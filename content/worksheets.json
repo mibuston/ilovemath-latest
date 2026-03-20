@@ -1,0 +1,76 @@
+{
+  "worksheets": [
+    {
+      "lesson": "01",
+      "title": "Understanding Fractions",
+      "subtitle": "Parts of a whole",
+      "file": "/assets/uploads/ilovemath_fraction_lesson01_fractions.pdf"
+    },
+    {
+      "lesson": "02",
+      "title": "Numerator and Denominator",
+      "subtitle": "Top and bottom numbers",
+      "file": "/assets/uploads/ilovemath_fraction_lesson02_numerator_denominator.pdf"
+    },
+    {
+      "lesson": "03",
+      "title": "Comparing Fractions",
+      "subtitle": "Which one is larger?",
+      "file": "/assets/uploads/ilovemath_fraction_lesson03_comparing.pdf"
+    },
+    {
+      "lesson": "04",
+      "title": "Equivalent Fractions",
+      "subtitle": "Same value, different numbers",
+      "file": "/assets/uploads/ilovemath_fraction_lesson04_equivalent.pdf"
+    },
+    {
+      "lesson": "05",
+      "title": "Simplifying Fractions",
+      "subtitle": "Reduce to smallest form",
+      "file": "/assets/uploads/ilovemath_fraction_lesson05_simplifying.pdf"
+    },
+    {
+      "lesson": "06",
+      "title": "Adding Fractions",
+      "subtitle": "Same denominator",
+      "file": "/assets/uploads/ilovemath_fraction_lesson06_adding_same_denominator.pdf"
+    },
+    {
+      "lesson": "07",
+      "title": "Subtracting Fractions",
+      "subtitle": "Same denominator",
+      "file": "/assets/uploads/ilovemath_fraction_lesson07_subtracting_same_denominator.pdf"
+    },
+    {
+      "lesson": "08",
+      "title": "Mixed Numbers",
+      "subtitle": "Whole number + fraction",
+      "file": "/assets/uploads/ilovemath_fraction_lesson08_mixed_numbers.pdf"
+    },
+    {
+      "lesson": "09",
+      "title": "Improper Fractions",
+      "subtitle": "More than one whole",
+      "file": "/assets/uploads/ilovemath_fraction_lesson09_improper_fractions.pdf"
+    },
+    {
+      "lesson": "10",
+      "title": "Improper to Mixed",
+      "subtitle": "Convert step by step",
+      "file": "/assets/uploads/ilovemath_fraction_lesson10_improper_to_mixed.pdf"
+    },
+    {
+      "lesson": "11",
+      "title": "Multiplying Fractions",
+      "subtitle": "Area model practice",
+      "file": "/assets/uploads/ilovemath_fraction_lesson11_multiplying_fractions.pdf"
+    },
+    {
+      "lesson": "12",
+      "title": "Dividing Fractions",
+      "subtitle": "Using reciprocals",
+      "file": "/assets/uploads/ilovemath_fraction_lesson12_dividing_fractions.pdf"
+    }
+  ]
+}
