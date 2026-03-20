@@ -6,14 +6,14 @@ local_backend: true
 publish_mode: simple
 site_url: https://ilovemath.live
 logo_url: /favicon.ico
-media_folder: "assets/uploads"
+media_folder: "../assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
   - name: "worksheets"
     label: "Worksheets"
     label_singular: "Worksheet"
-    folder: "content/worksheets"
+    folder: "../content/worksheets"
     create: true
     slug: "lesson-{{lesson_number}}-{{slug}}"
     summary: "Lesson {{lesson_number}} - {{title}}"
@@ -30,7 +30,7 @@ collections:
   - name: "videos"
     label: "Videos"
     label_singular: "Video"
-    folder: "content/videos"
+    folder: "../content/videos"
     create: true
     slug: "lesson-{{lesson_number}}-{{slug}}"
     summary: "Lesson {{lesson_number}} - {{title}}"
@@ -47,7 +47,7 @@ collections:
     files:
       - label: "Homepage"
         name: "homepage"
-        file: "content/settings/homepage.md"
+        file: "../content/settings/homepage.md"
         fields:
           - { label: "Hero Title", name: "hero_title", widget: "string" }
           - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
@@ -55,7 +55,7 @@ collections:
           - { label: "Body", name: "body", widget: "markdown", required: false }
       - label: "Site Settings"
         name: "site_settings"
-        file: "content/settings/site.json"
+        file: "../content/settings/site.json"
         fields:
           - { label: "Site Name", name: "site_name", widget: "string" }
           - { label: "Contact Email", name: "contact_email", widget: "string", required: false }
