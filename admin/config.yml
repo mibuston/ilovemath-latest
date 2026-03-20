@@ -6,11 +6,19 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
-  - name: "worksheets"
-    label: "Worksheets"
-    folder: "content/worksheets"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "File", name: "file", widget: "file" }
+  - name: "worksheet_library"
+    label: "Worksheet Library"
+    files:
+      - label: "Worksheets"
+        name: "worksheets"
+        file: "content/worksheets.json"
+        fields:
+          - label: "Worksheets"
+            name: "worksheets"
+            widget: "list"
+            summary: "Lesson {{fields.lesson}} - {{fields.title}}"
+            fields:
+              - { label: "Lesson Number", name: "lesson", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "Worksheet File", name: "file", widget: "string" }
