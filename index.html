@@ -275,7 +275,7 @@ async function loadWorksheets() {
       <div class="lesson-card ${colors[i % colors.length]}">
         <h4>Lesson ${w.lesson}<br>${w.title}</h4>
         <small>${w.subtitle || ''}</small>
-        <a href="${w.file}" download>Download Worksheet</a>
+        <a href="${w.file}" target="_blank" rel="noopener">Preview Worksheet</a>
       </div>
     `).join('');
   } catch (err) {
