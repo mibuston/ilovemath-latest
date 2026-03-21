@@ -4,12 +4,85 @@
 <meta charset="UTF-8">
 <title>I Love Math</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#58b8ff,#ffe7c3);
+  text-align:center;
+}
+header {
+  background:#2d8cff;
+  padding:15px;
+  color:white;
+  font-weight:bold;
+}
+h1 { font-size:40px; margin-top:40px; }
+p { font-size:18px; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  max-width:900px;
+  margin:30px auto;
+}
+
+.card {
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 10px rgba(0,0,0,.1);
+}
+
+.card a {
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 15px;
+  background:#2d8cff;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+}
+</style>
 </head>
-<body style="font-family: Arial; text-align: center; padding: 50px;">
-  <h1>🎉 I Love Math Website is LIVE!</h1>
-  <p>If you see this, GitHub Pages is working correctly.</p>
-  <hr style="margin:40px 0;">
-  <h2>Next Step</h2>
-  <p>We will now restore your full website design.</p>
+
+<body>
+
+<header>
+I Love Math — Worksheets & Videos
+</header>
+
+<h1>Welcome to I Love Math 🎉</h1>
+<p>Fun and easy math lessons for kids.</p>
+
+<div class="grid" id="worksheet-grid">
+Loading worksheets...
+</div>
+
+<script>
+async function loadWorksheets() {
+  try {
+    const res = await fetch('content/worksheets.json');
+    const data = await res.json();
+    const grid = document.getElementById('worksheet-grid');
+
+    grid.innerHTML = data.worksheets.map(w => `
+      <div class="card">
+        <h3>Lesson ${w.lesson}</h3>
+        <p>${w.title}</p>
+        <a href="${w.file}" target="_blank">Open Worksheet</a>
+      </div>
+    `).join('');
+  } catch (err) {
+    document.getElementById('worksheet-grid').innerHTML =
+      "⚠️ Worksheets failed to load. Check file paths.";
+  }
+}
+
+loadWorksheets();
+</script>
+
 </body>
 </html>
