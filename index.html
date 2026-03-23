@@ -7,43 +7,44 @@
 
 <style>
 body {
-  margin:0;
+  margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg,#58b8ff,#ffe7c3);
-  text-align:center;
+  background: linear-gradient(180deg, #58b8ff, #ffe7c3);
+  text-align: center;
 }
 header {
-  background:#2d8cff;
-  padding:15px;
-  color:white;
-  font-weight:bold;
+  background: #2d8cff;
+  padding: 15px;
+  color: white;
+  font-weight: bold;
 }
-h1 { font-size:40px; margin-top:40px; }
-p { font-size:18px; }
+h1 { font-size: 40px; margin-top: 40px; }
+p { font-size: 18px; }
 
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-  max-width:900px;
-  margin:30px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 15px 40px;
 }
 
 .card {
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 5px 10px rgba(0,0,0,.1);
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
 }
 
 .card a {
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 15px;
-  background:#2d8cff;
-  color:white;
-  text-decoration:none;
-  border-radius:10px;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #2d8cff;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
 }
 </style>
 </head>
@@ -64,7 +65,7 @@ Loading worksheets...
 <script>
 async function loadWorksheets() {
   try {
-    const res = await fetch('content/worksheets.json');
+    const res = await fetch('/content/worksheets.json?v=' + Date.now());
     const data = await res.json();
     const grid = document.getElementById('worksheet-grid');
 
@@ -72,12 +73,13 @@ async function loadWorksheets() {
       <div class="card">
         <h3>Lesson ${w.lesson}</h3>
         <p>${w.title}</p>
-        <a href="${w.file}" target="_blank">Open Worksheet</a>
+        <a href="${w.file}" target="_blank" rel="noopener noreferrer">Open Worksheet</a>
       </div>
     `).join('');
   } catch (err) {
     document.getElementById('worksheet-grid').innerHTML =
       "⚠️ Worksheets failed to load. Check file paths.";
+    console.error(err);
   }
 }
 
