@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>I Love Math | Premium Worksheets for Kids</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Fun and premium math worksheets for kids. Learn fractions step by step with colorful lessons and printable practice sheets.">
+<meta name="description" content="Fun and premium math worksheets and videos for kids. Learn math step by step with colorful lessons and printable practice sheets.">
 
 <style>
 :root {
@@ -47,9 +47,9 @@ a {
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   backdrop-filter: blur(10px);
-  background: rgba(17, 106, 233, 0.88);
+  background: rgba(17, 106, 233, 0.9);
   color: white;
   box-shadow: 0 3px 16px rgba(0,0,0,0.12);
 }
@@ -62,6 +62,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .brand {
@@ -87,7 +88,7 @@ a {
 
 .nav-links {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -115,7 +116,7 @@ a {
   grid-template-columns: 1.2fr 0.8fr;
   gap: 26px;
   align-items: center;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.76);
   border: 1px solid rgba(255,255,255,0.55);
   border-radius: 34px;
   padding: 34px;
@@ -214,40 +215,6 @@ a {
   font-size: 14px;
 }
 
-.feature-row {
-  max-width: 1180px;
-  margin: 24px auto 0;
-  padding: 0 18px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.feature-box {
-  background: rgba(255,255,255,0.82);
-  border-radius: 22px;
-  padding: 22px;
-  box-shadow: var(--shadow);
-  text-align: left;
-}
-
-.feature-box .icon {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.feature-box h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
-}
-
-.feature-box p {
-  margin: 0;
-  color: var(--text-2);
-  line-height: 1.6;
-  font-size: 15px;
-}
-
 .section {
   max-width: 1180px;
   margin: 44px auto 0;
@@ -290,13 +257,16 @@ a {
   gap: 22px;
 }
 
-.card {
+.card, .info-card, .video-card {
   background: linear-gradient(180deg, #ffffff, #fbfdff);
   border-radius: var(--radius-xl);
   padding: 22px;
   box-shadow: var(--shadow);
   border: 1px solid rgba(222,235,249,0.9);
   text-align: left;
+}
+
+.card {
   position: relative;
   overflow: hidden;
   transition: 0.22s ease;
@@ -326,7 +296,7 @@ a {
   margin-bottom: 14px;
 }
 
-.card h3 {
+.card h3, .info-card h3, .video-card h3 {
   margin: 0 0 8px;
   font-size: 22px;
   color: #11304c;
@@ -343,21 +313,28 @@ a {
   margin-bottom: 12px;
 }
 
-.card .subtitle {
+.card .subtitle, .info-card p, .video-card p {
   color: var(--text-2);
   font-size: 15px;
   line-height: 1.6;
+}
+
+.card .subtitle {
   min-height: 48px;
 }
 
-.card .actions {
+.card .actions,
+.video-card .actions {
   margin-top: 18px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.card a {
+.card a,
+.video-card a,
+.contact-links a,
+.admin-links a {
   display: inline-block;
   padding: 11px 15px;
   border-radius: 12px;
@@ -385,44 +362,45 @@ a {
   background: #eaf4ff;
 }
 
-.cta {
-  max-width: 1180px;
-  margin: 0 auto 70px;
-  padding: 0 18px;
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
 }
 
-.cta-box {
-  background: linear-gradient(135deg, #0f6fff, #5eb0ff);
-  color: white;
-  border-radius: 30px;
-  padding: 34px;
-  box-shadow: 0 20px 35px rgba(15,111,255,0.22);
+.contact-links,
+.admin-links {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
+  gap: 12px;
   flex-wrap: wrap;
+  margin-top: 16px;
 }
 
-.cta-box h3 {
-  margin: 0 0 8px;
-  font-size: 30px;
-}
-
-.cta-box p {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 650px;
-  color: rgba(255,255,255,0.92);
-}
-
-.cta-box a {
-  background: white;
+.contact-links a,
+.admin-links a {
+  background: #eef6ff;
   color: var(--blue-1);
-  font-weight: 800;
-  padding: 14px 18px;
-  border-radius: 14px;
+  border: 1px solid #d9e9ff;
+}
+
+.contact-links a:hover,
+.admin-links a:hover {
+  background: #e6f1ff;
+}
+
+.video-placeholder {
+  background: linear-gradient(135deg, #f4f9ff, #fff8de);
+  border: 2px dashed #c7def9;
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+}
+
+.video-placeholder strong {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #103458;
 }
 
 footer {
@@ -437,17 +415,17 @@ footer strong {
 }
 
 @media (max-width: 900px) {
-  .hero {
+  .hero,
+  .two-col {
     grid-template-columns: 1fr;
+  }
+
+  .hero {
     padding: 26px;
   }
 
   .hero h1 {
     font-size: 40px;
-  }
-
-  .feature-row {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -475,10 +453,6 @@ footer strong {
   .section-head h2 {
     font-size: 28px;
   }
-
-  .cta-box h3 {
-    font-size: 24px;
-  }
 }
 </style>
 </head>
@@ -493,71 +467,53 @@ footer strong {
     </div>
 
     <div class="nav-links">
+      <a href="#home">Home</a>
       <a href="#worksheets">Worksheets</a>
-      <a href="#features">Why Kids Love It</a>
-      <a href="#start">Get Started</a>
+      <a href="#videos">Videos</a>
+      <a href="/admin/" target="_blank" rel="noopener noreferrer">Admin</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
     </div>
   </div>
 </div>
 
-<div class="hero-wrap">
+<div class="hero-wrap" id="home">
   <section class="hero">
     <div class="hero-text">
       <div class="kicker">Premium Learning for Kids</div>
       <h1>Make Math Easy, Fun, and Beautiful.</h1>
       <p>
-        Explore premium printable worksheets designed to help kids learn fractions
-        step by step with clear explanations, colorful layout, and engaging practice.
+        Explore premium worksheets and learning resources designed to help kids understand math step by step with colorful visuals, clear explanations, and engaging practice.
       </p>
 
       <div class="hero-actions">
         <a href="#worksheets" class="btn-primary">Browse Worksheets</a>
-        <a href="/assets/uploads/ilovemath_fraction_lesson1_fractions.pdf" target="_blank" class="btn-secondary">Try Lesson 1</a>
+        <a href="#videos" class="btn-secondary">Watch Videos</a>
       </div>
     </div>
 
     <div class="hero-panel">
       <div class="stat-card">
         <strong id="lesson-total">12+</strong>
-        <span>Printable fraction lessons ready to open and download</span>
+        <span>Printable lessons ready to open and download</span>
       </div>
       <div class="stat-card">
-        <strong>Kid-Friendly</strong>
-        <span>Bright visuals, simple explanations, and clean worksheet flow</span>
+        <strong>Premium Design</strong>
+        <span>Bright visuals, organized layout, and a polished learning experience</span>
       </div>
       <div class="stat-card">
         <strong>Easy Access</strong>
-        <span>Open lessons instantly from any phone, tablet, or computer</span>
+        <span>Works on phones, tablets, laptops, and desktop computers</span>
       </div>
     </div>
   </section>
 </div>
 
-<section class="feature-row" id="features">
-  <div class="feature-box">
-    <div class="icon">🎨</div>
-    <h3>Beautiful Design</h3>
-    <p>Premium visuals that make learning feel exciting, polished, and welcoming for children.</p>
-  </div>
-
-  <div class="feature-box">
-    <div class="icon">📘</div>
-    <h3>Clear Lessons</h3>
-    <p>Every worksheet is organized for easy reading, guided examples, and practical learning.</p>
-  </div>
-
-  <div class="feature-box">
-    <div class="icon">🚀</div>
-    <h3>Fast and Simple</h3>
-    <p>Open worksheets quickly with a clean layout that works smoothly across devices.</p>
-  </div>
-</section>
-
 <section class="section" id="worksheets">
   <div class="section-head">
     <div>
-      <h2>Premium Worksheets</h2>
-      <p>Browse your growing collection of printable math lessons.</p>
+      <h2>Worksheets</h2>
+      <p>Browse your printable lesson collection.</p>
     </div>
     <div class="lesson-count" id="lesson-count-pill">Loading...</div>
   </div>
@@ -567,15 +523,81 @@ footer strong {
   </div>
 </section>
 
-<section class="cta" id="start">
-  <div class="cta-box">
+<section class="section" id="videos">
+  <div class="section-head">
     <div>
-      <h3>Start Learning Today</h3>
+      <h2>Videos</h2>
+      <p>Math video lessons for kids.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="video-card">
+      <h3>Lesson Videos</h3>
+      <p>Add your video lessons here so kids can watch before or after using the worksheets.</p>
+      <div class="video-placeholder">
+        <strong>Video section ready</strong>
+        Add your lesson video links or embedded videos here.
+      </div>
+      <div class="actions">
+        <a class="open-btn" href="/videos.html">View Videos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-head">
+    <div>
+      <h2>About</h2>
+      <p>Learn more about I Love Math.</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-card">
+      <h3>Our Mission</h3>
       <p>
-        Open a worksheet, practice one lesson at a time, and build strong math confidence in a fun way.
+        I Love Math is built to make learning math easier and more enjoyable for kids through premium worksheets, simple lessons, and colorful educational design.
       </p>
     </div>
-    <a href="#worksheets">View All Lessons</a>
+
+    <div class="info-card">
+      <h3>Who It’s For</h3>
+      <p>
+        This website is for kids, parents, and teachers looking for easy-to-understand math resources that are printable, engaging, and beginner-friendly.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-head">
+    <div>
+      <h2>Contact</h2>
+      <p>Reach out for questions, suggestions, or partnerships.</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-card">
+      <h3>Get in Touch</h3>
+      <p>Email: hello@ilovemath.live</p>
+      <p>You can also add your Facebook page, Messenger link, or WhatsApp here.</p>
+      <div class="contact-links">
+        <a href="mailto:hello@ilovemath.live">Email Us</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>Admin Access</h3>
+      <p>Use the admin area to manage worksheets, videos, and website content.</p>
+      <div class="admin-links">
+        <a href="/admin/" target="_blank" rel="noopener noreferrer">Open Admin</a>
+      </div>
+    </div>
   </div>
 </section>
 
