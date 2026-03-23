@@ -35,10 +35,42 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--text-1);
+  min-height: 100vh;
+  overflow-x: hidden;
   background:
-    radial-gradient(circle at top left, #d8efff 0%, transparent 24%),
-    radial-gradient(circle at top right, #fff0b3 0%, transparent 18%),
-    linear-gradient(180deg, #87ceff 0%, #dff3ff 42%, #fff6da 100%);
+    radial-gradient(circle at 10% 12%, rgba(255,255,255,0.55) 0 65px, transparent 66px),
+    radial-gradient(circle at 88% 12%, rgba(255,244,207,0.85) 0 85px, transparent 86px),
+    radial-gradient(circle at 18% 28%, rgba(141, 227, 136, 0.22) 0 120px, transparent 121px),
+    radial-gradient(circle at 85% 78%, rgba(90,169,255,0.20) 0 180px, transparent 181px),
+    linear-gradient(180deg, #71d0ff 0%, #9fe4ff 24%, #88ddff 40%, #70caff 54%, #b8f2ff 68%, #fff1bf 86%, #ffdf9a 100%);
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(10px);
+  opacity: .28;
+}
+
+body::before {
+  width: 320px;
+  height: 320px;
+  left: -90px;
+  top: 220px;
+  background: radial-gradient(circle, #7df59f 0%, #51d387 58%, transparent 72%);
+}
+
+body::after {
+  width: 360px;
+  height: 360px;
+  right: -110px;
+  bottom: 70px;
+  background: radial-gradient(circle, #8ecbff 0%, #52a9ff 58%, transparent 72%);
 }
 
 a {
@@ -50,7 +82,7 @@ a {
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(10px);
-  background: rgba(17, 106, 233, 0.9);
+  background: rgba(17, 106, 233, 0.90);
   color: white;
   box-shadow: 0 3px 16px rgba(0,0,0,0.12);
 }
@@ -71,6 +103,7 @@ a {
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  gap: 12px;
 }
 
 .site-logo {
@@ -78,6 +111,13 @@ a {
   width: auto;
   display: block;
   filter: drop-shadow(0 6px 14px rgba(0,0,0,0.14));
+}
+
+.brand-text {
+  color: white;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 0.2px;
 }
 
 .nav-links {
@@ -103,22 +143,39 @@ a {
   max-width: 1180px;
   margin: 0 auto;
   padding: 34px 18px 18px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 26px;
-  align-items: center;
-  background: rgba(255,255,255,0.76);
+  align-items: stretch;
+  background: rgba(255,255,255,0.78);
   border: 1px solid rgba(255,255,255,0.55);
   border-radius: 34px;
   padding: 34px;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
 .hero-text {
   text-align: left;
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+}
+
+.hero-glow {
+  position: absolute;
+  right: -65px;
+  top: -65px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,231,125,0.92) 0%, rgba(255,231,125,0.38) 48%, rgba(255,231,125,0) 72%);
+  pointer-events: none;
 }
 
 .kicker {
@@ -130,6 +187,8 @@ a {
   padding: 8px 14px;
   border-radius: 999px;
   margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero h1 {
@@ -137,6 +196,8 @@ a {
   font-size: 52px;
   line-height: 1.08;
   color: #0d2d52;
+  position: relative;
+  z-index: 2;
 }
 
 .hero p {
@@ -145,6 +206,8 @@ a {
   line-height: 1.7;
   color: var(--text-2);
   max-width: 640px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-actions {
@@ -152,6 +215,8 @@ a {
   gap: 14px;
   flex-wrap: wrap;
   margin-top: 26px;
+  position: relative;
+  z-index: 2;
 }
 
 .btn-primary,
@@ -184,9 +249,75 @@ a {
   background: #f6fbff;
 }
 
+.floating-math {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.math-symbol {
+  position: absolute;
+  font-weight: 700;
+  color: rgba(21,106,232,0.14);
+  animation: floaty 6s ease-in-out infinite;
+}
+
+.math1 { top: 18px; right: 145px; font-size: 44px; }
+.math2 { top: 105px; right: 30px; font-size: 34px; animation-delay: .8s; }
+.math3 { bottom: 50px; right: 180px; font-size: 50px; animation-delay: 1.5s; }
+.math4 { bottom: 18px; right: 60px; font-size: 30px; animation-delay: 2.2s; }
+
+@keyframes floaty {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 .hero-panel {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
+}
+
+.professor-card {
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(13, 45, 82, 0.08);
+  text-align: center;
+}
+
+.professor-avatar {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, #f6fbff 45%, #d7efff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 86px;
+  box-shadow: inset 0 0 0 8px rgba(255,255,255,0.65), 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.professor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.professor-card h3 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  color: #123a64;
+}
+
+.professor-card p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .stat-card {
@@ -209,10 +340,27 @@ a {
   font-size: 14px;
 }
 
+.wave-divider {
+  max-width: 1180px;
+  margin: -8px auto 0;
+  padding: 0 18px;
+  position: relative;
+  z-index: 1;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 72px;
+}
+
 .section {
   max-width: 1180px;
-  margin: 44px auto 0;
+  margin: 22px auto 0;
   padding: 0 18px 70px;
+  position: relative;
+  z-index: 1;
 }
 
 .section-head {
@@ -271,7 +419,7 @@ a {
   position: absolute;
   inset: 0 0 auto 0;
   height: 8px;
-  background: linear-gradient(90deg, #3d8dff, #7bbcff, #ffd76a);
+  background: linear-gradient(90deg, #3d8dff, #7bbcff, #8fe388, #ffd76a);
 }
 
 .card:hover {
@@ -402,6 +550,8 @@ footer {
   text-align: center;
   color: #4c6177;
   font-size: 14px;
+  position: relative;
+  z-index: 1;
 }
 
 footer strong {
@@ -432,6 +582,10 @@ footer strong {
     height: 46px;
   }
 
+  .brand-text {
+    font-size: 18px;
+  }
+
   .hero-wrap {
     padding-top: 18px;
   }
@@ -447,6 +601,12 @@ footer strong {
   .section-head h2 {
     font-size: 28px;
   }
+
+  .professor-avatar {
+    width: 140px;
+    height: 140px;
+    font-size: 70px;
+  }
 }
 </style>
 </head>
@@ -457,6 +617,7 @@ footer strong {
   <div class="nav">
     <a href="/" class="brand">
       <img src="assets/logo.png" alt="I Love Math Logo" class="site-logo">
+      <span class="brand-text">I Love Math</span>
     </a>
 
     <div class="nav-links">
@@ -473,10 +634,19 @@ footer strong {
 <div class="hero-wrap" id="home">
   <section class="hero">
     <div class="hero-text">
-      <div class="kicker">Premium Learning for Kids</div>
-      <h1>Make Math Easy, Fun, and Beautiful.</h1>
+      <div class="hero-glow"></div>
+
+      <div class="floating-math">
+        <span class="math-symbol math1">π</span>
+        <span class="math-symbol math2">+</span>
+        <span class="math-symbol math3">÷</span>
+        <span class="math-symbol math4">×</span>
+      </div>
+
+      <div class="kicker">🌴 Island Learning with Professor Pi</div>
+      <h1>Make Math Easy, Fun, and Full of Wonder.</h1>
       <p>
-        Explore premium worksheets and learning resources designed to help kids understand math step by step with colorful visuals, clear explanations, and engaging practice.
+        Join Professor Pi on a bright island adventure where kids can explore premium worksheets, learn step by step, and build confidence in math with colorful visuals and engaging practice.
       </p>
 
       <div class="hero-actions">
@@ -486,6 +656,19 @@ footer strong {
     </div>
 
     <div class="hero-panel">
+      <div class="professor-card">
+        <div class="professor-avatar">🧑‍🏫</div>
+        <!-- If you create a real Professor Pi image later, replace the line above with:
+        <div class="professor-avatar">
+          <img src="assets/professor-pi.png" alt="Professor Pi">
+        </div>
+        -->
+        <h3>Professor Pi</h3>
+        <p>
+          Your friendly island math guide, ready to help kids learn fractions, numbers, and problem solving in a colorful and exciting way.
+        </p>
+      </div>
+
       <div class="stat-card">
         <strong id="lesson-total">12+</strong>
         <span>Printable lessons ready to open and download</span>
@@ -495,11 +678,17 @@ footer strong {
         <span>Bright visuals, organized layout, and a polished learning experience</span>
       </div>
       <div class="stat-card">
-        <strong>Easy Access</strong>
-        <span>Works on phones, tablets, laptops, and desktop computers</span>
+        <strong>Island Fun</strong>
+        <span>A tropical learning theme that makes your website unique and memorable</span>
       </div>
     </div>
   </section>
+</div>
+
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+    <path fill="rgba(255,255,255,0.35)" d="M0,64L48,64C96,64,192,64,288,69.3C384,75,480,85,576,80C672,75,768,53,864,48C960,43,1056,53,1152,64C1248,75,1344,85,1392,90.7L1440,96L1440,121L1392,121C1344,121,1248,121,1152,121C1056,121,960,121,864,121C768,121,672,121,576,121C480,121,384,121,288,121C192,121,96,121,48,121L0,121Z"></path>
+  </svg>
 </div>
 
 <section class="section" id="worksheets">
@@ -551,14 +740,14 @@ footer strong {
     <div class="info-card">
       <h3>Our Mission</h3>
       <p>
-        I Love Math is built to make learning math easier and more enjoyable for kids through premium worksheets, simple lessons, and colorful educational design.
+        I Love Math is built to make learning math easier and more enjoyable for kids through premium worksheets, simple lessons, colorful educational design, and a fun island-style learning experience.
       </p>
     </div>
 
     <div class="info-card">
       <h3>Who It’s For</h3>
       <p>
-        This website is for kids, parents, and teachers looking for easy-to-understand math resources that are printable, engaging, and beginner-friendly.
+        This website is for kids, parents, and teachers looking for easy-to-understand math resources that are printable, engaging, beginner-friendly, and enjoyable to use.
       </p>
     </div>
   </div>
