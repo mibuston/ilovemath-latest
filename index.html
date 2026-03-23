@@ -455,7 +455,7 @@ footer strong {
 
 <div class="topbar">
   <div class="nav">
-    <a href="#home" class="brand">
+    <a href="/" class="brand">
       <img src="assets/logo.png" alt="I Love Math Logo" class="site-logo">
     </a>
 
@@ -630,6 +630,19 @@ async function loadWorksheets() {
 }
 
 loadWorksheets();
+</script>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function(user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function() {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
 </script>
 
 </body>
