@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professor Pi's Math Challenge | I Love Math</title>
+  <meta name="description" content="Play Professor Pi's premium math challenge with fractions, addition, subtraction, multiplication, and division." />
+  <style>
+    :root{
+      --blue-1:#0f6fff;
+      --blue-2:#3da5ff;
+      --blue-3:#dff3ff;
+      --navy:#123a73;
+      --yellow:#ffd95c;
+      --orange:#ff9d42;
+      --green:#22b573;
+      --red:#ff5e6c;
+      --purple:#7a5cff;
+      --white:#ffffff;
+      --ink:#17324d;
+      --soft:#f6fbff;
+      --card-shadow:0 20px 50px rgba(15,111,255,.16);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255,217,92,.45), transparent 30%),
+        radial-gradient(circle at top right, rgba(61,165,255,.32), transparent 25%),
+        linear-gradient(180deg, #7ed0ff 0%, #cceeff 35%, #fff4dc 100%);
+      min-height:100vh;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter: blur(10px);
+      background:rgba(255,255,255,.75);
+      border-bottom:1px solid rgba(18,58,115,.08);
+    }
+
+    .nav{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      color:var(--navy);
+      letter-spacing:.3px;
+    }
+
+    .brand-logo{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      object-fit:cover;
+      background:#fff;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .brand-text span{
+      display:block;
+      font-size:12px;
+      opacity:.7;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--navy);
+      font-weight:700;
+      padding:10px 14px;
+      border-radius:999px;
+      transition:.25s ease;
+    }
+
+    .nav-links a:hover{
+      background:rgba(15,111,255,.08);
+    }
+
+    .hero{
+      max-width:1200px;
+      margin:0 auto;
+      padding:42px 18px 24px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(18,58,115,.08);
+      border-radius:32px;
+      box-shadow:var(--card-shadow);
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-60px;
+      top:-60px;
+      background:radial-gradient(circle, rgba(255,217,92,.9), rgba(255,217,92,0));
+      border-radius:50%;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:#e9f5ff;
+      color:var(--blue-1);
+      font-weight:800;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 62px);
+      line-height:1.04;
+      color:var(--navy);
+    }
+
+    .highlight{
+      color:var(--blue-1);
+    }
+
+    .hero p{
+      font-size:18px;
+      line-height:1.65;
+      margin:0 0 22px;
+      max-width:760px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .btn{
+      border:none;
+      border-radius:18px;
+      padding:14px 20px;
+      font-size:16px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .15s ease, box-shadow .25s ease, opacity .2s ease;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+
+    .btn:hover{ transform:translateY(-2px); }
+    .btn:active{ transform:translateY(0); }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue-1), var(--blue-2));
+      color:#fff;
+    }
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--navy);
+      border:2px solid #d9ebff;
+    }
+
+    .hero-side{
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(240,249,255,.95));
+      border-radius:32px;
+      padding:26px;
+      box-shadow:var(--card-shadow);
+      border:1px solid rgba(18,58,115,.08);
+    }
+
+    .professor{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .professor img{
+      width:112px;
+      height:112px;
+      object-fit:contain;
+      background:#fff;
+      border-radius:24px;
+      padding:8px;
+      box-shadow:0 12px 30px rgba(0,0,0,.08);
+    }
+
+    .speech{
+      background:#eef8ff;
+      border:2px dashed #bfe1ff;
+      color:var(--navy);
+      padding:14px 16px;
+      border-radius:18px;
+      font-weight:700;
+      line-height:1.5;
+    }
+
+    .mini-stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .mini-stat{
+      background:#fff;
+      border-radius:20px;
+      padding:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,.05);
+      border:1px solid rgba(18,58,115,.06);
+    }
+
+    .mini-stat .label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      opacity:.65;
+      font-weight:800;
+    }
+
+    .mini-stat .value{
+      font-size:28px;
+      font-weight:900;
+      color:var(--blue-1);
+      margin-top:6px;
+    }
+
+    .game-wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:10px 18px 60px;
+    }
+
+    .game-grid{
+      display:grid;
+      grid-template-columns:340px 1fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .panel{
+      background:rgba(255,255,255,.92);
+      border-radius:28px;
+      box-shadow:var(--card-shadow);
+      border:1px solid rgba(18,58,115,.08);
+      padding:24px;
+    }
+
+    .panel h2{
+      margin:0 0 14px;
+      color:var(--navy);
+      font-size:26px;
+    }
+
+    .panel h3{
+      margin:0 0 10px;
+      color:var(--navy);
+      font-size:18px;
+    }
+
+    .field{
+      margin-bottom:16px;
+    }
+
+    .field label{
+      display:block;
+      font-size:14px;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:8px;
+    }
+
+    select, input[type="text"]{
+      width:100%;
+      padding:14px 14px;
+      border-radius:16px;
+      border:2px solid #d9ebff;
+      font-size:16px;
+      outline:none;
+      background:#fff;
+      color:var(--ink);
+    }
+
+    select:focus, input[type="text"]:focus{
+      border-color:var(--blue-2);
+      box-shadow:0 0 0 4px rgba(61,165,255,.12);
+    }
+
+    .quick-modes{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .pill{
+      border:none;
+      background:#f2f9ff;
+      color:var(--navy);
+      padding:12px;
+      border-radius:16px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .pill:hover{
+      background:#e2f1ff;
+      transform:translateY(-1px);
+    }
+
+    .scoreboard{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .scorebox{
+      background:linear-gradient(180deg,#ffffff,#f6fbff);
+      border-radius:22px;
+      padding:18px;
+      border:1px solid rgba(18,58,115,.07);
+      box-shadow:0 10px 24px rgba(0,0,0,.05);
+      text-align:center;
+    }
+
+    .scorebox .name{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      opacity:.65;
+      font-weight:800;
+    }
+
+    .scorebox .num{
+      font-size:32px;
+      color:var(--blue-1);
+      font-weight:900;
+      margin-top:8px;
+    }
+
+    .game-card{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .game-card::after{
+      content:"";
+      position:absolute;
+      left:-40px;
+      bottom:-40px;
+      width:180px;
+      height:180px;
+      background:radial-gradient(circle, rgba(122,92,255,.18), rgba(122,92,255,0));
+      border-radius:50%;
+      pointer-events:none;
+    }
+
+    .level-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#eef8ff;
+      color:var(--blue-1);
+      font-weight:800;
+      padding:10px 14px;
+      border-radius:999px;
+      margin-bottom:16px;
+      font-size:14px;
+    }
+
+    .question-box{
+      background:linear-gradient(180deg,#ffffff,#f7fbff);
+      border:1px solid rgba(18,58,115,.06);
+      border-radius:30px;
+      padding:26px;
+      text-align:center;
+      box-shadow:0 18px 40px rgba(0,0,0,.05);
+    }
+
+    .question-label{
+      font-size:13px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      font-weight:800;
+      color:var(--blue-1);
+      margin-bottom:12px;
+    }
+
+    .question-text{
+      font-size:clamp(28px, 4vw, 52px);
+      font-weight:900;
+      color:var(--navy);
+      line-height:1.2;
+      min-height:78px;
+    }
+
+    .answer-row{
+      display:flex;
+      gap:12px;
+      margin-top:18px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .answer-row input{
+      max-width:320px;
+      font-size:24px;
+      text-align:center;
+      font-weight:800;
+    }
+
+    .feedback{
+      margin-top:16px;
+      min-height:34px;
+      font-size:18px;
+      font-weight:800;
+      text-align:center;
+    }
+
+    .feedback.good{ color:var(--green); }
+    .feedback.bad{ color:var(--red); }
+    .feedback.info{ color:var(--purple); }
+
+    .progress-wrap{
+      margin-top:18px;
+    }
+
+    .progress-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:8px;
+      font-weight:800;
+      color:var(--navy);
+      gap:12px;
+    }
+
+    .progress{
+      width:100%;
+      height:16px;
+      background:#e9f5ff;
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .progress-fill{
+      width:0%;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--blue-1), var(--yellow));
+      transition:width .35s ease;
+    }
+
+    .choices{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .choice{
+      border:none;
+      background:#fff;
+      border:2px solid #dcecff;
+      padding:16px;
+      border-radius:18px;
+      font-size:20px;
+      font-weight:800;
+      color:var(--navy);
+      cursor:pointer;
+      transition:.2s ease;
+      min-height:66px;
+    }
+
+    .choice:hover{
+      transform:translateY(-2px);
+      border-color:var(--blue-2);
+      box-shadow:0 12px 24px rgba(61,165,255,.12);
+    }
+
+    .game-footer{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      margin-top:18px;
+    }
+
+    .tips{
+      margin-top:18px;
+      background:#fff9e9;
+      border:1px solid #ffe7a1;
+      color:#795800;
+      border-radius:18px;
+      padding:14px 16px;
+      font-weight:700;
+      line-height:1.55;
+    }
+
+    .leaderboard-list{
+      list-style:none;
+      padding:0;
+      margin:14px 0 0;
+    }
+
+    .leaderboard-list li{
+      background:#fff;
+      border-radius:18px;
+      padding:12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:10px;
+      border:1px solid rgba(18,58,115,.06);
+      font-weight:800;
+    }
+
+    .footer-note{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 18px 50px;
+      text-align:center;
+      color:#37506a;
+      line-height:1.7;
+      font-weight:700;
+    }
+
+    .fraction{
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      vertical-align:middle;
+      margin:0 6px;
+      min-width:54px;
+    }
+
+    .fraction .top{
+      display:block;
+      padding:0 8px 4px;
+      border-bottom:3px solid currentColor;
+      line-height:1.1;
+    }
+
+    .fraction .bottom{
+      display:block;
+      padding:4px 8px 0;
+      line-height:1.1;
+    }
+
+    .hidden{ display:none !important; }
+
+    @media (max-width:980px){
+      .hero, .game-grid{
+        grid-template-columns:1fr;
+      }
+      .scoreboard{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (max-width:640px){
+      h1{font-size:34px}
+      .hero-card, .hero-side, .panel{padding:18px}
+      .scoreboard{grid-template-columns:1fr 1fr}
+      .choices{grid-template-columns:1fr}
+      .question-text{min-height:88px}
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .answer-row{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .answer-row input{
+        max-width:none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="nav">
+      <div class="brand">
+        <img class="brand-logo" src="assets/logo.png" alt="I Love Math logo">
+        <div class="brand-text">
+          I Love Math
+          <span>Professor Pi Edition</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="worksheets.html">Worksheets</a>
+        <a href="videos.html">Videos</a>
+        <a href="#game">Play Game</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="eyebrow">Premium Math Game</div>
+      <h1>Professor Pi’s <span class="highlight">Math Challenge</span></h1>
+      <p>
+        Practice math in a fun, premium, and kid-friendly way. Choose your mode,
+        answer questions, earn points, build streaks, and try to beat your best score.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="scrollToGame()">Start Playing</button>
+        <button class="btn btn-secondary" onclick="showInstructions()">How to Play</button>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="professor">
+        <img src="assets/professor-pi.png" alt="Professor Pi">
+        <div class="speech" id="piSpeech">
+          Welcome, math explorer! Pick a game mode and let’s train your brain today.
+        </div>
+      </div>
+
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="label">Game Modes</div>
+          <div class="value">6</div>
+        </div>
+        <div class="mini-stat">
+          <div class="label">Best Score</div>
+          <div class="value" id="heroBestScore">0</div>
+        </div>
+        <div class="mini-stat">
+          <div class="label">Best Streak</div>
+          <div class="value" id="heroBestStreak">0</div>
+        </div>
+        <div class="mini-stat">
+          <div class="label">Fun Level</div>
+          <div class="value">100%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="game-wrap" id="game">
+    <div class="game-grid">
+      <aside class="panel">
+        <h2>Game Setup</h2>
+
+        <div class="field">
+          <label for="playerName">Player Name</label>
+          <input type="text" id="playerName" placeholder="Enter your name" maxlength="18">
+        </div>
+
+        <div class="field">
+          <label for="gameMode">Choose a Math Mode</label>
+          <select id="gameMode">
+            <option value="addition">Addition</option>
+            <option value="subtraction">Subtraction</option>
+            <option value="multiplication">Multiplication</option>
+            <option value="division">Division</option>
+            <option value="fractions">Fractions</option>
+            <option value="mixed">Mixed Challenge</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="questionCount">Number of Questions</label>
+          <select id="questionCount">
+            <option value="5">5 Questions</option>
+            <option value="10" selected>10 Questions</option>
+            <option value="15">15 Questions</option>
+            <option value="20">20 Questions</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Quick Start</label>
+          <div class="quick-modes">
+            <button class="pill" onclick="quickSet('fractions','easy',10)">Fractions Fun</button>
+            <button class="pill" onclick="quickSet('mixed','medium',10)">Mixed Quiz</button>
+            <button class="pill" onclick="quickSet('multiplication','hard',15)">Times Master</button>
+            <button class="pill" onclick="quickSet('addition','easy',5)">Beginner Mode</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%; margin-top:8px;" onclick="startGame()">
+          Start New Game
+        </button>
+
+        <div class="tips">
+          <strong>Professor Pi Tip:</strong>
+          Keep a streak going to earn bonus points. The harder the level, the more points you can win.
+        </div>
+
+        <h3 style="margin-top:20px;">Top Scores</h3>
+        <ul class="leaderboard-list" id="leaderboard">
+          <li><span>No scores yet</span><strong>0</strong></li>
+        </ul>
+      </aside>
+
+      <main>
+        <div class="scoreboard">
+          <div class="scorebox">
+            <div class="name">Score</div>
+            <div class="num" id="score">0</div>
+          </div>
+          <div class="scorebox">
+            <div class="name">Question</div>
+            <div class="num" id="questionNumber">0/0</div>
+          </div>
+          <div class="scorebox">
+            <div class="name">Streak</div>
+            <div class="num" id="streak">0</div>
+          </div>
+          <div class="scorebox">
+            <div class="name">Best</div>
+            <div class="num" id="bestScore">0</div>
+          </div>
+        </div>
+
+        <div class="panel game-card">
+          <div class="level-badge" id="levelBadge">Ready to Play</div>
+
+          <div class="question-box">
+            <div class="question-label">Current Question</div>
+            <div class="question-text" id="questionText">
+              Click <strong>Start New Game</strong> to begin your challenge.
+            </div>
+
+            <div class="choices hidden" id="choices"></div>
+
+            <div class="answer-row" id="typedAnswerRow">
+              <input type="text" id="answerInput" placeholder="Type your answer" disabled>
+              <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()" disabled>Submit</button>
+            </div>
+
+            <div class="feedback info" id="feedback">Professor Pi is ready when you are.</div>
+
+            <div class="game-footer">
+              <button class="btn btn-secondary" onclick="skipQuestion()" id="skipBtn" disabled>Skip</button>
+              <button class="btn btn-secondary" onclick="nextQuestion()" id="nextBtn" disabled>Next</button>
+              <button class="btn btn-secondary" onclick="startGame()">Restart</button>
+            </div>
+
+            <div class="progress-wrap">
+              <div class="progress-top">
+                <span>Progress</span>
+                <span id="progressLabel">0%</span>
+              </div>
+              <div class="progress">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Website: https://ilovemath.live<br>
+    © 2026 ilovemath.live – All rights reserved.<br>
+    This material is for personal educational use only.<br>
+    Reproduction, redistribution, or resale is strictly prohibited.
+  </div>
+
+  <script>
+    const scoreEl = document.getElementById("score");
+    const questionNumberEl = document.getElementById("questionNumber");
+    const streakEl = document.getElementById("streak");
+    const bestScoreEl = document.getElementById("bestScore");
+    const heroBestScoreEl = document.getElementById("heroBestScore");
+    const heroBestStreakEl = document.getElementById("heroBestStreak");
+    const questionTextEl = document.getElementById("questionText");
+    const feedbackEl = document.getElementById("feedback");
+    const answerInput = document.getElementById("answerInput");
+    const submitBtn = document.getElementById("submitBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const skipBtn = document.getElementById("skipBtn");
+    const progressFill = document.getElementById("progressFill");
+    const progressLabel = document.getElementById("progressLabel");
+    const levelBadge = document.getElementById("levelBadge");
+    const piSpeech = document.getElementById("piSpeech");
+    const choicesEl = document.getElementById("choices");
+    const leaderboardEl = document.getElementById("leaderboard");
+
+    const playerNameInput = document.getElementById("playerName");
+    const gameModeSelect = document.getElementById("gameMode");
+    const difficultySelect = document.getElementById("difficulty");
+    const questionCountSelect = document.getElementById("questionCount");
+
+    let gameState = {
+      started: false,
+      mode: "addition",
+      difficulty: "medium",
+      totalQuestions: 10,
+      currentQuestion: 0,
+      score: 0,
+      streak: 0,
+      bestScore: Number(localStorage.getItem("ilm_best_score") || 0),
+      bestStreak: Number(localStorage.getItem("ilm_best_streak") || 0),
+      current: null,
+      answered: false,
+      playerName: ""
+    };
+
+    function init() {
+      bestScoreEl.textContent = gameState.bestScore;
+      heroBestScoreEl.textContent = gameState.bestScore;
+      heroBestStreakEl.textContent = gameState.bestStreak;
+      updateLeaderboard();
+      answerInput.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !submitBtn.disabled) submitAnswer();
+      });
+    }
+
+    function scrollToGame() {
+      document.getElementById("game").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showInstructions() {
+      alert(
+        "How to Play:\\n\\n" +
+        "1. Enter your name.\\n" +
+        "2. Choose a math mode, difficulty, and number of questions.\\n" +
+        "3. Click Start New Game.\\n" +
+        "4. Answer each question to earn points.\\n" +
+        "5. Build a streak for bonus points.\\n\\n" +
+        "Professor Pi says: Have fun and do your best!"
+      );
+    }
+
+    function quickSet(mode, difficulty, total) {
+      gameModeSelect.value = mode;
+      difficultySelect.value = difficulty;
+      questionCountSelect.value = total;
+      piSpeech.textContent = "Excellent choice! Your " + mode + " challenge is ready to begin.";
+      scrollToGame();
+    }
+
+    function startGame() {
+      gameState.mode = gameModeSelect.value;
+      gameState.difficulty = difficultySelect.value;
+      gameState.totalQuestions = Number(questionCountSelect.value);
+      gameState.currentQuestion = 0;
+      gameState.score = 0;
+      gameState.streak = 0;
+      gameState.started = true;
+      gameState.answered = false;
+      gameState.playerName = playerNameInput.value.trim() || "Math Star";
+
+      answerInput.disabled = false;
+      submitBtn.disabled = false;
+      nextBtn.disabled = true;
+      skipBtn.disabled = false;
+
+      choicesEl.classList.add("hidden");
+      choicesEl.innerHTML = "";
+      document.getElementById("typedAnswerRow").classList.remove("hidden");
+
+      updateScoreboard();
+      updateBadge();
+      setFeedback("Let's go, " + gameState.playerName + "! Solve the first question.", "info");
+      piSpeech.textContent = "Ready, " + gameState.playerName + "? Let’s make math fun!";
+      generateQuestion();
+    }
+
+    function updateBadge() {
+      const modeName = capitalize(gameState.mode);
+      const difficultyName = capitalize(gameState.difficulty);
+      levelBadge.textContent = modeName + " • " + difficultyName + " • " + gameState.totalQuestions + " Questions";
+    }
+
+    function updateScoreboard() {
+      scoreEl.textContent = gameState.score;
+      streakEl.textContent = gameState.streak;
+      bestScoreEl.textContent = gameState.bestScore;
+      heroBestScoreEl.textContent = gameState.bestScore;
+      heroBestStreakEl.textContent = gameState.bestStreak;
+      questionNumberEl.textContent = gameState.currentQuestion + "/" + gameState.totalQuestions;
+
+      const progress = gameState.totalQuestions === 0 ? 0 : Math.round((gameState.currentQuestion / gameState.totalQuestions) * 100);
+      progressFill.style.width = progress + "%";
+      progressLabel.textContent = progress + "%";
+    }
+
+    function generateQuestion() {
+      if (gameState.currentQuestion >= gameState.totalQuestions) {
+        endGame();
+        return;
+      }
+
+      gameState.currentQuestion++;
+      gameState.answered = false;
+      updateScoreboard();
+
+      answerInput.value = "";
+      answerInput.focus();
+      nextBtn.disabled = true;
+      submitBtn.disabled = false;
+      skipBtn.disabled = false;
+      choicesEl.classList.add("hidden");
+      choicesEl.innerHTML = "";
+      document.getElementById("typedAnswerRow").classList.remove("hidden");
+
+      const mode = gameState.mode === "mixed" ? randomMode() : gameState.mode;
+      let q;
+
+      switch (mode) {
+        case "addition":
+          q = makeAddition();
+          break;
+        case "subtraction":
+          q = makeSubtraction();
+          break;
+        case "multiplication":
+          q = makeMultiplication();
+          break;
+        case "division":
+          q = makeDivision();
+          break;
+        case "fractions":
+          q = makeFractionQuestion();
+          break;
+        default:
+          q = makeAddition();
+      }
+
+      q.mode = mode;
+      gameState.current = q;
+      renderQuestion(q);
+    }
+
+    function renderQuestion(q) {
+      questionTextEl.innerHTML = q.display;
+      setFeedback("Solve the problem and submit your answer.", "info");
+
+      if (q.multipleChoice) {
+        document.getElementById("typedAnswerRow").classList.add("hidden");
+        choicesEl.classList.remove("hidden");
+        choicesEl.innerHTML = "";
+        q.choices.forEach(choice => {
+          const btn = document.createElement("button");
+          btn.className = "choice";
+          btn.innerHTML = choice;
+          btn.onclick = () => submitChoice(choice, q.answer);
+          choicesEl.appendChild(btn);
+        });
+      }
+    }
+
+    function submitChoice(choice, correctAnswer) {
+      if (gameState.answered) return;
+      const normalizedChoice = normalizeAnswer(stripHtml(choice));
+      const normalizedCorrect = normalizeAnswer(String(correctAnswer));
+      handleAnswer(normalizedChoice === normalizedCorrect);
+    }
+
+    function submitAnswer() {
+      if (!gameState.started || gameState.answered) return;
+      const userAnswer = normalizeAnswer(answerInput.value);
+      const correctAnswer = normalizeAnswer(String(gameState.current.answer));
+      handleAnswer(userAnswer === correctAnswer);
+    }
+
+    function handleAnswer(isCorrect) {
+      gameState.answered = true;
+      submitBtn.disabled = true;
+      nextBtn.disabled = false;
+      skipBtn.disabled = true;
+
+      if (isCorrect) {
+        const points = getPoints();
+        gameState.score += points;
+        gameState.streak += 1;
+        if (gameState.streak > gameState.bestStreak) {
+          gameState.bestStreak = gameState.streak;
+          localStorage.setItem("ilm_best_streak", gameState.bestStreak);
+        }
+        if (gameState.score > gameState.bestScore) {
+          gameState.bestScore = gameState.score;
+          localStorage.setItem("ilm_best_score", gameState.bestScore);
+        }
+
+        setFeedback("Correct! +" + points + " points. Great job!", "good");
+        piSpeech.textContent = getPraiseMessage();
+      } else {
+        gameState.streak = 0;
+        setFeedback("Not quite. The correct answer is " + gameState.current.answer + ".", "bad");
+        piSpeech.textContent = getEncouragementMessage();
+      }
+
+      updateScoreboard();
+    }
+
+    function skipQuestion() {
+      if (!gameState.started || gameState.answered) return;
+      gameState.answered = true;
+      gameState.streak = 0;
+      submitBtn.disabled = true;
+      nextBtn.disabled = false;
+      skipBtn.disabled = true;
+      setFeedback("Skipped. The correct answer was " + gameState.current.answer + ".", "bad");
+      piSpeech.textContent = "That’s okay. Every question is a chance to learn!";
+      updateScoreboard();
+    }
+
+    function nextQuestion() {
+      if (!gameState.started) return;
+      generateQuestion();
+    }
+
+    function endGame() {
+      gameState.started = false;
+      answerInput.disabled = true;
+      submitBtn.disabled = true;
+      nextBtn.disabled = true;
+      skipBtn.disabled = true;
+
+      questionTextEl.innerHTML = "🎉 Challenge Complete!";
+      const name = gameState.playerName || "Math Star";
+      setFeedback(
+        name + ", your final score is " + gameState.score + " with a best streak of " + gameState.bestStreak + ".",
+        "good"
+      );
+      piSpeech.textContent = "Fantastic work, " + name + "! You finished the challenge like a true math champion.";
+      saveLeaderboard(name, gameState.score, gameState.mode, gameState.difficulty);
+      updateLeaderboard();
+      updateScoreboard();
+    }
+
+    function getPoints() {
+      const base = {
+        easy: 10,
+        medium: 15,
+        hard: 20
+      }[gameState.difficulty] || 10;
+
+      const streakBonus = Math.min(gameState.streak * 2, 20);
+      return base + streakBonus;
+    }
+
+    function randomMode() {
+      const modes = ["addition", "subtraction", "multiplication", "division", "fractions"];
+      return modes[Math.floor(Math.random() * modes.length)];
+    }
+
+    function rangeByDifficulty() {
+      if (gameState.difficulty === "easy") return [1, 10];
+      if (gameState.difficulty === "hard") return [10, 50];
+      return [1, 20];
+    }
+
+    function makeAddition() {
+      const [min, max] = rangeByDifficulty();
+      const a = rand(min, max);
+      const b = rand(min, max);
+      return {
+        display: `${a} + ${b} = ?`,
+        answer: a + b
+      };
+    }
+
+    function makeSubtraction() {
+      const [min, max] = rangeByDifficulty();
+      let a = rand(min, max);
+      let b = rand(min, max);
+      if (b > a) [a, b] = [b, a];
+      return {
+        display: `${a} − ${b} = ?`,
+        answer: a - b
+      };
+    }
+
+    function makeMultiplication() {
+      let max = gameState.difficulty === "easy" ? 5 : gameState.difficulty === "hard" ? 12 : 9;
+      const a = rand(1, max);
+      const b = rand(1, max);
+      return {
+        display: `${a} × ${b} = ?`,
+        answer: a * b
+      };
+    }
+
+    function makeDivision() {
+      let max = gameState.difficulty === "easy" ? 5 : gameState.difficulty === "hard" ? 12 : 9;
+      const b = rand(1, max);
+      const answer = rand(1, max);
+      const a = b * answer;
+      return {
+        display: `${a} ÷ ${b} = ?`,
+        answer
+      };
+    }
+
+    function makeFractionQuestion() {
+      const typePool = gameState.difficulty === "easy"
+        ? ["identify", "compare"]
+        : gameState.difficulty === "hard"
+        ? ["identify", "compare", "equivalent", "simplify"]
+        : ["identify", "compare", "equivalent"];
+
+      const type = typePool[Math.floor(Math.random() * typePool.length)];
+
+      if (type === "identify") {
+        const denominator = rand(2, 8);
+        const numerator = rand(1, denominator - 1);
+        return {
+          display: `What fraction is shown?<br>${fractionHTML(numerator, denominator)}`,
+          answer: `${numerator}/${denominator}`
+        };
+      }
+
+      if (type === "compare") {
+        const a1 = rand(1, 8), b1 = rand(a1 + 1, 9);
+        const a2 = rand(1, 8), b2 = rand(a2 + 1, 9);
+        const v1 = a1 / b1;
+        const v2 = a2 / b2;
+        let answer = "=";
+        if (v1 > v2) answer = ">";
+        if (v1 < v2) answer = "<";
+
+        const choices = shuffle([
+          "&gt;",
+          "&lt;",
+          "=",
+          "Not sure"
+        ]);
+
+        return {
+          display:
+            `Compare the fractions:<br>${fractionHTML(a1, b1)} ? ${fractionHTML(a2, b2)}`,
+          answer,
+          multipleChoice: true,
+          choices
+        };
+      }
+
+      if (type === "equivalent") {
+        const baseNum = rand(1, 5);
+        const baseDen = rand(baseNum + 1, 8);
+        const mult = rand(2, 4);
+        const eqNum = baseNum * mult;
+        const eqDen = baseDen * mult;
+
+        const options = shuffle([
+          `${eqNum}/${eqDen}`,
+          `${eqNum + 1}/${eqDen}`,
+          `${eqNum}/${eqDen + 1}`,
+          `${baseNum + 1}/${baseDen + 2}`
+        ]);
+
+        return {
+          display: `Which fraction is equivalent to ${fractionHTML(baseNum, baseDen)} ?`,
+          answer: `${eqNum}/${eqDen}`,
+          multipleChoice: true,
+          choices: options.map(v => fractionChoiceHTML(v))
+        };
+      }
+
+      const num = rand(2, 12);
+      const den = rand(2, 12);
+      const g = gcd(num, den);
+      const simpNum = num / g;
+      const simpDen = den / g;
+
+      return {
+        display: `Simplify this fraction:<br>${fractionHTML(num, den)}`,
+        answer: `${simpNum}/${simpDen}`
+      };
+    }
+
+    function fractionHTML(n, d) {
+      return `
+        <span class="fraction">
+          <span class="top">${n}</span>
+          <span class="bottom">${d}</span>
+        </span>
+      `;
+    }
+
+    function fractionChoiceHTML(text) {
+      if (!text.includes("/")) return text;
+      const [n, d] = text.split("/");
+      return fractionHTML(n, d);
+    }
+
+    function setFeedback(text, type) {
+      feedbackEl.textContent = text;
+      feedbackEl.className = "feedback " + type;
+    }
+
+    function capitalize(text) {
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    }
+
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function gcd(a, b) {
+      while (b !== 0) {
+        [a, b] = [b, a % b];
+      }
+      return a;
+    }
+
+    function normalizeAnswer(value) {
+      return String(value).trim().replace(/\s+/g, "").replace(/÷/g, "/");
+    }
+
+    function stripHtml(html) {
+      const div = document.createElement("div");
+      div.innerHTML = html;
+      return div.textContent || div.innerText || "";
+    }
+
+    function shuffle(array) {
+      return [...array].sort(() => Math.random() - 0.5);
+    }
+
+    function getPraiseMessage() {
+      const messages = [
+        "Brilliant work! You’re shining today!",
+        "Amazing! Professor Pi is impressed!",
+        "Excellent answer! Keep that streak going!",
+        "Fantastic! Your math power is growing!",
+        "Super job! You solved it beautifully!"
+      ];
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    function getEncouragementMessage() {
+      const messages = [
+        "Nice try. Learning happens one step at a time!",
+        "Do not worry. Mistakes help us grow smarter!",
+        "Keep going. You can get the next one!",
+        "Almost there. Stay focused and try again!",
+        "Every challenge makes you better at math!"
+      ];
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    function saveLeaderboard(name, score, mode, difficulty) {
+      const raw = localStorage.getItem("ilm_leaderboard");
+      const board = raw ? JSON.parse(raw) : [];
+      board.push({
+        name,
+        score,
+        mode,
+        difficulty,
+        date: new Date().toLocaleDateString()
+      });
+      board.sort((a, b) => b.score - a.score);
+      const topFive = board.slice(0, 5);
+      localStorage.setItem("ilm_leaderboard", JSON.stringify(topFive));
+    }
+
+    function updateLeaderboard() {
+      const raw = localStorage.getItem("ilm_leaderboard");
+      const board = raw ? JSON.parse(raw) : [];
+
+      if (!board.length) {
+        leaderboardEl.innerHTML = `<li><span>No scores yet</span><strong>0</strong></li>`;
+        return;
+      }
+
+      leaderboardEl.innerHTML = board.map((entry, index) => `
+        <li>
+          <span>${index + 1}. ${escapeHtml(entry.name)} <small style="opacity:.6;">(${capitalize(entry.mode)})</small></span>
+          <strong>${entry.score}</strong>
+        </li>
+      `).join("");
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    init();
+  </script>
+</body>
+</html>
