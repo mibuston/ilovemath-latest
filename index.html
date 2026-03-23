@@ -8,620 +8,760 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 
 <style>
-:root {
-  --blue-1: #0f6fff;
-  --blue-2: #5aa9ff;
-  --blue-3: #eaf4ff;
-  --gold-1: #ffd76a;
-  --gold-2: #fff4cf;
-  --text-1: #15314b;
-  --text-2: #5d7186;
-  --white: #ffffff;
-  --shadow: 0 14px 35px rgba(16, 52, 88, 0.12);
-  --shadow-hover: 0 18px 42px rgba(16, 52, 88, 0.18);
-  --radius-xl: 26px;
-  --radius-lg: 18px;
+:root{
+  --blue:#0f6fff;
+  --blue2:#4fb5ff;
+  --nav:#0d67d7;
+  --dark:#123252;
+  --text:#3d5873;
+  --white:#ffffff;
+  --glass:rgba(255,255,255,0.72);
+  --glass-strong:rgba(255,255,255,0.84);
+  --shadow:0 16px 40px rgba(15, 56, 99, 0.14);
+  --shadow-hover:0 20px 50px rgba(15, 56, 99, 0.20);
+  --radius-xl:34px;
+  --radius-lg:24px;
+  --radius-md:18px;
 }
 
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+  scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--text-1);
-  min-height: 100vh;
-  overflow-x: hidden;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  color:var(--dark);
+  overflow-x:hidden;
   background:
-    radial-gradient(circle at 10% 12%, rgba(255,255,255,0.55) 0 65px, transparent 66px),
-    radial-gradient(circle at 88% 12%, rgba(255,244,207,0.85) 0 85px, transparent 86px),
-    radial-gradient(circle at 18% 28%, rgba(141, 227, 136, 0.22) 0 120px, transparent 121px),
-    radial-gradient(circle at 85% 78%, rgba(90,169,255,0.20) 0 180px, transparent 181px),
-    linear-gradient(180deg, #71d0ff 0%, #9fe4ff 24%, #88ddff 40%, #70caff 54%, #b8f2ff 68%, #fff1bf 86%, #ffdf9a 100%);
-  position: relative;
+    radial-gradient(circle at 20% 14%, rgba(255,255,255,0.50) 0 70px, transparent 71px),
+    radial-gradient(circle at 80% 16%, rgba(255,255,255,0.35) 0 90px, transparent 91px),
+    linear-gradient(180deg,#0d7bff 0%, #42bfff 14%, #81ddff 26%, #92e6ff 35%, #69d4ee 43%, #9ef0f8 49%, #c9f8ff 54%, #fff7d8 73%, #ffefc0 100%);
+  min-height:100vh;
+  position:relative;
 }
 
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  border-radius: 50%;
-  z-index: 0;
-  pointer-events: none;
-  filter: blur(10px);
-  opacity: .28;
+a{
+  text-decoration:none;
 }
 
-body::before {
-  width: 320px;
-  height: 320px;
-  left: -90px;
-  top: 220px;
-  background: radial-gradient(circle, #7df59f 0%, #51d387 58%, transparent 72%);
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(8, 92, 198, 0.88);
+  backdrop-filter:blur(12px);
+  box-shadow:0 3px 16px rgba(0,0,0,0.12);
 }
 
-body::after {
-  width: 360px;
-  height: 360px;
-  right: -110px;
-  bottom: 70px;
-  background: radial-gradient(circle, #8ecbff 0%, #52a9ff 58%, transparent 72%);
+.nav{
+  max-width:1240px;
+  margin:0 auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
 }
 
-a {
-  text-decoration: none;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  color:#fff;
+  font-weight:800;
+  font-size:22px;
 }
 
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  background: rgba(17, 106, 233, 0.90);
-  color: white;
-  box-shadow: 0 3px 16px rgba(0,0,0,0.12);
+.brand img{
+  height:56px;
+  width:auto;
+  display:block;
+  background:#fff;
+  border-radius:14px;
+  padding:4px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
 }
 
-.nav {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+.nav-links{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  flex-shrink: 0;
-  gap: 12px;
+.nav-links a{
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  padding:11px 16px;
+  border-radius:999px;
+  transition:.22s ease;
 }
 
-.site-logo {
-  height: 64px;
-  width: auto;
-  display: block;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.14));
+.nav-links a:hover,
+.nav-links a.active{
+  background:rgba(255,255,255,0.18);
 }
 
-.brand-text {
-  color: white;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 0.2px;
+.hero-shell{
+  max-width:1280px;
+  margin:0 auto;
+  padding:22px 18px 0;
+  position:relative;
 }
 
-.nav-links {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.hero-scene{
+  position:relative;
+  min-height:760px;
+  border-radius:0 0 50px 50px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 72% 13%, rgba(255,245,182,0.95) 0 56px, rgba(255,235,129,0.50) 57px, rgba(255,235,129,0) 120px),
+    radial-gradient(circle at 16% 18%, rgba(255,255,255,0.60) 0 60px, transparent 61px),
+    linear-gradient(180deg,#39a9ff 0%, #87dcff 28%, #69d8ff 44%, #39c3df 58%, #34b7d0 62%, #5fe2f4 68%, #aef6ff 73%, #fff4d5 84%, #ffebb8 100%);
+  box-shadow:var(--shadow);
 }
 
-.nav-links a {
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 10px 14px;
-  border-radius: 999px;
-  transition: 0.2s ease;
+.hero-scene::before{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:42%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15) 0 16px, transparent 17px),
+    radial-gradient(circle at 44% 56%, rgba(255,255,255,0.10) 0 20px, transparent 21px),
+    linear-gradient(180deg, rgba(66,210,233,0.0) 0%, rgba(38,196,224,0.55) 18%, rgba(25,183,211,0.75) 38%, rgba(83,227,238,0.55) 62%, rgba(255,255,255,0.28) 100%);
 }
 
-.nav-links a:hover {
-  background: rgba(255,255,255,0.16);
+.hero-scene::after{
+  content:"";
+  position:absolute;
+  left:-2%;
+  right:-2%;
+  bottom:-48px;
+  height:190px;
+  background:#eef5fb;
+  border-radius:50% 50% 0 0 / 44% 44% 0 0;
+  box-shadow:0 -15px 40px rgba(255,255,255,0.22);
 }
 
-.hero-wrap {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 34px 18px 18px;
-  position: relative;
-  z-index: 1;
+.palm{
+  position:absolute;
+  width:260px;
+  height:260px;
+  pointer-events:none;
+  opacity:.96;
+  z-index:1;
 }
 
-.hero {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 26px;
-  align-items: stretch;
-  background: rgba(255,255,255,0.78);
-  border: 1px solid rgba(255,255,255,0.55);
-  border-radius: 34px;
-  padding: 34px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
+.palm.left{
+  top:0;
+  left:-42px;
 }
 
-.hero-text {
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-  min-height: 340px;
+.palm.right{
+  top:0;
+  right:-26px;
+  transform:scaleX(-1);
 }
 
-.hero-glow {
-  position: absolute;
-  right: -65px;
-  top: -65px;
-  width: 230px;
-  height: 230px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,231,125,0.92) 0%, rgba(255,231,125,0.38) 48%, rgba(255,231,125,0) 72%);
-  pointer-events: none;
+.palm::before{
+  content:"";
+  position:absolute;
+  left:108px;
+  top:-5px;
+  width:12px;
+  height:180px;
+  background:linear-gradient(180deg,#7b5222,#92632d);
+  border-radius:30px;
+  transform:rotate(-18deg);
 }
 
-.kicker {
-  display: inline-block;
-  background: var(--gold-2);
-  color: #8a6500;
-  font-weight: 700;
-  font-size: 13px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 2;
+.palm::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 45% 22%, #2f8f39 0 24px, transparent 25px),
+    linear-gradient(140deg, transparent 0 38%, #52b94f 39% 44%, transparent 45%),
+    linear-gradient(175deg, transparent 0 34%, #4aae48 35% 40%, transparent 41%),
+    linear-gradient(210deg, transparent 0 34%, #46a744 35% 40%, transparent 41%),
+    linear-gradient(250deg, transparent 0 35%, #62c65e 36% 41%, transparent 42%),
+    linear-gradient(295deg, transparent 0 37%, #56ba51 38% 43%, transparent 44%);
+  border-radius:50%;
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,0.10));
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: 52px;
-  line-height: 1.08;
-  color: #0d2d52;
-  position: relative;
-  z-index: 2;
+.hero-content{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  gap:26px;
+  align-items:center;
+  padding:72px 42px 0;
 }
 
-.hero p {
-  margin: 16px 0 0;
-  font-size: 18px;
-  line-height: 1.7;
-  color: var(--text-2);
-  max-width: 640px;
-  position: relative;
-  z-index: 2;
+.hero-panel{
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.56);
+  border-radius:34px;
+  box-shadow:var(--shadow);
+  padding:36px 38px 38px;
+  max-width:760px;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 26px;
-  position: relative;
-  z-index: 2;
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#ffefc9;
+  color:#8f6300;
+  padding:12px 18px;
+  border-radius:999px;
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.hero-panel h1{
+  margin:0;
+  font-size:66px;
+  line-height:1.03;
+  color:#12356c;
+  letter-spacing:-1.5px;
+}
+
+.hero-panel p{
+  margin:18px 0 0;
+  font-size:21px;
+  line-height:1.65;
+  color:#2f5576;
+  max-width:650px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:30px;
 }
 
 .btn-primary,
-.btn-secondary {
-  display: inline-block;
-  padding: 14px 20px;
-  border-radius: 14px;
-  font-weight: bold;
-  font-size: 15px;
-  transition: 0.2s ease;
+.btn-secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:18px 28px;
+  border-radius:18px;
+  font-size:17px;
+  font-weight:800;
+  transition:.22s ease;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, var(--blue-1), var(--blue-2));
-  color: white;
-  box-shadow: 0 10px 24px rgba(15,111,255,0.25);
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(90deg,#1272ff,#2f8eff 48%, #3ebcff 100%);
+  box-shadow:0 14px 30px rgba(15,111,255,0.28);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
+.btn-primary:hover{
+  transform:translateY(-2px);
 }
 
-.btn-secondary {
-  background: white;
-  color: var(--blue-1);
-  border: 1px solid #d8e8ff;
+.btn-secondary{
+  color:#104c96;
+  background:rgba(255,255,255,0.92);
+  border:2px solid #beddff;
 }
 
-.btn-secondary:hover {
-  background: #f6fbff;
+.btn-secondary:hover{
+  background:#f8fcff;
 }
 
-.floating-math {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+.professor-zone{
+  position:relative;
+  min-height:520px;
 }
 
-.math-symbol {
-  position: absolute;
-  font-weight: 700;
-  color: rgba(21,106,232,0.14);
-  animation: floaty 6s ease-in-out infinite;
+.professor-zone .symbols span{
+  position:absolute;
+  font-weight:800;
+  z-index:2;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+  animation:floaty 5.8s ease-in-out infinite;
 }
 
-.math1 { top: 18px; right: 145px; font-size: 44px; }
-.math2 { top: 105px; right: 30px; font-size: 34px; animation-delay: .8s; }
-.math3 { bottom: 50px; right: 180px; font-size: 50px; animation-delay: 1.5s; }
-.math4 { bottom: 18px; right: 60px; font-size: 30px; animation-delay: 2.2s; }
+.professor-zone .sym1{ top:60px; right:40px; font-size:82px; color:#ffcb34; }
+.professor-zone .sym2{ top:210px; right:120px; font-size:68px; color:#3e98ff; animation-delay:.8s; }
+.professor-zone .sym3{ top:110px; left:30px; font-size:60px; color:#7fe0ff; animation-delay:1.3s; }
+.professor-zone .sym4{ top:260px; left:40px; font-size:54px; color:#ffd76a; animation-delay:1.8s; }
+.professor-zone .sym5{ top:32px; left:120px; font-size:54px; color:#d6f4ff; animation-delay:2.2s; }
 
-@keyframes floaty {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes floaty{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
 }
 
-.hero-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.professor-island{
+  position:absolute;
+  inset:auto 0 24px 0;
+  margin:auto;
+  width:100%;
+  max-width:520px;
+  height:460px;
+  z-index:2;
 }
 
-.professor-card {
-  background: linear-gradient(180deg, #ffffff, #f7fbff);
-  border-radius: 24px;
-  padding: 22px;
-  box-shadow: 0 10px 24px rgba(13, 45, 82, 0.08);
-  text-align: center;
+.island-base{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:420px;
+  height:130px;
+  background:radial-gradient(ellipse at center, #f8dda0 0%, #f3d18b 55%, #dfbd71 100%);
+  border-radius:50%;
+  box-shadow:0 24px 40px rgba(0,0,0,0.10);
 }
 
-.professor-avatar {
-  width: 170px;
-  height: 170px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff 0%, #f6fbff 45%, #d7efff 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 86px;
-  box-shadow: inset 0 0 0 8px rgba(255,255,255,0.65), 0 10px 25px rgba(0,0,0,0.08);
-  overflow: hidden;
+.island-base::before{
+  content:"";
+  position:absolute;
+  left:-18px;
+  right:-18px;
+  bottom:-12px;
+  height:40px;
+  background:rgba(255,255,255,0.42);
+  border-radius:50%;
+  filter:blur(3px);
 }
 
-.professor-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
+.sea-ball{
+  position:absolute;
+  bottom:42px;
+  left:74px;
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:conic-gradient(#ff5d5d 0 25%, #ffffff 25% 50%, #4cc6ff 50% 75%, #ffffff 75% 100%);
+  box-shadow:0 10px 22px rgba(0,0,0,0.10);
 }
 
-.professor-card h3 {
-  margin: 0 0 8px;
-  font-size: 30px;
-  color: #123a64;
+.starfish{
+  position:absolute;
+  bottom:24px;
+  right:44px;
+  font-size:62px;
 }
 
-.professor-card p {
-  margin: 0;
-  color: var(--text-2);
-  font-size: 15px;
-  line-height: 1.6;
+.shell{
+  position:absolute;
+  bottom:34px;
+  left:150px;
+  font-size:34px;
 }
 
-.stat-card {
-  background: linear-gradient(180deg, #ffffff, #f7fbff);
-  border-radius: 22px;
-  padding: 22px;
-  box-shadow: 0 10px 24px rgba(13, 45, 82, 0.08);
-  text-align: left;
+.professor-card-image{
+  position:absolute;
+  left:50%;
+  bottom:52px;
+  transform:translateX(-50%);
+  width:360px;
+  height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:3;
 }
 
-.stat-card strong {
-  display: block;
-  font-size: 30px;
-  color: #0f355e;
-  margin-bottom: 4px;
+.professor-card-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,0.14));
 }
 
-.stat-card span {
-  color: var(--text-2);
-  font-size: 14px;
+.professor-fallback{
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff 0%, #eef8ff 46%, #cdeeff 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:160px;
+  box-shadow:inset 0 0 0 10px rgba(255,255,255,0.7), 0 18px 30px rgba(0,0,0,0.12);
 }
 
-.wave-divider {
-  max-width: 1180px;
-  margin: -8px auto 0;
-  padding: 0 18px;
-  position: relative;
-  z-index: 1;
-  line-height: 0;
+.stats-row{
+  position:relative;
+  z-index:3;
+  max-width:1240px;
+  margin:-120px auto 0;
+  padding:0 18px;
+  display:flex;
+  justify-content:flex-end;
+  gap:18px;
+  flex-wrap:wrap;
 }
 
-.wave-divider svg {
-  display: block;
-  width: 100%;
-  height: 72px;
+.stat-box{
+  min-width:190px;
+  background:var(--glass-strong);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.6);
+  box-shadow:var(--shadow);
+  border-radius:24px;
+  padding:22px 20px;
+  text-align:center;
 }
 
-.section {
-  max-width: 1180px;
-  margin: 22px auto 0;
-  padding: 0 18px 70px;
-  position: relative;
-  z-index: 1;
+.stat-box strong{
+  display:block;
+  font-size:22px;
+  color:#153b67;
+  margin-bottom:8px;
 }
 
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 22px;
-  flex-wrap: wrap;
+.stat-box span{
+  display:block;
+  color:#49647e;
+  font-size:14px;
+  line-height:1.4;
 }
 
-.section-head h2 {
-  margin: 0;
-  font-size: 34px;
-  color: #0d2d52;
+.main{
+  position:relative;
+  z-index:3;
+  max-width:1240px;
+  margin:0 auto;
+  padding:34px 18px 70px;
 }
 
-.section-head p {
-  margin: 8px 0 0;
-  color: var(--text-2);
-  font-size: 16px;
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
 }
 
-.lesson-count {
-  background: rgba(255,255,255,0.9);
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-weight: bold;
-  color: var(--blue-1);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 22px;
+.section-title .icon{
+  font-size:34px;
 }
 
-.card, .info-card, .video-card {
-  background: linear-gradient(180deg, #ffffff, #fbfdff);
-  border-radius: var(--radius-xl);
-  padding: 22px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(222,235,249,0.9);
-  text-align: left;
+.section-title-wrap h2{
+  margin:0;
+  font-size:56px;
+  line-height:1;
+  color:#122e56;
 }
 
-.card {
-  position: relative;
-  overflow: hidden;
-  transition: 0.22s ease;
+.section-title-wrap p{
+  margin:10px 0 0;
+  color:#49647e;
+  font-size:18px;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 8px;
-  background: linear-gradient(90deg, #3d8dff, #7bbcff, #8fe388, #ffd76a);
+.lesson-count{
+  background:rgba(255,255,255,0.85);
+  color:#1769dc;
+  font-weight:800;
+  font-size:16px;
+  padding:18px 24px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:26px;
 }
 
-.lesson-pill {
-  display: inline-block;
-  background: #eef6ff;
-  color: var(--blue-1);
-  font-size: 13px;
-  font-weight: 800;
-  padding: 7px 12px;
-  border-radius: 999px;
-  margin-bottom: 14px;
+.card{
+  background:rgba(255,255,255,0.88);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.7);
+  transition:.22s ease;
 }
 
-.card h3, .info-card h3, .video-card h3 {
-  margin: 0 0 8px;
-  font-size: 22px;
-  color: #11304c;
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-hover);
 }
 
-.card .category {
-  display: inline-block;
-  background: #fff6d5;
-  color: #8a6500;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 999px;
-  margin-bottom: 12px;
+.card-top{
+  height:10px;
 }
 
-.card .subtitle, .info-card p, .video-card p {
-  color: var(--text-2);
-  font-size: 15px;
-  line-height: 1.6;
+.card:nth-child(4n+1) .card-top{ background:linear-gradient(90deg,#2a98ff,#42c6ff); }
+.card:nth-child(4n+2) .card-top{ background:linear-gradient(90deg,#15c56d,#5adbb0); }
+.card:nth-child(4n+3) .card-top{ background:linear-gradient(90deg,#8f47ff,#c08cff); }
+.card:nth-child(4n+4) .card-top{ background:linear-gradient(90deg,#ff9b1e,#ffbd59); }
+
+.card-body{
+  padding:22px 22px 24px;
 }
 
-.card .subtitle {
-  min-height: 48px;
+.lesson-pill{
+  display:inline-block;
+  background:#eaf3ff;
+  color:#1669da;
+  border-radius:999px;
+  padding:9px 14px;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:12px;
 }
 
-.card .actions,
-.video-card .actions {
-  margin-top: 18px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.card:nth-child(4n+2) .lesson-pill{ background:#e6fff2; color:#11955a; }
+.card:nth-child(4n+3) .lesson-pill{ background:#f2eaff; color:#7b3fd8; }
+.card:nth-child(4n+4) .lesson-pill{ background:#fff1de; color:#e07c00; }
+
+.category-pill{
+  display:inline-block;
+  background:#fff6d6;
+  color:#8e6a00;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
 }
 
-.card a,
-.video-card a,
-.contact-links a,
-.admin-links a {
-  display: inline-block;
-  padding: 11px 15px;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 14px;
+.card h3{
+  margin:0;
+  font-size:21px;
+  line-height:1.25;
+  color:#183357;
+  min-height:54px;
 }
 
-.open-btn {
-  background: linear-gradient(90deg, var(--blue-1), var(--blue-2));
-  color: white;
-  box-shadow: 0 8px 18px rgba(15,111,255,0.22);
+.card .subtitle{
+  margin-top:10px;
+  color:#4f6983;
+  font-size:16px;
+  line-height:1.55;
+  min-height:52px;
 }
 
-.open-btn:hover {
-  opacity: 0.95;
+.card-actions{
+  margin-top:22px;
 }
 
-.preview-btn {
-  background: #f3f8ff;
-  color: var(--blue-1);
-  border: 1px solid #d9e9ff;
+.open-btn{
+  display:inline-block;
+  padding:14px 18px;
+  border-radius:16px;
+  color:#fff;
+  font-weight:800;
+  font-size:15px;
+  box-shadow:0 12px 24px rgba(0,0,0,0.10);
 }
 
-.preview-btn:hover {
-  background: #eaf4ff;
+.card:nth-child(4n+1) .open-btn{ background:linear-gradient(90deg,#1272ff,#2ea9ff); }
+.card:nth-child(4n+2) .open-btn{ background:linear-gradient(90deg,#10a957,#1bc97b); }
+.card:nth-child(4n+3) .open-btn{ background:linear-gradient(90deg,#7f35e8,#a04fff); }
+.card:nth-child(4n+4) .open-btn{ background:linear-gradient(90deg,#ff7d00,#ff9d23); }
+
+.bottom-scene{
+  position:relative;
+  margin-top:54px;
+  min-height:320px;
+  border-radius:38px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(255,241,171,0.85) 0 50px, rgba(255,241,171,0) 110px),
+    linear-gradient(180deg,#7edbff 0%, #aef2ff 34%, #fff1cd 75%, #ffe5ad 100%);
+  box-shadow:var(--shadow);
 }
 
-.two-col {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
+.bottom-sea{
+  position:absolute;
+  inset:0 0 auto 0;
+  height:58%;
+  background:linear-gradient(180deg, rgba(64,206,232,0.40) 0%, rgba(38,190,217,0.68) 60%, rgba(156,240,248,0.35) 100%);
 }
 
-.contact-links,
-.admin-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 16px;
+.bottom-sand{
+  position:absolute;
+  inset:auto 0 0 0;
+  height:44%;
+  background:linear-gradient(180deg,#fff3d6 0%, #f6dfa7 100%);
+  border-radius:44% 44% 0 0 / 22% 22% 0 0;
 }
 
-.contact-links a,
-.admin-links a {
-  background: #eef6ff;
-  color: var(--blue-1);
-  border: 1px solid #d9e9ff;
+.sandcastle{
+  position:absolute;
+  left:70px;
+  bottom:48px;
+  font-size:110px;
 }
 
-.contact-links a:hover,
-.admin-links a:hover {
-  background: #e6f1ff;
+.treasure{
+  position:absolute;
+  right:76px;
+  bottom:52px;
+  font-size:100px;
 }
 
-.video-placeholder {
-  background: linear-gradient(135deg, #f4f9ff, #fff8de);
-  border: 2px dashed #c7def9;
-  border-radius: 20px;
-  padding: 28px;
-  text-align: center;
+.crab{
+  position:absolute;
+  right:190px;
+  bottom:44px;
+  font-size:58px;
 }
 
-.video-placeholder strong {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #103458;
+.footer-text{
+  text-align:center;
+  margin-top:26px;
+  color:#37536f;
+  font-size:14px;
 }
 
-footer {
-  padding: 26px 18px 40px;
-  text-align: center;
-  color: #4c6177;
-  font-size: 14px;
-  position: relative;
-  z-index: 1;
+.footer-text strong{
+  color:#17395f;
 }
 
-footer strong {
-  color: #11304c;
-}
-
-@media (max-width: 900px) {
-  .hero,
-  .two-col {
-    grid-template-columns: 1fr;
+@media (max-width: 1100px){
+  .hero-content{
+    grid-template-columns:1fr;
+    padding:54px 28px 0;
   }
 
-  .hero {
-    padding: 26px;
+  .hero-panel{
+    max-width:none;
   }
 
-  .hero h1 {
-    font-size: 40px;
+  .professor-zone{
+    min-height:420px;
+  }
+
+  .stats-row{
+    justify-content:center;
+    margin-top:-40px;
   }
 }
 
-@media (max-width: 600px) {
-  .nav {
-    padding: 12px 14px;
+@media (max-width: 760px){
+  .brand{
+    font-size:18px;
   }
 
-  .site-logo {
-    height: 46px;
+  .brand img{
+    height:48px;
   }
 
-  .brand-text {
-    font-size: 18px;
+  .hero-scene{
+    min-height:820px;
   }
 
-  .hero-wrap {
-    padding-top: 18px;
+  .hero-panel{
+    padding:24px;
+    border-radius:28px;
   }
 
-  .hero h1 {
-    font-size: 32px;
+  .hero-panel h1{
+    font-size:44px;
+    letter-spacing:-0.5px;
   }
 
-  .hero p {
-    font-size: 16px;
+  .hero-panel p{
+    font-size:18px;
   }
 
-  .section-head h2 {
-    font-size: 28px;
+  .btn-primary,
+  .btn-secondary{
+    width:100%;
   }
 
-  .professor-avatar {
-    width: 140px;
-    height: 140px;
-    font-size: 70px;
+  .section-title-wrap h2{
+    font-size:40px;
+  }
+
+  .lesson-count{
+    width:100%;
+    text-align:center;
+  }
+
+  .stats-row{
+    margin-top:-10px;
+  }
+
+  .stat-box{
+    min-width:unset;
+    width:100%;
+  }
+
+  .professor-card-image{
+    width:270px;
+    height:270px;
+    bottom:78px;
+  }
+
+  .professor-fallback{
+    width:250px;
+    height:250px;
+    font-size:120px;
+  }
+
+  .island-base{
+    width:320px;
+    height:100px;
+  }
+
+  .sea-ball{
+    left:46px;
+    width:68px;
+    height:68px;
+  }
+
+  .sandcastle{
+    left:22px;
+    font-size:88px;
+  }
+
+  .treasure{
+    right:28px;
+    font-size:82px;
+  }
+
+  .crab{
+    right:124px;
+    font-size:48px;
   }
 }
 </style>
 </head>
-
 <body>
 
 <div class="topbar">
   <div class="nav">
-    <a href="/" class="brand">
-      <img src="assets/logo.png" alt="I Love Math Logo" class="site-logo">
-      <span class="brand-text">I Love Math</span>
+    <a href="#home" class="brand">
+      <img src="assets/logo.png" alt="I Love Math logo">
+      <span>I Love Math</span>
     </a>
 
     <div class="nav-links">
-      <a href="#home">Home</a>
+      <a href="#home" class="active">Home</a>
       <a href="#worksheets">Worksheets</a>
       <a href="#videos">Videos</a>
       <a href="/admin/" target="_blank" rel="noopener noreferrer">Admin</a>
@@ -631,162 +771,190 @@ footer strong {
   </div>
 </div>
 
-<div class="hero-wrap" id="home">
-  <section class="hero">
-    <div class="hero-text">
-      <div class="hero-glow"></div>
+<div class="hero-shell" id="home">
+  <section class="hero-scene">
+    <div class="palm left"></div>
+    <div class="palm right"></div>
 
-      <div class="floating-math">
-        <span class="math-symbol math1">π</span>
-        <span class="math-symbol math2">+</span>
-        <span class="math-symbol math3">÷</span>
-        <span class="math-symbol math4">×</span>
-      </div>
-
-      <div class="kicker">🌴 Island Learning with Professor Pi</div>
-      <h1>Make Math Easy, Fun, and Full of Wonder.</h1>
-      <p>
-        Join Professor Pi on a bright island adventure where kids can explore premium worksheets, learn step by step, and build confidence in math with colorful visuals and engaging practice.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#worksheets" class="btn-primary">Browse Worksheets</a>
-        <a href="#videos" class="btn-secondary">Watch Videos</a>
-      </div>
-    </div>
-
-    <div class="hero-panel">
-      <div class="professor-card">
-        <div class="professor-avatar">🧑‍🏫</div>
-        <!-- If you create a real Professor Pi image later, replace the line above with:
-        <div class="professor-avatar">
-          <img src="assets/professor-pi.png" alt="Professor Pi">
-        </div>
-        -->
-        <h3>Professor Pi</h3>
+    <div class="hero-content">
+      <div class="hero-panel">
+        <div class="kicker">🌴 Island Learning with Professor Pi</div>
+        <h1>Make Math Easy, Fun, and Full of Wonder.</h1>
         <p>
-          Your friendly island math guide, ready to help kids learn fractions, numbers, and problem solving in a colorful and exciting way.
+          Join Professor Pi on a bright island adventure where kids can explore premium worksheets, learn step by step, and build confidence in math.
         </p>
+
+        <div class="hero-actions">
+          <a class="btn-primary" href="#worksheets">🌴 Browse Worksheets</a>
+          <a class="btn-secondary" href="#videos">▶ Watch Videos</a>
+        </div>
       </div>
 
-      <div class="stat-card">
-        <strong id="lesson-total">12+</strong>
-        <span>Printable lessons ready to open and download</span>
-      </div>
-      <div class="stat-card">
-        <strong>Premium Design</strong>
-        <span>Bright visuals, organized layout, and a polished learning experience</span>
-      </div>
-      <div class="stat-card">
-        <strong>Island Fun</strong>
-        <span>A tropical learning theme that makes your website unique and memorable</span>
+      <div class="professor-zone">
+        <div class="symbols">
+          <span class="sym1">π</span>
+          <span class="sym2">÷</span>
+          <span class="sym3">3</span>
+          <span class="sym4">+</span>
+          <span class="sym5">÷</span>
+        </div>
+
+        <div class="professor-island">
+          <div class="island-base"></div>
+          <div class="sea-ball"></div>
+          <div class="shell">🐚</div>
+          <div class="starfish">⭐</div>
+
+          <div class="professor-card-image">
+            <!-- Replace this fallback with your real image later -->
+            <!-- Example:
+            <img src="assets/professor-pi.png" alt="Professor Pi">
+            -->
+            <div class="professor-fallback">🧑‍🏫</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </div>
 
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
-    <path fill="rgba(255,255,255,0.35)" d="M0,64L48,64C96,64,192,64,288,69.3C384,75,480,85,576,80C672,75,768,53,864,48C960,43,1056,53,1152,64C1248,75,1344,85,1392,90.7L1440,96L1440,121L1392,121C1344,121,1248,121,1152,121C1056,121,960,121,864,121C768,121,672,121,576,121C480,121,384,121,288,121C192,121,96,121,48,121L0,121Z"></path>
-  </svg>
+<div class="stats-row">
+  <div class="stat-box">
+    <strong id="lesson-total">13+</strong>
+    <span>Printable Lessons</span>
+  </div>
+  <div class="stat-box">
+    <strong>Premium</strong>
+    <span>Design & Quality</span>
+  </div>
+  <div class="stat-box">
+    <strong>Easy Access</strong>
+    <span>Any Device</span>
+  </div>
 </div>
 
-<section class="section" id="worksheets">
-  <div class="section-head">
-    <div>
-      <h2>Worksheets</h2>
-      <p>Browse your printable lesson collection.</p>
-    </div>
-    <div class="lesson-count" id="lesson-count-pill">Loading...</div>
-  </div>
-
-  <div class="grid" id="worksheet-grid">
-    Loading worksheets...
-  </div>
-</section>
-
-<section class="section" id="videos">
-  <div class="section-head">
-    <div>
-      <h2>Videos</h2>
-      <p>Math video lessons for kids.</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="video-card">
-      <h3>Lesson Videos</h3>
-      <p>Add your video lessons here so kids can watch before or after using the worksheets.</p>
-      <div class="video-placeholder">
-        <strong>Video section ready</strong>
-        Add your lesson video links or embedded videos here.
+<div class="main">
+  <section id="worksheets">
+    <div class="section-head">
+      <div class="section-title">
+        <div class="icon">🏝️</div>
+        <div class="section-title-wrap">
+          <h2>Worksheets</h2>
+          <p>Browse your printable lesson collection.</p>
+        </div>
       </div>
-      <div class="actions">
-        <a class="open-btn" href="/videos.html">View Videos</a>
+
+      <div class="lesson-count" id="lesson-count-pill">Loading...</div>
+    </div>
+
+    <div class="grid" id="worksheet-grid">
+      <div class="card">
+        <div class="card-top"></div>
+        <div class="card-body">
+          <div class="lesson-pill">Lesson 01</div><br>
+          <div class="category-pill">Fractions</div>
+          <h3>Understanding Fractions</h3>
+          <div class="subtitle">Parts of a whole</div>
+          <div class="card-actions">
+            <a class="open-btn" href="#">Open Worksheet ↗</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="about">
-  <div class="section-head">
-    <div>
-      <h2>About</h2>
-      <p>Learn more about I Love Math.</p>
+  <section id="videos" style="margin-top:64px;">
+    <div class="section-head">
+      <div class="section-title">
+        <div class="icon">🎥</div>
+        <div class="section-title-wrap">
+          <h2 style="font-size:42px;">Videos</h2>
+          <p>Math video lessons for kids.</p>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="two-col">
-    <div class="info-card">
-      <h3>Our Mission</h3>
-      <p>
-        I Love Math is built to make learning math easier and more enjoyable for kids through premium worksheets, simple lessons, colorful educational design, and a fun island-style learning experience.
+    <div style="background:rgba(255,255,255,0.82); border-radius:30px; box-shadow:var(--shadow); padding:28px; border:1px solid rgba(255,255,255,0.7);">
+      <h3 style="margin:0 0 10px; font-size:28px; color:#15365d;">Lesson Videos</h3>
+      <p style="margin:0; color:#4c6782; font-size:16px; line-height:1.7;">
+        Add your math videos here so students can watch lessons before or after using the worksheets.
       </p>
+      <div style="margin-top:20px;">
+        <a class="btn-primary" href="/videos.html">Open Videos Page</a>
+      </div>
     </div>
+  </section>
 
-    <div class="info-card">
-      <h3>Who It’s For</h3>
-      <p>
-        This website is for kids, parents, and teachers looking for easy-to-understand math resources that are printable, engaging, beginner-friendly, and enjoyable to use.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="contact">
-  <div class="section-head">
-    <div>
-      <h2>Contact</h2>
-      <p>Reach out for questions, suggestions, or partnerships.</p>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <div class="info-card">
-      <h3>Get in Touch</h3>
-      <p>Email: hello@ilovemath.live</p>
-      <p>You can also add your Facebook page, Messenger link, or WhatsApp here.</p>
-      <div class="contact-links">
-        <a href="mailto:hello@ilovemath.live">Email Us</a>
-        <a href="#">Facebook</a>
-        <a href="#">WhatsApp</a>
+  <section id="about" style="margin-top:64px;">
+    <div class="section-head">
+      <div class="section-title">
+        <div class="icon">ℹ️</div>
+        <div class="section-title-wrap">
+          <h2 style="font-size:42px;">About</h2>
+          <p>Learn more about I Love Math.</p>
+        </div>
       </div>
     </div>
 
-    <div class="info-card">
-      <h3>Admin Access</h3>
-      <p>Use the admin area to manage worksheets, videos, and website content.</p>
-      <div class="admin-links">
-        <a href="/admin/" target="_blank" rel="noopener noreferrer">Open Admin</a>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
+      <div style="background:rgba(255,255,255,0.84); border-radius:28px; box-shadow:var(--shadow); padding:28px;">
+        <h3 style="margin:0 0 10px; font-size:26px; color:#17375f;">Our Mission</h3>
+        <p style="margin:0; color:#4c6782; font-size:16px; line-height:1.75;">
+          I Love Math makes learning math easier and more enjoyable for kids through premium worksheets, simple lessons, colorful design, and a fun island-style learning experience.
+        </p>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.84); border-radius:28px; box-shadow:var(--shadow); padding:28px;">
+        <h3 style="margin:0 0 10px; font-size:26px; color:#17375f;">Who It’s For</h3>
+        <p style="margin:0; color:#4c6782; font-size:16px; line-height:1.75;">
+          This website is for kids, parents, and teachers looking for printable, beginner-friendly, engaging math resources that are easy to understand and enjoyable to use.
+        </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <strong>© 2026 I Love Math</strong><br>
-  Fun and easy math lessons for kids.
-</footer>
+  <section id="contact" style="margin-top:64px;">
+    <div class="section-head">
+      <div class="section-title">
+        <div class="icon">📩</div>
+        <div class="section-title-wrap">
+          <h2 style="font-size:42px;">Contact</h2>
+          <p>Reach out for questions, suggestions, or partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
+      <div style="background:rgba(255,255,255,0.84); border-radius:28px; box-shadow:var(--shadow); padding:28px;">
+        <h3 style="margin:0 0 10px; font-size:26px; color:#17375f;">Get in Touch</h3>
+        <p style="margin:0 0 16px; color:#4c6782; font-size:16px; line-height:1.7;">
+          Email: hello@ilovemath.live
+        </p>
+        <a class="btn-secondary" href="mailto:hello@ilovemath.live">Email Us</a>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.84); border-radius:28px; box-shadow:var(--shadow); padding:28px;">
+        <h3 style="margin:0 0 10px; font-size:26px; color:#17375f;">Admin Access</h3>
+        <p style="margin:0 0 16px; color:#4c6782; font-size:16px; line-height:1.7;">
+          Use the admin area to manage worksheets, videos, and website content.
+        </p>
+        <a class="btn-secondary" href="/admin/" target="_blank" rel="noopener noreferrer">Open Admin</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-scene">
+    <div class="bottom-sea"></div>
+    <div class="bottom-sand"></div>
+    <div class="sandcastle">🏰</div>
+    <div class="treasure">🪙</div>
+    <div class="crab">🦀</div>
+  </div>
+
+  <div class="footer-text">
+    <strong>© 2026 I Love Math</strong> — Fun and easy math lessons for kids.
+  </div>
+</div>
 
 <script>
 async function loadWorksheets() {
@@ -799,21 +967,26 @@ async function loadWorksheets() {
     document.getElementById('lesson-total').textContent = total + '+';
     document.getElementById('lesson-count-pill').textContent = total + ' Lessons Available';
 
-    grid.innerHTML = data.worksheets.map(w => `
+    grid.innerHTML = data.worksheets.map((w, index) => `
       <div class="card">
-        <div class="lesson-pill">Lesson ${w.lesson}</div>
-        <div class="category">${w.category || 'Math'}</div>
-        <h3>${w.title}</h3>
-        <div class="subtitle">${w.subtitle || 'Printable worksheet lesson'}</div>
-        <div class="actions">
-          <a class="open-btn" href="${w.file}" target="_blank" rel="noopener noreferrer">Open Worksheet</a>
-          <a class="preview-btn" href="${w.file}" target="_blank" rel="noopener noreferrer">Preview PDF</a>
+        <div class="card-top"></div>
+        <div class="card-body">
+          <div class="lesson-pill">Lesson ${w.lesson}</div><br>
+          <div class="category-pill">${w.category || 'Math'}</div>
+          <h3>${w.title}</h3>
+          <div class="subtitle">${w.subtitle || 'Printable worksheet lesson'}</div>
+          <div class="card-actions">
+            <a class="open-btn" href="${w.file}" target="_blank" rel="noopener noreferrer">Open Worksheet ↗</a>
+          </div>
         </div>
       </div>
     `).join('');
   } catch (err) {
-    document.getElementById('worksheet-grid').innerHTML =
-      "⚠️ Worksheets failed to load. Please check your files and paths.";
+    document.getElementById('worksheet-grid').innerHTML = `
+      <div style="background:rgba(255,255,255,0.88); border-radius:24px; padding:24px; box-shadow:var(--shadow); color:#37546f;">
+        ⚠️ Worksheets failed to load. Please check your files and paths.
+      </div>
+    `;
     console.error(err);
   }
 }
