@@ -5,6 +5,7 @@
 <title>I Love Math | Premium Worksheets for Kids</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Fun and premium math worksheets and videos for kids. Learn math step by step with colorful lessons and printable practice sheets.">
+<link rel="icon" type="image/png" href="assets/logo.png">
 
 <style>
 :root {
@@ -57,7 +58,7 @@ a {
 .nav {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 14px 18px;
+  padding: 12px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -68,22 +69,15 @@ a {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: 0.2px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
-.brand-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #ffffff, #dceeff);
-  color: var(--blue-1);
-  display: grid;
-  place-items: center;
-  font-size: 22px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+.site-logo {
+  height: 64px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.14));
 }
 
 .nav-links {
@@ -434,8 +428,8 @@ footer strong {
     padding: 12px 14px;
   }
 
-  .brand {
-    font-size: 17px;
+  .site-logo {
+    height: 46px;
   }
 
   .hero-wrap {
@@ -461,10 +455,9 @@ footer strong {
 
 <div class="topbar">
   <div class="nav">
-    <div class="brand">
-      <div class="brand-badge">➗</div>
-      <div>I Love Math</div>
-    </div>
+    <a href="#home" class="brand">
+      <img src="assets/logo.png" alt="I Love Math Logo" class="site-logo">
+    </a>
 
     <div class="nav-links">
       <a href="#home">Home</a>
