@@ -44,9 +44,9 @@
       font-family:Arial, Helvetica, sans-serif;
       color:var(--dark);
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.8), transparent 25%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.6), transparent 20%),
-        linear-gradient(180deg, #6dc7ff 0%, #a8e0ff 38%, #dff5ff 68%, #fff5de 100%);
+        linear-gradient(rgba(255,255,255,0.50), rgba(255,255,255,0.78)),
+        url('assets/island-bg.png') no-repeat center center fixed;
+      background-size:cover;
       min-height:100vh;
       overflow-x:hidden;
     }
@@ -65,7 +65,7 @@
       position:fixed;
       border-radius:50%;
       filter:blur(2px);
-      opacity:0.28;
+      opacity:0.20;
       z-index:0;
       pointer-events:none;
     }
@@ -108,7 +108,7 @@
       top:0;
       z-index:100;
       backdrop-filter:blur(14px);
-      background:rgba(255,255,255,0.60);
+      background:rgba(255,255,255,0.65);
       border-bottom:1px solid rgba(255,255,255,0.55);
     }
 
@@ -128,10 +128,10 @@
     }
 
     .brand img{
-      width:54px;
-      height:54px;
+      width:60px;
+      height:60px;
       object-fit:contain;
-      border-radius:16px;
+      border-radius:18px;
       background:white;
       box-shadow:0 8px 18px rgba(0,0,0,0.08);
       padding:6px;
@@ -168,7 +168,7 @@
       font-weight:700;
       padding:11px 16px;
       border-radius:999px;
-      background:rgba(255,255,255,0.60);
+      background:rgba(255,255,255,0.78);
       transition:0.25s ease;
       box-shadow:0 6px 18px rgba(0,0,0,0.04);
     }
@@ -201,13 +201,14 @@
       grid-template-columns:1.15fr 0.85fr;
       gap:26px;
       align-items:center;
-      background:var(--glass-strong);
-      border:1px solid rgba(255,255,255,0.65);
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(255,255,255,0.68);
       box-shadow:var(--shadow);
       border-radius:var(--radius-xl);
       padding:34px;
       overflow:hidden;
       position:relative;
+      backdrop-filter:blur(10px);
     }
 
     .hero-card::before{
@@ -304,7 +305,7 @@
     }
 
     .pill{
-      background:rgba(255,255,255,0.84);
+      background:rgba(255,255,255,0.90);
       color:var(--dark);
       padding:10px 14px;
       border-radius:999px;
@@ -324,16 +325,17 @@
     .visual-card{
       width:100%;
       max-width:420px;
-      background:linear-gradient(180deg, #ffffff, #eef8ff);
+      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(238,248,255,0.92));
       border-radius:30px;
       padding:26px;
       box-shadow:var(--shadow);
       position:relative;
+      backdrop-filter:blur(8px);
     }
 
     .professor{
       width:100%;
-      max-width:260px;
+      max-width:290px;
       display:block;
       margin:0 auto 14px;
       object-fit:contain;
@@ -402,12 +404,13 @@
     }
 
     .feature-card{
-      background:var(--glass-strong);
+      background:rgba(255,255,255,0.82);
       border:1px solid rgba(255,255,255,0.65);
       border-radius:var(--radius-lg);
       padding:24px;
       box-shadow:var(--shadow);
       transition:0.25s ease;
+      backdrop-filter:blur(10px);
     }
 
     .feature-card:hover{
@@ -457,7 +460,7 @@
     /* Highlight strip */
     .highlight-strip{
       margin-top:10px;
-      background:linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+      background:linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.72));
       border:1px solid rgba(255,255,255,0.60);
       border-radius:28px;
       box-shadow:var(--shadow);
@@ -466,6 +469,7 @@
       grid-template-columns:repeat(4, 1fr);
       gap:16px;
       text-align:center;
+      backdrop-filter:blur(10px);
     }
 
     .highlight-item strong{
@@ -487,7 +491,7 @@
     }
 
     .cta-card{
-      background:linear-gradient(135deg, rgba(15,111,255,0.95), rgba(79,181,255,0.90));
+      background:linear-gradient(135deg, rgba(15,111,255,0.94), rgba(79,181,255,0.90));
       color:white;
       border-radius:34px;
       padding:34px;
@@ -533,11 +537,12 @@
     }
 
     footer .footer-card{
-      background:rgba(255,255,255,0.65);
+      background:rgba(255,255,255,0.78);
       border:1px solid rgba(255,255,255,0.60);
       border-radius:24px;
       padding:20px;
       box-shadow:0 10px 24px rgba(0,0,0,0.06);
+      backdrop-filter:blur(8px);
     }
 
     footer p{
