@@ -44,7 +44,9 @@
       font-family:Arial, Helvetica, sans-serif;
       color:var(--dark);
       background:
-        linear-gradient(rgba(255,255,255,0.50), rgba(255,255,255,0.78)),
+        linear-gradient(rgba(235,248,255,0.58), rgba(255,255,255,0.80)),
+        radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.22), transparent 24%),
         url('assets/island-bg.png') no-repeat center center fixed;
       background-size:cover;
       min-height:100vh;
@@ -65,7 +67,7 @@
       position:fixed;
       border-radius:50%;
       filter:blur(2px);
-      opacity:0.20;
+      opacity:0.16;
       z-index:0;
       pointer-events:none;
     }
@@ -108,7 +110,7 @@
       top:0;
       z-index:100;
       backdrop-filter:blur(14px);
-      background:rgba(255,255,255,0.65);
+      background:rgba(255,255,255,0.66);
       border-bottom:1px solid rgba(255,255,255,0.55);
     }
 
@@ -168,7 +170,7 @@
       font-weight:700;
       padding:11px 16px;
       border-radius:999px;
-      background:rgba(255,255,255,0.78);
+      background:rgba(255,255,255,0.80);
       transition:0.25s ease;
       box-shadow:0 6px 18px rgba(0,0,0,0.04);
     }
@@ -201,14 +203,14 @@
       grid-template-columns:1.15fr 0.85fr;
       gap:26px;
       align-items:center;
-      background:rgba(255,255,255,0.82);
-      border:1px solid rgba(255,255,255,0.68);
+      background:rgba(255,255,255,0.76);
+      border:1px solid rgba(255,255,255,0.56);
       box-shadow:var(--shadow);
       border-radius:var(--radius-xl);
       padding:34px;
       overflow:hidden;
       position:relative;
-      backdrop-filter:blur(10px);
+      backdrop-filter:blur(12px);
     }
 
     .hero-card::before{
@@ -325,12 +327,12 @@
     .visual-card{
       width:100%;
       max-width:420px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(238,248,255,0.92));
+      background:linear-gradient(180deg, rgba(255,255,255,0.94), rgba(238,248,255,0.88));
       border-radius:30px;
       padding:26px;
       box-shadow:var(--shadow);
       position:relative;
-      backdrop-filter:blur(8px);
+      backdrop-filter:blur(10px);
     }
 
     .professor{
@@ -404,13 +406,13 @@
     }
 
     .feature-card{
-      background:rgba(255,255,255,0.82);
-      border:1px solid rgba(255,255,255,0.65);
+      background:rgba(255,255,255,0.74);
+      border:1px solid rgba(255,255,255,0.55);
       border-radius:var(--radius-lg);
       padding:24px;
       box-shadow:var(--shadow);
       transition:0.25s ease;
-      backdrop-filter:blur(10px);
+      backdrop-filter:blur(12px);
     }
 
     .feature-card:hover{
@@ -460,8 +462,8 @@
     /* Highlight strip */
     .highlight-strip{
       margin-top:10px;
-      background:linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.72));
-      border:1px solid rgba(255,255,255,0.60);
+      background:linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.62));
+      border:1px solid rgba(255,255,255,0.55);
       border-radius:28px;
       box-shadow:var(--shadow);
       padding:24px;
@@ -469,7 +471,7 @@
       grid-template-columns:repeat(4, 1fr);
       gap:16px;
       text-align:center;
-      backdrop-filter:blur(10px);
+      backdrop-filter:blur(12px);
     }
 
     .highlight-item strong{
@@ -538,11 +540,11 @@
 
     footer .footer-card{
       background:rgba(255,255,255,0.78);
-      border:1px solid rgba(255,255,255,0.60);
+      border:1px solid rgba(255,255,255,0.56);
       border-radius:24px;
       padding:20px;
       box-shadow:0 10px 24px rgba(0,0,0,0.06);
-      backdrop-filter:blur(8px);
+      backdrop-filter:blur(10px);
     }
 
     footer p{
