@@ -54,8 +54,40 @@
       width:46px;height:46px;border-radius:14px;
       background:linear-gradient(135deg,var(--blue),var(--blue2));
       display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:var(--shadow);
+      flex:0 0 auto;
     }
     .brand small{display:block;font-size:12px;color:var(--text);font-weight:700;}
+
+    .top-nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .nav-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:#ffffff;
+      color:var(--nav);
+      font-weight:800;
+      border:1px solid rgba(13,103,215,0.12);
+      box-shadow:0 8px 18px rgba(18,50,82,0.08);
+      transition:.2s transform,.2s box-shadow,.2s background,.2s color;
+      white-space:nowrap;
+    }
+    .nav-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-hover);
+    }
+    .nav-btn.active{
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:#fff;
+      border-color:transparent;
+    }
 
     .stats-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
     .pill{
@@ -242,11 +274,30 @@
 
     .footer{max-width:var(--max);margin:0 auto;padding:0 18px 30px;color:var(--text);font-size:13px;text-align:center;}
 
+    @media (max-width: 1180px){
+      .topbar-inner{
+        justify-content:flex-start;
+      }
+    }
+
     @media (max-width: 1100px){
       .hero,.worlds{grid-template-columns:1fr;}
       .progress-grid{grid-template-columns:repeat(2,1fr);}
       .levels-grid{grid-template-columns:repeat(3,1fr);}
     }
+
+    @media (max-width: 900px){
+      .topbar-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+      .top-nav,
+      .stats-bar{
+        width:100%;
+      }
+    }
+
     @media (max-width: 760px){
       .progress-grid,.result-grid,.options{grid-template-columns:1fr;}
       .levels-grid{grid-template-columns:repeat(2,1fr);}
@@ -272,6 +323,14 @@
           <small>Professor Pi's Island Quest</small>
         </div>
       </div>
+
+      <div class="top-nav">
+        <a href="index.html" class="nav-btn">🏠 Home</a>
+        <a href="worksheets.html" class="nav-btn">📄 Worksheets</a>
+        <a href="game.html" class="nav-btn">🎮 Games</a>
+        <a href="adventure.html" class="nav-btn active">🗺️ Adventure</a>
+      </div>
+
       <div class="stats-bar">
         <div class="pill">⭐ Total Stars: <span id="totalStars">0</span></div>
         <div class="pill">🏅 Badges: <span id="badgeCount">0</span></div>
