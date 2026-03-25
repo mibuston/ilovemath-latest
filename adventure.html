@@ -2,14 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>I Love Math | Professor Pi's Math Adventures</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Choose your grade level and explore Professor Pi's premium math adventure map with worlds, unlockable levels, stars, and saved progress."
-  />
-  <link rel="icon" type="image/png" href="assets/logo.png" />
-
+  <title>I Love Math | Math Adventure</title>
+  <meta name="description" content="Math Adventure map with grade selector, 5 levels per world, 10 questions per level, boss battles, stars, badges, timer, and progress tracking." />
   <style>
     :root{
       --blue:#0f6fff;
@@ -18,2527 +13,1240 @@
       --dark:#123252;
       --text:#3d5873;
       --white:#ffffff;
-      --glass:rgba(255,255,255,0.76);
-      --glass-strong:rgba(255,255,255,0.92);
-      --shadow:0 16px 40px rgba(15,56,99,0.14);
-      --shadow-hover:0 20px 50px rgba(15,56,99,0.20);
-      --radius-xl:34px;
-      --radius-lg:24px;
-      --radius-md:18px;
-      --yellow:#ffd54a;
-      --orange:#ff9f43;
-      --pink:#ff6fa9;
-      --mint:#63e6be;
-      --success:#12b76a;
-      --danger:#ef5350;
-      --soft:#eef7ff;
-      --locked:#94a3b8;
-      --line:#d7e7ff;
+      --gold:#ffbf3f;
+      --green:#21b66f;
+      --red:#ef5350;
+      --purple:#7f5cff;
+      --bg1:#dff4ff;
+      --bg2:#fff5df;
+      --card:rgba(255,255,255,0.88);
+      --glass:rgba(255,255,255,0.72);
+      --shadow:0 18px 40px rgba(18,50,82,0.15);
+      --shadow-hover:0 24px 50px rgba(18,50,82,0.22);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --max:1280px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;color:var(--dark);background:linear-gradient(180deg,var(--bg1),#f6fbff 35%, var(--bg2));}
+    body{min-height:100vh;}
+    a{text-decoration:none;color:inherit;}
+    button,input,select{font:inherit;}
 
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      color:var(--dark);
-      background:
-        linear-gradient(rgba(235,248,255,0.58), rgba(255,255,255,0.82)),
-        radial-gradient(circle at top left, rgba(255,255,255,0.38), transparent 30%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.24), transparent 24%),
-        url('assets/island-bg.png') no-repeat center center fixed;
-      background-size:cover;
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    a{text-decoration:none;color:inherit}
-    button, select{font-family:inherit}
-
-    .container{
-      width:min(1240px, calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    .bg-bubble{
-      position:fixed;
-      border-radius:50%;
-      filter:blur(2px);
-      opacity:0.16;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    .bubble-1{width:220px;height:220px;background:#ffffff;top:80px;left:-60px;}
-    .bubble-2{width:160px;height:160px;background:#8ad0ff;top:350px;right:40px;}
-    .bubble-3{width:250px;height:250px;background:#ffe8a3;bottom:60px;left:40px;}
-    .bubble-4{width:140px;height:140px;background:#fff;bottom:180px;right:-20px;}
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:100;
-      backdrop-filter:blur(14px);
-      background:rgba(255,255,255,0.66);
-      border-bottom:1px solid rgba(255,255,255,0.55);
-    }
-
-    .nav-wrap{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:14px 0;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .brand img{
-      width:60px;
-      height:60px;
-      object-fit:contain;
-      border-radius:18px;
-      background:white;
-      box-shadow:0 8px 18px rgba(0,0,0,0.08);
-      padding:6px;
-    }
-
-    .brand-text h1{
-      margin:0;
-      font-size:22px;
-      line-height:1.1;
-      color:var(--dark);
-    }
-
-    .brand-text p{
-      margin:3px 0 0;
-      font-size:13px;
-      color:var(--text);
-    }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    nav a{
-      color:var(--dark);
-      font-size:14px;
-      font-weight:700;
-      padding:11px 16px;
-      border-radius:999px;
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(12px);
       background:rgba(255,255,255,0.82);
-      transition:0.25s ease;
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+      border-bottom:1px solid rgba(13,103,215,0.12);
     }
-
-    nav a:hover{
-      transform:translateY(-2px);
-      background:white;
-      box-shadow:0 10px 24px rgba(0,0,0,0.08);
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
     }
-
-    nav a.games-link{
-      background:linear-gradient(135deg,#ffd54a,#ffb347);
-      color:var(--dark);
-    }
-
-    nav a.admin-link{
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--nav);}
+    .brand-badge{
+      width:46px;height:46px;border-radius:14px;
       background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:white;
+      display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:var(--shadow);
+    }
+    .brand small{display:block;font-size:12px;color:var(--text);font-weight:700;}
+
+    .stats-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+    .pill{
+      background:#fff;border:1px solid rgba(13,103,215,0.12);border-radius:999px;
+      padding:10px 14px;font-weight:700;color:var(--dark);box-shadow:0 8px 18px rgba(18,50,82,0.08);
     }
 
     .hero{
-      position:relative;
-      z-index:1;
-      padding:42px 0 22px;
+      max-width:var(--max);margin:0 auto;padding:24px 18px 10px;
+      display:grid;grid-template-columns:1.2fr .8fr;gap:22px;
     }
-
+    .hero-card,.side-card,.panel,.modal-card,.world-card,.level-btn,.question-card,.result-card,.boss-banner{
+      background:var(--card);backdrop-filter:blur(8px);box-shadow:var(--shadow);
+    }
     .hero-card{
-      display:grid;
-      grid-template-columns:1.1fr 0.9fr;
-      gap:26px;
-      align-items:center;
-      background:rgba(255,255,255,0.78);
-      border:1px solid rgba(255,255,255,0.58);
-      box-shadow:var(--shadow);
-      border-radius:var(--radius-xl);
-      padding:34px;
-      overflow:hidden;
-      position:relative;
-      backdrop-filter:blur(12px);
+      border-radius:var(--radius-xl);padding:28px;
+      background:linear-gradient(135deg, rgba(15,111,255,0.95), rgba(79,181,255,0.92));
+      color:#fff;position:relative;overflow:hidden;
     }
-
-    .hero-card::before{
-      content:"";
-      position:absolute;
-      inset:auto -60px -70px auto;
-      width:260px;
-      height:260px;
-      background:radial-gradient(circle, rgba(79,181,255,0.28), transparent 65%);
-      border-radius:50%;
-      pointer-events:none;
+    .hero-card::after{
+      content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+      background:rgba(255,255,255,0.14);
     }
+    .hero-card h1{margin:0 0 10px;font-size:clamp(30px,4vw,46px);line-height:1.05;}
+    .hero-card p{margin:0 0 16px;font-size:17px;line-height:1.6;max-width:720px;}
+    .hero-tags{display:flex;gap:10px;flex-wrap:wrap;}
+    .hero-tag{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,0.16);font-weight:700;}
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background:white;
-      color:var(--nav);
-      padding:10px 16px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:14px;
-      box-shadow:0 8px 18px rgba(0,0,0,0.06);
-      margin-bottom:18px;
-    }
-
-    .hero h2{
-      margin:0 0 16px;
-      font-size:clamp(34px, 4.6vw, 60px);
-      line-height:1.04;
-      letter-spacing:-1px;
-      color:var(--dark);
-    }
-
-    .hero h2 span{color:var(--blue)}
-
-    .hero p{
-      margin:0;
-      max-width:680px;
-      font-size:18px;
-      line-height:1.7;
-      color:var(--text);
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:26px;
+    .side-card{border-radius:var(--radius-xl);padding:22px;}
+    .side-card h2{margin:0 0 14px;font-size:22px;}
+    .controls{display:grid;gap:14px;}
+    .control-group label{display:block;font-size:13px;font-weight:800;color:var(--text);margin-bottom:7px;}
+    select{
+      width:100%;padding:13px 14px;border-radius:14px;border:1px solid rgba(18,50,82,0.14);background:#fff;color:var(--dark);font-weight:700;
     }
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      border:none;
-      border-radius:999px;
-      padding:15px 24px;
-      font-size:16px;
-      font-weight:700;
-      cursor:pointer;
-      transition:0.25s ease;
-      box-shadow:0 12px 28px rgba(0,0,0,0.10);
-    }
-
-    .btn:hover{transform:translateY(-3px)}
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:white;
-    }
-
-    .btn-games{
-      background:linear-gradient(135deg,#ff9f43,#ffd54a);
-      color:var(--dark);
-    }
-
-    .btn-soft{
-      background:white;
-      color:var(--dark);
-    }
-
-    .btn-danger{
-      background:linear-gradient(135deg,#ff7b7b,#ff5d5d);
-      color:white;
-    }
-
-    .hero-points{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:22px;
-    }
-
-    .pill{
-      background:rgba(255,255,255,0.92);
-      color:var(--dark);
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:700;
-      box-shadow:0 8px 16px rgba(0,0,0,0.05);
-    }
-
-    .hero-visual{
-      position:relative;
-      min-height:420px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .visual-card{
-      width:100%;
-      max-width:430px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(238,248,255,0.90));
-      border-radius:30px;
-      padding:26px;
-      box-shadow:var(--shadow);
-      position:relative;
-      backdrop-filter:blur(10px);
-    }
-
-    .professor{
-      width:100%;
-      max-width:290px;
-      display:block;
-      margin:0 auto 14px;
-      object-fit:contain;
-      filter:drop-shadow(0 16px 22px rgba(18,50,82,0.15));
-    }
-
-    .mini-stats{
-      display:grid;
-      grid-template-columns:repeat(2, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .mini-box{
-      background:white;
-      border-radius:18px;
-      padding:16px;
-      text-align:center;
-      box-shadow:0 8px 16px rgba(0,0,0,0.05);
-    }
-
-    .mini-box strong{
-      display:block;
-      font-size:24px;
-      color:var(--blue);
-      margin-bottom:6px;
-    }
-
-    .mini-box span{
-      font-size:13px;
-      color:var(--text);
-      font-weight:700;
-    }
-
-    section{
-      position:relative;
-      z-index:1;
-      padding:26px 0;
-    }
-
-    .panel-grid{
-      display:grid;
-      grid-template-columns:320px 1fr;
-      gap:20px;
-      align-items:start;
-    }
-
-    .glass-card{
-      background:rgba(255,255,255,0.76);
-      border:1px solid rgba(255,255,255,0.56);
-      border-radius:var(--radius-lg);
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(12px);
-    }
-
-    .sidebar{
-      padding:22px;
-      position:sticky;
-      top:98px;
-    }
-
-    .sidebar h3{
-      margin:0 0 14px;
-      font-size:24px;
-    }
-
-    .sidebar p{
-      margin:0 0 16px;
-      color:var(--text);
-      line-height:1.65;
-      font-size:15px;
-    }
-
-    .control-group{
-      margin-bottom:16px;
-    }
-
-    .control-group label{
-      display:block;
-      margin-bottom:8px;
-      font-size:14px;
-      font-weight:800;
-      color:var(--dark);
-    }
-
-    select{
-      width:100%;
-      border-radius:14px;
-      border:1px solid #d8e7fb;
-      padding:12px 14px;
-      font-size:15px;
-      background:white;
-      color:var(--dark);
-      outline:none;
-    }
-
-    .grade-note{
-      margin-top:10px;
-      font-size:13px;
-      line-height:1.55;
-      color:var(--text);
-      background:#f8fbff;
-      border:1px solid #e2eefc;
-      border-radius:14px;
-      padding:12px;
-    }
-
-    .stats-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin:16px 0 18px;
-    }
-
-    .stat-box{
-      background:white;
-      border-radius:18px;
-      padding:16px;
-      text-align:center;
-      box-shadow:0 8px 16px rgba(0,0,0,0.05);
-    }
-
-    .stat-box strong{
-      display:block;
-      font-size:26px;
-      color:var(--blue);
-      margin-bottom:6px;
-    }
-
-    .stat-box span{
-      color:var(--text);
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .side-actions{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      margin-top:12px;
-    }
-
-    .full-btn{width:100%}
-
-    .main-content{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-    }
-
-    .map-card{
-      padding:22px;
-    }
-
-    .map-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:16px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-
-    .map-head h3{
-      margin:0 0 6px;
-      font-size:28px;
-    }
-
-    .map-head p{
-      margin:0;
-      color:var(--text);
-      line-height:1.65;
-      font-size:15px;
-    }
-
-    .map-legend{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .legend-pill{
-      padding:8px 12px;
-      border-radius:999px;
-      background:white;
-      box-shadow:0 8px 16px rgba(0,0,0,0.05);
-      font-size:12px;
-      font-weight:800;
-      color:var(--text);
-    }
-
-    .adventure-map{
-      position:relative;
-      padding:24px 12px 10px;
-      overflow:auto;
-    }
-
-    .map-track{
-      position:relative;
-      min-width:980px;
-      padding:16px 12px 30px;
-    }
-
-    .map-line{
-      position:absolute;
-      top:90px;
-      left:80px;
-      right:80px;
-      height:10px;
-      background:linear-gradient(90deg,#cfe3ff,#dff5ff,#ffe8b3,#d8ffe9);
-      border-radius:999px;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.7);
-    }
-
-    .map-worlds{
-      position:relative;
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:24px;
-      align-items:start;
-    }
-
-    .world-node{
-      position:relative;
-      text-align:center;
-      padding-top:2px;
-    }
-
-    .world-bubble{
-      width:120px;
-      height:120px;
-      margin:0 auto 16px;
-      border-radius:30px;
-      display:grid;
-      place-items:center;
-      font-size:50px;
-      box-shadow:var(--shadow);
-      background:linear-gradient(135deg,#ffffff,#edf6ff);
-      border:4px solid white;
-      position:relative;
-      z-index:2;
-    }
-
-    .world-bubble.world-1{background:linear-gradient(135deg,#d7f0ff,#89d6ff)}
-    .world-bubble.world-2{background:linear-gradient(135deg,#fff4c7,#ffd45d)}
-    .world-bubble.world-3{background:linear-gradient(135deg,#ffe0ed,#ff9cc2)}
-    .world-bubble.world-4{background:linear-gradient(135deg,#d7ffe8,#63e6be)}
-
-    .world-node h4{
-      margin:0 0 6px;
-      font-size:22px;
-    }
-
-    .world-node p{
-      margin:0 auto 14px;
-      max-width:210px;
-      color:var(--text);
-      font-size:14px;
-      line-height:1.55;
-    }
-
-    .world-stars{
-      font-size:20px;
-      color:#ffb400;
-      margin-bottom:12px;
-      letter-spacing:2px;
-    }
-
-    .map-levels{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      max-width:220px;
-      margin:0 auto;
-    }
-
-    .map-level-btn{
-      border:none;
-      border-radius:16px;
-      padding:12px 14px;
-      font-size:14px;
-      font-weight:800;
-      text-align:left;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      box-shadow:0 8px 16px rgba(0,0,0,0.05);
-      cursor:pointer;
-      transition:0.2s ease;
-      background:white;
-      color:var(--dark);
-    }
-
-    .map-level-btn:hover:not(:disabled){
-      transform:translateY(-2px);
-      box-shadow:var(--shadow-hover);
-    }
-
-    .map-level-btn.locked{
-      background:#f1f5f9;
-      color:#64748b;
-      cursor:not-allowed;
-    }
-
-    .map-level-btn.unlocked{
-      background:linear-gradient(135deg,#eef7ff,#ffffff);
-      border:2px solid #d6e9ff;
-    }
-
-    .map-level-btn.completed{
-      background:linear-gradient(135deg,#ecfff5,#ffffff);
-      border:2px solid #bde9cf;
-    }
-
-    .map-level-right{
-      font-size:12px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .world-panels{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-    }
-
-    .world-card{
-      padding:22px;
-    }
-
-    .world-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:18px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-
-    .world-title{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-
-    .world-icon{
-      width:68px;
-      height:68px;
-      border-radius:22px;
-      display:grid;
-      place-items:center;
-      font-size:32px;
-      box-shadow:0 10px 22px rgba(0,0,0,0.08);
-      flex-shrink:0;
-    }
-
-    .world-icon.world-1{ background:linear-gradient(135deg,#d7f0ff,#89d6ff); }
-    .world-icon.world-2{ background:linear-gradient(135deg,#fff4c7,#ffd45d); }
-    .world-icon.world-3{ background:linear-gradient(135deg,#ffe0ed,#ff9cc2); }
-    .world-icon.world-4{ background:linear-gradient(135deg,#d7ffe8,#63e6be); }
-
-    .world-title h3{
-      margin:0 0 6px;
-      font-size:26px;
-    }
-
-    .world-title p{
-      margin:0;
-      color:var(--text);
-      line-height:1.6;
-      font-size:15px;
-      max-width:650px;
-    }
-
-    .world-progress{
-      background:white;
-      border-radius:18px;
-      padding:14px 16px;
-      min-width:180px;
-      box-shadow:0 8px 16px rgba(0,0,0,0.05);
-    }
-
-    .world-progress strong{
-      display:block;
-      font-size:22px;
-      color:var(--blue);
-      margin-bottom:4px;
-    }
-
-    .world-progress span{
-      color:var(--text);
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .levels-grid{
-      display:grid;
-      grid-template-columns:repeat(5, 1fr);
-      gap:16px;
-    }
-
-    .level-card{
-      background:white;
-      border-radius:22px;
-      padding:18px;
-      box-shadow:0 10px 18px rgba(0,0,0,0.05);
-      border:2px solid transparent;
-      transition:0.25s ease;
-      position:relative;
-      min-height:228px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .level-card:hover{
-      transform:translateY(-5px);
-      box-shadow:var(--shadow-hover);
-    }
-
-    .level-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-    }
-
-    .level-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:44px;
-      height:44px;
-      border-radius:14px;
-      font-weight:800;
-      font-size:15px;
-      background:var(--soft);
-      color:var(--nav);
-    }
-
-    .level-status{
-      font-size:13px;
-      font-weight:800;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#edf7ff;
-      color:var(--nav);
-    }
-
-    .level-status.locked{
-      background:#f1f5f9;
-      color:#64748b;
-    }
-
-    .level-status.complete{
-      background:#ecfff5;
-      color:#0f9f5f;
-    }
-
-    .level-card h4{
-      margin:14px 0 8px;
-      font-size:20px;
-    }
-
-    .level-card p{
-      margin:0 0 14px;
-      font-size:14px;
-      color:var(--text);
-      line-height:1.65;
-      min-height:66px;
-    }
-
-    .stars{
-      font-size:20px;
-      letter-spacing:2px;
-      margin-bottom:14px;
-      color:#ffb400;
-    }
-
-    .locked-card{
-      opacity:0.78;
-      background:linear-gradient(180deg,#f8fafc,#eef2f7);
-    }
-
-    .locked-card h4,
-    .locked-card p{
-      color:#64748b;
-    }
-
-    .play-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      padding:12px 16px;
-      border:none;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      transition:0.2s ease;
-    }
-
-    .play-btn.unlock{
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:white;
-    }
-
-    .play-btn.review{
-      background:linear-gradient(135deg,#ff9f43,#ffd54a);
-      color:var(--dark);
-    }
-
-    .play-btn.locked{
-      background:#cbd5e1;
-      color:white;
-      cursor:not-allowed;
-    }
-
-    .game-modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(10,21,45,0.55);
-      z-index:300;
-      padding:20px;
-      overflow:auto;
-    }
-
-    .game-modal.show{display:block}
-
-    .game-box{
-      width:min(960px, 100%);
-      margin:40px auto;
-      background:rgba(255,255,255,0.96);
-      border-radius:30px;
-      box-shadow:0 30px 70px rgba(0,0,0,0.22);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.7);
-    }
-
-    .game-header{
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:white;
-      padding:22px 24px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .game-header h3{
-      margin:0;
-      font-size:28px;
-    }
-
-    .game-header p{
-      margin:6px 0 0;
-      font-size:14px;
-      opacity:0.95;
-    }
-
-    .close-btn{
-      background:white;
-      color:var(--nav);
-      border:none;
-      border-radius:999px;
-      padding:12px 18px;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .game-body{padding:24px}
-
-    .game-topbar{
-      display:grid;
-      grid-template-columns:repeat(5, 1fr);
-      gap:12px;
-      margin-bottom:18px;
-    }
-
-    .topbox{
-      background:#f8fbff;
-      border-radius:18px;
-      padding:14px;
-      text-align:center;
-      border:1px solid #e2eefc;
-    }
-
-    .topbox strong{
-      display:block;
-      font-size:24px;
-      color:var(--blue);
-      margin-bottom:4px;
-    }
-
-    .topbox span{
-      font-size:12px;
-      color:var(--text);
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:0.4px;
-    }
-
-    .progress-bar{
-      height:14px;
-      background:#e6f1ff;
-      border-radius:999px;
-      overflow:hidden;
-      margin-bottom:20px;
-    }
-
-    .progress-fill{
-      height:100%;
-      width:0%;
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      transition:width 0.25s ease;
-    }
-
-    .question-card{
-      background:#fbfdff;
-      border:1px solid #e8f0fb;
-      border-radius:26px;
-      padding:22px;
-      box-shadow:0 8px 16px rgba(0,0,0,0.04);
-    }
-
-    .question-tag{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#eef7ff;
-      color:var(--nav);
-      font-weight:800;
-      font-size:12px;
-      letter-spacing:0.4px;
-      margin-bottom:14px;
-    }
-
-    .question-text{
-      font-size:34px;
-      font-weight:800;
-      line-height:1.2;
-      margin-bottom:12px;
-      color:var(--dark);
-    }
-
-    .question-note{
-      color:var(--text);
-      line-height:1.65;
-      font-size:15px;
-      margin-bottom:18px;
-    }
-
-    .question-visual{
-      background:white;
-      border:1px dashed #cfe0f9;
-      border-radius:22px;
-      padding:18px;
-      margin-bottom:18px;
-      text-align:center;
-    }
-
-    .visual-row{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-
-    .visual-pill{
-      min-width:60px;
-      padding:14px 12px;
-      border-radius:16px;
-      background:#f4f9ff;
-      font-size:22px;
-      font-weight:800;
-      color:var(--dark);
-      border:1px solid #dce9fb;
-    }
-
-    .options-grid{
-      display:grid;
-      grid-template-columns:repeat(2, 1fr);
-      gap:14px;
-    }
-
+      border:none;border-radius:16px;padding:13px 16px;font-weight:800;cursor:pointer;
+      transition:.2s transform,.2s box-shadow,.2s opacity;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none;}
+    .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
+    .btn-secondary{background:#eef6ff;color:var(--nav);}
+    .btn-gold{background:linear-gradient(135deg,#ffcb52,#ffac2f);color:#6b4200;}
+    .btn-green{background:linear-gradient(135deg,#33cc7e,#18a55f);color:#fff;}
+    .btn-red{background:linear-gradient(135deg,#ff7a70,#ef5350);color:#fff;}
+
+    .container{max-width:var(--max);margin:0 auto;padding:10px 18px 38px;}
+
+    .panel{border-radius:var(--radius-xl);padding:22px;margin-top:18px;}
+    .panel-head{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+    .panel-head h2{margin:0;font-size:28px;}
+    .subtext{color:var(--text);line-height:1.6;}
+
+    .progress-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+    .mini-stat{padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(18,50,82,0.08);}
+    .mini-stat .label{font-size:12px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.04em;}
+    .mini-stat .value{font-size:28px;font-weight:900;margin-top:8px;}
+
+    .worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    .world-card{border-radius:24px;padding:18px;position:relative;overflow:hidden;border:2px solid transparent;}
+    .world-card.active{border-color:rgba(15,111,255,0.35);transform:translateY(-2px);}
+    .world-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+    .world-icon{font-size:44px;line-height:1;}
+    .world-chip{padding:8px 11px;border-radius:999px;background:#fff;font-size:12px;font-weight:800;color:var(--nav);}
+    .world-card h3{margin:10px 0 8px;font-size:24px;}
+    .world-card p{margin:0 0 14px;color:var(--text);line-height:1.55;min-height:70px;}
+    .world-meter{height:12px;background:#eaf2ff;border-radius:999px;overflow:hidden;margin:14px 0 8px;}
+    .world-meter-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));width:0%;}
+    .world-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+    .stars{font-size:18px;letter-spacing:2px;}
+
+    .map-wrap{position:relative;padding:18px;background:linear-gradient(180deg,#e6fbff,#fff6df);border-radius:24px;overflow:hidden;min-height:360px;}
+    .map-path{
+      position:absolute;left:10%;right:10%;top:52%;height:16px;border-radius:999px;
+      background:linear-gradient(90deg,#9fd8ff,#8be7b9,#ffe08b,#ffbc80,#c3b8ff);
+      box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .island{
+      position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff9d4 0,#ffe79d 38%,#7ed67a 39%,#44b563 72%,#2a9a4b 100%);
+      box-shadow:0 18px 28px rgba(18,50,82,0.15);display:grid;place-items:center;font-size:46px;font-weight:900;color:#fff;border:8px solid rgba(255,255,255,.55);
+    }
+    .island span{filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));}
+    .island-1{left:6%;top:18%;}
+    .island-2{left:26%;top:56%;}
+    .island-3{left:44%;top:16%;}
+    .island-4{left:63%;top:58%;}
+    .island-5{right:6%;top:22%;}
+    .map-legend{position:absolute;left:18px;bottom:16px;background:rgba(255,255,255,0.85);padding:12px 14px;border-radius:16px;font-size:13px;font-weight:700;color:var(--text);}
+
+    .levels-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:18px;}
+    .level-btn{
+      border:none;border-radius:20px;padding:16px 12px;cursor:pointer;text-align:center;position:relative;
+      border:1px solid rgba(18,50,82,0.08);
+    }
+    .level-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);}
+    .level-btn.locked{opacity:.6;cursor:not-allowed;background:#f4f7fb;}
+    .level-btn.completed{outline:2px solid rgba(33,182,111,.35);}
+    .level-badge{font-size:26px;display:block;margin-bottom:8px;}
+    .level-title{font-size:15px;font-weight:900;}
+    .level-meta{font-size:12px;color:var(--text);margin-top:6px;line-height:1.4;}
+    .level-stars{margin-top:10px;color:#ffb300;letter-spacing:2px;font-size:16px;min-height:20px;}
+
+    .boss-banner{
+      margin-top:16px;border-radius:22px;padding:18px;background:linear-gradient(135deg,#fff0ce,#ffd67a);
+      display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    }
+    .boss-banner h3{margin:0 0 6px;font-size:24px;color:#6b4200;}
+    .boss-banner p{margin:0;color:#7b5611;line-height:1.5;}
+
+    .modal{
+      position:fixed;inset:0;background:rgba(9,20,40,.52);display:none;align-items:center;justify-content:center;padding:18px;z-index:100;
+    }
+    .modal.show{display:flex;}
+    .modal-card{width:min(880px,100%);border-radius:28px;padding:22px;max-height:92vh;overflow:auto;}
+
+    .quiz-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px;}
+    .quiz-stats{display:flex;gap:10px;flex-wrap:wrap;}
+    .question-card{border-radius:22px;padding:18px;background:#f9fcff;border:1px solid rgba(18,50,82,.08);}
+    .question-type{font-size:12px;font-weight:900;color:var(--nav);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+    .question-text{font-size:28px;font-weight:900;margin:10px 0 18px;line-height:1.25;}
+    .question-visual{min-height:58px;margin-bottom:14px;color:var(--text);font-weight:700;}
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
     .option-btn{
-      border:none;
-      border-radius:18px;
-      padding:16px;
-      font-size:18px;
-      font-weight:800;
-      background:white;
-      color:var(--dark);
-      border:2px solid #e2eeff;
-      cursor:pointer;
-      transition:0.18s ease;
-      min-height:68px;
+      padding:15px 16px;border-radius:16px;border:1px solid rgba(18,50,82,.12);background:#fff;font-weight:800;cursor:pointer;text-align:left;
+      transition:.18s transform,.18s box-shadow,.18s background;
     }
-
-    .option-btn:hover:not(:disabled){
-      transform:translateY(-2px);
-      border-color:#9cc8ff;
-      box-shadow:0 10px 18px rgba(15,111,255,0.10);
+    .option-btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(18,50,82,.1);}
+    .option-btn.correct{background:rgba(33,182,111,.14);border-color:rgba(33,182,111,.35);}
+    .option-btn.wrong{background:rgba(239,83,80,.12);border-color:rgba(239,83,80,.28);}
+    .explain{
+      margin-top:14px;padding:14px 15px;border-radius:16px;background:#fff;border-left:5px solid var(--blue);line-height:1.6;color:var(--text);
     }
+    .quiz-actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px;}
 
-    .option-btn.correct{
-      background:#eafff3;
-      border-color:#9ae6bf;
-      color:#0b8b54;
+    .result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0;}
+    .result-card{padding:16px;border-radius:18px;background:#f9fcff;border:1px solid rgba(18,50,82,.08);}
+    .result-card strong{display:block;font-size:28px;margin-top:8px;}
+    .final-badge{font-size:54px;}
+    .tips{padding:16px;border-radius:18px;background:#fff8e8;color:#7f5a15;line-height:1.6;}
+
+    .footer{max-width:var(--max);margin:0 auto;padding:0 18px 30px;color:var(--text);font-size:13px;text-align:center;}
+
+    @media (max-width: 1100px){
+      .hero,.worlds{grid-template-columns:1fr;}
+      .progress-grid{grid-template-columns:repeat(2,1fr);}
+      .levels-grid{grid-template-columns:repeat(3,1fr);}
     }
-
-    .option-btn.wrong{
-      background:#fff1f1;
-      border-color:#ffb4b4;
-      color:#c53030;
-    }
-
-    .feedback{
-      margin-top:18px;
-      border-radius:18px;
-      padding:16px 18px;
-      font-size:15px;
-      line-height:1.6;
-      display:none;
-      font-weight:700;
-    }
-
-    .feedback.show{display:block}
-    .feedback.correct{
-      background:#ebfff3;
-      color:#0b7e4f;
-      border:1px solid #bceccd;
-    }
-    .feedback.wrong{
-      background:#fff3f3;
-      color:#b53030;
-      border:1px solid #ffc9c9;
-    }
-
-    .game-actions{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .result-screen{
-      text-align:center;
-      padding:10px 4px 4px;
-    }
-
-    .result-screen h3{
-      font-size:38px;
-      margin:8px 0 10px;
-    }
-
-    .result-screen p{
-      color:var(--text);
-      font-size:16px;
-      line-height:1.7;
-      max-width:680px;
-      margin:10px auto;
-    }
-
-    .big-score{
-      font-size:54px;
-      font-weight:900;
-      color:var(--nav);
-      margin:14px 0;
-    }
-
-    .result-stars{
-      font-size:34px;
-      color:#ffb400;
-      letter-spacing:4px;
-      margin-bottom:8px;
-    }
-
-    .reward-badge{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:999px;
-      background:#eef7ff;
-      color:var(--nav);
-      font-weight:800;
-      margin-top:8px;
-    }
-
-    footer{
-      position:relative;
-      z-index:1;
-      padding:24px 0 40px;
-      text-align:center;
-      color:var(--text);
-      font-size:14px;
-    }
-
-    footer .footer-card{
-      background:rgba(255,255,255,0.78);
-      border:1px solid rgba(255,255,255,0.56);
-      border-radius:24px;
-      padding:20px;
-      box-shadow:0 10px 24px rgba(0,0,0,0.06);
-      backdrop-filter:blur(10px);
-    }
-
-    footer p{
-      margin:6px 0;
-      line-height:1.7;
-    }
-
-    @media (max-width: 1180px){
-      .levels-grid{
-        grid-template-columns:repeat(3, 1fr);
-      }
-      .map-worlds{
-        grid-template-columns:repeat(2, 1fr);
-        row-gap:34px;
-      }
-      .map-line{
-        display:none;
-      }
-      .map-track{
-        min-width:auto;
-      }
-    }
-
-    @media (max-width: 980px){
-      .hero-card,
-      .panel-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero-visual{
-        min-height:auto;
-      }
-
-      .sidebar{
-        position:static;
-      }
-
-      .levels-grid{
-        grid-template-columns:repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 720px){
-      .nav-wrap{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      nav{
-        width:100%;
-        justify-content:flex-start;
-      }
-
-      .hero-card,
-      .map-card,
-      .world-card,
-      .sidebar,
-      .game-body{
-        padding:22px;
-      }
-
-      .hero h2{
-        font-size:38px;
-      }
-
-      .mini-stats,
-      .stats-grid,
-      .game-topbar,
-      .options-grid,
-      .levels-grid,
-      .map-worlds{
-        grid-template-columns:1fr;
-      }
-
-      .question-text{
-        font-size:28px;
-      }
-
-      .world-head{
-        flex-direction:column;
-      }
-
-      .map-track{
-        min-width:auto;
-        padding:0;
-      }
+    @media (max-width: 760px){
+      .progress-grid,.result-grid,.options{grid-template-columns:1fr;}
+      .levels-grid{grid-template-columns:repeat(2,1fr);}
+      .question-text{font-size:23px;}
+      .map-wrap{min-height:460px;}
+      .island{width:92px;height:92px;font-size:34px;}
+      .island-1{left:5%;top:9%;}
+      .island-2{left:18%;top:62%;}
+      .island-3{left:41%;top:23%;}
+      .island-4{left:60%;top:66%;}
+      .island-5{right:6%;top:18%;}
+      .map-path{top:50%;left:6%;right:6%;}
     }
   </style>
 </head>
 <body>
-  <div class="bg-bubble bubble-1"></div>
-  <div class="bg-bubble bubble-2"></div>
-  <div class="bg-bubble bubble-3"></div>
-  <div class="bg-bubble bubble-4"></div>
-
-  <header>
-    <div class="container nav-wrap">
+  <header class="topbar">
+    <div class="topbar-inner">
       <div class="brand">
-        <img src="assets/logo.png" alt="I Love Math logo" />
-        <div class="brand-text">
-          <h1>I Love Math</h1>
-          <p>Professor Pi's premium grade-level math adventures</p>
+        <div class="brand-badge">∑</div>
+        <div>
+          I Love Math Adventure
+          <small>Professor Pi's Island Quest</small>
         </div>
       </div>
-
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="worksheets.html">Worksheets</a>
-        <a href="videos.html">Videos</a>
-        <a href="game.html" class="games-link">🎮 Games</a>
-        <a href="puzzle.html" class="games-link">🧩 Puzzles</a>
-        <a href="adventure.html" class="games-link">🗺️ Adventure</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="admin/" class="admin-link">Admin</a>
-      </nav>
+      <div class="stats-bar">
+        <div class="pill">⭐ Total Stars: <span id="totalStars">0</span></div>
+        <div class="pill">🏅 Badges: <span id="badgeCount">0</span></div>
+        <div class="pill">✅ Levels Cleared: <span id="levelsCleared">0</span></div>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-card">
-          <div class="hero-copy">
-            <div class="badge">🗺️ Actual Map View • 5 Levels per World • 10 Questions per Level</div>
-            <h2>
-              Choose Your Grade and Explore a <span>Real Math Adventure Map</span>
-            </h2>
-            <p>
-              Travel with Professor Pi through grade-based math worlds. Use the map, unlock new levels,
-              earn stars, and save progress separately for each year level from Kinder to Grade 12.
-            </p>
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Math Adventure Map</h1>
+      <p>
+        Explore 5 themed worlds, clear 5 levels in each world, answer 10 questions per level, and unlock a boss battle at the end.
+        Designed for grade-based learning with stars, progress, explanations, and replayable fun.
+      </p>
+      <div class="hero-tags">
+        <div class="hero-tag">🗺️ Adventure Map</div>
+        <div class="hero-tag">🎯 10 Questions / Level</div>
+        <div class="hero-tag">👑 Boss Battles</div>
+        <div class="hero-tag">🌟 Stars + Badges</div>
+      </div>
+    </div>
 
-            <div class="hero-actions">
-              <button class="btn btn-primary" id="startFirstUnlockedBtn">🚀 Continue Adventure</button>
-              <a href="#mapSection" class="btn btn-games">🗺️ Open Map</a>
-              <a href="game.html" class="btn btn-soft">🎮 Other Games</a>
-            </div>
-
-            <div class="hero-points">
-              <div class="pill">Actual Map View</div>
-              <div class="pill">5 Levels Per World</div>
-              <div class="pill">10 Questions Per Level</div>
-              <div class="pill">Saved Progress Per Grade</div>
-            </div>
-          </div>
-
-          <div class="hero-visual">
-            <div class="visual-card">
-              <img src="assets/professor-pi.png" alt="Professor Pi mascot" class="professor" />
-              <div class="mini-stats">
-                <div class="mini-box">
-                  <strong id="miniCompleted">0</strong>
-                  <span>Levels completed</span>
-                </div>
-                <div class="mini-box">
-                  <strong id="miniStars">0</strong>
-                  <span>Total stars</span>
-                </div>
-                <div class="mini-box">
-                  <strong id="miniUnlocked">1</strong>
-                  <span>Levels unlocked</span>
-                </div>
-                <div class="mini-box">
-                  <strong id="miniWorlds">4</strong>
-                  <span>Worlds in this grade</span>
-                </div>
-              </div>
-            </div>
-          </div>
+    <aside class="side-card">
+      <h2>Start Your Adventure</h2>
+      <div class="controls">
+        <div class="control-group">
+          <label for="gradeSelect">Choose Grade Level</label>
+          <select id="gradeSelect"></select>
         </div>
+        <div class="control-group">
+          <label for="worldSelect">Jump to World</label>
+          <select id="worldSelect"></select>
+        </div>
+        <button class="btn btn-primary" id="goToWorldBtn">Open World</button>
+        <button class="btn btn-secondary" id="resetProgressBtn">Reset Progress</button>
+      </div>
+    </aside>
+  </section>
+
+  <main class="container">
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Your Progress</h2>
+          <div class="subtext">Finish levels to unlock the next challenge. Clear all 5 levels in a world to face the boss battle.</div>
+        </div>
+      </div>
+      <div class="progress-grid">
+        <div class="mini-stat"><div class="label">Current Grade</div><div class="value" id="currentGradeLabel">Grade 1</div></div>
+        <div class="mini-stat"><div class="label">Current World</div><div class="value" id="currentWorldLabel">Number Bay</div></div>
+        <div class="mini-stat"><div class="label">World Progress</div><div class="value" id="worldProgressLabel">0%</div></div>
+        <div class="mini-stat"><div class="label">Boss Status</div><div class="value" id="bossStatusLabel">Locked</div></div>
       </div>
     </section>
 
-    <section id="mapSection">
-      <div class="container panel-grid">
-        <aside class="glass-card sidebar">
-          <h3>Adventure Progress</h3>
-          <p>
-            Choose a year level, use the map to enter each world, and unlock the next level by finishing the current one.
-          </p>
-
-          <div class="control-group">
-            <label for="gradeSelector">Choose Year Level</label>
-            <select id="gradeSelector">
-              <option value="kinder">Kinder</option>
-              <option value="grade1">Grade 1</option>
-              <option value="grade2">Grade 2</option>
-              <option value="grade3">Grade 3</option>
-              <option value="grade4">Grade 4</option>
-              <option value="grade5">Grade 5</option>
-              <option value="grade6">Grade 6</option>
-              <option value="grade7">Grade 7</option>
-              <option value="grade8">Grade 8</option>
-              <option value="grade9">Grade 9</option>
-              <option value="grade10">Grade 10</option>
-              <option value="grade11">Grade 11</option>
-              <option value="grade12">Grade 12</option>
-            </select>
-            <div class="grade-note" id="gradeNote"></div>
-          </div>
-
-          <div class="stats-grid">
-            <div class="stat-box">
-              <strong id="sidebarCompleted">0</strong>
-              <span>Completed</span>
-            </div>
-            <div class="stat-box">
-              <strong id="sidebarUnlocked">1</strong>
-              <span>Unlocked</span>
-            </div>
-            <div class="stat-box">
-              <strong id="sidebarStars">0</strong>
-              <span>Stars</span>
-            </div>
-            <div class="stat-box">
-              <strong id="sidebarBest">0</strong>
-              <span>Best Score</span>
-            </div>
-          </div>
-
-          <div class="side-actions">
-            <button class="btn btn-primary full-btn" id="continueBtn">▶ Continue Adventure</button>
-            <button class="btn btn-soft full-btn" id="resetBtn">↺ Reset This Grade</button>
-            <button class="btn btn-danger full-btn" id="resetAllBtn">🗑 Reset All Grades</button>
-          </div>
-        </aside>
-
-        <div class="main-content">
-          <div class="glass-card map-card">
-            <div class="map-head">
-              <div>
-                <h3 id="mapTitle">Adventure Map</h3>
-                <p id="mapSubtitle">Follow the path, unlock levels, and complete worlds with Professor Pi.</p>
-              </div>
-
-              <div class="map-legend">
-                <div class="legend-pill">🔒 Locked</div>
-                <div class="legend-pill">🔓 Unlocked</div>
-                <div class="legend-pill">✅ Completed</div>
-              </div>
-            </div>
-
-            <div class="adventure-map">
-              <div class="map-track">
-                <div class="map-line"></div>
-                <div class="map-worlds" id="mapWorlds"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="world-panels" id="worldPanels"></div>
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Adventure Map</h2>
+          <div class="subtext">Each island is a math world. Pick a world, then clear its 5 levels. The boss island opens after all 5 are completed.</div>
         </div>
+      </div>
+      <div class="map-wrap">
+        <div class="map-path"></div>
+        <div class="island island-1"><span>1</span></div>
+        <div class="island island-2"><span>2</span></div>
+        <div class="island island-3"><span>3</span></div>
+        <div class="island island-4"><span>4</span></div>
+        <div class="island island-5"><span>5</span></div>
+        <div class="map-legend">🏝️ Islands = Worlds &nbsp; • &nbsp; 🔒 Finish levels to unlock more &nbsp; • &nbsp; 👑 Boss after Level 5</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Worlds</h2>
+          <div class="subtext">Choose your math world. Each world includes 5 levels and a final boss battle.</div>
+        </div>
+      </div>
+      <div class="worlds" id="worldsGrid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2 id="levelsTitle">Levels</h2>
+          <div class="subtext" id="levelsSubtext">Select a level to begin.</div>
+        </div>
+      </div>
+      <div class="levels-grid" id="levelsGrid"></div>
+      <div class="boss-banner" id="bossBanner">
+        <div>
+          <h3>👑 Boss Battle Locked</h3>
+          <p>Clear all 5 levels in this world to unlock the final mixed challenge.</p>
+        </div>
+        <button class="btn btn-gold" id="bossBattleBtn" disabled>Start Boss Battle</button>
       </div>
     </section>
   </main>
 
-  <div class="game-modal" id="gameModal">
-    <div class="game-box">
-      <div class="game-header">
-        <div>
-          <h3 id="modalTitle">Adventure Level</h3>
-          <p id="modalSubtitle">Solve the challenge to unlock the next level.</p>
-        </div>
-        <button class="close-btn" id="closeModalBtn">Close</button>
-      </div>
-
-      <div class="game-body">
-        <div class="game-topbar">
-          <div class="topbox">
-            <strong id="topGrade">K</strong>
-            <span>Grade</span>
-          </div>
-          <div class="topbox">
-            <strong id="topWorld">1</strong>
-            <span>World</span>
-          </div>
-          <div class="topbox">
-            <strong id="topLevel">1</strong>
-            <span>Level</span>
-          </div>
-          <div class="topbox">
-            <strong id="topQuestion">1/10</strong>
-            <span>Question</span>
-          </div>
-          <div class="topbox">
-            <strong id="topScore">0</strong>
-            <span>Score</span>
-          </div>
-        </div>
-
-        <div class="progress-bar">
-          <div class="progress-fill" id="gameProgressFill"></div>
-        </div>
-
-        <div class="question-card" id="questionCard"></div>
-      </div>
+  <div class="modal" id="quizModal">
+    <div class="modal-card">
+      <div id="quizView"></div>
     </div>
   </div>
 
-  <footer>
-    <div class="container">
-      <div class="footer-card">
-        <p><strong>I Love Math</strong> — Learning math can be fun, colorful, and exciting.</p>
-        <p>Website: https://ilovemath.live</p>
-        <p>© 2026 ilovemath.live – All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+  <div class="footer">
+    © 2026 ilovemath.live – Math Adventure Phase 1. Personal educational website build with grade selector, worlds, levels, stars, and boss battles.
+  </div>
 
   <script>
-    const gradeMeta = {
-      kinder: {
-        label: "Kinder",
-        short: "K",
-        note: "Kinder adventure focuses on counting, shapes, number matching, and simple patterns."
+    const gradeConfigs = [
+      {
+        id: 'k',
+        label: 'Kindergarten',
+        worlds: [
+          { id:'counting-cove', name:'Counting Cove', icon:'🔢', desc:'Count, match, and compare numbers up to 20.', topic:'Counting', skills:['counting','before after','greater less','number words'] },
+          { id:'shape-shore', name:'Shape Shore', icon:'🟦', desc:'Recognize shapes and simple positions.', topic:'Shapes', skills:['identify shapes','sides','positions','sort'] },
+          { id:'add-lagoon', name:'Addition Lagoon', icon:'➕', desc:'Add small numbers with picture-friendly practice.', topic:'Addition', skills:['add within 10','picture sums','missing addend','story sums'] },
+          { id:'subtraction-jungle', name:'Subtraction Jungle', icon:'➖', desc:'Take away and find what is left.', topic:'Subtraction', skills:['subtract within 10','take away','how many left','compare'] },
+          { id:'pattern-peak', name:'Pattern Peak', icon:'🌈', desc:'Build and complete repeating patterns.', topic:'Patterns', skills:['AB patterns','AAB patterns','extend patterns','find next'] }
+        ]
       },
-      grade1: {
-        label: "Grade 1",
-        short: "1",
-        note: "Grade 1 adventure focuses on addition, subtraction, place value, time, and money."
+      {
+        id: 'g1',
+        label: 'Grade 1',
+        worlds: [
+          { id:'number-bay', name:'Number Bay', icon:'🔢', desc:'Number bonds, place value, and comparing numbers.', topic:'Numbers', skills:['place value','compare numbers','number bonds','before after'] },
+          { id:'addition-isle', name:'Addition Isle', icon:'➕', desc:'Addition fluency and simple word problems.', topic:'Addition', skills:['add within 20','doubles','make 10','word problems'] },
+          { id:'subtraction-forest', name:'Subtraction Forest', icon:'➖', desc:'Subtract with confidence and solve story problems.', topic:'Subtraction', skills:['subtract within 20','fact families','missing number','story problems'] },
+          { id:'shape-harbor', name:'Shape Harbor', icon:'📐', desc:'2D and 3D shapes, size, and positions.', topic:'Geometry', skills:['2D shapes','3D shapes','positions','partition shapes'] },
+          { id:'measurement-mountain', name:'Measurement Mountain', icon:'📏', desc:'Length, time, and simple data.', topic:'Measurement', skills:['longer shorter','time to hour','tally charts','compare lengths'] }
+        ]
       },
-      grade2: {
-        label: "Grade 2",
-        short: "2",
-        note: "Grade 2 adventure focuses on bigger numbers, place value, addition, subtraction, arrays, and fractions."
+      {
+        id: 'g2',
+        label: 'Grade 2',
+        worlds: [
+          { id:'place-value-port', name:'Place Value Port', icon:'🏗️', desc:'Tens, ones, skip counting, and number patterns.', topic:'Place Value', skills:['hundreds tens ones','skip counting','expanded form','compare'] },
+          { id:'double-digit-dunes', name:'Double Digit Dunes', icon:'➕', desc:'Add and subtract within 100.', topic:'Operations', skills:['add within 100','subtract within 100','mental math','word problems'] },
+          { id:'money-marina', name:'Money Marina', icon:'💰', desc:'Coins, values, and total amounts.', topic:'Money', skills:['coin values','make amounts','compare money','count mixed coins'] },
+          { id:'time-trail', name:'Time Trail', icon:'🕒', desc:'Time, calendars, and elapsed thinking.', topic:'Time', skills:['time to 5 minutes','calendar','elapsed ideas','morning evening'] },
+          { id:'graph-garden', name:'Graph Garden', icon:'📊', desc:'Read picture graphs and bar graphs.', topic:'Data', skills:['picture graphs','bar graphs','most least','compare totals'] }
+        ]
       },
-      grade3: {
-        label: "Grade 3",
-        short: "3",
-        note: "Grade 3 adventure focuses on multiplication, division, fractions, and problem solving."
+      {
+        id: 'g3',
+        label: 'Grade 3',
+        worlds: [
+          { id:'multiplication-mesa', name:'Multiplication Mesa', icon:'✖️', desc:'Facts, arrays, and equal groups.', topic:'Multiplication', skills:['facts','arrays','equal groups','word problems'] },
+          { id:'division-delta', name:'Division Delta', icon:'➗', desc:'Sharing, grouping, and inverse thinking.', topic:'Division', skills:['division facts','sharing','grouping','fact families'] },
+          { id:'fraction-falls', name:'Fraction Falls', icon:'🍕', desc:'Fractions as parts of a whole and on number lines.', topic:'Fractions', skills:['unit fractions','compare fractions','fraction models','number lines'] },
+          { id:'area-archipelago', name:'Area Archipelago', icon:'🧱', desc:'Area, perimeter, and simple geometry.', topic:'Area & Perimeter', skills:['area','perimeter','rectangles','word problems'] },
+          { id:'data-desert', name:'Data Desert', icon:'📈', desc:'Graphs, tables, and problem solving.', topic:'Data', skills:['bar graphs','scaled graphs','tables','analyze data'] }
+        ]
       },
-      grade4: {
-        label: "Grade 4",
-        short: "4",
-        note: "Grade 4 adventure focuses on large-number operations, factors, multiples, fractions, and geometry."
+      {
+        id: 'g4',
+        label: 'Grade 4',
+        worlds: [
+          { id:'power-place-plateau', name:'Place Value Plateau', icon:'🔟', desc:'Large numbers, rounding, and estimation.', topic:'Place Value', skills:['place value','rounding','expanded form','compare'] },
+          { id:'multi-step-marsh', name:'Multi-Step Marsh', icon:'🧠', desc:'Multi-step addition and subtraction.', topic:'Problem Solving', skills:['multi-step problems','estimation','check work','reasoning'] },
+          { id:'fraction-fortress', name:'Fraction Fortress', icon:'🥧', desc:'Equivalent fractions and operations basics.', topic:'Fractions', skills:['equivalent fractions','compare','add like denominators','mixed numbers'] },
+          { id:'angle-atoll', name:'Angle Atoll', icon:'📐', desc:'Angles, lines, and shapes.', topic:'Geometry', skills:['measure angles','classify triangles','parallel perpendicular','symmetry'] },
+          { id:'measurement-ridge', name:'Measurement Ridge', icon:'📏', desc:'Units, conversions, and area/perimeter.', topic:'Measurement', skills:['convert units','area','perimeter','word problems'] }
+        ]
       },
-      grade5: {
-        label: "Grade 5",
-        short: "5",
-        note: "Grade 5 adventure focuses on decimals, fractions, volume, coordinate ideas, and problem solving."
+      {
+        id: 'g5',
+        label: 'Grade 5',
+        worlds: [
+          { id:'decimal-docks', name:'Decimal Docks', icon:'🔣', desc:'Decimals, place value, and comparing.', topic:'Decimals', skills:['decimal place value','compare decimals','round decimals','expanded form'] },
+          { id:'fraction-frontier', name:'Fraction Frontier', icon:'🍰', desc:'Add, subtract, multiply, and divide fractions.', topic:'Fractions', skills:['add subtract fractions','multiply fractions','divide fractions','mixed numbers'] },
+          { id:'volume-valley', name:'Volume Valley', icon:'🧊', desc:'Volume and geometry concepts.', topic:'Volume', skills:['volume','rectangular prisms','unit cubes','reasoning'] },
+          { id:'coordinate-coast', name:'Coordinate Coast', icon:'🗺️', desc:'Graph points and interpret coordinate planes.', topic:'Coordinates', skills:['ordered pairs','graph points','first quadrant','word problems'] },
+          { id:'expression-estuary', name:'Expression Estuary', icon:'🧩', desc:'Numerical expressions and patterns.', topic:'Expressions', skills:['order of operations','patterns','evaluate expressions','write expressions'] }
+        ]
       },
-      grade6: {
-        label: "Grade 6",
-        short: "6",
-        note: "Grade 6 adventure focuses on ratios, integers, expressions, geometry, and statistics."
-      },
-      grade7: {
-        label: "Grade 7",
-        short: "7",
-        note: "Grade 7 adventure focuses on integers, proportional relationships, equations, and geometry."
-      },
-      grade8: {
-        label: "Grade 8",
-        short: "8",
-        note: "Grade 8 adventure focuses on linear equations, functions, exponents, and geometry."
-      },
-      grade9: {
-        label: "Grade 9",
-        short: "9",
-        note: "Grade 9 adventure focuses on algebra foundations, linear relationships, exponents, and problem solving."
-      },
-      grade10: {
-        label: "Grade 10",
-        short: "10",
-        note: "Grade 10 adventure focuses on algebra, polynomials, functions, geometry, and statistics."
-      },
-      grade11: {
-        label: "Grade 11",
-        short: "11",
-        note: "Grade 11 adventure focuses on advanced algebra, functions, trigonometry, and statistics."
-      },
-      grade12: {
-        label: "Grade 12",
-        short: "12",
-        note: "Grade 12 adventure focuses on pre-calculus ideas, functions, systems, and advanced problem solving."
+      {
+        id: 'g6',
+        label: 'Grade 6',
+        worlds: [
+          { id:'ratio-reef', name:'Ratio Reef', icon:'⚖️', desc:'Ratios, rates, and unit rates.', topic:'Ratios', skills:['ratios','rates','unit rates','tables'] },
+          { id:'integer-island', name:'Integer Island', icon:'➕', desc:'Integers, absolute value, and number lines.', topic:'Integers', skills:['integers','absolute value','compare integers','operations ideas'] },
+          { id:'equation-estate', name:'Equation Estate', icon:'🧮', desc:'Expressions, equations, and variables.', topic:'Algebra', skills:['variables','write expressions','one-step equations','inequalities'] },
+          { id:'geometry-gulf', name:'Geometry Gulf', icon:'📐', desc:'Area, volume, and surface area.', topic:'Geometry', skills:['area','surface area','volume','nets'] },
+          { id:'statistics-station', name:'Statistics Station', icon:'📊', desc:'Data sets and measures of center.', topic:'Statistics', skills:['mean','median','mode','range'] }
+        ]
       }
+    ];
+
+    const storageKey = 'ilovemath_adventure_phase1_progress_v1';
+
+    const state = {
+      gradeId: 'g1',
+      worldIndex: 0,
+      progress: loadProgress(),
+      quiz: null
     };
 
-    let selectedGrade = "kinder";
+    const els = {
+      gradeSelect: document.getElementById('gradeSelect'),
+      worldSelect: document.getElementById('worldSelect'),
+      goToWorldBtn: document.getElementById('goToWorldBtn'),
+      resetProgressBtn: document.getElementById('resetProgressBtn'),
+      worldsGrid: document.getElementById('worldsGrid'),
+      levelsGrid: document.getElementById('levelsGrid'),
+      levelsTitle: document.getElementById('levelsTitle'),
+      levelsSubtext: document.getElementById('levelsSubtext'),
+      totalStars: document.getElementById('totalStars'),
+      badgeCount: document.getElementById('badgeCount'),
+      levelsCleared: document.getElementById('levelsCleared'),
+      currentGradeLabel: document.getElementById('currentGradeLabel'),
+      currentWorldLabel: document.getElementById('currentWorldLabel'),
+      worldProgressLabel: document.getElementById('worldProgressLabel'),
+      bossStatusLabel: document.getElementById('bossStatusLabel'),
+      bossBanner: document.getElementById('bossBanner'),
+      bossBattleBtn: document.getElementById('bossBattleBtn'),
+      quizModal: document.getElementById('quizModal'),
+      quizView: document.getElementById('quizView')
+    };
 
-    function makeQuestion(type, prompt, note, visual, options, answer, explanation){
-      return { type, prompt, note, visual, options, answer, explanation };
-    }
-
-    function shuffleArray(arr){
-      const copy = [...arr];
-      for(let i = copy.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
+    function loadProgress(){
+      try{
+        return JSON.parse(localStorage.getItem(storageKey)) || {};
+      }catch(e){
+        return {};
       }
-      return copy;
     }
 
-    function pick10(questionPool){
-      const output = [];
-      while(output.length < 10){
-        output.push(...shuffleArray(questionPool));
+    function saveProgress(){
+      localStorage.setItem(storageKey, JSON.stringify(state.progress));
+    }
+
+    function getGrade(){
+      return gradeConfigs.find(g => g.id === state.gradeId) || gradeConfigs[1];
+    }
+
+    function ensureGradeProgress(gradeId){
+      const grade = gradeConfigs.find(g => g.id === gradeId);
+      if(!state.progress[gradeId]){
+        state.progress[gradeId] = { worlds: {} };
       }
-      return output.slice(0, 10);
+      grade.worlds.forEach(world => {
+        if(!state.progress[gradeId].worlds[world.id]){
+          state.progress[gradeId].worlds[world.id] = {
+            levels: {
+              1:{completed:false,stars:0,bestScore:0},
+              2:{completed:false,stars:0,bestScore:0},
+              3:{completed:false,stars:0,bestScore:0},
+              4:{completed:false,stars:0,bestScore:0},
+              5:{completed:false,stars:0,bestScore:0}
+            },
+            boss: { unlocked:false, completed:false, stars:0, bestScore:0 }
+          };
+        }
+      });
     }
 
-    function decorateWorlds(worlds, gradeKey){
-      return worlds.map((world, worldIndex) => ({
-        id: `${gradeKey}_world_${worldIndex + 1}`,
-        name: world.name,
-        icon: world.icon,
-        className: world.className,
-        description: world.description,
-        levels: world.levels.map((level, levelIndex) => ({
-          id: `${gradeKey}_w${worldIndex + 1}_l${levelIndex + 1}`,
-          title: level.title,
-          description: level.description,
-          questions: level.questions
-        }))
-      }));
+    function getWorldProgress(worldId){
+      ensureGradeProgress(state.gradeId);
+      return state.progress[state.gradeId].worlds[worldId];
     }
 
-    function buildCustomGrades(gradeKey){
-      const data = {
-        kinder: [
-          {
-            name: "Counting Island",
-            icon: "🔢",
-            className: "world-1",
-            description: "Count forward, backward, compare numbers, and complete easy patterns.",
-            levels: [
-              {
-                title: "Level 1 • Count Forward",
-                description: "Practice counting in order.",
-                questions: pick10([
-                  makeQuestion("Counting","What comes next?","Count by 1.",["1","2","3","?"],["4","5","6","7"],"4","After 1, 2, 3 comes 4."),
-                  makeQuestion("Counting","What comes next?","Count by 1.",["4","5","6","?"],["7","8","9","10"],"7","After 6 comes 7."),
-                  makeQuestion("Counting","Fill the blank.","Count in order.",["7","8","?","10"],["8","9","10","11"],"9","9 comes between 8 and 10."),
-                  makeQuestion("Counting","What comes next?","Count by 2.",["2","4","6","?"],["7","8","9","10"],"8","The pattern adds 2."),
-                  makeQuestion("Counting","What comes next?","Count by 5.",["5","10","15","?"],["18","20","25","30"],"20","The pattern adds 5.")
-                ])
-              },
-              {
-                title: "Level 2 • Count Backward",
-                description: "Practice counting backward and missing numbers.",
-                questions: pick10([
-                  makeQuestion("Counting","What comes next?","Go back by 1.",["10","9","8","?"],["5","6","7","8"],"7","The numbers go down by 1."),
-                  makeQuestion("Counting","Fill the blank.","Go back by 1.",["6","5","?","3"],["2","3","4","5"],"4","4 fits between 5 and 3."),
-                  makeQuestion("Counting","What comes next?","Go back by 2.",["10","8","6","?"],["2","3","4","5"],"4","The pattern goes down by 2."),
-                  makeQuestion("Counting","What comes before 9?","Think of the previous number.",["?","9"],["6","7","8","10"],"8","8 comes before 9."),
-                  makeQuestion("Counting","What comes before 5?","Think of the previous number.",["?","5"],["3","4","5","6"],"4","4 comes before 5.")
-                ])
-              },
-              {
-                title: "Level 3 • Big and Small",
-                description: "Compare which number is bigger or smaller.",
-                questions: pick10([
-                  makeQuestion("Compare","Which number is bigger?","Compare the numbers.",["2","5"],["2","5","Same","None"],"5","5 is bigger than 2."),
-                  makeQuestion("Compare","Which is smaller?","Choose the lesser value.",["3","6"],["3","6","Same","None"],"3","3 is smaller than 6."),
-                  makeQuestion("Compare","Which is greater?","Compare carefully.",["8","1"],["8","1","Same","None"],"8","8 is greater than 1."),
-                  makeQuestion("Compare","Which is smallest?","Choose the least value.",["5","2","8"],["5","2","8","Same"],"2","2 is the smallest."),
-                  makeQuestion("Compare","Which is greatest?","Choose the largest.",["4","7","9"],["4","7","9","Same"],"9","9 is the greatest.")
-                ])
-              },
-              {
-                title: "Level 4 • Easy Patterns",
-                description: "Find what comes next in simple patterns.",
-                questions: pick10([
-                  makeQuestion("Pattern","What comes next?","Add 1 each time.",["2","3","4","?"],["4","5","6","7"],"5","The pattern adds 1."),
-                  makeQuestion("Pattern","What comes next?","Add 2 each time.",["1","3","5","?"],["6","7","8","9"],"7","The pattern adds 2."),
-                  makeQuestion("Pattern","What comes next?","Go down by 1.",["7","6","5","?"],["2","3","4","5"],"4","The pattern goes down by 1."),
-                  makeQuestion("Pattern","What comes next?","Add 3 each time.",["3","6","9","?"],["10","11","12","13"],"12","The pattern adds 3."),
-                  makeQuestion("Pattern","What comes next?","Add 10.",["10","20","30","?"],["35","40","50","60"],"40","The pattern adds 10.")
-                ])
-              },
-              {
-                title: "Level 5 • Counting Boss",
-                description: "Final mixed Kinder number challenge.",
-                questions: pick10([
-                  makeQuestion("Boss","Which is bigger?","Compare the numbers.",["7","3"],["7","3","Same","None"],"7","7 is bigger than 3."),
-                  makeQuestion("Boss","Fill the blank.","Count by 1.",["11","12","?","14"],["11","12","13","15"],"13","13 comes after 12."),
-                  makeQuestion("Boss","What comes next?","Add 2.",["2","4","6","?"],["7","8","9","10"],"8","The pattern adds 2."),
-                  makeQuestion("Boss","Which is smallest?","Choose the least value.",["5","2","8"],["5","2","8","Same"],"2","2 is the smallest."),
-                  makeQuestion("Boss","What comes next?","Count by 1.",["13","14","15","?"],["14","15","16","17"],"16","16 comes after 15.")
-                ])
-              }
-            ]
-          },
-          {
-            name: "Shapes Garden",
-            icon: "🔷",
-            className: "world-2",
-            description: "Recognize shapes, sides, corners, and simple matching.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Shape Challenge`,
-              description: "Match shapes to their basic properties.",
-              questions: pick10([
-                makeQuestion("Shapes","Which shape has 3 sides?","Think of a triangle.",["3 sides"],["Circle","Triangle","Square","Oval"],"Triangle","A triangle has 3 sides."),
-                makeQuestion("Shapes","Which shape is round?","Choose the round shape.",["No corners"],["Square","Rectangle","Circle","Triangle"],"Circle","A circle is round."),
-                makeQuestion("Shapes","Which shape has 4 equal sides?","Think of a square.",["4 equal sides"],["Triangle","Square","Circle","Oval"],"Square","A square has 4 equal sides."),
-                makeQuestion("Shapes","Which shape has no sides?","Choose carefully.",["No sides"],["Rectangle","Triangle","Circle","Square"],"Circle","A circle has no sides."),
-                makeQuestion("Shapes","Which shape has 4 corners?","Count the corners.",["4 corners"],["Circle","Triangle","Square","Oval"],"Square","A square has 4 corners."),
-                makeQuestion("Shapes","Which shape has 3 corners?","Count carefully.",["3 corners"],["Triangle","Rectangle","Circle","Oval"],"Triangle","A triangle has 3 corners.")
-              ])
-            }))
-          },
-          {
-            name: "Number Match Beach",
-            icon: "🏖️",
-            className: "world-3",
-            description: "Match numbers, compare amounts, and complete missing-number clues.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Beach Match`,
-              description: "Mixed number matching and missing-number practice.",
-              questions: pick10([
-                makeQuestion("Missing Number","Fill the blank.","Count in order.",["1","2","?","4"],["2","3","4","5"],"3","3 fits between 2 and 4."),
-                makeQuestion("Missing Number","Fill the blank.","Count by 1.",["6","?","8"],["5","6","7","9"],"7","7 comes between 6 and 8."),
-                makeQuestion("Missing Number","Fill the blank.","Count forward.",["9","10","?","12"],["10","11","12","13"],"11","11 comes after 10."),
-                makeQuestion("Compare","Which is bigger?","Compare the numbers.",["6","9"],["6","9","Same","None"],"9","9 is bigger than 6."),
-                makeQuestion("Compare","Which is smaller?","Choose the lesser value.",["1","4"],["1","4","Same","None"],"1","1 is smaller than 4."),
-                makeQuestion("Compare","Which is greatest?","Choose the largest.",["2","5","7"],["2","5","7","Same"],"7","7 is the greatest.")
-              ])
-            }))
-          },
-          {
-            name: "Pattern Path",
-            icon: "🌈",
-            className: "world-4",
-            description: "Finish Kinder Adventure with simple number patterns.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Pattern Path`,
-              description: "Spot what comes next in easy patterns.",
-              questions: pick10([
-                makeQuestion("Pattern","What comes next?","Add 1 each time.",["2","3","4","?"],["4","5","6","7"],"5","The pattern adds 1."),
-                makeQuestion("Pattern","What comes next?","Add 2 each time.",["1","3","5","?"],["6","7","8","9"],"7","The pattern adds 2."),
-                makeQuestion("Pattern","What comes next?","Count by 5.",["5","10","15","?"],["18","20","25","30"],"20","The pattern adds 5."),
-                makeQuestion("Pattern","What comes next?","Go down by 1.",["7","6","5","?"],["2","3","4","5"],"4","The pattern goes down by 1."),
-                makeQuestion("Pattern","What comes next?","Go down by 2.",["10","8","6","?"],["2","3","4","5"],"4","The pattern goes down by 2.")
-              ])
-            }))
+    function totalStats(){
+      let stars = 0, badges = 0, levels = 0;
+      Object.values(state.progress).forEach(grade => {
+        Object.values(grade.worlds || {}).forEach(world => {
+          Object.values(world.levels || {}).forEach(level => {
+            stars += level.stars || 0;
+            if(level.completed) levels++;
+          });
+          if(world.boss?.completed){
+            badges++;
+            stars += world.boss.stars || 0;
           }
-        ],
-
-        grade1: [
-          {
-            name: "Addition Forest",
-            icon: "🌳",
-            className: "world-1",
-            description: "Practice addition facts and missing addends.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Addition Trail`,
-              description: "Addition facts within 20.",
-              questions: pick10([
-                makeQuestion("Addition","3 + 4 = ?","Add the numbers.",["3","+","4"],["6","7","8","9"],"7","3 plus 4 equals 7."),
-                makeQuestion("Addition","5 + 2 = ?","Add carefully.",["5","+","2"],["6","7","8","9"],"7","5 plus 2 equals 7."),
-                makeQuestion("Addition","6 + 1 = ?","Add one more.",["6","+","1"],["6","7","8","9"],"7","6 plus 1 equals 7."),
-                makeQuestion("Addition","9 + 3 = ?","Add the numbers.",["9","+","3"],["11","12","13","14"],"12","9 plus 3 equals 12."),
-                makeQuestion("Addition","7 + 6 = ?","Add carefully.",["7","+","6"],["12","13","14","15"],"13","7 plus 6 equals 13."),
-                makeQuestion("Missing Addend","? + 5 = 9","Find the missing number.",["?","+","5","=","9"],["2","3","4","5"],"4","4 plus 5 equals 9.")
-              ])
-            }))
-          },
-          {
-            name: "Subtraction River",
-            icon: "🚣",
-            className: "world-2",
-            description: "Learn subtraction facts and missing numbers.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • River Subtract`,
-              description: "Subtraction facts within 20.",
-              questions: pick10([
-                makeQuestion("Subtraction","8 - 3 = ?","Take away 3.",["8","-","3"],["4","5","6","7"],"5","8 minus 3 equals 5."),
-                makeQuestion("Subtraction","7 - 2 = ?","Subtract carefully.",["7","-","2"],["4","5","6","7"],"5","7 minus 2 equals 5."),
-                makeQuestion("Subtraction","9 - 4 = ?","Count back.",["9","-","4"],["4","5","6","7"],"5","9 minus 4 equals 5."),
-                makeQuestion("Subtraction","14 - 6 = ?","Subtract carefully.",["14","-","6"],["7","8","9","10"],"8","14 minus 6 equals 8."),
-                makeQuestion("Subtraction","15 - 5 = ?","Subtract carefully.",["15","-","5"],["8","9","10","11"],"10","15 minus 5 equals 10."),
-                makeQuestion("Missing Number","? - 2 = 5","Find the missing number.",["?","-","2","=","5"],["6","7","8","9"],"7","7 minus 2 equals 5.")
-              ])
-            }))
-          },
-          {
-            name: "Place Value Town",
-            icon: "🏘️",
-            className: "world-3",
-            description: "Learn tens and ones.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Place Value`,
-              description: "Understand tens and ones in two-digit numbers.",
-              questions: pick10([
-                makeQuestion("Place Value","How many tens are in 34?","Look at the tens digit.",["34"],["2","3","4","5"],"3","34 has 3 tens."),
-                makeQuestion("Place Value","How many ones are in 47?","Look at the ones digit.",["47"],["4","5","6","7"],"7","47 has 7 ones."),
-                makeQuestion("Place Value","Which number is bigger?","Compare the values.",["52","46"],["52","46","Same","None"],"52","52 is greater than 46."),
-                makeQuestion("Place Value","How many tens are in 61?","Look at the left digit.",["61"],["5","6","1","7"],"6","61 has 6 tens."),
-                makeQuestion("Place Value","Which number has 2 tens and 5 ones?","Build the number.",["2 tens","5 ones"],["15","20","25","52"],"25","2 tens and 5 ones make 25."),
-                makeQuestion("Place Value","Which number has 4 tens and 3 ones?","Build carefully.",["4 tens","3 ones"],["34","43","40","33"],"43","4 tens and 3 ones make 43.")
-              ])
-            }))
-          },
-          {
-            name: "Time & Money Park",
-            icon: "⏰",
-            className: "world-4",
-            description: "Practice time and money basics.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Time & Money`,
-              description: "Recognize simple times and coin values.",
-              questions: pick10([
-                makeQuestion("Time","Which time shows 3 o'clock?","Choose the correct hour.",["3:00"],["2:00","3:00","4:00","5:00"],"3:00","3 o'clock is written 3:00."),
-                makeQuestion("Time","Which comes after 6 o'clock?","Move one hour later.",["6:00"],["5:00","6:00","7:00","8:00"],"7:00","One hour after 6:00 is 7:00."),
-                makeQuestion("Money","Which coin is worth 1 cent?","Think of a penny.",["1¢"],["Penny","Nickel","Dime","Quarter"],"Penny","A penny is worth 1 cent."),
-                makeQuestion("Money","Which coin is worth 5 cents?","Choose carefully.",["5¢"],["Penny","Nickel","Dime","Quarter"],"Nickel","A nickel is worth 5 cents."),
-                makeQuestion("Money","Which coin is worth 10 cents?","Think of a dime.",["10¢"],["Penny","Nickel","Dime","Quarter"],"Dime","A dime is worth 10 cents."),
-                makeQuestion("Money","Which coin is worth 25 cents?","Choose correctly.",["25¢"],["Penny","Nickel","Dime","Quarter"],"Quarter","A quarter is worth 25 cents.")
-              ])
-            }))
-          }
-        ],
-
-        grade2: [
-          {
-            name: "Bigger Numbers Mountain",
-            icon: "⛰️",
-            className: "world-1",
-            description: "Work with larger numbers and compare values.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Big Numbers`,
-              description: "Compare numbers and count by tens and hundreds.",
-              questions: pick10([
-                makeQuestion("Compare","Which number is greater?","Compare carefully.",["124","142"],["124","142","Same","None"],"142","142 is greater than 124."),
-                makeQuestion("Compare","Which is smaller?","Choose the lesser value.",["87","78"],["87","78","Same","None"],"78","78 is smaller than 87."),
-                makeQuestion("Compare","Which is greatest?","Choose the largest.",["205","250","152"],["205","250","152","Same"],"250","250 is the greatest."),
-                makeQuestion("Patterns","What comes next?","Add 10.",["120","130","140","?"],["145","150","160","170"],"150","The pattern adds 10."),
-                makeQuestion("Patterns","What comes next?","Add 100.",["200","300","400","?"],["450","500","550","600"],"500","The pattern adds 100."),
-                makeQuestion("Patterns","What comes next?","Go back by 10.",["90","80","70","?"],["50","60","70","80"],"60","The numbers go down by 10.")
-              ])
-            }))
-          },
-          {
-            name: "Addition & Subtraction Cave",
-            icon: "🕳️",
-            className: "world-2",
-            description: "Use two-digit addition and subtraction.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Cave Operations`,
-              description: "Practice two-digit addition and subtraction.",
-              questions: pick10([
-                makeQuestion("Addition","23 + 15 = ?","Add the numbers.",["23","+","15"],["36","37","38","39"],"38","23 plus 15 equals 38."),
-                makeQuestion("Addition","34 + 22 = ?","Add carefully.",["34","+","22"],["54","55","56","57"],"56","34 plus 22 equals 56."),
-                makeQuestion("Addition","41 + 18 = ?","Add the numbers.",["41","+","18"],["57","58","59","60"],"59","41 plus 18 equals 59."),
-                makeQuestion("Subtraction","42 - 15 = ?","Subtract carefully.",["42","-","15"],["25","26","27","28"],"27","42 minus 15 equals 27."),
-                makeQuestion("Subtraction","50 - 23 = ?","Subtract the numbers.",["50","-","23"],["25","26","27","28"],"27","50 minus 23 equals 27."),
-                makeQuestion("Subtraction","61 - 14 = ?","Count carefully.",["61","-","14"],["45","46","47","48"],"47","61 minus 14 equals 47.")
-              ])
-            }))
-          },
-          {
-            name: "Arrays Village",
-            icon: "🧱",
-            className: "world-3",
-            description: "Build early multiplication ideas through equal groups and arrays.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Arrays`,
-              description: "Understand equal groups and rows.",
-              questions: pick10([
-                makeQuestion("Equal Groups","2 groups of 3 means ?","Add equal groups.",["3","3"],["5","6","7","8"],"6","2 groups of 3 make 6."),
-                makeQuestion("Equal Groups","3 groups of 2 means ?","Count equal groups.",["2","2","2"],["5","6","7","8"],"6","3 groups of 2 make 6."),
-                makeQuestion("Equal Groups","4 groups of 2 means ?","Count the total.",["2","2","2","2"],["6","7","8","9"],"8","4 groups of 2 make 8."),
-                makeQuestion("Arrays","2 rows of 4 means ?","Count all items.",["4","4"],["6","7","8","9"],"8","2 rows of 4 make 8."),
-                makeQuestion("Arrays","3 rows of 3 means ?","Count equal rows.",["3","3","3"],["7","8","9","10"],"9","3 rows of 3 make 9."),
-                makeQuestion("Arrays","3 rows of 5 means ?","Count total items.",["5","5","5"],["12","13","14","15"],"15","3 rows of 5 make 15.")
-              ])
-            }))
-          },
-          {
-            name: "Fraction Pond",
-            icon: "🐸",
-            className: "world-4",
-            description: "Begin simple fractions.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Pond Fractions`,
-              description: "Recognize and compare simple fractions.",
-              questions: pick10([
-                makeQuestion("Fractions","Which fraction means one-half?","Choose correctly.",["1/2"],["1/2","1/3","1/4","2/3"],"1/2","One-half is written 1/2."),
-                makeQuestion("Fractions","Which means one-third?","Choose carefully.",["1/3"],["1/2","1/3","1/4","3/3"],"1/3","One-third is 1/3."),
-                makeQuestion("Fractions","Which means one-fourth?","Choose correctly.",["1/4"],["1/2","1/3","1/4","1/5"],"1/4","One-fourth is 1/4."),
-                makeQuestion("Fractions","Which is bigger?","Compare the fractions.",["1/2","1/4"],["1/2","1/4","Same","None"],"1/2","1/2 is bigger than 1/4."),
-                makeQuestion("Fractions","Which equals one whole?","Think of all parts filled.",["2/2"],["1/2","2/2","1/3","2/3"],"2/2","2/2 equals one whole."),
-                makeQuestion("Fraction Compare","Which is smaller?","Compare carefully.",["1/3","1/2"],["1/3","1/2","Same","None"],"1/3","1/3 is smaller than 1/2.")
-              ])
-            }))
-          }
-        ],
-
-        grade3: [
-          {
-            name: "Multiplication Mountain",
-            icon: "⛰️",
-            className: "world-1",
-            description: "Build multiplication fact fluency.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Multiplication`,
-              description: "Practice multiplication facts.",
-              questions: pick10([
-                makeQuestion("Multiplication","2 × 4 = ?","Multiply the numbers.",["2","×","4"],["6","8","10","12"],"8","2 times 4 equals 8."),
-                makeQuestion("Multiplication","3 × 3 = ?","Multiply carefully.",["3","×","3"],["6","8","9","12"],"9","3 times 3 equals 9."),
-                makeQuestion("Multiplication","2 × 5 = ?","Multiply by 2.",["2","×","5"],["8","10","12","15"],"10","2 times 5 equals 10."),
-                makeQuestion("Multiplication","4 × 4 = ?","Use doubles of doubles.",["4","×","4"],["12","14","16","18"],"16","4 times 4 equals 16."),
-                makeQuestion("Multiplication","5 × 3 = ?","Multiply carefully.",["5","×","3"],["12","13","14","15"],"15","5 times 3 equals 15."),
-                makeQuestion("Multiplication","6 × 3 = ?","Multiply carefully.",["6","×","3"],["16","17","18","19"],"18","6 times 3 equals 18.")
-              ])
-            }))
-          },
-          {
-            name: "Division Desert",
-            icon: "🏜️",
-            className: "world-2",
-            description: "Use division as equal sharing.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Division`,
-              description: "Practice simple division facts.",
-              questions: pick10([
-                makeQuestion("Division","8 ÷ 2 = ?","Split into equal groups.",["8","÷","2"],["2","3","4","5"],"4","8 divided by 2 equals 4."),
-                makeQuestion("Division","9 ÷ 3 = ?","Share equally.",["9","÷","3"],["2","3","4","5"],"3","9 divided by 3 equals 3."),
-                makeQuestion("Division","12 ÷ 2 = ?","Divide carefully.",["12","÷","2"],["4","5","6","7"],"6","12 divided by 2 equals 6."),
-                makeQuestion("Division","15 ÷ 3 = ?","Share equally.",["15","÷","3"],["3","4","5","6"],"5","15 divided by 3 equals 5."),
-                makeQuestion("Division","20 ÷ 5 = ?","Share equally.",["20","÷","5"],["2","3","4","5"],"4","20 divided by 5 equals 4."),
-                makeQuestion("Division","24 ÷ 6 = ?","Divide carefully.",["24","÷","6"],["2","3","4","5"],"4","24 divided by 6 equals 4.")
-              ])
-            }))
-          },
-          {
-            name: "Fraction Ocean",
-            icon: "🌊",
-            className: "world-3",
-            description: "Understand and compare fractions.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Fractions`,
-              description: "Work with simple fractions and equivalents.",
-              questions: pick10([
-                makeQuestion("Fractions","Which equals one-half?","Choose correctly.",["1/2"],["1/2","1/3","1/4","2/3"],"1/2","One-half is 1/2."),
-                makeQuestion("Fractions","Which is bigger?","Compare the fractions.",["1/2","1/4"],["1/2","1/4","Same","None"],"1/2","1/2 is bigger than 1/4."),
-                makeQuestion("Fractions","Which equals one whole?","Think of all parts filled.",["4/4"],["1/4","2/4","3/4","4/4"],"4/4","4/4 equals one whole."),
-                makeQuestion("Equivalent Fractions","Which equals 1/2?","Look for the same value.",["1/2"],["2/4","3/4","2/3","1/3"],"2/4","2/4 equals 1/2."),
-                makeQuestion("Equivalent Fractions","Which equals 3/4?","Look for the same value.",["3/4"],["6/8","4/8","2/8","8/8"],"6/8","6/8 equals 3/4."),
-                makeQuestion("Fractions","Which is smaller?","Compare the values.",["1/3","1/2"],["1/3","1/2","Same","None"],"1/3","1/3 is smaller than 1/2.")
-              ])
-            }))
-          },
-          {
-            name: "Problem Solving City",
-            icon: "🏙️",
-            className: "world-4",
-            description: "Use multiplication, division, and fractions in mixed reasoning.",
-            levels: Array.from({length:5}, (_, i) => ({
-              title: `Level ${i+1} • Problem Solving`,
-              description: "Solve mixed reasoning questions.",
-              questions: pick10([
-                makeQuestion("Reasoning","Which fact helps solve 3 groups of 4?","Think multiplication.",["3 groups of 4"],["3+4","3×4","4-3","4÷3"],"3×4","3 groups of 4 means 3×4."),
-                makeQuestion("Reasoning","Which answer is correct for 12 ÷ 3?","Use division.",["12 ÷ 3"],["3","4","5","6"],"4","12 divided by 3 equals 4."),
-                makeQuestion("Reasoning","Which fraction is bigger?","Compare carefully.",["1/2","1/4"],["1/2","1/4","Same","None"],"1/2","1/2 is bigger."),
-                makeQuestion("Reasoning","Which is 2 groups of 6?","Think equal groups.",["2 groups of 6"],["8","10","12","14"],"12","2 groups of 6 make 12."),
-                makeQuestion("Reasoning","Which is smaller?","Compare the results.",["3×3","10÷2"],["3×3","10÷2","Same","None"],"10÷2","3×3=9 and 10÷2=5."),
-                makeQuestion("Reasoning","3 × 4 + 2 = ?","Multiply first, then add.",["3","×","4","+","2"],["12","13","14","15"],"14","3×4=12, then 12+2=14.")
-              ])
-            }))
-          }
-        ]
-      };
-
-      if (data[gradeKey]) return decorateWorlds(data[gradeKey], gradeKey);
-      return buildGeneratedUpperGrade(gradeKey);
+        });
+      });
+      return { stars, badges, levels };
     }
 
-    function buildGeneratedUpperGrade(gradeKey){
-      const gradeNum = Number(gradeKey.replace("grade",""));
-      const base = Math.max(1, gradeNum - 3);
-
-      const worldTemplates = [
-        { name:"Algebra Arena", icon:"🧮", className:"world-1", description:`Grade ${gradeNum} algebra and equation skills.` },
-        { name:"Geometry Zone", icon:"📐", className:"world-2", description:`Grade ${gradeNum} geometry, angles, area, and shape reasoning.` },
-        { name:"Number Power Lab", icon:"⚡", className:"world-3", description:`Grade ${gradeNum} number operations, patterns, and exponents.` },
-        { name:"Data & Functions Hub", icon:"📊", className:"world-4", description:`Grade ${gradeNum} graphing, functions, ratios, and statistics.` }
-      ];
-
-      return worldTemplates.map((world, worldIndex) => ({
-        id:`${gradeKey}_world_${worldIndex+1}`,
-        name:world.name,
-        icon:world.icon,
-        className:world.className,
-        description:world.description,
-        levels:Array.from({length:5}, (_, levelIndex) => ({
-          id:`${gradeKey}_w${worldIndex+1}_l${levelIndex+1}`,
-          title:`Level ${levelIndex+1} • ${world.name}`,
-          description:`10-question ${gradeMeta[gradeKey].label} challenge for ${world.name.toLowerCase()}.`,
-          questions:buildGeneratedQuestionSet(gradeNum, worldIndex, levelIndex, base)
-        }))
-      }));
+    function starString(n){
+      return '★'.repeat(n) + '☆'.repeat(3 - n);
     }
 
-    function buildGeneratedQuestionSet(gradeNum, worldIndex, levelIndex, base){
-      const diff = base + levelIndex;
-      const sets = [
-        [
-          makeQuestion("Algebra", `Solve: x + ${4+diff} = ${10+diff}`, "Use inverse operations.", ["x","+",(4+diff),"=",(10+diff)], [String(4+diff),String(5+diff),String(6),String(7+diff)], String(6), `Subtract ${4+diff} from ${10+diff}.`),
-          makeQuestion("Algebra", `Solve: 2x = ${12+diff*2}`, "Divide both sides by 2.", ["2x","=",(12+diff*2)], [String(4+diff),String(5+diff),String((12+diff*2)/2),String(7+diff)], String((12+diff*2)/2), `Divide ${(12+diff*2)} by 2.`),
-          makeQuestion("Algebra", `Solve: x - ${3+levelIndex} = ${7+diff}`, "Add to both sides.", ["x","-",(3+levelIndex),"=",(7+diff)], [String(8+diff),String(9+diff),String(10+diff),String((7+diff)+(3+levelIndex))], String((7+diff)+(3+levelIndex)), "Use inverse operations."),
-          makeQuestion("Algebra", `Evaluate: 3 + 2 × ${2+levelIndex}`, "Multiply before adding.", ["3","+","2×"+(2+levelIndex)], [String(6+levelIndex),String(7+levelIndex),String(3+2*(2+levelIndex)),String(9+levelIndex)], String(3+2*(2+levelIndex)), "Use order of operations."),
-          makeQuestion("Algebra", `Solve: ${20+diff} - y = ${8+diff}`, "Find the missing value.", [(20+diff),"-","y","=",(8+diff)], [String(10),String(11),String(12),String((20+diff)-(8+diff))], String((20+diff)-(8+diff)), "Subtract to isolate y."),
-          makeQuestion("Algebra", `Solve: 3x = ${18+diff*3}`, "Divide both sides by 3.", ["3x","=",(18+diff*3)], [String(5+diff),String(6+diff),String((18+diff*3)/3),String(8+diff)], String((18+diff*3)/3), "Divide by 3."),
-          makeQuestion("Algebra", `If x = ${2+levelIndex}, what is 2x + 3?`, "Substitute the value.", ["2x","+","3"], [String(5+levelIndex),String(6+levelIndex),String(7+levelIndex),String(2*(2+levelIndex)+3)], String(2*(2+levelIndex)+3), "Substitute x first."),
-          makeQuestion("Algebra", `What is the value of 4²?`, "Square the number.", ["4²"], ["8","12","16","20"], "16", "4 squared equals 16."),
-          makeQuestion("Algebra", `Which is greater?`, "Compare the expressions.", [`2(${3+levelIndex})`,`or`,`${8+diff}+${1+levelIndex}`], [`2(${3+levelIndex})`,`${8+diff}+${1+levelIndex}`,"Same","None"], ((2*(3+levelIndex)) > ((8+diff)+(1+levelIndex))) ? `2(${3+levelIndex})` : ((((2*(3+levelIndex)) < ((8+diff)+(1+levelIndex)))) ? `${8+diff}+${1+levelIndex}` : "Same"), "Evaluate both expressions first."),
-          makeQuestion("Algebra","True or False: A function gives one output for each input.","Recall the definition of a function.",["Function rule"],["True","False"],"True","That is the definition of a function.")
-        ],
-        [
-          makeQuestion("Geometry","How many degrees are in a right angle?","Recall the angle fact.",["Right angle"],["45°","60°","90°","180°"],"90°","A right angle is 90°."),
-          makeQuestion("Geometry",`What is the perimeter of a square with side ${3+levelIndex}?`, "Add all four sides.", ["Square side",String(3+levelIndex)], [String(8+levelIndex),String(10+levelIndex),String(12+levelIndex),String(4*(3+levelIndex))], String(4*(3+levelIndex)), "Perimeter = 4 × side."),
-          makeQuestion("Geometry",`What is the area of a rectangle ${4+levelIndex} by ${2+levelIndex}?`, "Multiply length by width.", [(4+levelIndex),"×",(2+levelIndex)], [String(10+levelIndex),String((4+levelIndex)*(2+levelIndex)),String(16+levelIndex),String(18+levelIndex)], String((4+levelIndex)*(2+levelIndex)), "Area = length × width."),
-          makeQuestion("Geometry","Which angle is obtuse?","An obtuse angle is greater than 90°.",["45°","90°","120°","60°"],["45°","90°","120°","60°"],"120°","120° is obtuse."),
-          makeQuestion("Geometry","How many sides does a hexagon have?","Count the sides.",["Hexagon"],["5","6","7","8"],"6","A hexagon has 6 sides."),
-          makeQuestion("Geometry","A straight angle measures ?","Recall the angle fact.",["Straight angle"],["90°","120°","180°","360°"],"180°","A straight angle is 180°."),
-          makeQuestion("Geometry","Which is acute?","Choose an angle less than 90°.",["110°","95°","30°","180°"],["110°","95°","30°","180°"],"30°","30° is acute."),
-          makeQuestion("Geometry","Perimeter means ?","What are we measuring?",["Perimeter"],["Inside area","Around the shape","Height only","Volume"],"Around the shape","Perimeter is the distance around a shape."),
-          makeQuestion("Geometry","Area measures ?","Choose the best meaning.",["Area"],["The boundary","Inside surface","Only one side","The corners"],"Inside surface","Area is the space inside a shape."),
-          makeQuestion("Geometry", `A triangle has angles 50° and 60°. What is the third angle?`, "Triangle angles total 180°.", ["50°","+","60°","+","?"], ["60°","70°","80°","90°"], "70°", "180° - 110° = 70°.")
-        ],
-        [
-          makeQuestion("Number Sense", `What is ${6+levelIndex}²?`, "Square the number.", [String(6+levelIndex),"²"], [String((6+levelIndex)*(6+levelIndex)-1),String((6+levelIndex)*(6+levelIndex)),String((6+levelIndex)*(6+levelIndex)+1),String((6+levelIndex)*(6+levelIndex)+2)], String((6+levelIndex)*(6+levelIndex)), "Multiply the number by itself."),
-          makeQuestion("Exponents", `What is 2³ × ${2+levelIndex}?`, "Evaluate the exponent first.", ["2³","×",String(2+levelIndex)], [String(12),String(16),String(8*(2+levelIndex)),String(20)], String(8*(2+levelIndex)), "2³ = 8."),
-          makeQuestion("Integers", `What is ${-3-levelIndex} + ${7+base}?`, "Add the integers.", [String(-3-levelIndex),"+",String(7+base)], [String((-3-levelIndex)+(7+base)-1),String((-3-levelIndex)+(7+base)),String((-3-levelIndex)+(7+base)+1),String((-3-levelIndex)+(7+base)+2)], String((-3-levelIndex)+(7+base)), "Combine the integers."),
-          makeQuestion("Patterns","What comes next?","Look at the multiplication pattern.",["2","4","8","16","?"],["24","28","32","36"],"32","Each term doubles."),
-          makeQuestion("Number Sense", `Which is greater?`, "Compare both values.", [`${12+base} ÷ 3`,`or`,`2² + ${levelIndex}`], [`${12+base} ÷ 3`,`2² + ${levelIndex}`,"Same","None"], (((12+base)/3) > (4+levelIndex)) ? `${12+base} ÷ 3` : ((((12+base)/3) < (4+levelIndex)) ? `2² + ${levelIndex}` : "Same"), "Evaluate both expressions."),
-          makeQuestion("Number Sense", `What is ${15+base} - ${7+levelIndex}?`, "Subtract carefully.", [String(15+base),"-",String(7+levelIndex)], [String((15+base)-(7+levelIndex)-1),String((15+base)-(7+levelIndex)),String((15+base)-(7+levelIndex)+1),String((15+base)-(7+levelIndex)+2)], String((15+base)-(7+levelIndex)), "Subtract the second number."),
-          makeQuestion("Number Sense", `What is ${3+levelIndex} × ${4+levelIndex}?`, "Multiply carefully.", [String(3+levelIndex),"×",String(4+levelIndex)], [String((3+levelIndex)*(4+levelIndex)-1),String((3+levelIndex)*(4+levelIndex)),String((3+levelIndex)*(4+levelIndex)+1),String((3+levelIndex)*(4+levelIndex)+2)], String((3+levelIndex)*(4+levelIndex)), "Multiply the factors."),
-          makeQuestion("Number Sense","Which is prime?","Choose the number with exactly 2 factors.",["9","15","17","21"],["9","15","17","21"],"17","17 is prime."),
-          makeQuestion("Number Sense","True or False: Negative 4 is greater than negative 6.","Use the number line.",["-4 > -6"],["True","False"],"True","-4 is to the right of -6."),
-          makeQuestion("Number Sense", `What is ${20+base} ÷ ${4}?`, "Divide carefully.", [String(20+base),"÷","4"], [String(Math.floor((20+base)/4)-1),String((20+base)/4),String(Math.floor((20+base)/4)+1),String(Math.floor((20+base)/4)+2)], String((20+base)/4), "Divide the dividend by 4.")
-        ],
-        [
-          makeQuestion("Functions", `If y = x + ${3+base}, what is y when x = ${4+levelIndex}?`, "Substitute x.", ["y","=","x + "+(3+base)], [String((4+levelIndex)+(3+base)-1),String((4+levelIndex)+(3+base)),String((4+levelIndex)+(3+base)+1),String((4+levelIndex)+(3+base)+2)], String((4+levelIndex)+(3+base)), "Substitute x and add."),
-          makeQuestion("Ratios", `What is the ratio of ${2+levelIndex}:${4+levelIndex} in simplest form?`, "Reduce both parts.", [`${2+levelIndex}:${4+levelIndex}`], ratioChoices(2+levelIndex,4+levelIndex).choices, ratioChoices(2+levelIndex,4+levelIndex).answer, "Divide both parts by the greatest common factor."),
-          makeQuestion("Statistics", `What is the mean of ${3+levelIndex}, ${5+levelIndex}, ${7+levelIndex}?`, "Add and divide by 3.", [String(3+levelIndex),String(5+levelIndex),String(7+levelIndex)], [String(4+levelIndex),String(5+levelIndex),String(6+levelIndex),String(7+levelIndex)], String(5+levelIndex), "The average of evenly spaced numbers is the middle number."),
-          makeQuestion("Graphing","Which ordered pair has x = 3?","Look at the first coordinate.",["(3,5)","(5,3)","(2,3)","(4,3)"],["(3,5)","(5,3)","(2,3)","(4,3)"],"(3,5)","The x-coordinate comes first."),
-          makeQuestion("Functions", `If y = 2x and x = ${3+levelIndex}, what is y?`, "Substitute and multiply.", ["y","=","2x"], [String(2*(3+levelIndex)-1),String(2*(3+levelIndex)),String(2*(3+levelIndex)+1),String(2*(3+levelIndex)+2)], String(2*(3+levelIndex)), "Multiply x by 2."),
-          makeQuestion("Ratios", `Which is equivalent to 2:3?`, "Look for the scaled ratio.", ["2:3"], ["4:6","3:4","6:10","8:10"], "4:6", "Multiply both parts of 2:3 by 2."),
-          makeQuestion("Statistics","Which is the mode?","Find the number that appears most often.",["2, 3, 3, 5"],["2","3","5","No mode"],"3","3 appears most often."),
-          makeQuestion("Functions","True or False: On a graph, the y-coordinate comes second.","Recall ordered pairs.",["(x, y)"],["True","False"],"True","Ordered pairs are written as (x, y)."),
-          makeQuestion("Graphing", `Which point lies on y = x + 1 when x = 2?`, "Substitute x = 2.", ["y = x + 1"], ["(2,2)","(2,3)","(3,2)","(1,2)"], "(2,3)", "If x = 2, then y = 3."),
-          makeQuestion("Boss", `Which is greater?`, "Compare both values.", [`mean of 2,4,6`,`or`,`2+3`], ["mean of 2,4,6","2+3","Same","None"], "2+3", "The mean is 4 and 2+3 is 5.")
-        ]
-      ];
-
-      return sets[worldIndex];
+    function worldUnlocked(index){
+      if(index === 0) return true;
+      const grade = getGrade();
+      const prevWorld = grade.worlds[index - 1];
+      const prevProg = getWorldProgress(prevWorld.id);
+      return prevProg.boss.completed;
     }
 
-    function ratioChoices(a,b){
-      const g = gcd(a,b);
-      const simp = `${a/g}:${b/g}`;
-      return {
-        answer: simp,
-        choices: shuffleArray([simp, `${a}:${b}`, `1:${Math.max(2, b-a)}`, `2:1`]).slice(0,4)
-      };
+    function levelUnlocked(worldId, levelNo){
+      if(levelNo === 1) return true;
+      const prog = getWorldProgress(worldId);
+      return prog.levels[levelNo - 1].completed;
     }
 
-    function gcd(a,b){
-      while(b !== 0){
-        const t = b;
-        b = a % b;
-        a = t;
+    function bossUnlocked(worldId){
+      const prog = getWorldProgress(worldId);
+      return [1,2,3,4,5].every(n => prog.levels[n].completed);
+    }
+
+    function populateSelectors(){
+      els.gradeSelect.innerHTML = gradeConfigs.map(g => `<option value="${g.id}">${g.label}</option>`).join('');
+      els.gradeSelect.value = state.gradeId;
+      populateWorldSelect();
+    }
+
+    function populateWorldSelect(){
+      const grade = getGrade();
+      els.worldSelect.innerHTML = grade.worlds.map((w,i)=>`<option value="${i}">${i+1}. ${w.name}</option>`).join('');
+      els.worldSelect.value = String(state.worldIndex);
+    }
+
+    function renderAll(){
+      ensureGradeProgress(state.gradeId);
+      populateSelectors();
+      renderStats();
+      renderWorlds();
+      renderLevels();
+      renderHeaderProgress();
+      saveProgress();
+    }
+
+    function renderStats(){
+      const stats = totalStats();
+      els.totalStars.textContent = stats.stars;
+      els.badgeCount.textContent = stats.badges;
+      els.levelsCleared.textContent = stats.levels;
+    }
+
+    function renderHeaderProgress(){
+      const grade = getGrade();
+      const world = grade.worlds[state.worldIndex];
+      const prog = getWorldProgress(world.id);
+      const completed = [1,2,3,4,5].filter(n => prog.levels[n].completed).length;
+      const pct = Math.round((completed / 5) * 100);
+      els.currentGradeLabel.textContent = grade.label;
+      els.currentWorldLabel.textContent = world.name;
+      els.worldProgressLabel.textContent = pct + '%';
+      els.bossStatusLabel.textContent = prog.boss.completed ? 'Defeated' : bossUnlocked(world.id) ? 'Unlocked' : 'Locked';
+    }
+
+    function renderWorlds(){
+      const grade = getGrade();
+      els.worldsGrid.innerHTML = grade.worlds.map((world, index) => {
+        const prog = getWorldProgress(world.id);
+        const completed = [1,2,3,4,5].filter(n => prog.levels[n].completed).length;
+        const unlocked = worldUnlocked(index);
+        const pct = Math.round((completed / 5) * 100);
+        const stars = Object.values(prog.levels).reduce((a,b)=>a+(b.stars||0),0) + (prog.boss.stars || 0);
+        return `
+          <div class="world-card ${state.worldIndex===index?'active':''}" data-world-index="${index}" style="opacity:${unlocked?1:.6}">
+            <div class="world-top">
+              <div class="world-icon">${world.icon}</div>
+              <div class="world-chip">${unlocked ? (prog.boss.completed ? 'Completed' : 'Open') : 'Locked'}</div>
+            </div>
+            <h3>${world.name}</h3>
+            <p>${world.desc}</p>
+            <div class="subtext"><strong>Topic:</strong> ${world.topic}</div>
+            <div class="world-meter"><div class="world-meter-fill" style="width:${pct}%"></div></div>
+            <div class="world-foot">
+              <div class="subtext">${completed}/5 levels cleared</div>
+              <div class="stars" aria-label="stars">${'⭐'.repeat(Math.min(stars,5))}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      [...els.worldsGrid.querySelectorAll('.world-card')].forEach(card => {
+        card.addEventListener('click', () => {
+          const index = Number(card.dataset.worldIndex);
+          if(!worldUnlocked(index)) return;
+          state.worldIndex = index;
+          renderAll();
+          window.scrollTo({ top: document.querySelector('#levelsTitle').getBoundingClientRect().top + window.scrollY - 90, behavior:'smooth' });
+        });
+      });
+    }
+
+    function renderLevels(){
+      const grade = getGrade();
+      const world = grade.worlds[state.worldIndex];
+      const prog = getWorldProgress(world.id);
+      els.levelsTitle.textContent = `${world.name} Levels`;
+      els.levelsSubtext.textContent = `${world.topic} • 5 levels • 10 questions per level • boss battle after Level 5`;
+
+      els.levelsGrid.innerHTML = [1,2,3,4,5].map(levelNo => {
+        const data = prog.levels[levelNo];
+        const unlocked = levelUnlocked(world.id, levelNo);
+        const skill = world.skills[(levelNo - 1) % world.skills.length];
+        return `
+          <button class="level-btn ${unlocked ? '' : 'locked'} ${data.completed ? 'completed' : ''}" data-level="${levelNo}" ${unlocked ? '' : 'disabled'}>
+            <span class="level-badge">${data.completed ? '✅' : unlocked ? '🧩' : '🔒'}</span>
+            <div class="level-title">Level ${levelNo}</div>
+            <div class="level-meta">${skill}<br>10 questions</div>
+            <div class="level-stars">${data.stars ? starString(data.stars) : '☆☆☆'}</div>
+          </button>
+        `;
+      }).join('');
+
+      [...els.levelsGrid.querySelectorAll('.level-btn')].forEach(btn => {
+        btn.addEventListener('click', () => {
+          startQuiz('level', state.worldIndex, Number(btn.dataset.level));
+        });
+      });
+
+      const bossIsUnlocked = bossUnlocked(world.id);
+      prog.boss.unlocked = bossIsUnlocked;
+      els.bossBattleBtn.disabled = !bossIsUnlocked;
+      els.bossBattleBtn.textContent = prog.boss.completed ? 'Replay Boss Battle' : 'Start Boss Battle';
+      els.bossBanner.querySelector('h3').textContent = prog.boss.completed ? '👑 Boss Battle Cleared' : bossIsUnlocked ? '👑 Boss Battle Unlocked' : '👑 Boss Battle Locked';
+      els.bossBanner.querySelector('p').textContent = prog.boss.completed
+        ? 'Amazing work. Replay the boss battle to improve your score and earn more stars.'
+        : bossIsUnlocked
+          ? 'You cleared all 5 levels. Defeat the boss to earn a badge for this world.'
+          : 'Clear all 5 levels in this world to unlock the final mixed challenge.';
+    }
+
+    function shuffle(arr){
+      const a = [...arr];
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i],a[j]] = [a[j],a[i]];
       }
       return a;
     }
 
-    function getCurrentWorlds(){
-      return buildCustomGrades(selectedGrade);
+    function randInt(min,max){
+      return Math.floor(Math.random()*(max-min+1))+min;
     }
 
-    function getStorageKey(){
-      return `ilovemath_adventure_progress_${selectedGrade}_v2`;
+    function makeQuestion(gradeId, world, mode, levelNo, qIndex){
+      const difficulty = mode === 'boss' ? 3 : Math.min(levelNo, 3);
+      const topic = world.topic.toLowerCase();
+
+      if(topic.includes('count')){
+        const a = randInt(1, 10 + difficulty * 3);
+        const beforeAfter = Math.random() < 0.5;
+        const answer = beforeAfter ? a + 1 : a - 1;
+        return mcq(
+          beforeAfter ? `What number comes after ${a}?` : `What number comes before ${a}?`,
+          answer,
+          `${beforeAfter ? 'Counting forward' : 'Counting backward'} by 1 helps you find the answer.`,
+          `🔢 Use the counting sequence.`
+        );
+      }
+
+      if(topic.includes('shape')){
+        const shapes = [
+          ['triangle', 3], ['square', 4], ['rectangle', 4], ['pentagon', 5], ['hexagon', 6]
+        ];
+        const [name, sides] = shapes[randInt(0, shapes.length - 1)];
+        if(Math.random()<0.5){
+          return mcq(
+            `How many sides does a ${name} have?`,
+            sides,
+            `A ${name} has ${sides} side${sides===1?'':'s'}.`,
+            `📐 Shape: ${name}`
+          );
+        }
+        return mcq(
+          `Which shape has ${sides} sides?`,
+          name,
+          `A shape with ${sides} sides is called a ${name}.`,
+          `🟦 Think about the number of sides.`
+        );
+      }
+
+      if(topic.includes('addition')){
+        const a = randInt(1, difficulty===1?10:20);
+        const b = randInt(1, difficulty===1?10:20);
+        const answer = a + b;
+        return mcq(
+          `${a} + ${b} = ?`,
+          answer,
+          `Add the two numbers together: ${a} + ${b} = ${answer}.`,
+          `➕ Combine the groups.`
+        );
+      }
+
+      if(topic.includes('subtraction')){
+        const a = randInt(6, difficulty===1?20:50);
+        const b = randInt(1, Math.min(a-1, difficulty===1?10:20));
+        const answer = a - b;
+        return mcq(
+          `${a} - ${b} = ?`,
+          answer,
+          `Start with ${a} and take away ${b}. You get ${answer}.`,
+          `➖ Count backward or think of the missing part.`
+        );
+      }
+
+      if(topic.includes('pattern')){
+        const seqs = [
+          {arr:['🔵','🔴','🔵','🔴'], ans:'🔵', rule:'The pattern alternates blue, red, blue, red.'},
+          {arr:['⭐','⭐','🌙','⭐','⭐','🌙'], ans:'⭐', rule:'This is an AAB pattern: star, star, moon.'},
+          {arr:[2,4,6,8], ans:10, rule:'The numbers increase by 2 each time.'}
+        ];
+        const s = seqs[randInt(0, seqs.length-1)];
+        return mcq(
+          `What comes next? ${s.arr.join('  ')}  ?`,
+          s.ans,
+          s.rule,
+          `🌈 Look for the repeating rule.`
+        );
+      }
+
+      if(topic.includes('number') || topic.includes('place value')){
+        if(Math.random()<0.5){
+          const n = randInt(12, 999);
+          const place = String(n).length===3 ? 'tens' : 'ones';
+          const answer = place==='tens' ? Number(String(n)[String(n).length-2]) : Number(String(n)[String(n).length-1]);
+          return mcq(
+            `What digit is in the ${place} place of ${n}?`,
+            answer,
+            `Read the digits from right to left: ones, tens, hundreds.`,
+            `🏗️ Find the ${place} digit.`
+          );
+        }
+        const a = randInt(10, 999), b = randInt(10, 999);
+        const answer = a > b ? a : b;
+        return mcq(
+          `Which number is greater?`,
+          answer,
+          `Compare the largest place value first. ${answer} is greater.`,
+          `🔢 Compare the digits from left to right.`,
+          [a,b,a<b?b+1:b-1,a>b?a-1:a+1]
+        );
+      }
+
+      if(topic.includes('measurement')){
+        const a = randInt(5, 20), b = randInt(1, 15);
+        const answer = a > b ? 'A' : 'B';
+        return mcq(
+          `Which is longer? Rope A is ${a} cm. Rope B is ${b} cm.`,
+          answer,
+          `Compare the measurements. ${Math.max(a,b)} cm is longer.`,
+          `📏 Larger length means longer.`,
+          ['A','B','Same','Cannot tell']
+        );
+      }
+
+      if(topic.includes('money')){
+        const quarters = randInt(0,3), dimes = randInt(0,4), nickels = randInt(0,3);
+        const total = quarters*25 + dimes*10 + nickels*5;
+        return mcq(
+          `How many cents? ${quarters} quarter(s), ${dimes} dime(s), ${nickels} nickel(s)`,
+          total,
+          `Quarter = 25¢, dime = 10¢, nickel = 5¢. Total = ${total}¢.`,
+          `💰 Add the values of the coins.`
+        );
+      }
+
+      if(topic.includes('time')){
+        const hour = randInt(1,12);
+        const mins = [0,5,10,15,20,30,45][randInt(0,6)];
+        const text = `${hour}:${String(mins).padStart(2,'0')}`;
+        return mcq(
+          `Which clock time matches "${text}"?`,
+          text,
+          `Read the hour and the minute together: ${text}.`,
+          `🕒 Match the hour and minute.`
+        );
+      }
+
+      if(topic.includes('graph') || topic.includes('data') || topic.includes('statistics')){
+        const a = randInt(2,12), b = randInt(2,12), c = randInt(2,12);
+        const data = {Cats:a, Dogs:b, Birds:c};
+        const top = Object.entries(data).sort((x,y)=>y[1]-x[1])[0][0];
+        return mcq(
+          `Which category has the most? Cats ${a}, Dogs ${b}, Birds ${c}`,
+          top,
+          `Compare the totals. ${top} has the greatest value.`,
+          `📊 Look for the largest number.`
+        );
+      }
+
+      if(topic.includes('multiplication')){
+        const a = randInt(2, 12), b = randInt(2, difficulty===1?5:12);
+        const answer = a*b;
+        return mcq(
+          `${a} × ${b} = ?`,
+          answer,
+          `Multiplication means equal groups. ${a} groups of ${b} = ${answer}.`,
+          `✖️ You can use repeated addition.`
+        );
+      }
+
+      if(topic.includes('division')){
+        const b = randInt(2,10), ans = randInt(2,10), a = b*ans;
+        return mcq(
+          `${a} ÷ ${b} = ?`,
+          ans,
+          `Division splits ${a} into ${b} equal groups. Each group has ${ans}.`,
+          `➗ Think: ${b} × ? = ${a}`
+        );
+      }
+
+      if(topic.includes('fraction')){
+        const den = randInt(2,8);
+        const num = randInt(1, den-1);
+        if(Math.random()<0.5){
+          return mcq(
+            `Which fraction matches the picture idea: ${num} shaded out of ${den} equal parts?`,
+            `${num}/${den}`,
+            `The numerator is the shaded parts (${num}) and the denominator is all equal parts (${den}).`,
+            `🍕 Fraction = shaded parts over total equal parts.`
+          );
+        }
+        const num2 = randInt(1, den-1);
+        const answer = num > num2 ? `${num}/${den}` : `${num2}/${den}`;
+        return mcq(
+          `Which fraction is greater? ${num}/${den} or ${num2}/${den}`,
+          answer,
+          `When denominators are the same, the fraction with the bigger numerator is greater.`,
+          `🥧 Compare the numerators.`
+        );
+      }
+
+      if(topic.includes('area')){
+        const l = randInt(2,9), w = randInt(2,9), area = l*w;
+        return mcq(
+          `A rectangle is ${l} units by ${w} units. What is its area?`,
+          area,
+          `Area = length × width = ${l} × ${w} = ${area}.`,
+          `🧱 Count square units or multiply length and width.`
+        );
+      }
+
+      if(topic.includes('angle') || topic.includes('geometry')){
+        const types = [
+          {q:'An angle less than 90° is called what?', a:'Acute', e:'Angles smaller than 90° are acute.'},
+          {q:'An angle exactly 90° is called what?', a:'Right', e:'A 90° angle is a right angle.'},
+          {q:'Parallel lines do what?', a:'Never meet', e:'Parallel lines stay the same distance apart and never meet.'}
+        ];
+        const t = types[randInt(0, types.length-1)];
+        return mcq(t.q, t.a, t.e, '📐 Use geometry vocabulary.');
+      }
+
+      if(topic.includes('decimal')){
+        const a = (randInt(1,99)/10).toFixed(1);
+        const b = (randInt(1,99)/10).toFixed(1);
+        const ans = Number(a) > Number(b) ? a : b;
+        return mcq(
+          `Which decimal is greater? ${a} or ${b}`,
+          ans,
+          `Compare the whole numbers first, then the tenths place.`,
+          `🔣 Line up place values.`
+        );
+      }
+
+      if(topic.includes('coordinate')){
+        const x = randInt(1,9), y = randInt(1,9);
+        return mcq(
+          `Which ordered pair matches x = ${x}, y = ${y}?`,
+          `(${x}, ${y})`,
+          `Ordered pairs are written as (x, y).`,
+          `🗺️ x comes first, y comes second.`
+        );
+      }
+
+      if(topic.includes('expression') || topic.includes('equation') || topic.includes('algebra')){
+        if(Math.random()<0.5){
+          const x = randInt(2,12), b = randInt(2,12), total = x+b;
+          return mcq(
+            `Solve: n + ${b} = ${total}`,
+            x,
+            `Subtract ${b} from both sides: n = ${total} - ${b} = ${x}.`,
+            `🧮 Undo addition with subtraction.`
+          );
+        }
+        const a = randInt(2,10), b = randInt(2,10), c = randInt(2,10);
+        const ans = a + b*c;
+        return mcq(
+          `Evaluate: ${a} + ${b} × ${c}`,
+          ans,
+          `Multiply first, then add. ${b} × ${c} = ${b*c}, then + ${a} = ${ans}.`,
+          `🧩 Order of operations matters.`
+        );
+      }
+
+      if(topic.includes('ratio')){
+        const a = randInt(1,5), b = randInt(2,8);
+        return mcq(
+          `Write the ratio of apples to oranges if there are ${a} apples and ${b} oranges.`,
+          `${a}:${b}`,
+          `Apples to oranges means apples first, oranges second: ${a}:${b}.`,
+          `⚖️ Keep the order correct.`
+        );
+      }
+
+      if(topic.includes('integer')){
+        const a = randInt(-15, 15), b = randInt(-15, 15);
+        const ans = a > b ? a : b;
+        return mcq(
+          `Which integer is greater? ${a} or ${b}`,
+          ans,
+          `On a number line, the number farther right is greater.`,
+          `➕ Think of the number line.`
+        );
+      }
+
+      if(topic.includes('volume')){
+        const l = randInt(2,6), w = randInt(2,6), h = randInt(2,6), vol = l*w*h;
+        return mcq(
+          `Find the volume of a box with length ${l}, width ${w}, and height ${h}.`,
+          vol,
+          `Volume = length × width × height = ${vol}.`,
+          `🧊 Multiply the three dimensions.`
+        );
+      }
+
+      return mcq(`What is ${qIndex+3} + ${difficulty}?`, qIndex+3+difficulty, 'Add the numbers.', '➕ Basic practice');
     }
 
-    function getBestScoreKey(){
-      return `ilovemath_adventure_best_${selectedGrade}_v2`;
-    }
-
-    function buildDefaultProgress(){
-      const worlds = getCurrentWorlds();
-      const progress = {};
-      let firstUnlocked = false;
-
-      worlds.forEach((world, worldIndex) => {
-        world.levels.forEach((level, levelIndex) => {
-          const unlocked = !firstUnlocked && worldIndex === 0 && levelIndex === 0;
-          progress[level.id] = {
-            unlocked,
-            completed:false,
-            stars:0,
-            bestScore:0
-          };
-          if(unlocked) firstUnlocked = true;
-        });
-      });
-
-      return progress;
-    }
-
-    function getProgress(){
-      const saved = localStorage.getItem(getStorageKey());
-      const defaults = buildDefaultProgress();
-      if(saved){
-        try{
-          const parsed = JSON.parse(saved);
-          return { ...defaults, ...parsed };
-        }catch(e){
-          return defaults;
+    function mcq(question, correct, explanation, visual = '', customOptions = null){
+      let options;
+      if(customOptions){
+        options = shuffle([...new Set(customOptions.map(String).concat(String(correct)))]).slice(0,4);
+        if(!options.includes(String(correct))){
+          options[0] = String(correct);
+          options = shuffle(options);
+        }
+      } else {
+        if(typeof correct === 'number'){
+          const set = new Set([correct]);
+          while(set.size < 4){
+            const delta = randInt(-10,10) || 1;
+            const value = Math.max(-50, correct + delta);
+            set.add(value);
+          }
+          options = shuffle([...set]);
+        } else {
+          const bank = [
+            String(correct), '2/3', '3/4', 'Acute', 'Right', 'Never meet', '(3, 4)', '(4, 3)', 'A', 'B', 'triangle', 'square', 'rectangle', '10', '12', '14', '16'
+          ];
+          const set = new Set([String(correct)]);
+          while(set.size < 4){
+            set.add(bank[randInt(0, bank.length-1)]);
+          }
+          options = shuffle([...set]);
         }
       }
-      localStorage.setItem(getStorageKey(), JSON.stringify(defaults));
-      return defaults;
-    }
-
-    function saveProgress(progress){
-      localStorage.setItem(getStorageKey(), JSON.stringify(progress));
-    }
-
-    function getBestGlobalScore(){
-      return Number(localStorage.getItem(getBestScoreKey()) || 0);
-    }
-
-    function setBestGlobalScore(score){
-      localStorage.setItem(getBestScoreKey(), String(score));
-    }
-
-    function getAllLevelsFlat(){
-      const worlds = getCurrentWorlds();
-      const list = [];
-      worlds.forEach((world, worldIndex) => {
-        world.levels.forEach((level, levelIndex) => {
-          list.push({
-            worldId: world.id,
-            worldName: world.name,
-            worldIndex,
-            levelIndex,
-            ...level
-          });
-        });
-      });
-      return list;
-    }
-
-    function findNextLevel(levelId){
-      const flat = getAllLevelsFlat();
-      const index = flat.findIndex(level => level.id === levelId);
-      if(index >= 0 && index < flat.length - 1){
-        return flat[index + 1];
-      }
-      return null;
-    }
-
-    function getWorldProgress(world, progress){
-      const total = world.levels.length;
-      const completed = world.levels.filter(level => progress[level.id]?.completed).length;
-      const stars = world.levels.reduce((sum, level) => sum + (progress[level.id]?.stars || 0), 0);
-      return { total, completed, stars };
-    }
-
-    function getSummary(progress){
-      const flat = getAllLevelsFlat();
-      const completed = flat.filter(level => progress[level.id]?.completed).length;
-      const unlocked = flat.filter(level => progress[level.id]?.unlocked).length;
-      const stars = flat.reduce((sum, level) => sum + (progress[level.id]?.stars || 0), 0);
-      const best = Math.max(0, ...flat.map(level => progress[level.id]?.bestScore || 0), getBestGlobalScore());
-      return { completed, unlocked, stars, best, total: flat.length };
-    }
-
-    function starsString(count){
-      if(count === 3) return "★★★";
-      if(count === 2) return "★★☆";
-      if(count === 1) return "★☆☆";
-      return "☆☆☆";
-    }
-
-    function scoreToStars(score, total){
-      const ratio = total === 0 ? 0 : score / total;
-      if(ratio >= 0.9) return 3;
-      if(ratio >= 0.6) return 2;
-      if(ratio >= 0.35) return 1;
-      return 0;
-    }
-
-    const gradeSelector = document.getElementById("gradeSelector");
-    const gradeNote = document.getElementById("gradeNote");
-    const mapTitle = document.getElementById("mapTitle");
-    const mapSubtitle = document.getElementById("mapSubtitle");
-    const mapWorlds = document.getElementById("mapWorlds");
-    const worldPanels = document.getElementById("worldPanels");
-
-    const sidebarCompleted = document.getElementById("sidebarCompleted");
-    const sidebarUnlocked = document.getElementById("sidebarUnlocked");
-    const sidebarStars = document.getElementById("sidebarStars");
-    const sidebarBest = document.getElementById("sidebarBest");
-    const miniCompleted = document.getElementById("miniCompleted");
-    const miniStars = document.getElementById("miniStars");
-    const miniUnlocked = document.getElementById("miniUnlocked");
-    const miniWorlds = document.getElementById("miniWorlds");
-
-    const continueBtn = document.getElementById("continueBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const resetAllBtn = document.getElementById("resetAllBtn");
-    const startFirstUnlockedBtn = document.getElementById("startFirstUnlockedBtn");
-
-    const gameModal = document.getElementById("gameModal");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalSubtitle = document.getElementById("modalSubtitle");
-    const topGrade = document.getElementById("topGrade");
-    const topWorld = document.getElementById("topWorld");
-    const topLevel = document.getElementById("topLevel");
-    const topQuestion = document.getElementById("topQuestion");
-    const topScore = document.getElementById("topScore");
-    const gameProgressFill = document.getElementById("gameProgressFill");
-    const questionCard = document.getElementById("questionCard");
-
-    let progressState = {};
-
-    let currentSession = {
-      level:null,
-      world:null,
-      levelNumber:0,
-      worldNumber:0,
-      questionIndex:0,
-      score:0,
-      answered:false
-    };
-
-    function renderSummary(){
-      const summary = getSummary(progressState);
-      const worlds = getCurrentWorlds();
-
-      sidebarCompleted.textContent = summary.completed;
-      sidebarUnlocked.textContent = summary.unlocked;
-      sidebarStars.textContent = summary.stars;
-      sidebarBest.textContent = summary.best;
-
-      miniCompleted.textContent = summary.completed;
-      miniStars.textContent = summary.stars;
-      miniUnlocked.textContent = summary.unlocked;
-      miniWorlds.textContent = worlds.length;
-
-      gradeNote.textContent = gradeMeta[selectedGrade].note;
-      mapTitle.textContent = `${gradeMeta[selectedGrade].label} Adventure Map`;
-      mapSubtitle.textContent = `Follow the route through 4 worlds. Each world has 5 levels with 10 questions each.`;
-    }
-
-    function renderMap(){
-      const worlds = getCurrentWorlds();
-      mapWorlds.innerHTML = "";
-
-      worlds.forEach((world, worldIndex) => {
-        const worldStats = getWorldProgress(world, progressState);
-        const stars = starsString(Math.min(3, Math.max(0, Math.round(worldStats.stars / Math.max(1, world.levels.length)))));
-        const worldNode = document.createElement("div");
-        worldNode.className = "world-node";
-
-        const levelsHtml = world.levels.map((level, levelIndex) => {
-          const state = progressState[level.id];
-          const locked = !state.unlocked;
-          const completed = state.completed;
-          const cls = locked ? "locked" : completed ? "completed" : "unlocked";
-          const right = locked ? "🔒" : completed ? "✅" : "▶";
-
-          return `
-            <button class="map-level-btn ${cls}" ${locked ? "disabled" : ""} data-world="${worldIndex}" data-level="${levelIndex}">
-              <span>L${levelIndex + 1}</span>
-              <span class="map-level-right">${right}</span>
-            </button>
-          `;
-        }).join("");
-
-        worldNode.innerHTML = `
-          <div class="world-bubble ${world.className}">${world.icon}</div>
-          <h4>${world.name}</h4>
-          <p>${world.description}</p>
-          <div class="world-stars">${stars}</div>
-          <div class="map-levels">
-            ${levelsHtml}
-          </div>
-        `;
-
-        mapWorlds.appendChild(worldNode);
-      });
-
-      document.querySelectorAll(".map-level-btn[data-world]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const worldIndex = Number(btn.dataset.world);
-          const levelIndex = Number(btn.dataset.level);
-          openLevel(worldIndex, levelIndex);
-        });
-      });
-    }
-
-    function renderWorldPanels(){
-      const worlds = getCurrentWorlds();
-      worldPanels.innerHTML = "";
-
-      worlds.forEach((world, worldIndex) => {
-        const worldStats = getWorldProgress(world, progressState);
-        const worldCard = document.createElement("div");
-        worldCard.className = "glass-card world-card";
-
-        const levelsHtml = world.levels.map((level, levelIndex) => {
-          const state = progressState[level.id];
-          const locked = !state.unlocked;
-          const completed = state.completed;
-          const statusText = locked ? "Locked" : completed ? "Completed" : "Unlocked";
-          const statusClass = locked ? "locked" : completed ? "complete" : "";
-          const stars = starsString(state.stars || 0);
-
-          return `
-            <div class="level-card ${locked ? 'locked-card' : ''}">
-              <div>
-                <div class="level-top">
-                  <div class="level-badge">L${levelIndex + 1}</div>
-                  <div class="level-status ${statusClass}">${locked ? '🔒 ' : completed ? '✅ ' : '🔓 '}${statusText}</div>
-                </div>
-                <h4>${level.title}</h4>
-                <p>${level.description}</p>
-              </div>
-
-              <div>
-                <div class="stars">${stars}</div>
-                <button
-                  class="play-btn ${locked ? 'locked' : completed ? 'review' : 'unlock'}"
-                  ${locked ? 'disabled' : ''}
-                  data-world="${worldIndex}"
-                  data-level="${levelIndex}"
-                >
-                  ${locked ? 'Locked' : completed ? 'Replay Level' : 'Play Level'}
-                </button>
-              </div>
-            </div>
-          `;
-        }).join("");
-
-        worldCard.innerHTML = `
-          <div class="world-head">
-            <div class="world-title">
-              <div class="world-icon ${world.className}">${world.icon}</div>
-              <div>
-                <h3>${world.name}</h3>
-                <p>${world.description}</p>
-              </div>
-            </div>
-            <div class="world-progress">
-              <strong>${worldStats.completed}/${worldStats.total}</strong>
-              <span>Levels completed • ${worldStats.stars} stars</span>
-            </div>
-          </div>
-          <div class="levels-grid">
-            ${levelsHtml}
-          </div>
-        `;
-
-        worldPanels.appendChild(worldCard);
-      });
-
-      document.querySelectorAll(".play-btn[data-world]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const worldIndex = Number(btn.dataset.world);
-          const levelIndex = Number(btn.dataset.level);
-          openLevel(worldIndex, levelIndex);
-        });
-      });
-    }
-
-    function refreshUI(){
-      progressState = getProgress();
-      renderSummary();
-      renderMap();
-      renderWorldPanels();
-    }
-
-    function openLevel(worldIndex, levelIndex){
-      const worlds = getCurrentWorlds();
-      const world = worlds[worldIndex];
-      const level = world.levels[levelIndex];
-
-      if(!progressState[level.id]?.unlocked) return;
-
-      currentSession = {
-        world,
-        level,
-        worldNumber: worldIndex + 1,
-        levelNumber: levelIndex + 1,
-        questionIndex: 0,
-        score: 0,
-        answered: false
+      return {
+        question,
+        correct: String(correct),
+        options: options.map(String),
+        explanation,
+        visual
       };
-
-      modalTitle.textContent = `${gradeMeta[selectedGrade].label} — ${world.name} — ${level.title}`;
-      modalSubtitle.textContent = `${level.description} • 10 questions in this level.`;
-      topGrade.textContent = gradeMeta[selectedGrade].short;
-      topWorld.textContent = currentSession.worldNumber;
-      topLevel.textContent = currentSession.levelNumber;
-      topQuestion.textContent = `1/${currentSession.level.questions.length}`;
-      topScore.textContent = "0";
-      gameProgressFill.style.width = "0%";
-
-      gameModal.classList.add("show");
-      renderCurrentQuestion();
     }
 
-    function closeModal(){
-      gameModal.classList.remove("show");
+    function buildQuiz(mode, worldIndex, levelNo){
+      const grade = getGrade();
+      const world = grade.worlds[worldIndex];
+      const count = 10;
+      const questions = Array.from({length:count}, (_,i)=>makeQuestion(state.gradeId, world, mode, levelNo, i));
+      return {
+        mode,
+        worldIndex,
+        levelNo,
+        worldId: world.id,
+        worldName: world.name,
+        questions,
+        current: 0,
+        score: 0,
+        correctCount: 0,
+        lives: mode === 'boss' ? 3 : null,
+        answered: false,
+        selected: null,
+        timeLeft: mode === 'boss' ? 25 : 30,
+        timer: null
+      };
     }
 
-    function renderCurrentQuestion(){
-      const q = currentSession.level.questions[currentSession.questionIndex];
-      currentSession.answered = false;
+    function startQuiz(mode, worldIndex, levelNo){
+      state.quiz = buildQuiz(mode, worldIndex, levelNo);
+      els.quizModal.classList.add('show');
+      renderQuiz();
+      startTimer();
+    }
 
-      topGrade.textContent = gradeMeta[selectedGrade].short;
-      topWorld.textContent = currentSession.worldNumber;
-      topLevel.textContent = currentSession.levelNumber;
-      topQuestion.textContent = `${currentSession.questionIndex + 1}/${currentSession.level.questions.length}`;
-      topScore.textContent = currentSession.score;
-      gameProgressFill.style.width = `${(currentSession.questionIndex / currentSession.level.questions.length) * 100}%`;
+    function startTimer(){
+      clearInterval(state.quiz.timer);
+      state.quiz.timer = setInterval(() => {
+        state.quiz.timeLeft--;
+        const timerNode = document.getElementById('timerValue');
+        if(timerNode) timerNode.textContent = state.quiz.timeLeft;
+        if(state.quiz.timeLeft <= 0){
+          autoReveal(false, '⏰ Time is up for this question.');
+        }
+      }, 1000);
+    }
 
-      questionCard.innerHTML = `
-        <div class="question-tag">${q.type.toUpperCase()}</div>
-        <div class="question-text">${q.prompt}</div>
-        <div class="question-note">${q.note}</div>
-        <div class="question-visual">
-          <div class="visual-row">
-            ${q.visual.map(item => `<div class="visual-pill">${item}</div>`).join("")}
+    function resetQuestionTimer(){
+      state.quiz.timeLeft = state.quiz.mode === 'boss' ? 25 : 30;
+      startTimer();
+    }
+
+    function renderQuiz(){
+      const q = state.quiz.questions[state.quiz.current];
+      const progress = state.quiz.current + 1;
+      els.quizView.innerHTML = `
+        <div class="quiz-top">
+          <div>
+            <h2 style="margin:0 0 6px;">${state.quiz.mode === 'boss' ? '👑 Boss Battle' : `🧩 Level ${state.quiz.levelNo}`}</h2>
+            <div class="subtext">${state.quiz.worldName} • Question ${progress} of ${state.quiz.questions.length}</div>
+          </div>
+          <div class="quiz-stats">
+            <div class="pill">⏱️ Time: <span id="timerValue">${state.quiz.timeLeft}</span>s</div>
+            <div class="pill">✅ Correct: ${state.quiz.correctCount}</div>
+            ${state.quiz.mode === 'boss' ? `<div class="pill">❤️ Lives: ${state.quiz.lives}</div>` : ''}
           </div>
         </div>
-        <div class="options-grid">
-          ${q.options.map(option => `<button class="option-btn" data-option="${escapeHtml(option)}">${option}</button>`).join("")}
+        <div class="question-card">
+          <div class="question-type">${state.quiz.mode === 'boss' ? 'Boss Challenge' : 'Adventure Question'}</div>
+          <div class="question-text">${q.question}</div>
+          <div class="question-visual">${q.visual || ''}</div>
+          <div class="options">
+            ${q.options.map(opt => `<button class="option-btn" data-option="${escapeHtml(opt)}">${opt}</button>`).join('')}
+          </div>
+          <div id="explainBox"></div>
         </div>
-        <div class="feedback" id="feedbackBox"></div>
-        <div class="game-actions">
-          <button class="btn btn-soft" id="skipBtn">Skip</button>
-          <button class="btn btn-primary" id="nextBtn" style="display:none;">Next</button>
+        <div class="quiz-actions">
+          <button class="btn btn-secondary" id="quitQuizBtn">Quit</button>
+          <button class="btn btn-primary" id="nextQuestionBtn" disabled>${progress === state.quiz.questions.length ? 'Finish' : 'Next Question'}</button>
         </div>
       `;
 
-      questionCard.querySelectorAll(".option-btn").forEach(btn => {
-        btn.addEventListener("click", () => handleAnswer(btn.dataset.option));
+      [...els.quizView.querySelectorAll('.option-btn')].forEach(btn => {
+        btn.addEventListener('click', () => selectAnswer(btn.dataset.option));
       });
-
-      document.getElementById("skipBtn").addEventListener("click", () => handleAnswer(null, true));
-      document.getElementById("nextBtn").addEventListener("click", nextQuestion);
+      document.getElementById('nextQuestionBtn').addEventListener('click', nextQuestion);
+      document.getElementById('quitQuizBtn').addEventListener('click', closeQuiz);
     }
 
-    function handleAnswer(selected, skipped = false){
-      if(currentSession.answered) return;
-      currentSession.answered = true;
+    function escapeHtml(str){
+      return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
 
-      const q = currentSession.level.questions[currentSession.questionIndex];
-      const feedbackBox = document.getElementById("feedbackBox");
-      const nextBtn = document.getElementById("nextBtn");
-      const optionButtons = questionCard.querySelectorAll(".option-btn");
+    function selectAnswer(option){
+      if(state.quiz.answered) return;
+      const q = state.quiz.questions[state.quiz.current];
+      const isCorrect = String(option) === String(q.correct);
+      autoReveal(isCorrect, isCorrect ? '✅ Correct!' : '❌ Not quite.');
+    }
 
+    function autoReveal(isCorrect, label){
+      if(state.quiz.answered) return;
+      state.quiz.answered = true;
+      clearInterval(state.quiz.timer);
+      const q = state.quiz.questions[state.quiz.current];
+      const optionButtons = [...els.quizView.querySelectorAll('.option-btn')];
       optionButtons.forEach(btn => {
-        btn.disabled = true;
-        if(btn.dataset.option === q.answer){
-          btn.classList.add("correct");
-        }
-        if(selected && btn.dataset.option === selected && selected !== q.answer){
-          btn.classList.add("wrong");
-        }
+        const value = btn.dataset.option;
+        if(String(value) === String(q.correct)) btn.classList.add('correct');
+        else if(isCorrect === false && btn === document.activeElement) btn.classList.add('wrong');
       });
 
-      let feedbackClass = "wrong";
-      let message = "";
-
-      if(skipped){
-        message = `⏭ You skipped this question. The correct answer is <strong>${q.answer}</strong>. ${q.explanation}`;
-      } else if(selected === q.answer){
-        currentSession.score++;
-        feedbackClass = "correct";
-        message = `✅ Correct! ${q.explanation}`;
-      } else {
-        message = `❌ Not quite. The correct answer is <strong>${q.answer}</strong>. ${q.explanation}`;
+      if(isCorrect){
+        state.quiz.score += 10;
+        state.quiz.correctCount++;
+      } else if(state.quiz.mode === 'boss'){
+        state.quiz.lives--;
       }
 
-      topScore.textContent = currentSession.score;
-      feedbackBox.className = `feedback show ${feedbackClass}`;
-      feedbackBox.innerHTML = message;
-      nextBtn.style.display = "inline-flex";
+      const explainBox = document.getElementById('explainBox');
+      explainBox.innerHTML = `
+        <div class="explain">
+          <strong>${label}</strong><br>
+          Answer: <strong>${q.correct}</strong><br>
+          ${q.explanation}
+        </div>
+      `;
+
+      document.getElementById('nextQuestionBtn').disabled = false;
+      if(state.quiz.mode === 'boss' && state.quiz.lives <= 0){
+        document.getElementById('nextQuestionBtn').textContent = 'Finish';
+      }
     }
 
     function nextQuestion(){
-      currentSession.questionIndex++;
-      if(currentSession.questionIndex >= currentSession.level.questions.length){
-        finishLevel();
+      if(!state.quiz.answered) return;
+      if(state.quiz.mode === 'boss' && state.quiz.lives <= 0){
+        finishQuiz();
         return;
       }
-      renderCurrentQuestion();
+      state.quiz.current++;
+      if(state.quiz.current >= state.quiz.questions.length){
+        finishQuiz();
+        return;
+      }
+      state.quiz.answered = false;
+      state.quiz.selected = null;
+      resetQuestionTimer();
+      renderQuiz();
     }
 
-    function finishLevel(){
-      const totalQuestions = currentSession.level.questions.length;
-      const score = currentSession.score;
-      const stars = scoreToStars(score, totalQuestions);
-      const levelId = currentSession.level.id;
+    function finishQuiz(){
+      clearInterval(state.quiz.timer);
+      const total = state.quiz.questions.length;
+      const pct = Math.round((state.quiz.correctCount / total) * 100);
+      const stars = pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
+      const passed = state.quiz.mode === 'boss' ? pct >= 70 : pct >= 60;
+      const worldProg = getWorldProgress(state.quiz.worldId);
 
-      progressState[levelId].completed = true;
-      progressState[levelId].stars = Math.max(progressState[levelId].stars || 0, stars);
-      progressState[levelId].bestScore = Math.max(progressState[levelId].bestScore || 0, score);
-
-      if(score > getBestGlobalScore()){
-        setBestGlobalScore(score);
+      if(state.quiz.mode === 'level'){
+        const levelProg = worldProg.levels[state.quiz.levelNo];
+        if(passed){
+          levelProg.completed = true;
+        }
+        levelProg.bestScore = Math.max(levelProg.bestScore || 0, pct);
+        levelProg.stars = Math.max(levelProg.stars || 0, stars);
+      } else {
+        if(passed){
+          worldProg.boss.completed = true;
+        }
+        worldProg.boss.unlocked = true;
+        worldProg.boss.bestScore = Math.max(worldProg.boss.bestScore || 0, pct);
+        worldProg.boss.stars = Math.max(worldProg.boss.stars || 0, stars);
       }
 
-      const next = findNextLevel(levelId);
-      if(next){
-        progressState[next.id].unlocked = true;
-      }
+      saveProgress();
+      renderAll();
 
-      saveProgress(progressState);
-      refreshUI();
-      gameProgressFill.style.width = "100%";
+      const badge = state.quiz.mode === 'boss' && passed ? '🏅' : passed ? '⭐' : '📘';
+      els.quizView.innerHTML = `
+        <div style="text-align:center;">
+          <div class="final-badge">${badge}</div>
+          <h2 style="margin:8px 0 6px;">${passed ? 'Adventure Cleared!' : 'Keep Practicing!'}</h2>
+          <div class="subtext">${state.quiz.worldName} • ${state.quiz.mode === 'boss' ? 'Boss Battle' : `Level ${state.quiz.levelNo}`}</div>
+        </div>
 
-      let rewardText = "Explorer";
-      if(stars === 3) rewardText = "Math Champion";
-      else if(stars === 2) rewardText = "Smart Solver";
-      else if(stars === 1) rewardText = "Good Start";
+        <div class="result-grid">
+          <div class="result-card"><div class="label">Score</div><strong>${pct}%</strong></div>
+          <div class="result-card"><div class="label">Correct</div><strong>${state.quiz.correctCount}/${total}</strong></div>
+          <div class="result-card"><div class="label">Stars Earned</div><strong>${stars ? starString(stars) : '☆☆☆'}</strong></div>
+          <div class="result-card"><div class="label">Status</div><strong>${passed ? 'Passed' : 'Retry'}</strong></div>
+        </div>
 
-      questionCard.innerHTML = `
-        <div class="result-screen">
-          <h3>🎉 Level Complete</h3>
-          <p>You completed <strong>${currentSession.level.title}</strong> in <strong>${currentSession.world.name}</strong> for <strong>${gradeMeta[selectedGrade].label}</strong>.</p>
-          <div class="big-score">${score} / ${totalQuestions}</div>
-          <div class="result-stars">${starsString(stars)}</div>
-          <div class="reward-badge">${rewardText}</div>
-          <p>
-            ${next ? `Great job! The next level has been unlocked.` : `Amazing work! You finished the current path for this grade.`}
-          </p>
-          <div class="game-actions" style="justify-content:center;">
-            <button class="btn btn-primary" id="closeAfterWinBtn">Back to Adventure Map</button>
-            <button class="btn btn-games" id="replayBtn">Replay Level</button>
-          </div>
+        <div class="tips">
+          ${passed
+            ? state.quiz.mode === 'boss'
+              ? 'You defeated the boss and earned a world badge. The next locked world is now available if this was your current progression path.'
+              : 'Nice work. Your next level is now unlocked. Try replaying later to improve your stars.'
+            : 'You can replay this challenge anytime. Read the explanations, then try again for a better score.'}
+        </div>
+
+        <div class="quiz-actions" style="margin-top:18px;justify-content:center;">
+          <button class="btn btn-secondary" id="closeResultsBtn">Close</button>
+          <button class="btn btn-primary" id="replayBtn">Replay</button>
         </div>
       `;
 
-      document.getElementById("closeAfterWinBtn").addEventListener("click", () => {
-        closeModal();
-        refreshUI();
-      });
-
-      document.getElementById("replayBtn").addEventListener("click", () => {
-        openLevel(currentSession.worldNumber - 1, currentSession.levelNumber - 1);
+      document.getElementById('closeResultsBtn').addEventListener('click', closeQuiz);
+      document.getElementById('replayBtn').addEventListener('click', () => {
+        startQuiz(state.quiz.mode, state.quiz.worldIndex, state.quiz.levelNo);
       });
     }
 
-    function findFirstUnlockedUnfinished(){
-      const flat = getAllLevelsFlat();
-      for(const level of flat){
-        const state = progressState[level.id];
-        if(state?.unlocked && !state?.completed){
-          return level;
+    function closeQuiz(){
+      clearInterval(state.quiz?.timer);
+      els.quizModal.classList.remove('show');
+      els.quizView.innerHTML = '';
+      state.quiz = null;
+    }
+
+    function wireEvents(){
+      els.gradeSelect.addEventListener('change', e => {
+        state.gradeId = e.target.value;
+        state.worldIndex = 0;
+        ensureGradeProgress(state.gradeId);
+        renderAll();
+      });
+
+      els.worldSelect.addEventListener('change', e => {
+        const index = Number(e.target.value);
+        if(worldUnlocked(index)){
+          state.worldIndex = index;
+          renderAll();
         }
-      }
-      for(const level of flat){
-        const state = progressState[level.id];
-        if(state?.unlocked){
-          return level;
-        }
-      }
-      return flat[0];
-    }
-
-    function continueAdventure(){
-      const next = findFirstUnlockedUnfinished();
-      if(!next) return;
-      openLevel(next.worldIndex, next.levelIndex);
-    }
-
-    function resetThisGrade(){
-      const confirmed = confirm(`Reset adventure progress for ${gradeMeta[selectedGrade].label}?`);
-      if(!confirmed) return;
-      localStorage.removeItem(getStorageKey());
-      localStorage.removeItem(getBestScoreKey());
-      refreshUI();
-    }
-
-    function resetAllGrades(){
-      const confirmed = confirm("Reset progress for ALL grades?");
-      if(!confirmed) return;
-      Object.keys(gradeMeta).forEach(key => {
-        localStorage.removeItem(`ilovemath_adventure_progress_${key}_v2`);
-        localStorage.removeItem(`ilovemath_adventure_best_${key}_v2`);
       });
-      refreshUI();
+
+      els.goToWorldBtn.addEventListener('click', () => {
+        const index = Number(els.worldSelect.value);
+        if(worldUnlocked(index)){
+          state.worldIndex = index;
+          renderAll();
+        }
+      });
+
+      els.resetProgressBtn.addEventListener('click', () => {
+        const ok = confirm('Reset all Math Adventure progress for every grade?');
+        if(!ok) return;
+        localStorage.removeItem(storageKey);
+        state.progress = {};
+        ensureGradeProgress(state.gradeId);
+        renderAll();
+      });
+
+      els.bossBattleBtn.addEventListener('click', () => {
+        startQuiz('boss', state.worldIndex, 5);
+      });
+
+      els.quizModal.addEventListener('click', e => {
+        if(e.target === els.quizModal) closeQuiz();
+      });
     }
 
-    function escapeHtml(text){
-      return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    function init(){
+      ensureGradeProgress(state.gradeId);
+      wireEvents();
+      renderAll();
     }
 
-    gradeSelector.addEventListener("change", () => {
-      selectedGrade = gradeSelector.value;
-      refreshUI();
-    });
-
-    continueBtn.addEventListener("click", continueAdventure);
-    startFirstUnlockedBtn.addEventListener("click", continueAdventure);
-    resetBtn.addEventListener("click", resetThisGrade);
-    resetAllBtn.addEventListener("click", resetAllGrades);
-    closeModalBtn.addEventListener("click", closeModal);
-
-    gameModal.addEventListener("click", (e) => {
-      if(e.target === gameModal){
-        closeModal();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape"){
-        closeModal();
-      }
-    });
-
-    gradeSelector.value = selectedGrade;
-    refreshUI();
+    init();
   </script>
 </body>
 </html>
