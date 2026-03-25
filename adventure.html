@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>I Love Math | Math Adventure</title>
-  <meta name="description" content="Math Adventure map with grade selector, 5 levels per world, 10 questions per level, boss battles, stars, badges, timer, and progress tracking." />
+  <meta name="description" content="Math Adventure map with grade selector, 5 levels per world, 10 questions per level, boss battles, stars, badges, timer, progress tracking, sound effects, reward animations, and certificate unlock." />
   <style>
     :root{
       --blue:#0f6fff;
@@ -19,7 +19,7 @@
       --purple:#7f5cff;
       --bg1:#dff4ff;
       --bg2:#fff5df;
-      --card:rgba(255,255,255,0.88);
+      --card:rgba(255,255,255,0.9);
       --glass:rgba(255,255,255,0.72);
       --shadow:0 18px 40px rgba(18,50,82,0.15);
       --shadow-hover:0 24px 50px rgba(18,50,82,0.22);
@@ -30,13 +30,17 @@
     }
 
     *{box-sizing:border-box;}
-    html,body{margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;color:var(--dark);background:linear-gradient(180deg,var(--bg1),#f6fbff 35%, var(--bg2));}
+    html,body{
+      margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;color:var(--dark);
+      background:linear-gradient(180deg,var(--bg1),#f6fbff 35%, var(--bg2));
+      scroll-behavior:smooth;
+    }
     body{min-height:100vh;}
     a{text-decoration:none;color:inherit;}
     button,input,select{font:inherit;}
 
     .topbar{
-      position:sticky;top:0;z-index:50;
+      position:sticky;top:0;z-index:60;
       backdrop-filter:blur(12px);
       background:rgba(255,255,255,0.82);
       border-bottom:1px solid rgba(13,103,215,0.12);
@@ -63,7 +67,7 @@
       max-width:var(--max);margin:0 auto;padding:24px 18px 10px;
       display:grid;grid-template-columns:1.2fr .8fr;gap:22px;
     }
-    .hero-card,.side-card,.panel,.modal-card,.world-card,.level-btn,.question-card,.result-card,.boss-banner{
+    .hero-card,.side-card,.panel,.modal-card,.world-card,.level-btn,.question-card,.result-card,.boss-banner,.certificate-card{
       background:var(--card);backdrop-filter:blur(8px);box-shadow:var(--shadow);
     }
     .hero-card{
@@ -99,9 +103,9 @@
     .btn-gold{background:linear-gradient(135deg,#ffcb52,#ffac2f);color:#6b4200;}
     .btn-green{background:linear-gradient(135deg,#33cc7e,#18a55f);color:#fff;}
     .btn-red{background:linear-gradient(135deg,#ff7a70,#ef5350);color:#fff;}
+    .btn-purple{background:linear-gradient(135deg,#8d6dff,#6f50ff);color:#fff;}
 
     .container{max-width:var(--max);margin:0 auto;padding:10px 18px 38px;}
-
     .panel{border-radius:var(--radius-xl);padding:22px;margin-top:18px;}
     .panel-head{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
     .panel-head h2{margin:0;font-size:28px;}
@@ -113,8 +117,9 @@
     .mini-stat .value{font-size:28px;font-weight:900;margin-top:8px;}
 
     .worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-    .world-card{border-radius:24px;padding:18px;position:relative;overflow:hidden;border:2px solid transparent;}
+    .world-card{border-radius:24px;padding:18px;position:relative;overflow:hidden;border:2px solid transparent;transition:.2s transform,.2s opacity,.2s border-color;}
     .world-card.active{border-color:rgba(15,111,255,0.35);transform:translateY(-2px);}
+    .world-card:hover{transform:translateY(-3px);}
     .world-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
     .world-icon{font-size:44px;line-height:1;}
     .world-chip{padding:8px 11px;border-radius:999px;background:#fff;font-size:12px;font-weight:800;color:var(--nav);}
@@ -123,7 +128,7 @@
     .world-meter{height:12px;background:#eaf2ff;border-radius:999px;overflow:hidden;margin:14px 0 8px;}
     .world-meter-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));width:0%;}
     .world-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
-    .stars{font-size:18px;letter-spacing:2px;}
+    .stars{font-size:18px;letter-spacing:1px;}
 
     .map-wrap{position:relative;padding:18px;background:linear-gradient(180deg,#e6fbff,#fff6df);border-radius:24px;overflow:hidden;min-height:360px;}
     .map-path{
@@ -132,7 +137,8 @@
       box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);
     }
     .island{
-      position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff9d4 0,#ffe79d 38%,#7ed67a 39%,#44b563 72%,#2a9a4b 100%);
+      position:absolute;width:120px;height:120px;border-radius:50%;
+      background:radial-gradient(circle at 40% 35%,#fff9d4 0,#ffe79d 38%,#7ed67a 39%,#44b563 72%,#2a9a4b 100%);
       box-shadow:0 18px 28px rgba(18,50,82,0.15);display:grid;place-items:center;font-size:46px;font-weight:900;color:#fff;border:8px solid rgba(255,255,255,.55);
     }
     .island span{filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));}
@@ -146,7 +152,7 @@
     .levels-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:18px;}
     .level-btn{
       border:none;border-radius:20px;padding:16px 12px;cursor:pointer;text-align:center;position:relative;
-      border:1px solid rgba(18,50,82,0.08);
+      border:1px solid rgba(18,50,82,0.08);transition:.18s transform,.18s box-shadow,.18s opacity;
     }
     .level-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);}
     .level-btn.locked{opacity:.6;cursor:not-allowed;background:#f4f7fb;}
@@ -163,6 +169,17 @@
     .boss-banner h3{margin:0 0 6px;font-size:24px;color:#6b4200;}
     .boss-banner p{margin:0;color:#7b5611;line-height:1.5;}
 
+    .certificate-card{
+      border-radius:24px;padding:22px;
+      background:linear-gradient(135deg,#f5f0ff,#ffffff 40%,#fff4d9);
+      border:2px solid rgba(127,92,255,0.18);
+    }
+    .certificate-head{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;}
+    .certificate-status{
+      padding:10px 14px;border-radius:999px;font-weight:800;
+      background:#fff;border:1px solid rgba(127,92,255,0.18);color:#6b53d3;
+    }
+
     .modal{
       position:fixed;inset:0;background:rgba(9,20,40,.52);display:none;align-items:center;justify-content:center;padding:18px;z-index:100;
     }
@@ -178,7 +195,7 @@
     .options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
     .option-btn{
       padding:15px 16px;border-radius:16px;border:1px solid rgba(18,50,82,.12);background:#fff;font-weight:800;cursor:pointer;text-align:left;
-      transition:.18s transform,.18s box-shadow,.18s background;
+      transition:.18s transform,.18s box-shadow,.18s background,.18s border-color;
     }
     .option-btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(18,50,82,.1);}
     .option-btn.correct{background:rgba(33,182,111,.14);border-color:rgba(33,182,111,.35);}
@@ -193,6 +210,35 @@
     .result-card strong{display:block;font-size:28px;margin-top:8px;}
     .final-badge{font-size:54px;}
     .tips{padding:16px;border-radius:18px;background:#fff8e8;color:#7f5a15;line-height:1.6;}
+
+    .reward-popup{
+      position:fixed;right:20px;bottom:20px;z-index:120;
+      background:linear-gradient(135deg,#fff6da,#ffffff);
+      color:var(--dark);
+      border-radius:20px;
+      padding:16px 18px;
+      box-shadow:0 22px 40px rgba(18,50,82,.22);
+      border:1px solid rgba(255,191,63,.35);
+      min-width:260px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(25px) scale(.96);
+      transition:.3s ease;
+    }
+    .reward-popup.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+      animation:popBounce .55s ease;
+    }
+    .reward-popup-title{font-weight:900;font-size:18px;margin-bottom:4px;}
+    .reward-popup-text{color:var(--text);line-height:1.45;font-weight:700;}
+
+    @keyframes popBounce{
+      0%{transform:translateY(35px) scale(.88);}
+      55%{transform:translateY(-4px) scale(1.03);}
+      100%{transform:translateY(0) scale(1);}
+    }
 
     .footer{max-width:var(--max);margin:0 auto;padding:0 18px 30px;color:var(--text);font-size:13px;text-align:center;}
 
@@ -238,14 +284,14 @@
     <div class="hero-card">
       <h1>Math Adventure Map</h1>
       <p>
-        Explore 5 themed worlds, clear 5 levels in each world, answer 10 questions per level, and unlock a boss battle at the end.
-        Designed for grade-based learning with stars, progress, explanations, and replayable fun.
+        Explore 5 themed worlds, clear 5 levels in each world, answer 10 questions per level, unlock boss battles, earn badges,
+        trigger reward popups, and unlock a certificate after conquering all worlds in your grade.
       </p>
       <div class="hero-tags">
         <div class="hero-tag">🗺️ Adventure Map</div>
         <div class="hero-tag">🎯 10 Questions / Level</div>
-        <div class="hero-tag">👑 Boss Battles</div>
-        <div class="hero-tag">🌟 Stars + Badges</div>
+        <div class="hero-tag">👑 Stronger Boss Battles</div>
+        <div class="hero-tag">🏆 Certificate Unlock</div>
       </div>
     </div>
 
@@ -253,7 +299,7 @@
       <h2>Start Your Adventure</h2>
       <div class="controls">
         <div class="control-group">
-          <label for="gradeSelect">Choose Grade Level</label>
+          <label for="gradeSelect">Choose Year Level</label>
           <select id="gradeSelect"></select>
         </div>
         <div class="control-group">
@@ -296,7 +342,23 @@
         <div class="island island-3"><span>3</span></div>
         <div class="island island-4"><span>4</span></div>
         <div class="island island-5"><span>5</span></div>
-        <div class="map-legend">🏝️ Islands = Worlds &nbsp; • &nbsp; 🔒 Finish levels to unlock more &nbsp; • &nbsp; 👑 Boss after Level 5</div>
+        <div class="map-legend">🏝️ Islands = Worlds • 🔒 Clear worlds in order • 👑 Boss after 5 levels • 🏆 Certificate after all 5 worlds</div>
+      </div>
+    </section>
+
+    <section class="panel certificate-card">
+      <div class="certificate-head">
+        <div>
+          <h2 style="margin:0 0 8px;">Certificate Unlock</h2>
+          <div class="subtext">Defeat all 5 world bosses in the current grade level to unlock your Math Adventure Certificate.</div>
+        </div>
+        <div class="certificate-status" id="certificateStatus">Locked</div>
+      </div>
+      <div class="subtext" id="certificateText" style="margin-top:14px;">
+        Complete every world boss in this grade to earn your certificate.
+      </div>
+      <div style="margin-top:16px;">
+        <button class="btn btn-purple" id="viewCertificateBtn" disabled>View Certificate</button>
       </div>
     </section>
 
@@ -334,8 +396,19 @@
     </div>
   </div>
 
+  <div class="modal" id="certificateModal">
+    <div class="modal-card">
+      <div id="certificateView"></div>
+    </div>
+  </div>
+
+  <div class="reward-popup" id="rewardPopup">
+    <div class="reward-popup-title" id="rewardPopupTitle">Reward Unlocked!</div>
+    <div class="reward-popup-text" id="rewardPopupText">You earned stars.</div>
+  </div>
+
   <div class="footer">
-    © 2026 ilovemath.live – Math Adventure Phase 1. Personal educational website build with grade selector, worlds, levels, stars, and boss battles.
+    © 2026 ilovemath.live – Math Adventure premium build with grade selector, worlds, levels, stronger boss battles, sound effects, reward animations, and certificate unlocks.
   </div>
 
   <script>
@@ -344,87 +417,168 @@
         id: 'k',
         label: 'Kindergarten',
         worlds: [
-          { id:'counting-cove', name:'Counting Cove', icon:'🔢', desc:'Count, match, and compare numbers up to 20.', topic:'Counting', skills:['counting','before after','greater less','number words'] },
-          { id:'shape-shore', name:'Shape Shore', icon:'🟦', desc:'Recognize shapes and simple positions.', topic:'Shapes', skills:['identify shapes','sides','positions','sort'] },
-          { id:'add-lagoon', name:'Addition Lagoon', icon:'➕', desc:'Add small numbers with picture-friendly practice.', topic:'Addition', skills:['add within 10','picture sums','missing addend','story sums'] },
-          { id:'subtraction-jungle', name:'Subtraction Jungle', icon:'➖', desc:'Take away and find what is left.', topic:'Subtraction', skills:['subtract within 10','take away','how many left','compare'] },
-          { id:'pattern-peak', name:'Pattern Peak', icon:'🌈', desc:'Build and complete repeating patterns.', topic:'Patterns', skills:['AB patterns','AAB patterns','extend patterns','find next'] }
+          { id:'counting-cove', name:'Counting Cove', icon:'🔢', desc:'Count, match, and compare numbers up to 20.', topic:'Counting', skills:['counting','before after','greater less','number words','match sets'] },
+          { id:'shape-shore', name:'Shape Shore', icon:'🟦', desc:'Recognize shapes and simple positions.', topic:'Shapes', skills:['identify shapes','sides','positions','sort','shape names'] },
+          { id:'add-lagoon', name:'Addition Lagoon', icon:'➕', desc:'Add small numbers with picture-friendly practice.', topic:'Addition', skills:['add within 10','picture sums','missing addend','story sums','count on'] },
+          { id:'subtraction-jungle', name:'Subtraction Jungle', icon:'➖', desc:'Take away and find what is left.', topic:'Subtraction', skills:['subtract within 10','take away','how many left','compare','count back'] },
+          { id:'pattern-peak', name:'Pattern Peak', icon:'🌈', desc:'Build and complete repeating patterns.', topic:'Patterns', skills:['AB patterns','AAB patterns','extend patterns','find next','copy patterns'] }
         ]
       },
       {
         id: 'g1',
         label: 'Grade 1',
         worlds: [
-          { id:'number-bay', name:'Number Bay', icon:'🔢', desc:'Number bonds, place value, and comparing numbers.', topic:'Numbers', skills:['place value','compare numbers','number bonds','before after'] },
-          { id:'addition-isle', name:'Addition Isle', icon:'➕', desc:'Addition fluency and simple word problems.', topic:'Addition', skills:['add within 20','doubles','make 10','word problems'] },
-          { id:'subtraction-forest', name:'Subtraction Forest', icon:'➖', desc:'Subtract with confidence and solve story problems.', topic:'Subtraction', skills:['subtract within 20','fact families','missing number','story problems'] },
-          { id:'shape-harbor', name:'Shape Harbor', icon:'📐', desc:'2D and 3D shapes, size, and positions.', topic:'Geometry', skills:['2D shapes','3D shapes','positions','partition shapes'] },
-          { id:'measurement-mountain', name:'Measurement Mountain', icon:'📏', desc:'Length, time, and simple data.', topic:'Measurement', skills:['longer shorter','time to hour','tally charts','compare lengths'] }
+          { id:'number-bay', name:'Number Bay', icon:'🔢', desc:'Number bonds, place value, and comparing numbers.', topic:'Numbers', skills:['place value','compare numbers','number bonds','before after','skip count basics'] },
+          { id:'addition-isle', name:'Addition Isle', icon:'➕', desc:'Addition fluency and simple word problems.', topic:'Addition', skills:['add within 20','doubles','make 10','word problems','fact fluency'] },
+          { id:'subtraction-forest', name:'Subtraction Forest', icon:'➖', desc:'Subtract with confidence and solve story problems.', topic:'Subtraction', skills:['subtract within 20','fact families','missing number','story problems','count back'] },
+          { id:'shape-harbor', name:'Shape Harbor', icon:'📐', desc:'2D and 3D shapes, size, and positions.', topic:'Geometry', skills:['2D shapes','3D shapes','positions','partition shapes','compose shapes'] },
+          { id:'measurement-mountain', name:'Measurement Mountain', icon:'📏', desc:'Length, time, and simple data.', topic:'Measurement', skills:['longer shorter','time to hour','tally charts','compare lengths','simple graphs'] }
         ]
       },
       {
         id: 'g2',
         label: 'Grade 2',
         worlds: [
-          { id:'place-value-port', name:'Place Value Port', icon:'🏗️', desc:'Tens, ones, skip counting, and number patterns.', topic:'Place Value', skills:['hundreds tens ones','skip counting','expanded form','compare'] },
-          { id:'double-digit-dunes', name:'Double Digit Dunes', icon:'➕', desc:'Add and subtract within 100.', topic:'Operations', skills:['add within 100','subtract within 100','mental math','word problems'] },
-          { id:'money-marina', name:'Money Marina', icon:'💰', desc:'Coins, values, and total amounts.', topic:'Money', skills:['coin values','make amounts','compare money','count mixed coins'] },
-          { id:'time-trail', name:'Time Trail', icon:'🕒', desc:'Time, calendars, and elapsed thinking.', topic:'Time', skills:['time to 5 minutes','calendar','elapsed ideas','morning evening'] },
-          { id:'graph-garden', name:'Graph Garden', icon:'📊', desc:'Read picture graphs and bar graphs.', topic:'Data', skills:['picture graphs','bar graphs','most least','compare totals'] }
+          { id:'place-value-port', name:'Place Value Port', icon:'🏗️', desc:'Tens, ones, skip counting, and number patterns.', topic:'Place Value', skills:['hundreds tens ones','skip counting','expanded form','compare','odd even'] },
+          { id:'double-digit-dunes', name:'Double Digit Dunes', icon:'➕', desc:'Add and subtract within 100.', topic:'Operations', skills:['add within 100','subtract within 100','mental math','word problems','regrouping ideas'] },
+          { id:'money-marina', name:'Money Marina', icon:'💰', desc:'Coins, values, and total amounts.', topic:'Money', skills:['coin values','make amounts','compare money','count mixed coins','change basics'] },
+          { id:'time-trail', name:'Time Trail', icon:'🕒', desc:'Time, calendars, and elapsed thinking.', topic:'Time', skills:['time to 5 minutes','calendar','elapsed ideas','morning evening','days months'] },
+          { id:'graph-garden', name:'Graph Garden', icon:'📊', desc:'Read picture graphs and bar graphs.', topic:'Data', skills:['picture graphs','bar graphs','most least','compare totals','survey data'] }
         ]
       },
       {
         id: 'g3',
         label: 'Grade 3',
         worlds: [
-          { id:'multiplication-mesa', name:'Multiplication Mesa', icon:'✖️', desc:'Facts, arrays, and equal groups.', topic:'Multiplication', skills:['facts','arrays','equal groups','word problems'] },
-          { id:'division-delta', name:'Division Delta', icon:'➗', desc:'Sharing, grouping, and inverse thinking.', topic:'Division', skills:['division facts','sharing','grouping','fact families'] },
-          { id:'fraction-falls', name:'Fraction Falls', icon:'🍕', desc:'Fractions as parts of a whole and on number lines.', topic:'Fractions', skills:['unit fractions','compare fractions','fraction models','number lines'] },
-          { id:'area-archipelago', name:'Area Archipelago', icon:'🧱', desc:'Area, perimeter, and simple geometry.', topic:'Area & Perimeter', skills:['area','perimeter','rectangles','word problems'] },
-          { id:'data-desert', name:'Data Desert', icon:'📈', desc:'Graphs, tables, and problem solving.', topic:'Data', skills:['bar graphs','scaled graphs','tables','analyze data'] }
+          { id:'multiplication-mesa', name:'Multiplication Mesa', icon:'✖️', desc:'Facts, arrays, and equal groups.', topic:'Multiplication', skills:['facts','arrays','equal groups','word problems','properties'] },
+          { id:'division-delta', name:'Division Delta', icon:'➗', desc:'Sharing, grouping, and inverse thinking.', topic:'Division', skills:['division facts','sharing','grouping','fact families','remainders intro'] },
+          { id:'fraction-falls', name:'Fraction Falls', icon:'🍕', desc:'Fractions as parts of a whole and on number lines.', topic:'Fractions', skills:['unit fractions','compare fractions','fraction models','number lines','equivalent intro'] },
+          { id:'area-archipelago', name:'Area Archipelago', icon:'🧱', desc:'Area, perimeter, and simple geometry.', topic:'Area & Perimeter', skills:['area','perimeter','rectangles','word problems','missing side basics'] },
+          { id:'data-desert', name:'Data Desert', icon:'📈', desc:'Graphs, tables, and problem solving.', topic:'Data', skills:['bar graphs','scaled graphs','tables','analyze data','line plots intro'] }
         ]
       },
       {
         id: 'g4',
         label: 'Grade 4',
         worlds: [
-          { id:'power-place-plateau', name:'Place Value Plateau', icon:'🔟', desc:'Large numbers, rounding, and estimation.', topic:'Place Value', skills:['place value','rounding','expanded form','compare'] },
-          { id:'multi-step-marsh', name:'Multi-Step Marsh', icon:'🧠', desc:'Multi-step addition and subtraction.', topic:'Problem Solving', skills:['multi-step problems','estimation','check work','reasoning'] },
-          { id:'fraction-fortress', name:'Fraction Fortress', icon:'🥧', desc:'Equivalent fractions and operations basics.', topic:'Fractions', skills:['equivalent fractions','compare','add like denominators','mixed numbers'] },
-          { id:'angle-atoll', name:'Angle Atoll', icon:'📐', desc:'Angles, lines, and shapes.', topic:'Geometry', skills:['measure angles','classify triangles','parallel perpendicular','symmetry'] },
-          { id:'measurement-ridge', name:'Measurement Ridge', icon:'📏', desc:'Units, conversions, and area/perimeter.', topic:'Measurement', skills:['convert units','area','perimeter','word problems'] }
+          { id:'place-value-plateau', name:'Place Value Plateau', icon:'🔟', desc:'Large numbers, rounding, and estimation.', topic:'Place Value', skills:['place value','rounding','expanded form','compare','word form'] },
+          { id:'multi-step-marsh', name:'Multi-Step Marsh', icon:'🧠', desc:'Multi-step addition and subtraction.', topic:'Problem Solving', skills:['multi-step problems','estimation','check work','reasoning','model drawing'] },
+          { id:'fraction-fortress', name:'Fraction Fortress', icon:'🥧', desc:'Equivalent fractions and operations basics.', topic:'Fractions', skills:['equivalent fractions','compare','add like denominators','mixed numbers','fraction models'] },
+          { id:'angle-atoll', name:'Angle Atoll', icon:'📐', desc:'Angles, lines, and shapes.', topic:'Geometry', skills:['measure angles','classify triangles','parallel perpendicular','symmetry','line types'] },
+          { id:'measurement-ridge', name:'Measurement Ridge', icon:'📏', desc:'Units, conversions, and area/perimeter.', topic:'Measurement', skills:['convert units','area','perimeter','word problems','elapsed time'] }
         ]
       },
       {
         id: 'g5',
         label: 'Grade 5',
         worlds: [
-          { id:'decimal-docks', name:'Decimal Docks', icon:'🔣', desc:'Decimals, place value, and comparing.', topic:'Decimals', skills:['decimal place value','compare decimals','round decimals','expanded form'] },
-          { id:'fraction-frontier', name:'Fraction Frontier', icon:'🍰', desc:'Add, subtract, multiply, and divide fractions.', topic:'Fractions', skills:['add subtract fractions','multiply fractions','divide fractions','mixed numbers'] },
-          { id:'volume-valley', name:'Volume Valley', icon:'🧊', desc:'Volume and geometry concepts.', topic:'Volume', skills:['volume','rectangular prisms','unit cubes','reasoning'] },
-          { id:'coordinate-coast', name:'Coordinate Coast', icon:'🗺️', desc:'Graph points and interpret coordinate planes.', topic:'Coordinates', skills:['ordered pairs','graph points','first quadrant','word problems'] },
-          { id:'expression-estuary', name:'Expression Estuary', icon:'🧩', desc:'Numerical expressions and patterns.', topic:'Expressions', skills:['order of operations','patterns','evaluate expressions','write expressions'] }
+          { id:'decimal-docks', name:'Decimal Docks', icon:'🔣', desc:'Decimals, place value, and comparing.', topic:'Decimals', skills:['decimal place value','compare decimals','round decimals','expanded form','add subtract decimals'] },
+          { id:'fraction-frontier', name:'Fraction Frontier', icon:'🍰', desc:'Add, subtract, multiply, and divide fractions.', topic:'Fractions', skills:['add subtract fractions','multiply fractions','divide fractions','mixed numbers','unlike denominators'] },
+          { id:'volume-valley', name:'Volume Valley', icon:'🧊', desc:'Volume and geometry concepts.', topic:'Volume', skills:['volume','rectangular prisms','unit cubes','reasoning','missing dimension'] },
+          { id:'coordinate-coast', name:'Coordinate Coast', icon:'🗺️', desc:'Graph points and interpret coordinate planes.', topic:'Coordinates', skills:['ordered pairs','graph points','first quadrant','word problems','distance on grid'] },
+          { id:'expression-estuary', name:'Expression Estuary', icon:'🧩', desc:'Numerical expressions and patterns.', topic:'Expressions', skills:['order of operations','patterns','evaluate expressions','write expressions','grouping symbols'] }
         ]
       },
       {
         id: 'g6',
         label: 'Grade 6',
         worlds: [
-          { id:'ratio-reef', name:'Ratio Reef', icon:'⚖️', desc:'Ratios, rates, and unit rates.', topic:'Ratios', skills:['ratios','rates','unit rates','tables'] },
-          { id:'integer-island', name:'Integer Island', icon:'➕', desc:'Integers, absolute value, and number lines.', topic:'Integers', skills:['integers','absolute value','compare integers','operations ideas'] },
-          { id:'equation-estate', name:'Equation Estate', icon:'🧮', desc:'Expressions, equations, and variables.', topic:'Algebra', skills:['variables','write expressions','one-step equations','inequalities'] },
-          { id:'geometry-gulf', name:'Geometry Gulf', icon:'📐', desc:'Area, volume, and surface area.', topic:'Geometry', skills:['area','surface area','volume','nets'] },
-          { id:'statistics-station', name:'Statistics Station', icon:'📊', desc:'Data sets and measures of center.', topic:'Statistics', skills:['mean','median','mode','range'] }
+          { id:'ratio-reef', name:'Ratio Reef', icon:'⚖️', desc:'Ratios, rates, and unit rates.', topic:'Ratios', skills:['ratios','rates','unit rates','tables','equivalent ratios'] },
+          { id:'integer-island', name:'Integer Island', icon:'➕', desc:'Integers, absolute value, and number lines.', topic:'Integers', skills:['integers','absolute value','compare integers','operations ideas','opposites'] },
+          { id:'equation-estate', name:'Equation Estate', icon:'🧮', desc:'Expressions, equations, and variables.', topic:'Algebra', skills:['variables','write expressions','one-step equations','inequalities','evaluate expressions'] },
+          { id:'geometry-gulf', name:'Geometry Gulf', icon:'📐', desc:'Area, volume, and surface area.', topic:'Geometry', skills:['area','surface area','volume','nets','polygons'] },
+          { id:'statistics-station', name:'Statistics Station', icon:'📊', desc:'Data sets and measures of center.', topic:'Statistics', skills:['mean','median','mode','range','distribution'] }
+        ]
+      },
+      {
+        id: 'g7',
+        label: 'Grade 7',
+        worlds: [
+          { id:'proportion-port', name:'Proportion Port', icon:'⚓', desc:'Ratios, proportions, and percent problems.', topic:'Proportions', skills:['proportions','percent','markup discount','scale drawings','unit rates'] },
+          { id:'rational-ridge', name:'Rational Ridge', icon:'➖', desc:'Operate with rational numbers.', topic:'Rational Numbers', skills:['add integers','subtract integers','multiply divide integers','fractions decimals','signed numbers'] },
+          { id:'expression-explorer', name:'Expression Explorer', icon:'🧠', desc:'Simplify expressions and solve equations.', topic:'Algebra', skills:['combine like terms','solve equations','distribute','inequalities','write expressions'] },
+          { id:'geometry-gate', name:'Geometry Gate', icon:'📐', desc:'Angles, circles, and scale geometry.', topic:'Geometry', skills:['angle relationships','circles','scale drawings','cross sections','area'] },
+          { id:'probability-plaza', name:'Probability Plaza', icon:'🎲', desc:'Probability, samples, and data reasoning.', topic:'Probability', skills:['simple probability','experimental probability','theoretical probability','samples','compare outcomes'] }
+        ]
+      },
+      {
+        id: 'g8',
+        label: 'Grade 8',
+        worlds: [
+          { id:'linear-lagoon', name:'Linear Lagoon', icon:'📉', desc:'Linear equations and graphing.', topic:'Linear Equations', skills:['slope','y-intercept','graph lines','solve equations','tables'] },
+          { id:'function-forest', name:'Function Forest', icon:'🌲', desc:'Functions and input-output rules.', topic:'Functions', skills:['identify functions','function tables','evaluate functions','patterns','graph relations'] },
+          { id:'pythagoras-peak', name:'Pythagoras Peak', icon:'⛰️', desc:'Right triangles and the Pythagorean theorem.', topic:'Pythagorean Theorem', skills:['legs and hypotenuse','solve triangles','distance','square roots','applications'] },
+          { id:'transform-tide', name:'Transform Tide', icon:'🔄', desc:'Transformations and congruence.', topic:'Transformations', skills:['translations','rotations','reflections','dilations','congruence'] },
+          { id:'scatter-sands', name:'Scatter Sands', icon:'📍', desc:'Scatter plots and bivariate data.', topic:'Data', skills:['scatter plots','trend','association','two-way tables','interpret graphs'] }
+        ]
+      },
+      {
+        id: 'g9',
+        label: 'Grade 9',
+        worlds: [
+          { id:'algebra-bay', name:'Algebra Bay', icon:'🧮', desc:'Expressions, equations, and inequalities.', topic:'Algebra I', skills:['linear equations','inequalities','systems basics','polynomials intro','factoring basics'] },
+          { id:'quadratic-quay', name:'Quadratic Quay', icon:'🪂', desc:'Quadratic expressions and graphs.', topic:'Quadratics', skills:['vertex form','factored form','roots','graphing parabolas','solve quadratics'] },
+          { id:'function-fjord', name:'Function Fjord', icon:'📈', desc:'Function notation and behavior.', topic:'Functions', skills:['domain range','evaluate functions','compare functions','graphs','tables'] },
+          { id:'geometry-harbor', name:'Geometry Harbor', icon:'📐', desc:'Proofs, angles, and polygons.', topic:'Geometry', skills:['angle theorems','triangles','polygons','proof logic','coordinate geometry'] },
+          { id:'stats-strait', name:'Stats Strait', icon:'📊', desc:'Data displays and distributions.', topic:'Statistics', skills:['distributions','center spread','box plots','histograms','interpret data'] }
+        ]
+      },
+      {
+        id: 'g10',
+        label: 'Grade 10',
+        worlds: [
+          { id:'geometry-grove', name:'Geometry Grove', icon:'📏', desc:'Advanced geometry, similarity, and trigonometry basics.', topic:'Geometry', skills:['similarity','right triangle trig','circles','area volume','proofs'] },
+          { id:'polynomial-port', name:'Polynomial Port', icon:'🧩', desc:'Polynomial operations and factoring.', topic:'Polynomials', skills:['add subtract polynomials','multiply polynomials','factor trinomials','special products','zeros intro'] },
+          { id:'radical-reef', name:'Radical Reef', icon:'√', desc:'Radicals and rational exponents.', topic:'Radicals', skills:['simplify radicals','operations with radicals','rational exponents','equations','applications'] },
+          { id:'system-summit', name:'System Summit', icon:'🏔️', desc:'Systems of equations and inequalities.', topic:'Systems', skills:['solve systems','graph systems','substitution','elimination','word problems'] },
+          { id:'probability-pier', name:'Probability Pier', icon:'🎯', desc:'Compound probability and counting.', topic:'Probability', skills:['compound probability','independent events','counting principle','permutations intro','combinations intro'] }
+        ]
+      },
+      {
+        id: 'g11',
+        label: 'Grade 11',
+        worlds: [
+          { id:'precalc-pass', name:'Precalculus Pass', icon:'📐', desc:'Advanced functions and algebraic reasoning.', topic:'Precalculus', skills:['composition','inverse functions','transformations','complex numbers','sequences'] },
+          { id:'trig-trench', name:'Trig Trench', icon:'🌊', desc:'Trigonometric ratios, identities, and graphs.', topic:'Trigonometry', skills:['sine cosine tangent','unit circle','trig graphs','identities basics','solve trig equations'] },
+          { id:'analytic-atlas', name:'Analytic Atlas', icon:'🗺️', desc:'Conic sections and coordinate analysis.', topic:'Analytic Geometry', skills:['circles','parabolas','ellipses','hyperbolas','coordinate formulas'] },
+          { id:'sequence-shore', name:'Sequence Shore', icon:'🔁', desc:'Arithmetic and geometric sequences.', topic:'Sequences', skills:['arithmetic sequences','geometric sequences','explicit formulas','recursive formulas','series basics'] },
+          { id:'stats-sanctuary', name:'Stats Sanctuary', icon:'📊', desc:'Statistical reasoning and interpretation.', topic:'Statistics', skills:['normal distribution intro','sampling','correlation','regression basics','inference basics'] }
+        ]
+      },
+      {
+        id: 'g12',
+        label: 'Grade 12',
+        worlds: [
+          { id:'calculus-cape', name:'Calculus Cape', icon:'∫', desc:'Limits, derivatives, and rate of change.', topic:'Calculus', skills:['limits','derivatives','slope','optimization intro','tangent lines'] },
+          { id:'business-basin', name:'Business Basin', icon:'💼', desc:'Applied math in finance and business.', topic:'Business Math', skills:['simple interest','compound interest','markup markdown','commission','profit loss'] },
+          { id:'logic-lighthouse', name:'Logic Lighthouse', icon:'💡', desc:'Reasoning, proof, and mathematical thinking.', topic:'Logic', skills:['if then statements','truth values','deduction','valid arguments','proof reasoning'] },
+          { id:'data-district', name:'Data District', icon:'📉', desc:'Advanced statistics and data interpretation.', topic:'Data Analysis', skills:['regression','probability models','mean spread','interpret datasets','sampling bias'] },
+          { id:'capstone-cliffs', name:'Capstone Cliffs', icon:'🏆', desc:'Mixed senior-level problem solving.', topic:'Mixed Math', skills:['multi-topic review','word problems','functions','geometry','financial math'] }
         ]
       }
     ];
 
-    const storageKey = 'ilovemath_adventure_phase1_progress_v1';
+    const storageKey = 'ilovemath_adventure_phase2_progress_v1';
+    const settingsKey = 'ilovemath_adventure_phase2_settings_v1';
+    const certificateKey = 'ilovemath_adventure_phase2_certificates_v1';
+
+    function loadProgress(){
+      try{return JSON.parse(localStorage.getItem(storageKey)) || {};}catch(e){return {};}
+    }
+    function loadSettings(){
+      try{return JSON.parse(localStorage.getItem(settingsKey)) || {};}catch(e){return {};}
+    }
+    function loadCertificates(){
+      try{return JSON.parse(localStorage.getItem(certificateKey)) || {};}catch(e){return {};}
+    }
+
+    const savedSettings = loadSettings();
 
     const state = {
-      gradeId: 'g1',
-      worldIndex: 0,
+      gradeId: savedSettings.gradeId || 'g1',
+      worldIndex: Number.isInteger(savedSettings.worldIndex) ? savedSettings.worldIndex : 0,
       progress: loadProgress(),
+      certificates: loadCertificates(),
       quiz: null
     };
 
@@ -447,19 +601,28 @@
       bossBanner: document.getElementById('bossBanner'),
       bossBattleBtn: document.getElementById('bossBattleBtn'),
       quizModal: document.getElementById('quizModal'),
-      quizView: document.getElementById('quizView')
+      quizView: document.getElementById('quizView'),
+      certificateStatus: document.getElementById('certificateStatus'),
+      certificateText: document.getElementById('certificateText'),
+      viewCertificateBtn: document.getElementById('viewCertificateBtn'),
+      certificateModal: document.getElementById('certificateModal'),
+      certificateView: document.getElementById('certificateView'),
+      rewardPopup: document.getElementById('rewardPopup'),
+      rewardPopupTitle: document.getElementById('rewardPopupTitle'),
+      rewardPopupText: document.getElementById('rewardPopupText')
     };
-
-    function loadProgress(){
-      try{
-        return JSON.parse(localStorage.getItem(storageKey)) || {};
-      }catch(e){
-        return {};
-      }
-    }
 
     function saveProgress(){
       localStorage.setItem(storageKey, JSON.stringify(state.progress));
+    }
+    function saveSettings(){
+      localStorage.setItem(settingsKey, JSON.stringify({
+        gradeId: state.gradeId,
+        worldIndex: state.worldIndex
+      }));
+    }
+    function saveCertificates(){
+      localStorage.setItem(certificateKey, JSON.stringify(state.certificates));
     }
 
     function getGrade(){
@@ -532,6 +695,11 @@
       return [1,2,3,4,5].every(n => prog.levels[n].completed);
     }
 
+    function certificateUnlocked(){
+      const grade = getGrade();
+      return grade.worlds.every(world => getWorldProgress(world.id).boss.completed);
+    }
+
     function populateSelectors(){
       els.gradeSelect.innerHTML = gradeConfigs.map(g => `<option value="${g.id}">${g.label}</option>`).join('');
       els.gradeSelect.value = state.gradeId;
@@ -540,7 +708,14 @@
 
     function populateWorldSelect(){
       const grade = getGrade();
-      els.worldSelect.innerHTML = grade.worlds.map((w,i)=>`<option value="${i}">${i+1}. ${w.name}</option>`).join('');
+      els.worldSelect.innerHTML = grade.worlds.map((w,i)=>{
+        const unlocked = worldUnlocked(i);
+        return `<option value="${i}" ${unlocked ? '' : 'disabled'}>${i+1}. ${w.name}${unlocked ? '' : ' 🔒'}</option>`;
+      }).join('');
+
+      if(!worldUnlocked(state.worldIndex)){
+        state.worldIndex = 0;
+      }
       els.worldSelect.value = String(state.worldIndex);
     }
 
@@ -551,7 +726,10 @@
       renderWorlds();
       renderLevels();
       renderHeaderProgress();
+      renderCertificate();
       saveProgress();
+      saveSettings();
+      saveCertificates();
     }
 
     function renderStats(){
@@ -573,6 +751,18 @@
       els.bossStatusLabel.textContent = prog.boss.completed ? 'Defeated' : bossUnlocked(world.id) ? 'Unlocked' : 'Locked';
     }
 
+    function renderCertificate(){
+      const unlocked = certificateUnlocked();
+      els.certificateStatus.textContent = unlocked ? 'Unlocked' : 'Locked';
+      els.certificateText.textContent = unlocked
+        ? `Excellent work. You completed all 5 world bosses in ${getGrade().label}. Your certificate is ready.`
+        : `Complete every world boss in ${getGrade().label} to unlock the certificate.`;
+      els.viewCertificateBtn.disabled = !unlocked;
+      if(unlocked){
+        state.certificates[state.gradeId] = true;
+      }
+    }
+
     function renderWorlds(){
       const grade = getGrade();
       els.worldsGrid.innerHTML = grade.worlds.map((world, index) => {
@@ -582,7 +772,7 @@
         const pct = Math.round((completed / 5) * 100);
         const stars = Object.values(prog.levels).reduce((a,b)=>a+(b.stars||0),0) + (prog.boss.stars || 0);
         return `
-          <div class="world-card ${state.worldIndex===index?'active':''}" data-world-index="${index}" style="opacity:${unlocked?1:.6}">
+          <div class="world-card ${state.worldIndex===index?'active':''}" data-world-index="${index}" style="opacity:${unlocked?1:.58}">
             <div class="world-top">
               <div class="world-icon">${world.icon}</div>
               <div class="world-chip">${unlocked ? (prog.boss.completed ? 'Completed' : 'Open') : 'Locked'}</div>
@@ -593,7 +783,7 @@
             <div class="world-meter"><div class="world-meter-fill" style="width:${pct}%"></div></div>
             <div class="world-foot">
               <div class="subtext">${completed}/5 levels cleared</div>
-              <div class="stars" aria-label="stars">${'⭐'.repeat(Math.min(stars,5))}</div>
+              <div class="stars" aria-label="stars">⭐ ${stars}</div>
             </div>
           </div>
         `;
@@ -605,7 +795,8 @@
           if(!worldUnlocked(index)) return;
           state.worldIndex = index;
           renderAll();
-          window.scrollTo({ top: document.querySelector('#levelsTitle').getBoundingClientRect().top + window.scrollY - 90, behavior:'smooth' });
+          const target = document.querySelector('#levelsTitle');
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior:'smooth' });
         });
       });
     }
@@ -615,7 +806,7 @@
       const world = grade.worlds[state.worldIndex];
       const prog = getWorldProgress(world.id);
       els.levelsTitle.textContent = `${world.name} Levels`;
-      els.levelsSubtext.textContent = `${world.topic} • 5 levels • 10 questions per level • boss battle after Level 5`;
+      els.levelsSubtext.textContent = `${world.topic} • 5 levels • 10 questions per level • stronger mixed boss battle after Level 5`;
 
       els.levelsGrid.innerHTML = [1,2,3,4,5].map(levelNo => {
         const data = prog.levels[levelNo];
@@ -645,7 +836,7 @@
       els.bossBanner.querySelector('p').textContent = prog.boss.completed
         ? 'Amazing work. Replay the boss battle to improve your score and earn more stars.'
         : bossIsUnlocked
-          ? 'You cleared all 5 levels. Defeat the boss to earn a badge for this world.'
+          ? 'You cleared all 5 levels. The boss battle now mixes multiple skills from this world at a harder difficulty.'
           : 'Clear all 5 levels in this world to unlock the final mixed challenge.';
     }
 
@@ -662,285 +853,262 @@
       return Math.floor(Math.random()*(max-min+1))+min;
     }
 
+    function skillByLevel(world, levelNo){
+      return world.skills[(levelNo - 1) % world.skills.length];
+    }
+
+    function gradeDifficultyMultiplier(gradeId){
+      const order = ['k','g1','g2','g3','g4','g5','g6','g7','g8','g9','g10','g11','g12'];
+      return Math.max(1, order.indexOf(gradeId) + 1);
+    }
+
     function makeQuestion(gradeId, world, mode, levelNo, qIndex){
-      const difficulty = mode === 'boss' ? 3 : Math.min(levelNo, 3);
       const topic = world.topic.toLowerCase();
+      const skill = skillByLevel(world, mode === 'boss' ? randInt(1,5) : levelNo).toLowerCase();
+      const gradePower = gradeDifficultyMultiplier(gradeId);
+      const difficulty = mode === 'boss' ? Math.min(6, Math.ceil(gradePower / 2) + 2) : Math.min(5, Math.max(1, levelNo));
 
       if(topic.includes('count')){
-        const a = randInt(1, 10 + difficulty * 3);
-        const beforeAfter = Math.random() < 0.5;
-        const answer = beforeAfter ? a + 1 : a - 1;
-        return mcq(
-          beforeAfter ? `What number comes after ${a}?` : `What number comes before ${a}?`,
-          answer,
-          `${beforeAfter ? 'Counting forward' : 'Counting backward'} by 1 helps you find the answer.`,
-          `🔢 Use the counting sequence.`
-        );
+        const maxNum = 10 + difficulty * 4;
+        const a = randInt(1, maxNum);
+        const mode2 = randInt(1,3);
+        if(mode2 === 1){
+          const answer = a + 1;
+          return mcq(`What number comes after ${a}?`, answer, `Counting forward by 1 after ${a} gives ${answer}.`, `🔢 Count one more.`);
+        }
+        if(mode2 === 2){
+          const answer = Math.max(0, a - 1);
+          return mcq(`What number comes before ${a}?`, answer, `Counting backward by 1 before ${a} gives ${answer}.`, `🔢 Count one less.`);
+        }
+        const b = randInt(1, maxNum);
+        const answer = a > b ? a : b;
+        return mcq(`Which number is greater? ${a} or ${b}`, answer, `Compare the two numbers. ${answer} is greater.`, `🔢 Bigger number wins.`);
       }
 
       if(topic.includes('shape')){
         const shapes = [
-          ['triangle', 3], ['square', 4], ['rectangle', 4], ['pentagon', 5], ['hexagon', 6]
+          ['triangle', 3], ['square', 4], ['rectangle', 4], ['pentagon', 5], ['hexagon', 6], ['octagon', 8]
         ];
         const [name, sides] = shapes[randInt(0, shapes.length - 1)];
-        if(Math.random()<0.5){
-          return mcq(
-            `How many sides does a ${name} have?`,
-            sides,
-            `A ${name} has ${sides} side${sides===1?'':'s'}.`,
-            `📐 Shape: ${name}`
-          );
+        if(Math.random() < 0.5){
+          return mcq(`How many sides does a ${name} have?`, sides, `A ${name} has ${sides} sides.`, `📐 Think about the edges.`);
         }
-        return mcq(
-          `Which shape has ${sides} sides?`,
-          name,
-          `A shape with ${sides} sides is called a ${name}.`,
-          `🟦 Think about the number of sides.`
-        );
-      }
-
-      if(topic.includes('addition')){
-        const a = randInt(1, difficulty===1?10:20);
-        const b = randInt(1, difficulty===1?10:20);
-        const answer = a + b;
-        return mcq(
-          `${a} + ${b} = ?`,
-          answer,
-          `Add the two numbers together: ${a} + ${b} = ${answer}.`,
-          `➕ Combine the groups.`
-        );
-      }
-
-      if(topic.includes('subtraction')){
-        const a = randInt(6, difficulty===1?20:50);
-        const b = randInt(1, Math.min(a-1, difficulty===1?10:20));
-        const answer = a - b;
-        return mcq(
-          `${a} - ${b} = ?`,
-          answer,
-          `Start with ${a} and take away ${b}. You get ${answer}.`,
-          `➖ Count backward or think of the missing part.`
-        );
-      }
-
-      if(topic.includes('pattern')){
-        const seqs = [
-          {arr:['🔵','🔴','🔵','🔴'], ans:'🔵', rule:'The pattern alternates blue, red, blue, red.'},
-          {arr:['⭐','⭐','🌙','⭐','⭐','🌙'], ans:'⭐', rule:'This is an AAB pattern: star, star, moon.'},
-          {arr:[2,4,6,8], ans:10, rule:'The numbers increase by 2 each time.'}
-        ];
-        const s = seqs[randInt(0, seqs.length-1)];
-        return mcq(
-          `What comes next? ${s.arr.join('  ')}  ?`,
-          s.ans,
-          s.rule,
-          `🌈 Look for the repeating rule.`
-        );
+        return mcq(`Which shape has ${sides} sides?`, name, `A shape with ${sides} sides is called a ${name}.`, `🟦 Match the name to the number of sides.`);
       }
 
       if(topic.includes('number') || topic.includes('place value')){
-        if(Math.random()<0.5){
-          const n = randInt(12, 999);
-          const place = String(n).length===3 ? 'tens' : 'ones';
-          const answer = place==='tens' ? Number(String(n)[String(n).length-2]) : Number(String(n)[String(n).length-1]);
-          return mcq(
-            `What digit is in the ${place} place of ${n}?`,
-            answer,
-            `Read the digits from right to left: ones, tens, hundreds.`,
-            `🏗️ Find the ${place} digit.`
-          );
+        const digits = gradeId === 'k' || gradeId === 'g1' ? 2 : gradeId === 'g2' || gradeId === 'g3' ? 3 : 4;
+        let n = '';
+        for(let i=0;i<digits;i++) n += randInt(i===0?1:0,9);
+        n = Number(n);
+        if(Math.random() < 0.5){
+          const names = ['ones','tens','hundreds','thousands'];
+          const pos = randInt(0, digits-1);
+          const answer = Number(String(n)[String(n).length - 1 - pos]);
+          return mcq(`What digit is in the ${names[pos]} place of ${n}?`, answer, `Read from right to left: ones, tens, hundreds, thousands.`, `🏗️ Find the requested place value.`);
         }
-        const a = randInt(10, 999), b = randInt(10, 999);
-        const answer = a > b ? a : b;
-        return mcq(
-          `Which number is greater?`,
-          answer,
-          `Compare the largest place value first. ${answer} is greater.`,
-          `🔢 Compare the digits from left to right.`,
-          [a,b,a<b?b+1:b-1,a>b?a-1:a+1]
-        );
+        const b = n + randInt(1, 200);
+        const answer = n > b ? n : b;
+        return mcq(`Which number is greater? ${n} or ${b}?`, answer, `Compare the greatest place value first.`, `🔢 Start from the left-most digit.`);
+      }
+
+      if(topic.includes('addition') || (topic.includes('operations') && !topic.includes('rational'))){
+        const maxA = gradePower < 4 ? 20 + difficulty * 5 : 100 + difficulty * 40;
+        const a = randInt(2, maxA);
+        const b = randInt(2, maxA);
+        const answer = a + b;
+        return mcq(`${a} + ${b} = ?`, answer, `Add the two numbers: ${a} + ${b} = ${answer}.`, `➕ Combine both amounts.`);
+      }
+
+      if(topic.includes('subtraction')){
+        const maxA = gradePower < 4 ? 40 + difficulty * 8 : 150 + difficulty * 40;
+        const a = randInt(12, maxA);
+        const b = randInt(1, Math.min(a-1, Math.floor(maxA/2)));
+        const answer = a - b;
+        return mcq(`${a} - ${b} = ?`, answer, `Take away ${b} from ${a}.`, `➖ Count backward or find the difference.`);
+      }
+
+      if(topic.includes('patterns') || topic.includes('sequence')){
+        const seqType = randInt(1,3);
+        if(seqType === 1){
+          const step = randInt(2,6);
+          const start = randInt(1,20);
+          const arr = [start, start+step, start+2*step, start+3*step];
+          const answer = start+4*step;
+          return mcq(`What comes next? ${arr.join(', ')}, ?`, answer, `The pattern adds ${step} each time.`, `🔁 Find the rule.`);
+        }
+        if(seqType === 2){
+          const arr = ['🔵','🔴','🔵','🔴'];
+          return mcq(`What comes next? ${arr.join('  ')}  ?`, '🔵', `The pattern alternates blue and red.`, `🌈 Look at the repeating colors.`);
+        }
+        const start = randInt(2,5), ratio = randInt(2,3);
+        const arr = [start, start*ratio, start*ratio*ratio];
+        const answer = start*ratio*ratio*ratio;
+        return mcq(`What comes next? ${arr.join(', ')}, ?`, answer, `Multiply by ${ratio} each time.`, `🔁 This is a growing pattern.`);
       }
 
       if(topic.includes('measurement')){
-        const a = randInt(5, 20), b = randInt(1, 15);
-        const answer = a > b ? 'A' : 'B';
+        const a = randInt(5, 60), b = randInt(5, 60);
+        const answer = a > b ? 'A' : a < b ? 'B' : 'Same';
         return mcq(
           `Which is longer? Rope A is ${a} cm. Rope B is ${b} cm.`,
           answer,
-          `Compare the measurements. ${Math.max(a,b)} cm is longer.`,
-          `📏 Larger length means longer.`,
+          `Compare the two measurements directly.`,
+          `📏 Bigger measurement means longer.`,
           ['A','B','Same','Cannot tell']
         );
       }
 
-      if(topic.includes('money')){
-        const quarters = randInt(0,3), dimes = randInt(0,4), nickels = randInt(0,3);
-        const total = quarters*25 + dimes*10 + nickels*5;
-        return mcq(
-          `How many cents? ${quarters} quarter(s), ${dimes} dime(s), ${nickels} nickel(s)`,
-          total,
-          `Quarter = 25¢, dime = 10¢, nickel = 5¢. Total = ${total}¢.`,
-          `💰 Add the values of the coins.`
-        );
+      if(topic.includes('money') || topic.includes('business')){
+        if(topic.includes('business')){
+          const p = randInt(100,500), r = randInt(2,10), t = randInt(1,5);
+          const interest = Math.round((p*r*t)/100);
+          return mcq(`Find the simple interest on $${p} at ${r}% for ${t} year(s).`, interest, `Simple interest = P × R × T ÷ 100.`, `💼 Use the simple interest formula.`);
+        }
+        const quarters = randInt(0,3), dimes = randInt(0,4), nickels = randInt(0,3), pennies = randInt(0,5);
+        const total = quarters*25 + dimes*10 + nickels*5 + pennies;
+        return mcq(`How many cents? ${quarters} quarter(s), ${dimes} dime(s), ${nickels} nickel(s), ${pennies} penny/pennies`, total, `Quarter = 25¢, dime = 10¢, nickel = 5¢, penny = 1¢. Total = ${total}¢.`, `💰 Add all coin values.`);
       }
 
       if(topic.includes('time')){
         const hour = randInt(1,12);
-        const mins = [0,5,10,15,20,30,45][randInt(0,6)];
+        const minsArr = [0,5,10,15,20,25,30,35,40,45,50,55];
+        const mins = minsArr[randInt(0,minsArr.length-1)];
         const text = `${hour}:${String(mins).padStart(2,'0')}`;
-        return mcq(
-          `Which clock time matches "${text}"?`,
-          text,
-          `Read the hour and the minute together: ${text}.`,
-          `🕒 Match the hour and minute.`
-        );
+        return mcq(`Which clock time matches "${text}"?`, text, `Read hour and minute together: ${text}.`, `🕒 Match the time correctly.`);
       }
 
-      if(topic.includes('graph') || topic.includes('data') || topic.includes('statistics')){
-        const a = randInt(2,12), b = randInt(2,12), c = randInt(2,12);
+      if(topic.includes('graph') || topic.includes('data') || topic.includes('statistics') || topic.includes('probability')){
+        if(topic.includes('probability')){
+          const good = randInt(1,9), total = randInt(good+1,12);
+          const answer = `${good}/${total}`;
+          return mcq(`If ${good} outcomes are favorable out of ${total} total outcomes, what is the probability?`, answer, `Probability = favorable outcomes over total outcomes.`, `🎲 Write probability as a fraction.`);
+        }
+        const a = randInt(2,18), b = randInt(2,18), c = randInt(2,18);
         const data = {Cats:a, Dogs:b, Birds:c};
         const top = Object.entries(data).sort((x,y)=>y[1]-x[1])[0][0];
-        return mcq(
-          `Which category has the most? Cats ${a}, Dogs ${b}, Birds ${c}`,
-          top,
-          `Compare the totals. ${top} has the greatest value.`,
-          `📊 Look for the largest number.`
-        );
+        return mcq(`Which category has the most? Cats ${a}, Dogs ${b}, Birds ${c}`, top, `${top} has the greatest value.`, `📊 Look for the largest number.`);
       }
 
       if(topic.includes('multiplication')){
-        const a = randInt(2, 12), b = randInt(2, difficulty===1?5:12);
+        const a = randInt(2, 12 + difficulty);
+        const b = randInt(2, 12 + difficulty);
         const answer = a*b;
-        return mcq(
-          `${a} × ${b} = ?`,
-          answer,
-          `Multiplication means equal groups. ${a} groups of ${b} = ${answer}.`,
-          `✖️ You can use repeated addition.`
-        );
+        return mcq(`${a} × ${b} = ?`, answer, `Multiply the factors: ${a} × ${b} = ${answer}.`, `✖️ Think of equal groups.`);
       }
 
       if(topic.includes('division')){
-        const b = randInt(2,10), ans = randInt(2,10), a = b*ans;
-        return mcq(
-          `${a} ÷ ${b} = ?`,
-          ans,
-          `Division splits ${a} into ${b} equal groups. Each group has ${ans}.`,
-          `➗ Think: ${b} × ? = ${a}`
-        );
+        const b = randInt(2,12), ans = randInt(2,12), a = b*ans;
+        return mcq(`${a} ÷ ${b} = ?`, ans, `Division is the inverse of multiplication. ${b} × ${ans} = ${a}.`, `➗ Use a related multiplication fact.`);
       }
 
       if(topic.includes('fraction')){
-        const den = randInt(2,8);
+        const den = randInt(2,10);
         const num = randInt(1, den-1);
-        if(Math.random()<0.5){
-          return mcq(
-            `Which fraction matches the picture idea: ${num} shaded out of ${den} equal parts?`,
-            `${num}/${den}`,
-            `The numerator is the shaded parts (${num}) and the denominator is all equal parts (${den}).`,
-            `🍕 Fraction = shaded parts over total equal parts.`
-          );
+        if(Math.random() < 0.5){
+          return mcq(`Which fraction shows ${num} shaded part(s) out of ${den} equal parts?`, `${num}/${den}`, `The numerator is shaded parts. The denominator is all equal parts.`, `🍕 Fraction = parts over whole.`);
         }
         const num2 = randInt(1, den-1);
         const answer = num > num2 ? `${num}/${den}` : `${num2}/${den}`;
-        return mcq(
-          `Which fraction is greater? ${num}/${den} or ${num2}/${den}`,
-          answer,
-          `When denominators are the same, the fraction with the bigger numerator is greater.`,
-          `🥧 Compare the numerators.`
-        );
+        return mcq(`Which fraction is greater? ${num}/${den} or ${num2}/${den}`, answer, `When denominators are the same, compare numerators.`, `🥧 Same denominator, bigger numerator wins.`);
       }
 
       if(topic.includes('area')){
-        const l = randInt(2,9), w = randInt(2,9), area = l*w;
-        return mcq(
-          `A rectangle is ${l} units by ${w} units. What is its area?`,
-          area,
-          `Area = length × width = ${l} × ${w} = ${area}.`,
-          `🧱 Count square units or multiply length and width.`
-        );
+        const l = randInt(2,12), w = randInt(2,12), area = l*w;
+        return mcq(`A rectangle is ${l} units by ${w} units. What is its area?`, area, `Area = length × width = ${area}.`, `🧱 Multiply the side lengths.`);
       }
 
-      if(topic.includes('angle') || topic.includes('geometry')){
+      if(topic.includes('perimeter')){
+        const l = randInt(2,12), w = randInt(2,12), p = 2*(l+w);
+        return mcq(`A rectangle has length ${l} and width ${w}. What is its perimeter?`, p, `Perimeter = 2(length + width).`, `📏 Add all outer sides.`);
+      }
+
+      if(topic.includes('angle') || topic.includes('geometry') || topic.includes('transform')){
         const types = [
-          {q:'An angle less than 90° is called what?', a:'Acute', e:'Angles smaller than 90° are acute.'},
+          {q:'An angle less than 90° is called what?', a:'Acute', e:'An angle smaller than 90° is acute.'},
           {q:'An angle exactly 90° is called what?', a:'Right', e:'A 90° angle is a right angle.'},
-          {q:'Parallel lines do what?', a:'Never meet', e:'Parallel lines stay the same distance apart and never meet.'}
+          {q:'Parallel lines do what?', a:'Never meet', e:'Parallel lines stay the same distance apart and never meet.'},
+          {q:'A flip of a figure is called what?', a:'Reflection', e:'A reflection flips a figure across a line.'},
+          {q:'A slide of a figure is called what?', a:'Translation', e:'A translation slides without turning.'}
         ];
         const t = types[randInt(0, types.length-1)];
         return mcq(t.q, t.a, t.e, '📐 Use geometry vocabulary.');
       }
 
       if(topic.includes('decimal')){
-        const a = (randInt(1,99)/10).toFixed(1);
-        const b = (randInt(1,99)/10).toFixed(1);
+        const a = (randInt(1,999)/10).toFixed(1);
+        const b = (randInt(1,999)/10).toFixed(1);
         const ans = Number(a) > Number(b) ? a : b;
-        return mcq(
-          `Which decimal is greater? ${a} or ${b}`,
-          ans,
-          `Compare the whole numbers first, then the tenths place.`,
-          `🔣 Line up place values.`
-        );
+        return mcq(`Which decimal is greater? ${a} or ${b}`, ans, `Compare whole numbers first, then tenths.`, `🔣 Line up place values.`);
       }
 
       if(topic.includes('coordinate')){
         const x = randInt(1,9), y = randInt(1,9);
-        return mcq(
-          `Which ordered pair matches x = ${x}, y = ${y}?`,
-          `(${x}, ${y})`,
-          `Ordered pairs are written as (x, y).`,
-          `🗺️ x comes first, y comes second.`
-        );
+        return mcq(`Which ordered pair matches x = ${x}, y = ${y}?`, `(${x}, ${y})`, `Ordered pairs are written as (x, y).`, `🗺️ x comes first, y comes second.`);
       }
 
-      if(topic.includes('expression') || topic.includes('equation') || topic.includes('algebra')){
-        if(Math.random()<0.5){
-          const x = randInt(2,12), b = randInt(2,12), total = x+b;
-          return mcq(
-            `Solve: n + ${b} = ${total}`,
-            x,
-            `Subtract ${b} from both sides: n = ${total} - ${b} = ${x}.`,
-            `🧮 Undo addition with subtraction.`
-          );
+      if(topic.includes('expression') || topic.includes('equation') || topic.includes('algebra') || topic.includes('functions') || topic.includes('linear') || topic.includes('quadratic') || topic.includes('polynomial')){
+        const type = randInt(1,4);
+        if(type === 1){
+          const x = randInt(2,15), b = randInt(2,12), total = x+b;
+          return mcq(`Solve: n + ${b} = ${total}`, x, `Subtract ${b} from both sides.`, `🧮 Undo addition with subtraction.`);
         }
-        const a = randInt(2,10), b = randInt(2,10), c = randInt(2,10);
-        const ans = a + b*c;
-        return mcq(
-          `Evaluate: ${a} + ${b} × ${c}`,
-          ans,
-          `Multiply first, then add. ${b} × ${c} = ${b*c}, then + ${a} = ${ans}.`,
-          `🧩 Order of operations matters.`
-        );
+        if(type === 2){
+          const x = randInt(2,12), m = randInt(2,8), total = x*m;
+          return mcq(`Solve: ${m}n = ${total}`, x, `Divide both sides by ${m}.`, `🧮 Undo multiplication with division.`);
+        }
+        if(type === 3){
+          const a = randInt(1,10), b = randInt(1,10), c = randInt(1,10);
+          const ans = a + b*c;
+          return mcq(`Evaluate: ${a} + ${b} × ${c}`, ans, `Multiply first, then add.`, `🧩 Use order of operations.`);
+        }
+        const slope = randInt(-6,6) || 2;
+        return mcq(`In y = ${slope}x + 4, what is the slope?`, slope, `In slope-intercept form y = mx + b, m is the slope.`, `📉 Identify m.`);
       }
 
-      if(topic.includes('ratio')){
-        const a = randInt(1,5), b = randInt(2,8);
-        return mcq(
-          `Write the ratio of apples to oranges if there are ${a} apples and ${b} oranges.`,
-          `${a}:${b}`,
-          `Apples to oranges means apples first, oranges second: ${a}:${b}.`,
-          `⚖️ Keep the order correct.`
-        );
+      if(topic.includes('ratio') || topic.includes('proportion')){
+        const a = randInt(1,7), b = randInt(2,9);
+        return mcq(`Write the ratio of apples to oranges if there are ${a} apples and ${b} oranges.`, `${a}:${b}`, `Apples to oranges means apples first.`, `⚖️ Keep the order correct.`);
       }
 
-      if(topic.includes('integer')){
-        const a = randInt(-15, 15), b = randInt(-15, 15);
-        const ans = a > b ? a : b;
-        return mcq(
-          `Which integer is greater? ${a} or ${b}`,
-          ans,
-          `On a number line, the number farther right is greater.`,
-          `➕ Think of the number line.`
-        );
+      if(topic.includes('integer') || topic.includes('rational')){
+        const a = randInt(-20,20), b = randInt(-20,20);
+        const type = randInt(1,2);
+        if(type === 1){
+          const ans = a > b ? a : b;
+          return mcq(`Which integer is greater? ${a} or ${b}`, ans, `On the number line, the value farther right is greater.`, `➕ Use the number line idea.`);
+        }
+        const ans = a + b;
+        return mcq(`${a} + (${b}) = ?`, ans, `Add signed numbers carefully.`, `➕ Combine the integers.`);
       }
 
       if(topic.includes('volume')){
-        const l = randInt(2,6), w = randInt(2,6), h = randInt(2,6), vol = l*w*h;
-        return mcq(
-          `Find the volume of a box with length ${l}, width ${w}, and height ${h}.`,
-          vol,
-          `Volume = length × width × height = ${vol}.`,
-          `🧊 Multiply the three dimensions.`
-        );
+        const l = randInt(2,8), w = randInt(2,8), h = randInt(2,8), vol = l*w*h;
+        return mcq(`Find the volume of a box with length ${l}, width ${w}, and height ${h}.`, vol, `Volume = length × width × height.`, `🧊 Multiply all three dimensions.`);
+      }
+
+      if(topic.includes('pythagorean')){
+        const triples = [[3,4,5],[5,12,13],[8,15,17]];
+        const t = triples[randInt(0, triples.length-1)];
+        return mcq(`A right triangle has legs ${t[0]} and ${t[1]}. What is the hypotenuse?`, t[2], `Use a² + b² = c².`, `⛰️ Use the Pythagorean theorem.`);
+      }
+
+      if(topic.includes('trigonometry') || topic.includes('trig')){
+        return mcq(`In a right triangle, SOH stands for what?`, 'sin = opposite / hypotenuse', `SOH means sine equals opposite over hypotenuse.`, `🌊 Use the SOHCAHTOA mnemonic.`);
+      }
+
+      if(topic.includes('radical')){
+        const n = [4,9,16,25,36,49,64,81][randInt(0,7)];
+        return mcq(`What is √${n}?`, Math.sqrt(n), `The square root of ${n} is ${Math.sqrt(n)}.`, `√ Find the positive square root.`);
+      }
+
+      if(topic.includes('logic')){
+        return mcq(`If all squares are rectangles, then a square is a:`, 'Rectangle', `A square belongs to the larger set of rectangles.`, `💡 Use logical classification.`);
+      }
+
+      if(topic.includes('calculus')){
+        const m = randInt(2,9), b = randInt(0,8);
+        return mcq(`What is the derivative of ${m}x + ${b}?`, m, `The derivative of mx + b is m.`, `∫ The slope of a linear function is constant.`);
       }
 
       return mcq(`What is ${qIndex+3} + ${difficulty}?`, qIndex+3+difficulty, 'Add the numbers.', '➕ Basic practice');
@@ -958,14 +1126,15 @@
         if(typeof correct === 'number'){
           const set = new Set([correct]);
           while(set.size < 4){
-            const delta = randInt(-10,10) || 1;
-            const value = Math.max(-50, correct + delta);
-            set.add(value);
+            const delta = randInt(-12,12) || 1;
+            set.add(correct + delta);
           }
           options = shuffle([...set]);
         } else {
           const bank = [
-            String(correct), '2/3', '3/4', 'Acute', 'Right', 'Never meet', '(3, 4)', '(4, 3)', 'A', 'B', 'triangle', 'square', 'rectangle', '10', '12', '14', '16'
+            String(correct), '2/3', '3/4', 'Acute', 'Right', 'Never meet', 'Reflection', 'Translation',
+            '(3, 4)', '(4, 3)', 'A', 'B', 'Same', 'triangle', 'square', 'rectangle', '10', '12', '14', '16',
+            'Rectangle', 'sin = opposite / hypotenuse', 'cos = adjacent / hypotenuse'
           ];
           const set = new Set([String(correct)]);
           while(set.size < 4){
@@ -987,7 +1156,7 @@
       const grade = getGrade();
       const world = grade.worlds[worldIndex];
       const count = 10;
-      const questions = Array.from({length:count}, (_,i)=>makeQuestion(state.gradeId, world, mode, levelNo, i));
+      const questions = Array.from({length:count}, (_,i)=>makeQuestion(state.gradeId, world, mode, mode === 'boss' ? 5 : levelNo, i));
       return {
         mode,
         worldIndex,
@@ -1001,7 +1170,7 @@
         lives: mode === 'boss' ? 3 : null,
         answered: false,
         selected: null,
-        timeLeft: mode === 'boss' ? 25 : 30,
+        timeLeft: mode === 'boss' ? 22 : 30,
         timer: null
       };
     }
@@ -1020,13 +1189,14 @@
         const timerNode = document.getElementById('timerValue');
         if(timerNode) timerNode.textContent = state.quiz.timeLeft;
         if(state.quiz.timeLeft <= 0){
+          playSound('wrong');
           autoReveal(false, '⏰ Time is up for this question.');
         }
       }, 1000);
     }
 
     function resetQuestionTimer(){
-      state.quiz.timeLeft = state.quiz.mode === 'boss' ? 25 : 30;
+      state.quiz.timeLeft = state.quiz.mode === 'boss' ? 22 : 30;
       startTimer();
     }
 
@@ -1073,8 +1243,10 @@
 
     function selectAnswer(option){
       if(state.quiz.answered) return;
+      state.quiz.selected = String(option);
       const q = state.quiz.questions[state.quiz.current];
       const isCorrect = String(option) === String(q.correct);
+      playSound(isCorrect ? 'correct' : 'wrong');
       autoReveal(isCorrect, isCorrect ? '✅ Correct!' : '❌ Not quite.');
     }
 
@@ -1082,12 +1254,23 @@
       if(state.quiz.answered) return;
       state.quiz.answered = true;
       clearInterval(state.quiz.timer);
+
       const q = state.quiz.questions[state.quiz.current];
       const optionButtons = [...els.quizView.querySelectorAll('.option-btn')];
+
       optionButtons.forEach(btn => {
         const value = btn.dataset.option;
-        if(String(value) === String(q.correct)) btn.classList.add('correct');
-        else if(isCorrect === false && btn === document.activeElement) btn.classList.add('wrong');
+        btn.disabled = true;
+
+        if(String(value) === String(q.correct)){
+          btn.classList.add('correct');
+        } else if(
+          state.quiz.selected !== null &&
+          String(value) === String(state.quiz.selected) &&
+          String(value) !== String(q.correct)
+        ){
+          btn.classList.add('wrong');
+        }
       });
 
       if(isCorrect){
@@ -1107,6 +1290,7 @@
       `;
 
       document.getElementById('nextQuestionBtn').disabled = false;
+
       if(state.quiz.mode === 'boss' && state.quiz.lives <= 0){
         document.getElementById('nextQuestionBtn').textContent = 'Finish';
       }
@@ -1137,24 +1321,54 @@
       const passed = state.quiz.mode === 'boss' ? pct >= 70 : pct >= 60;
       const worldProg = getWorldProgress(state.quiz.worldId);
 
+      let rewardTitle = 'Keep Going!';
+      let rewardText = 'Practice more to improve your score.';
+
       if(state.quiz.mode === 'level'){
         const levelProg = worldProg.levels[state.quiz.levelNo];
-        if(passed){
-          levelProg.completed = true;
-        }
+        const firstClear = !levelProg.completed && passed;
+        if(passed) levelProg.completed = true;
         levelProg.bestScore = Math.max(levelProg.bestScore || 0, pct);
         levelProg.stars = Math.max(levelProg.stars || 0, stars);
-      } else {
-        if(passed){
-          worldProg.boss.completed = true;
+
+        if(firstClear){
+          rewardTitle = 'Level Cleared!';
+          rewardText = `You unlocked the next level and earned ${stars} star${stars===1?'':'s'}.`;
+        } else if(passed){
+          rewardTitle = 'Great Replay!';
+          rewardText = `You improved this level with ${stars} star${stars===1?'':'s'}.`;
         }
+      } else {
+        const firstBossClear = !worldProg.boss.completed && passed;
+        if(passed) worldProg.boss.completed = true;
         worldProg.boss.unlocked = true;
         worldProg.boss.bestScore = Math.max(worldProg.boss.bestScore || 0, pct);
         worldProg.boss.stars = Math.max(worldProg.boss.stars || 0, stars);
+
+        if(firstBossClear){
+          rewardTitle = 'Boss Defeated!';
+          rewardText = `You earned a world badge and unlocked the next world.`;
+        } else if(passed){
+          rewardTitle = 'Boss Replayed!';
+          rewardText = `You defeated the boss again and improved your result.`;
+        }
       }
 
       saveProgress();
       renderAll();
+
+      if(passed){
+        playSound('win');
+        showReward(rewardTitle, rewardText);
+      }
+
+      if(certificateUnlocked() && !state.certificates[state.gradeId]){
+        state.certificates[state.gradeId] = true;
+        saveCertificates();
+        playSound('certificate');
+        showReward('Certificate Unlocked!', `${getGrade().label} certificate is now available.`);
+        renderCertificate();
+      }
 
       const badge = state.quiz.mode === 'boss' && passed ? '🏅' : passed ? '⭐' : '📘';
       els.quizView.innerHTML = `
@@ -1174,8 +1388,8 @@
         <div class="tips">
           ${passed
             ? state.quiz.mode === 'boss'
-              ? 'You defeated the boss and earned a world badge. The next locked world is now available if this was your current progression path.'
-              : 'Nice work. Your next level is now unlocked. Try replaying later to improve your stars.'
+              ? 'You defeated the boss and earned a world badge. If this completes all worlds in your grade, your certificate is now unlocked.'
+              : 'Nice work. Your next level is now unlocked. Replay later to improve your stars.'
             : 'You can replay this challenge anytime. Read the explanations, then try again for a better score.'}
         </div>
 
@@ -1196,6 +1410,99 @@
       els.quizModal.classList.remove('show');
       els.quizView.innerHTML = '';
       state.quiz = null;
+    }
+
+    function showReward(title, text){
+      els.rewardPopupTitle.textContent = title;
+      els.rewardPopupText.textContent = text;
+      els.rewardPopup.classList.add('show');
+      clearTimeout(showReward._timer);
+      showReward._timer = setTimeout(() => {
+        els.rewardPopup.classList.remove('show');
+      }, 3200);
+    }
+
+    function renderCertificateModal(){
+      els.certificateView.innerHTML = `
+        <div style="padding:10px 4px;">
+          <div style="text-align:center;border:8px solid #f2d179;border-radius:26px;padding:34px 20px;background:linear-gradient(180deg,#fffef8,#ffffff);">
+            <div style="font-size:18px;font-weight:800;color:#7f5a15;letter-spacing:.08em;">CERTIFICATE OF ACHIEVEMENT</div>
+            <div style="font-size:46px;margin:12px 0 6px;">🏆</div>
+            <h2 style="margin:0 0 10px;font-size:34px;color:#123252;">I Love Math Adventure</h2>
+            <p style="margin:0;color:#3d5873;font-size:18px;line-height:1.6;">
+              This certifies that the learner has successfully completed all 5 worlds and defeated all boss battles in
+              <strong>${getGrade().label}</strong>.
+            </p>
+            <div style="margin:22px auto 10px;max-width:540px;padding:18px;border-radius:18px;background:#f8fbff;border:1px solid rgba(18,50,82,.08);font-weight:800;color:#123252;">
+              Professor Pi's Island Quest Master
+            </div>
+            <div style="margin-top:24px;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;color:#3d5873;">
+              <div>
+                <div style="border-top:2px solid #123252;padding-top:8px;min-width:180px;">Professor Pi</div>
+              </div>
+              <div>
+                <div style="border-top:2px solid #123252;padding-top:8px;min-width:180px;">Date Earned: ${new Date().toLocaleDateString()}</div>
+              </div>
+            </div>
+            <div style="margin-top:20px;font-size:13px;color:#5a7190;">
+              © 2026 ilovemath.live
+            </div>
+          </div>
+
+          <div class="quiz-actions" style="margin-top:18px;justify-content:center;">
+            <button class="btn btn-secondary" id="closeCertificateBtn">Close</button>
+            <button class="btn btn-primary" onclick="window.print()">Print Certificate</button>
+          </div>
+        </div>
+      `;
+      document.getElementById('closeCertificateBtn').addEventListener('click', () => {
+        els.certificateModal.classList.remove('show');
+      });
+    }
+
+    function playSound(type){
+      const ctx = window.AudioContext || window.webkitAudioContext;
+      if(!ctx) return;
+
+      if(!playSound.audioCtx){
+        try{
+          playSound.audioCtx = new ctx();
+        }catch(e){
+          return;
+        }
+      }
+
+      const audioCtx = playSound.audioCtx;
+      if(audioCtx.state === 'suspended'){
+        audioCtx.resume().catch(()=>{});
+      }
+
+      const now = audioCtx.currentTime;
+      const master = audioCtx.createGain();
+      master.connect(audioCtx.destination);
+      master.gain.setValueAtTime(0.05, now);
+
+      const tones = {
+        correct: [880, 1174],
+        wrong: [220, 165],
+        win: [523, 659, 784, 1047],
+        certificate: [784, 988, 1174, 1568]
+      };
+
+      const seq = tones[type] || [440];
+      seq.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type === 'wrong' ? 'sawtooth' : 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.12);
+        gain.gain.setValueAtTime(0.0001, now + i * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.18, now + i * 0.12 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 0.18);
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start(now + i * 0.12);
+        osc.stop(now + i * 0.12 + 0.2);
+      });
     }
 
     function wireEvents(){
@@ -1223,10 +1530,15 @@
       });
 
       els.resetProgressBtn.addEventListener('click', () => {
-        const ok = confirm('Reset all Math Adventure progress for every grade?');
+        const ok = confirm('Reset all Math Adventure progress, settings, and certificate unlocks for every grade?');
         if(!ok) return;
         localStorage.removeItem(storageKey);
+        localStorage.removeItem(settingsKey);
+        localStorage.removeItem(certificateKey);
         state.progress = {};
+        state.certificates = {};
+        state.gradeId = 'g1';
+        state.worldIndex = 0;
         ensureGradeProgress(state.gradeId);
         renderAll();
       });
@@ -1237,6 +1549,18 @@
 
       els.quizModal.addEventListener('click', e => {
         if(e.target === els.quizModal) closeQuiz();
+      });
+
+      els.viewCertificateBtn.addEventListener('click', () => {
+        if(!certificateUnlocked()) return;
+        renderCertificateModal();
+        els.certificateModal.classList.add('show');
+      });
+
+      els.certificateModal.addEventListener('click', e => {
+        if(e.target === els.certificateModal){
+          els.certificateModal.classList.remove('show');
+        }
       });
     }
 
