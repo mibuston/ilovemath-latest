@@ -373,71 +373,137 @@
   <script>
     const curriculum = {
 
-  "Grade 1": [
-    {
-      title:"Addition Within 20",
-      difficulty:"Beginner",
-      explanation:"Addition means combining numbers to get a total.",
-      example:"7 + 5 = 12",
-      tip:"Start from the bigger number and count up.",
-      questions:[
-        { q:"What is 2 + 3?", options:["4","5","6","7"], answer:"5", hint:"Count up from 3.", explain:"2 + 3 = 5" },
-        { q:"What is 4 + 5?", options:["7","8","9","10"], answer:"9", hint:"Add 4 and 5.", explain:"4 + 5 = 9" },
-        { q:"What is 6 + 7?", options:["12","13","14","15"], answer:"13", hint:"6 plus 7.", explain:"6 + 7 = 13" },
-        { q:"What is 9 + 8?", options:["15","16","17","18"], answer:"17", hint:"Count on.", explain:"9 + 8 = 17" },
-        { q:"What is 10 + 9?", options:["18","19","20","21"], answer:"19", hint:"10 plus 9.", explain:"10 + 9 = 19" },
-        { q:"What is 12 + 6?", options:["16","17","18","19"], answer:"18", hint:"Add carefully.", explain:"12 + 6 = 18" },
-        { q:"What is 15 + 4?", options:["18","19","20","21"], answer:"19", hint:"Count on.", explain:"15 + 4 = 19" },
-        { q:"What is 11 + 8?", options:["17","18","19","20"], answer:"19", hint:"Add 8 to 11.", explain:"11 + 8 = 19" },
-        { q:"What is 7 + 7?", options:["12","13","14","15"], answer:"14", hint:"Double 7.", explain:"7 + 7 = 14" },
-        { q:"What is 5 + 9?", options:["12","13","14","15"], answer:"14", hint:"Add 5 and 9.", explain:"5 + 9 = 14" }
-      ]
-    }
-  ],
+"Grade 1": [
+{
+ title:"Addition Within 20",
+ difficulty:"Beginner",
+ explanation:"Addition combines numbers.",
+ example:"5 + 3 = 8",
+ tip:"Count forward.",
+ questions:[
+  {q:"1+1",options:["1","2","3","4"],answer:"2",hint:"Add one.",explain:"1+1=2"},
+  {q:"2+3",options:["4","5","6","7"],answer:"5",hint:"Count up.",explain:"2+3=5"},
+  {q:"3+4",options:["6","7","8","9"],answer:"7",hint:"Add.",explain:"3+4=7"},
+  {q:"5+5",options:["8","9","10","11"],answer:"10",hint:"Double 5.",explain:"5+5=10"},
+  {q:"6+7",options:["12","13","14","15"],answer:"13",hint:"Add.",explain:"6+7=13"},
+  {q:"8+6",options:["12","13","14","15"],answer:"14",hint:"Add.",explain:"8+6=14"},
+  {q:"9+9",options:["16","17","18","19"],answer:"18",hint:"Double 9.",explain:"9+9=18"},
+  {q:"10+5",options:["14","15","16","17"],answer:"15",hint:"Add.",explain:"10+5=15"},
+  {q:"11+7",options:["16","17","18","19"],answer:"18",hint:"Add.",explain:"11+7=18"},
+  {q:"12+8",options:["18","19","20","21"],answer:"20",hint:"Add.",explain:"12+8=20"}
+ ]
+}
+],
 
-  "Grade 3": [
-    {
-      title:"Multiplication Basics",
-      difficulty:"Intermediate",
-      explanation:"Multiplication is repeated addition.",
-      example:"4 × 3 = 12",
-      tip:"Think of groups.",
-      questions:[
-        { q:"What is 2 × 3?", options:["5","6","7","8"], answer:"6", hint:"2 groups of 3.", explain:"2 × 3 = 6" },
-        { q:"What is 4 × 5?", options:["15","20","25","30"], answer:"20", hint:"4 groups of 5.", explain:"4 × 5 = 20" },
-        { q:"What is 6 × 3?", options:["18","16","15","12"], answer:"18", hint:"Multiply.", explain:"6 × 3 = 18" },
-        { q:"What is 7 × 4?", options:["24","26","28","30"], answer:"28", hint:"7 groups of 4.", explain:"7 × 4 = 28" },
-        { q:"What is 8 × 5?", options:["35","40","45","50"], answer:"40", hint:"8 groups of 5.", explain:"8 × 5 = 40" },
-        { q:"What is 9 × 3?", options:["26","27","28","29"], answer:"27", hint:"Multiply.", explain:"9 × 3 = 27" },
-        { q:"What is 6 × 6?", options:["30","32","34","36"], answer:"36", hint:"Square number.", explain:"6 × 6 = 36" },
-        { q:"What is 7 × 8?", options:["54","56","58","60"], answer:"56", hint:"Multiply carefully.", explain:"7 × 8 = 56" },
-        { q:"What is 9 × 9?", options:["72","81","90","99"], answer:"81", hint:"9 times 9.", explain:"9 × 9 = 81" },
-        { q:"What is 10 × 7?", options:["60","70","80","90"], answer:"70", hint:"Multiply by 10.", explain:"10 × 7 = 70" }
-      ]
-    }
-  ],
+"Grade 2": [
+{
+ title:"Addition with Regrouping",
+ difficulty:"Intermediate",
+ explanation:"Regroup when sum is 10+",
+ example:"27+15=42",
+ tip:"Carry over.",
+ questions:[
+  {q:"23+19",options:["40","41","42","43"],answer:"42",hint:"3+9=12.",explain:"23+19=42"},
+  {q:"34+28",options:["60","61","62","63"],answer:"62",hint:"Add.",explain:"34+28=62"},
+  {q:"45+17",options:["60","61","62","63"],answer:"62",hint:"Add.",explain:"45+17=62"},
+  {q:"56+29",options:["83","84","85","86"],answer:"85",hint:"Add.",explain:"56+29=85"},
+  {q:"67+18",options:["83","84","85","86"],answer:"85",hint:"Add.",explain:"67+18=85"},
+  {q:"78+14",options:["90","91","92","93"],answer:"92",hint:"Add.",explain:"78+14=92"},
+  {q:"89+11",options:["99","100","101","102"],answer:"100",hint:"Add.",explain:"89+11=100"},
+  {q:"32+49",options:["80","81","82","83"],answer:"81",hint:"Add.",explain:"32+49=81"},
+  {q:"24+38",options:["60","61","62","63"],answer:"62",hint:"Add.",explain:"24+38=62"},
+  {q:"41+59",options:["99","100","101","102"],answer:"100",hint:"Add.",explain:"41+59=100"}
+ ]
+}
+],
 
-  "Grade 5": [
-    {
-      title:"Decimals",
-      difficulty:"Intermediate",
-      explanation:"Decimals represent parts of a whole.",
-      example:"0.5 = 1/2",
-      tip:"Align decimal points.",
-      questions:[
-        { q:"What is 0.2 + 0.3?", options:["0.4","0.5","0.6","0.7"], answer:"0.5", hint:"Add tenths.", explain:"0.2 + 0.3 = 0.5" },
-        { q:"What is 0.7 - 0.2?", options:["0.4","0.5","0.6","0.7"], answer:"0.5", hint:"Subtract tenths.", explain:"0.7 - 0.2 = 0.5" },
-        { q:"Which is greater?", options:["0.8","0.75","same","cannot tell"], answer:"0.8", hint:"Compare place values.", explain:"0.8 is greater." },
-        { q:"What is 0.6 + 0.4?", options:["0.8","0.9","1.0","1.1"], answer:"1.0", hint:"Add decimals.", explain:"0.6 + 0.4 = 1.0" },
-        { q:"What is 1.2 - 0.5?", options:["0.6","0.7","0.8","0.9"], answer:"0.7", hint:"Subtract.", explain:"1.2 - 0.5 = 0.7" },
-        { q:"What is 0.9 + 0.8?", options:["1.5","1.6","1.7","1.8"], answer:"1.7", hint:"Add carefully.", explain:"0.9 + 0.8 = 1.7" },
-        { q:"What is 2.0 - 1.5?", options:["0.4","0.5","0.6","0.7"], answer:"0.5", hint:"Subtract decimals.", explain:"2.0 - 1.5 = 0.5" },
-        { q:"What is 0.25 + 0.25?", options:["0.25","0.5","0.75","1"], answer:"0.5", hint:"Add hundredths.", explain:"0.25 + 0.25 = 0.5" },
-        { q:"What is 0.1 + 0.9?", options:["0.9","1.0","1.1","1.2"], answer:"1.0", hint:"Add.", explain:"0.1 + 0.9 = 1.0" },
-        { q:"What is 1.5 + 0.5?", options:["1.5","1.8","2.0","2.5"], answer:"2.0", hint:"Add decimals.", explain:"1.5 + 0.5 = 2.0" }
-      ]
-    }
-  ]
+"Grade 3": [
+{
+ title:"Multiplication",
+ difficulty:"Intermediate",
+ explanation:"Repeated addition",
+ example:"4x3=12",
+ tip:"Memorize facts",
+ questions:[
+  {q:"2x2",options:["2","3","4","5"],answer:"4",hint:"2 groups of 2.",explain:"2x2=4"},
+  {q:"3x4",options:["10","11","12","13"],answer:"12",hint:"Multiply.",explain:"3x4=12"},
+  {q:"5x6",options:["28","29","30","31"],answer:"30",hint:"Multiply.",explain:"5x6=30"},
+  {q:"7x8",options:["54","55","56","57"],answer:"56",hint:"Multiply.",explain:"7x8=56"},
+  {q:"9x9",options:["80","81","82","83"],answer:"81",hint:"Multiply.",explain:"9x9=81"},
+  {q:"6x7",options:["40","41","42","43"],answer:"42",hint:"Multiply.",explain:"6x7=42"},
+  {q:"8x4",options:["30","31","32","33"],answer:"32",hint:"Multiply.",explain:"8x4=32"},
+  {q:"3x9",options:["26","27","28","29"],answer:"27",hint:"Multiply.",explain:"3x9=27"},
+  {q:"10x5",options:["40","50","60","70"],answer:"50",hint:"Multiply.",explain:"10x5=50"},
+  {q:"4x7",options:["26","27","28","29"],answer:"28",hint:"Multiply.",explain:"4x7=28"}
+ ]
+}
+],
+
+"Grade 4": [
+{
+ title:"Division",
+ difficulty:"Intermediate",
+ explanation:"Split equally",
+ example:"12÷3=4",
+ tip:"Use multiplication.",
+ questions:[
+  {q:"12÷3",options:["3","4","5","6"],answer:"4",hint:"Think multiply.",explain:"12÷3=4"},
+  {q:"24÷6",options:["2","3","4","5"],answer:"4",hint:"Multiply.",explain:"24÷6=4"},
+  {q:"36÷6",options:["5","6","7","8"],answer:"6",hint:"Multiply.",explain:"36÷6=6"},
+  {q:"40÷5",options:["6","7","8","9"],answer:"8",hint:"Multiply.",explain:"40÷5=8"},
+  {q:"45÷9",options:["4","5","6","7"],answer:"5",hint:"Multiply.",explain:"45÷9=5"},
+  {q:"63÷7",options:["8","9","10","11"],answer:"9",hint:"Multiply.",explain:"63÷7=9"},
+  {q:"72÷8",options:["8","9","10","11"],answer:"9",hint:"Multiply.",explain:"72÷8=9"},
+  {q:"81÷9",options:["8","9","10","11"],answer:"9",hint:"Multiply.",explain:"81÷9=9"},
+  {q:"56÷7",options:["6","7","8","9"],answer:"8",hint:"Multiply.",explain:"56÷7=8"},
+  {q:"90÷10",options:["7","8","9","10"],answer:"9",hint:"Multiply.",explain:"90÷10=9"}
+ ]
+}
+],
+
+"Grade 5": [
+{
+ title:"Decimals",
+ difficulty:"Intermediate",
+ explanation:"Parts of whole",
+ example:"0.5",
+ tip:"Align decimals",
+ questions:[
+  {q:"0.2+0.3",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Add.",explain:"0.2+0.3=0.5"},
+  {q:"0.7-0.2",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract.",explain:"0.7-0.2=0.5"},
+  {q:"0.5+0.5",options:["0.5","1.0","1.5","2.0"],answer:"1.0",hint:"Add.",explain:"0.5+0.5=1.0"},
+  {q:"1.2-0.2",options:["0.8","0.9","1.0","1.1"],answer:"1.0",hint:"Subtract.",explain:"1.2-0.2=1.0"},
+  {q:"0.9+0.8",options:["1.5","1.6","1.7","1.8"],answer:"1.7",hint:"Add.",explain:"0.9+0.8=1.7"},
+  {q:"2.0-1.5",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract.",explain:"2.0-1.5=0.5"},
+  {q:"0.25+0.25",options:["0.25","0.5","0.75","1"],answer:"0.5",hint:"Add.",explain:"0.25+0.25=0.5"},
+  {q:"0.1+0.9",options:["0.9","1.0","1.1","1.2"],answer:"1.0",hint:"Add.",explain:"0.1+0.9=1.0"},
+  {q:"1.5+0.5",options:["1.5","1.8","2.0","2.5"],answer:"2.0",hint:"Add.",explain:"1.5+0.5=2.0"},
+  {q:"2.3-1.1",options:["1.0","1.1","1.2","1.3"],answer:"1.2",hint:"Subtract.",explain:"2.3-1.1=1.2"}
+ ]
+}
+],
+
+"Grade 6": [
+{
+ title:"Percents",
+ difficulty:"Intermediate",
+ explanation:"Out of 100",
+ example:"50%=0.5",
+ tip:"Divide by 100",
+ questions:[
+  {q:"50% as decimal",options:["5","0.5","0.05","0.005"],answer:"0.5",hint:"Divide by 100.",explain:"50%=0.5"},
+  {q:"25% as decimal",options:["0.25","0.5","2.5","25"],answer:"0.25",hint:"Divide by 100.",explain:"25%=0.25"},
+  {q:"10% of 100",options:["5","10","15","20"],answer:"10",hint:"Percent.",explain:"10% of 100=10"},
+  {q:"20% of 50",options:["5","10","15","20"],answer:"10",hint:"Multiply.",explain:"20% of 50=10"},
+  {q:"75% as fraction",options:["1/4","3/4","2/5","5/2"],answer:"3/4",hint:"Simplify.",explain:"75%=3/4"},
+  {q:"30% of 200",options:["30","40","50","60"],answer:"60",hint:"Multiply.",explain:"30% of 200=60"},
+  {q:"5% of 100",options:["1","3","5","10"],answer:"5",hint:"Percent.",explain:"5% of 100=5"},
+  {q:"80% as decimal",options:["0.8","0.08","8","80"],answer:"0.8",hint:"Divide.",explain:"80%=0.8"},
+  {q:"60% of 50",options:["20","25","30","35"],answer:"30",hint:"Multiply.",explain:"60% of 50=30"},
+  {q:"90% as decimal",options:["0.9","0.09","9","90"],answer:"0.9",hint:"Divide.",explain:"90%=0.9"}
+ ]
+}
+]
 
 };
 
