@@ -4,185 +4,747 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>I Love Math | Premium Interactive Tutorial</title>
-  <meta name="description" content="Premium interactive math tutorial for I Love Math with login, student progress tracking, topic unlocking, sound effects, parent dashboard, and mobile-friendly learning." />
+  <meta
+    name="description"
+    content="Premium interactive math tutorial for I Love Math with student login, mastery tracking, lesson unlocking, badges, sound effects, parent dashboard, and mobile-friendly learning."
+  />
   <style>
     :root{
       --blue:#0f6fff;
-      --blue2:#4fb5ff;
+      --blue2:#5ab9ff;
       --nav:#0d67d7;
       --dark:#123252;
-      --text:#4a6480;
+      --text:#506982;
+      --muted:#7b93ac;
       --white:#ffffff;
       --gold:#ffbf3f;
+      --gold2:#ffe08f;
       --green:#21b66f;
+      --green2:#67db9e;
       --red:#ef5350;
       --purple:#7f5cff;
-      --bg1:#e8f6ff;
-      --bg2:#fff7e6;
+      --purple2:#b099ff;
+      --pink:#ff7cb4;
+      --bg1:#eaf7ff;
+      --bg2:#fff8eb;
+      --bg3:#f7faff;
       --glass:rgba(255,255,255,0.78);
       --glass-strong:rgba(255,255,255,0.92);
-      --shadow:0 18px 40px rgba(18,50,82,0.14);
-      --shadow-hover:0 24px 60px rgba(18,50,82,0.18);
+      --border:rgba(18,50,82,0.08);
+      --shadow:0 18px 42px rgba(18,50,82,0.12);
+      --shadow-hover:0 26px 64px rgba(18,50,82,0.18);
       --radius-xl:30px;
       --radius-lg:22px;
       --radius-md:16px;
-      --maxw:1320px;
+      --radius-sm:12px;
+      --maxw:1380px;
+      --transition:.22s ease;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:linear-gradient(180deg,var(--bg1),#f7fbff 40%, var(--bg2));}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--dark);
+      background:
+        radial-gradient(circle at top left, rgba(90,185,255,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,191,63,.16), transparent 28%),
+        linear-gradient(180deg,var(--bg1),#f7fbff 40%,var(--bg2));
+    }
+
     a{text-decoration:none;color:inherit}
     button,input,select{font:inherit}
     button{border:none}
+    img{max-width:100%}
 
     .topbar{
-      position:sticky;top:0;z-index:50;
-      background:rgba(255,255,255,0.88);
+      position:sticky;top:0;z-index:80;
+      background:rgba(255,255,255,0.84);
       backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(15,111,255,0.08);
+      border-bottom:1px solid var(--border);
     }
     .topbar-inner{
-      max-width:var(--maxw);margin:auto;padding:14px 18px;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      max-width:var(--maxw);
+      margin:auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
-    .brand{display:flex;align-items:center;gap:14px;font-weight:800;color:var(--dark)}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:800;
+      color:var(--dark);
+    }
     .logo{
-      width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:white;display:grid;place-items:center;font-size:24px;box-shadow:var(--shadow);
+      width:58px;height:58px;border-radius:18px;
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:white;
+      display:grid;place-items:center;
+      font-size:26px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
-    .brand small{display:block;color:var(--text);font-weight:700;font-size:12px;letter-spacing:.4px}
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-40% auto auto -40%;
+      width:70px;height:70px;
+      background:rgba(255,255,255,.2);
+      transform:rotate(35deg);
+    }
+    .brand-text strong{display:block;font-size:20px}
+    .brand-text small{
+      display:block;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.35px;
+      margin-top:2px;
+      font-size:12px;
+    }
+
+    .top-actions,.hero-actions,.cluster,.practice-actions,.login-actions,.mini-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
 
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      cursor:pointer;border-radius:16px;padding:13px 17px;font-weight:800;
-      transition:.2s transform,.2s box-shadow,.2s opacity;box-shadow:var(--shadow);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border-radius:16px;
+      padding:13px 18px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform var(--transition), box-shadow var(--transition), opacity var(--transition), background var(--transition);
+      box-shadow:var(--shadow);
+      user-select:none;
     }
     .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:var(--shadow)}
     .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
     .btn-secondary{background:#fff;color:var(--dark)}
-    .btn-success{background:linear-gradient(135deg,var(--green),#43d58f);color:#fff}
-    .btn-danger{background:linear-gradient(135deg,var(--red),#ff7d79);color:#fff}
-    .btn-gold{background:linear-gradient(135deg,var(--gold),#ffd97b);color:#5d4300}
-    .btn-purple{background:linear-gradient(135deg,var(--purple),#9f86ff);color:#fff}
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn-success{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff}
+    .btn-danger{background:linear-gradient(135deg,var(--red),#ff7f7b);color:#fff}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#5b4100}
+    .btn-purple{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff}
+    .btn-ghost{background:rgba(255,255,255,.68);color:var(--dark);box-shadow:none;border:1px solid rgba(18,50,82,.08)}
 
     .wrap{max-width:var(--maxw);margin:auto;padding:22px 18px 60px}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:stretch;margin-top:18px}
-    .hero-card,.side-card,.panel,.lesson-card,.practice-card,.certificate-card,.topic-card,.stats-card,.dashboard-card,.login-card,.map-card,.mini-card{
-      background:var(--glass);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.65);
-      box-shadow:var(--shadow);border-radius:var(--radius-xl);
-    }
-    .hero-card,.side-card,.panel,.lesson-card,.practice-card,.certificate-card,.dashboard-card,.login-card,.map-card{padding:24px}
-    .hero h1{font-size:clamp(32px,4vw,54px);line-height:1.05;margin:0 0 16px}
-    .hero p{font-size:18px;line-height:1.7;color:var(--text);margin:0 0 18px}
-    .label{font-size:12px;font-weight:800;color:var(--nav);letter-spacing:.6px;text-transform:uppercase}
-    .badges,.hero-actions,.toolbar,.practice-actions,.top-actions,.login-actions{display:flex;flex-wrap:wrap;gap:12px}
-    .badge{padding:10px 14px;border-radius:999px;background:#fff;color:var(--nav);font-weight:700;font-size:14px}
     .section-space{margin-top:22px}
 
+    .hero{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:22px;
+      align-items:stretch;
+      margin-top:16px;
+    }
+
+    .card,
+    .hero-card,
+    .side-card,
+    .panel,
+    .lesson-card,
+    .practice-card,
+    .certificate-card,
+    .dashboard-card,
+    .login-card,
+    .map-card,
+    .insight-card,
+    .summary-card,
+    .achievement-card,
+    .spotlight-card{
+      background:var(--glass);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.62);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius-xl);
+    }
+
+    .hero-card,.side-card,.panel,.lesson-card,.practice-card,.certificate-card,.dashboard-card,.login-card,.map-card,.insight-card,.summary-card,.achievement-card,.spotlight-card{
+      padding:24px;
+    }
+
+    .label{
+      display:inline-block;
+      font-size:12px;
+      font-weight:800;
+      color:var(--nav);
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    .hero h1{
+      font-size:clamp(32px,4.5vw,58px);
+      line-height:1.02;
+      margin:0 0 14px;
+    }
+    .hero p{
+      font-size:18px;
+      line-height:1.74;
+      color:var(--text);
+      margin:0 0 18px;
+    }
+    .headline-accent{color:var(--blue)}
+    .headline-gold{color:#d19100}
+    .headline-purple{color:var(--purple)}
+
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:18px 0 18px;
+    }
+    .badge{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      color:var(--nav);
+      font-weight:800;
+      font-size:14px;
+      border:1px solid rgba(15,111,255,.08);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+    .summary-card{
+      border-radius:22px;
+      background:linear-gradient(180deg,#eef6ff,#ffffff);
+      border:1px solid #dbe9f7;
+    }
+    .summary-card h4{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .summary-card p{
+      margin:0;
+      color:var(--text);
+      font-size:14px;
+      line-height:1.6;
+    }
+
     .mascot{
-      min-height:230px;border-radius:24px;padding:22px;background:linear-gradient(180deg,#eef8ff,#fff7e8);
-      display:flex;align-items:center;justify-content:center;text-align:center;border:1px dashed rgba(15,111,255,.18);
+      min-height:250px;
+      border-radius:24px;
+      padding:22px;
+      background:linear-gradient(180deg,#eef8ff,#fff7e8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      border:1px dashed rgba(15,111,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .mascot::before,.mascot::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      filter:blur(6px);
+      opacity:.55;
+    }
+    .mascot::before{
+      width:120px;height:120px;
+      background:rgba(127,92,255,.14);
+      top:-18px;right:-18px;
+    }
+    .mascot::after{
+      width:110px;height:110px;
+      background:rgba(255,191,63,.18);
+      bottom:-14px;left:-14px;
     }
     .pi{
-      width:140px;height:140px;border-radius:30px;background:linear-gradient(135deg,#ffd86f,#ffbe3f);
-      display:grid;place-items:center;font-size:64px;box-shadow:0 18px 35px rgba(255,191,63,.3);
+      width:148px;height:148px;
       margin:0 auto 14px;
+      border-radius:36px;
+      background:linear-gradient(135deg,#ffdd79,#ffbe3f);
+      box-shadow:0 18px 35px rgba(255,191,63,.3);
+      display:grid;place-items:center;
+      font-size:64px;
     }
-    .mascot h3{margin:0 0 8px;font-size:24px}
-    .mascot p{margin:0;color:var(--text);line-height:1.6}
-
-    .grid-main{display:grid;grid-template-columns:340px 1fr;gap:22px;margin-top:22px}
-    .panel h2,.lesson-card h2,.practice-card h2,.certificate-card h2,.dashboard-card h2,.login-card h2,.map-card h2{margin:0 0 14px;font-size:24px}
-    .control{margin-bottom:16px}
-    .control label{display:block;margin-bottom:8px;font-weight:700;color:var(--dark)}
-    .control select,.control input{
-      width:100%;padding:13px 14px;border-radius:14px;border:1px solid #d9e7f6;background:#fff;
+    .mascot h3{
+      margin:0 0 8px;
+      font-size:26px;
+    }
+    .mascot p{
+      margin:0;
+      color:var(--text);
+      line-height:1.68;
+      font-size:15px;
     }
 
-    .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .stats-card,.mini-card,.achievement-item{
+      padding:16px;
+      border-radius:20px;
+      text-align:center;
+      background:rgba(255,255,255,.84);
+      border:1px solid rgba(18,50,82,.06);
+    }
+    .stats-card strong,.mini-card strong{
+      display:block;
+      font-size:28px;
+      margin-top:6px;
+    }
+    .mini-card p{
+      margin:8px 0 0;
+      color:var(--text);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .insights-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      margin-top:22px;
+    }
+
+    .auth-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
     .welcome-box{
-      padding:16px;border-radius:20px;background:linear-gradient(180deg,#eef6ff,#ffffff);border:1px solid #d9e8f8;
-      line-height:1.7;color:var(--text)
+      padding:18px;
+      border-radius:22px;
+      background:linear-gradient(180deg,#eef6ff,#ffffff);
+      border:1px solid #dce9f8;
+      line-height:1.8;
+      color:var(--text);
+      min-height:100%;
     }
 
-    .dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .stats-card,.mini-card{padding:16px;border-radius:20px;text-align:center}
-    .stats-card strong,.mini-card strong{display:block;font-size:28px;margin-top:6px}
-    .mini-card p{margin:8px 0 0;color:var(--text);font-size:14px}
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
 
-    .map-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .achievement-strip{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .achievement-item{
+      text-align:left;
+    }
+    .achievement-item .icon{
+      font-size:24px;
+      margin-bottom:10px;
+    }
+    .achievement-item h4{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .achievement-item p{
+      margin:0;
+      font-size:13px;
+      color:var(--text);
+      line-height:1.5;
+    }
+    .achievement-item.locked{
+      opacity:.55;
+      filter:saturate(.6);
+    }
+
+    .map-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
     .world-card{
-      padding:16px;border-radius:22px;background:rgba(255,255,255,0.86);border:2px solid transparent;
-      box-shadow:var(--shadow);transition:.2s transform,.2s border,.2s opacity;
+      padding:16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.86);
+      border:2px solid transparent;
+      box-shadow:var(--shadow);
+      transition:transform var(--transition), border var(--transition), opacity var(--transition), background var(--transition);
+      text-align:left;
+      cursor:pointer;
     }
     .world-card:hover{transform:translateY(-2px)}
-    .world-card.locked{opacity:.62}
+    .world-card.locked{opacity:.58}
     .world-card.active{border-color:var(--blue);background:#eef6ff}
-    .world-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
-    .world-badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#f3f8ff;color:var(--nav);font-weight:800}
-    .stars-row{letter-spacing:2px;font-size:18px;color:#f0a800;margin-top:6px}
+    .world-card.completed{border-color:#ffcb58}
+    .world-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .world-badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#f3f8ff;
+      color:var(--nav);
+      font-weight:800;
+    }
+    .world-meta{
+      color:var(--text);
+      font-size:13px;
+      margin-top:6px;
+      line-height:1.5;
+    }
+    .stars-row{
+      letter-spacing:2px;
+      font-size:18px;
+      color:#f0a800;
+      margin-top:10px;
+    }
 
-    .topic-list{display:grid;gap:12px;margin-top:12px}
+    .grid-main{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:22px;
+      margin-top:22px;
+      align-items:start;
+    }
+
+    .panel h2,.lesson-card h2,.practice-card h2,.certificate-card h2,.dashboard-card h2,.login-card h2,.map-card h2,.insight-card h2,.spotlight-card h2{
+      margin:0 0 14px;
+      font-size:26px;
+    }
+
+    .control{margin-bottom:16px}
+    .control label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:800;
+      color:var(--dark);
+    }
+    .control select,.control input{
+      width:100%;
+      padding:14px 15px;
+      border-radius:14px;
+      border:1px solid #d9e7f6;
+      background:#fff;
+      outline:none;
+      transition:border-color var(--transition), box-shadow var(--transition);
+    }
+    .control select:focus,.control input:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(15,111,255,.1);
+    }
+
+    .quick-summary{
+      padding:16px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid #e3edf7;
+      margin-top:16px;
+      line-height:1.7;
+      color:var(--text);
+      font-size:14px;
+    }
+    .quick-summary strong{color:var(--dark)}
+
+    .topic-list{display:grid;gap:12px;margin-top:14px}
     .topic-card{
-      padding:14px;border-radius:18px;cursor:pointer;transition:.2s transform,.2s border,.2s background;
-      background:rgba(255,255,255,0.88);border:2px solid transparent;
+      padding:16px;
+      border-radius:18px;
+      cursor:pointer;
+      transition:transform var(--transition), border var(--transition), background var(--transition), opacity var(--transition);
+      background:rgba(255,255,255,.88);
+      border:2px solid transparent;
+      position:relative;
+      overflow:hidden;
     }
     .topic-card:hover{transform:translateY(-2px)}
     .topic-card.active{border-color:var(--blue);background:#eef6ff}
     .topic-card.locked{opacity:.55;cursor:not-allowed}
-    .topic-card h4{margin:0 0 6px;font-size:16px}
+    .topic-card.favorite::after{
+      content:"★";
+      position:absolute;
+      top:10px;right:12px;
+      color:#e4a700;
+      font-size:16px;
+    }
+    .topic-card h4{margin:0 0 7px;font-size:16px}
     .topic-card p{margin:0;color:var(--text);font-size:14px;line-height:1.5}
 
-    .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
-    .pill{padding:8px 12px;border-radius:999px;background:#eef6ff;color:var(--nav);font-size:13px;font-weight:800}
-    .explain-box,.example-box,.tip-box,.answer-box,.hint-box{
-      padding:18px;border-radius:20px;margin-top:14px;line-height:1.7;
+    .lesson-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
-    .explain-box{background:#f7fbff;border:1px solid #dbeaf8}
-    .example-box{background:#fff8ea;border:1px solid #f5dfaa}
-    .tip-box{background:#f4f0ff;border:1px solid #dfd4ff}
-    .answer-box{background:#eefcf4;border:1px solid #ccefdc}
+
+    .lesson-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:14px 0;
+    }
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:#eef6ff;
+      color:var(--nav);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .explain-box,.example-box,.tip-box,.objective-box,.vocab-box,.hint-box,.answer-box,.insight-box{
+      padding:18px;
+      border-radius:20px;
+      line-height:1.75;
+    }
+    .objective-box{background:#f7fbff;border:1px solid #dbeaf8}
+    .vocab-box{background:#fff8ea;border:1px solid #f5dfaa}
+    .explain-box{background:#f5f1ff;border:1px solid #e0d5ff}
+    .example-box{background:#fff;border:1px solid #e3edf7}
+    .tip-box{background:#eefcf4;border:1px solid #ccefdc}
     .hint-box{background:#fff4eb;border:1px solid #ffd4b0}
+    .answer-box{background:#eefcf4;border:1px solid #ccefdc}
+    .insight-box{background:#fff9ef;border:1px solid #f1dfb0}
 
-    .progress-bar{height:14px;background:#eaf2fb;border-radius:999px;overflow:hidden;margin-top:14px}
-    .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--purple));transition:width .35s ease}
-    .practice-question{background:#fff;border:1px solid #e2edf7;border-radius:22px;padding:18px;margin-top:14px}
-    .practice-question h4{margin:0 0 10px;font-size:18px}
-    .options{display:grid;gap:10px;margin-top:14px}
-    .option-btn{
-      width:100%;text-align:left;padding:14px 16px;border-radius:14px;border:1px solid #d7e5f5;
-      background:#fff;cursor:pointer;font-weight:700;transition:.2s all;
+    .lesson-box-title{
+      display:block;
+      margin-bottom:8px;
+      font-weight:800;
+      color:var(--dark);
     }
-    .option-btn:hover{transform:translateY(-1px);border-color:var(--blue)}
-    .option-btn.correct{background:#eafaf1;border-color:var(--green)}
-    .option-btn.wrong{background:#fff0ef;border-color:var(--red)}
 
-    .feedback{margin-top:12px;font-weight:800}
+    .practice-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .micro-stats{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .micro-pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #e2edf7;
+      font-size:13px;
+      font-weight:800;
+      color:var(--nav);
+    }
+
+    .progress-bar{
+      height:14px;
+      background:#eaf2fb;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:14px;
+    }
+    .progress-fill{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--blue),var(--purple));
+      transition:width .35s ease;
+    }
+
+    .practice-question{
+      background:#fff;
+      border:1px solid #e2edf7;
+      border-radius:24px;
+      padding:18px;
+      margin-top:14px;
+      position:relative;
+    }
+    .practice-question h4{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.4;
+    }
+    .options{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .option-btn{
+      width:100%;
+      text-align:left;
+      padding:15px 16px;
+      border-radius:14px;
+      border:1px solid #d7e5f5;
+      background:#fff;
+      cursor:pointer;
+      font-weight:700;
+      transition:transform var(--transition), border var(--transition), background var(--transition);
+    }
+    .option-btn:hover{
+      transform:translateY(-1px);
+      border-color:var(--blue);
+    }
+    .option-btn.correct{
+      background:#eafaf1;
+      border-color:var(--green);
+    }
+    .option-btn.wrong{
+      background:#fff0ef;
+      border-color:var(--red);
+    }
+
+    .feedback{
+      margin-top:12px;
+      font-weight:800;
+      min-height:22px;
+    }
     .feedback.ok{color:var(--green)}
     .feedback.no{color:var(--red)}
 
-    .certificate-card{display:none;margin-top:22px;text-align:center}
-    .certificate{
-      margin-top:18px;background:linear-gradient(180deg,#fffef8,#fff7db);border:4px solid #f3d277;
-      border-radius:28px;padding:30px 22px;
-    }
-    .certificate h3{font-size:34px;margin:8px 0}
-    .certificate p{margin:10px 0;line-height:1.7}
-    .sig{margin-top:20px;display:flex;justify-content:space-between;gap:20px;font-weight:700;color:var(--text)}
-    .footer-note{margin-top:28px;text-align:center;color:var(--text);line-height:1.7}
+    .practice-actions{margin-top:14px}
     .hidden{display:none !important}
 
-    @media (max-width: 1080px){
-      .hero,.grid-main,.auth-grid,.map-grid,.dashboard-grid{grid-template-columns:1fr 1fr}
+    .certificate-card{
+      display:none;
+      margin-top:22px;
+      text-align:center;
     }
-    @media (max-width: 880px){
-      .hero,.grid-main,.auth-grid,.map-grid,.dashboard-grid{grid-template-columns:1fr}
+    .certificate{
+      margin-top:18px;
+      background:linear-gradient(180deg,#fffef8,#fff7db);
+      border:4px solid #f3d277;
+      border-radius:28px;
+      padding:32px 22px;
+      position:relative;
+      overflow:hidden;
     }
-    @media (max-width: 680px){
+    .certificate::before,.certificate::after{
+      content:"✦";
+      position:absolute;
+      font-size:38px;
+      color:rgba(243,210,119,.55);
+    }
+    .certificate::before{top:18px;left:18px}
+    .certificate::after{bottom:18px;right:18px}
+    .certificate h3{
+      font-size:38px;
+      margin:8px 0;
+    }
+    .certificate p{
+      margin:10px 0;
+      line-height:1.75;
+    }
+    .sig{
+      margin-top:22px;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      font-weight:700;
+      color:var(--text);
+    }
+
+    .footer-note{
+      margin-top:28px;
+      text-align:center;
+      color:var(--text);
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:120;
+      background:rgba(18,50,82,.95);
+      color:#fff;
+      padding:14px 16px;
+      border-radius:16px;
+      box-shadow:var(--shadow-hover);
+      transform:translateY(18px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity var(--transition), transform var(--transition);
+      max-width:320px;
+      line-height:1.55;
+      font-size:14px;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .confetti-wrap{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      z-index:110;
+    }
+    .confetti{
+      position:absolute;
+      width:12px;
+      height:18px;
+      border-radius:4px;
+      opacity:.92;
+      animation:fall linear forwards;
+    }
+    @keyframes fall{
+      0%{transform:translateY(-20px) rotate(0deg)}
+      100%{transform:translateY(110vh) rotate(720deg)}
+    }
+
+    @media print{
+      body *{visibility:hidden !important}
+      #certificateCard, #certificateCard *{visibility:visible !important}
+      #certificateCard{
+        display:block !important;
+        position:absolute;
+        inset:0;
+        margin:0;
+        background:white;
+        width:100%;
+      }
+      .certificate{
+        box-shadow:none;
+        margin-top:0;
+      }
+    }
+
+    @media (max-width: 1180px){
+      .hero,.insights-grid,.grid-main,.auth-grid,.info-grid{grid-template-columns:1fr}
+      .dashboard-grid{grid-template-columns:repeat(3,1fr)}
+      .map-grid{grid-template-columns:repeat(2,1fr)}
+      .achievement-strip{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 820px){
+      .hero-grid,.hero-stats,.dashboard-grid,.map-grid,.achievement-strip{grid-template-columns:1fr}
       .wrap{padding:18px 14px 50px}
-      .hero-card,.side-card,.panel,.lesson-card,.practice-card,.certificate-card,.dashboard-card,.login-card,.map-card{padding:18px}
-      .badges,.hero-actions,.practice-actions,.toolbar,.top-actions,.login-actions{flex-direction:column}
+      .hero-card,.side-card,.panel,.lesson-card,.practice-card,.certificate-card,.dashboard-card,.login-card,.map-card,.insight-card,.summary-card,.achievement-card,.spotlight-card{padding:18px}
+      .top-actions,.hero-actions,.practice-actions,.cluster,.login-actions,.mini-actions{flex-direction:column}
       .btn{width:100%}
       .sig{text-align:center;flex-direction:column}
     }
@@ -193,17 +755,18 @@
     <div class="topbar-inner">
       <div class="brand">
         <div class="logo">π</div>
-        <div>
-          I Love Math
+        <div class="brand-text">
+          <strong>I Love Math</strong>
           <small>Premium Interactive Tutorial</small>
         </div>
       </div>
+
       <nav class="top-actions">
         <a href="index.html" class="btn btn-secondary">Home</a>
         <a href="worksheets.html" class="btn btn-secondary">Worksheets</a>
         <a href="game.html" class="btn btn-secondary">Games</a>
         <button type="button" class="btn btn-secondary" id="soundToggleBtn">🔊 Sound On</button>
-        <button type="button" class="btn btn-primary" onclick="scrollToTutorial()">Start</button>
+        <button type="button" class="btn btn-primary" onclick="scrollToTutorial()">Start Learning</button>
       </nav>
     </div>
   </div>
@@ -211,64 +774,154 @@
   <div class="wrap">
     <section class="hero">
       <div class="hero-card">
-        <div class="label">Premium Learning Platform</div>
-        <h1>Math lessons with <span style="color:var(--blue)">student tracking</span>, <span style="color:var(--purple)">unlock levels</span>, and <span style="color:var(--gold)">parent dashboard</span></h1>
+        <div class="label">Paid-Level Learning Experience</div>
+        <h1>
+          A more <span class="headline-accent">premium</span>,
+          <span class="headline-purple">structured</span>, and
+          <span class="headline-gold">reward-driven</span> tutorial system
+        </h1>
         <p>
-          This upgraded tutorial system gives your website a paid-platform feel. Students can log in with a name,
-          save progress on the same device, unlock new lessons by earning stars, hear simple sound feedback,
-          and let parents see progress at a glance.
+          This upgraded version gives your tutorial page a much stronger subscription-platform feel.
+          Students can save progress, build streaks, earn XP and stars, unlock lessons, receive badges,
+          review worked examples, and show parents a clear learning dashboard.
         </p>
+
         <div class="badges">
-          <span class="badge">Student Login</span>
-          <span class="badge">Auto Save Progress</span>
+          <span class="badge">Student Profile</span>
+          <span class="badge">XP + Stars</span>
+          <span class="badge">Daily Streak</span>
           <span class="badge">Lesson Unlocking</span>
-          <span class="badge">Sound Effects</span>
+          <span class="badge">Badges</span>
           <span class="badge">Parent Dashboard</span>
-          <span class="badge">Mobile App Feel</span>
+          <span class="badge">Premium UI</span>
+          <span class="badge">One-File Setup</span>
         </div>
+
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="scrollToLogin()">Create Student Session</button>
           <button class="btn btn-gold" onclick="scrollToTutorial()">Open Tutorial</button>
+          <button class="btn btn-purple" onclick="jumpToMap()">View Lesson Map</button>
+        </div>
+
+        <div class="hero-grid">
+          <div class="summary-card">
+            <div class="label">Student Journey</div>
+            <h4>Learn, practice, unlock</h4>
+            <p>Each lesson has learning goals, vocabulary, explanation, guided example, hints, and mastery tracking.</p>
+          </div>
+          <div class="summary-card">
+            <div class="label">Parent Visibility</div>
+            <h4>Simple but valuable reporting</h4>
+            <p>Parents can see completed lessons, overall accuracy, XP, badges, and latest topic practiced.</p>
+          </div>
         </div>
       </div>
+
       <div class="side-card">
         <div class="mascot">
           <div>
             <div class="pi">🎓</div>
             <h3>Professor Pi</h3>
-            <p>"Great learners grow through practice, confidence, and one clear step at a time."</p>
+            <p>
+              “Real math confidence grows one clear explanation,
+              one practice set, and one success at a time.”
+            </p>
           </div>
         </div>
-        <div class="dashboard-grid" style="margin-top:18px;grid-template-columns:repeat(2,1fr);">
-          <div class="stats-card"><span class="label">Student</span><strong id="statStudent">Guest</strong></div>
-          <div class="stats-card"><span class="label">Grade</span><strong id="statGrade">1</strong></div>
-          <div class="stats-card"><span class="label">Score</span><strong id="statScore">0</strong></div>
-          <div class="stats-card"><span class="label">Stars</span><strong id="statStars">0</strong></div>
+
+        <div class="hero-stats">
+          <div class="stats-card">
+            <span class="label">Student</span>
+            <strong id="statStudent">Guest</strong>
+          </div>
+          <div class="stats-card">
+            <span class="label">Grade</span>
+            <strong id="statGrade">1</strong>
+          </div>
+          <div class="stats-card">
+            <span class="label">XP</span>
+            <strong id="statXP">0</strong>
+          </div>
+          <div class="stats-card">
+            <span class="label">Stars</span>
+            <strong id="statStars">0</strong>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="login-card section-space" id="loginSection">
-      <div class="label">Student Access</div>
-      <h2>Student Login / Tracking</h2>
-      <div class="auth-grid">
-        <div>
-          <div class="control">
-            <label for="studentName">Student Name</label>
-            <input id="studentName" type="text" placeholder="Enter student name" />
+    <section class="insights-grid section-space">
+      <div class="login-card" id="loginSection">
+        <div class="label">Student Access</div>
+        <h2>Student Login / Tracking</h2>
+
+        <div class="auth-grid">
+          <div>
+            <div class="control">
+              <label for="studentName">Student Name</label>
+              <input id="studentName" type="text" placeholder="Enter student name" />
+            </div>
+
+            <div class="control">
+              <label for="gradeSelect">Select Grade</label>
+              <select id="gradeSelect"></select>
+            </div>
+
+            <div class="control">
+              <label for="learningGoalInput">Learning Goal</label>
+              <input id="learningGoalInput" type="text" placeholder="Example: Master addition this week" />
+            </div>
+
+            <div class="login-actions">
+              <button class="btn btn-primary" id="saveStudentBtn">Save Student</button>
+              <button class="btn btn-secondary" id="loadStudentBtn">Load Progress</button>
+              <button class="btn btn-danger" id="resetAllBtn">Reset All Progress</button>
+            </div>
           </div>
-          <div class="control">
-            <label for="gradeSelect">Select Grade</label>
-            <select id="gradeSelect"></select>
-          </div>
-          <div class="login-actions">
-            <button class="btn btn-primary" id="saveStudentBtn">Save Student</button>
-            <button class="btn btn-secondary" id="loadStudentBtn">Load Saved Progress</button>
-            <button class="btn btn-danger" id="resetAllBtn">Reset All Progress</button>
+
+          <div class="welcome-box" id="studentSummary">
+            Create a student session to save tutorial progress on this device.
+            The system will remember the student name, grade, goal, unlocked lessons, completed lessons,
+            XP, total stars, and most recent topic practiced.
           </div>
         </div>
-        <div class="welcome-box" id="studentSummary">
-          Create a student session to save your tutorial progress on this device. The system will remember the student name, grade, unlocked lessons, stars, and completed topics.
+      </div>
+
+      <div class="spotlight-card">
+        <div class="label">Learning Spotlight</div>
+        <h2>Today’s Overview</h2>
+
+        <div class="dashboard-grid" style="grid-template-columns:repeat(2,1fr);margin-bottom:14px;">
+          <div class="mini-card">
+            <span class="label">Streak</span>
+            <strong id="spotlightStreak">0</strong>
+            <p>Consecutive active days</p>
+          </div>
+          <div class="mini-card">
+            <span class="label">Session</span>
+            <strong id="spotlightSession">0m</strong>
+            <p>Minutes this session</p>
+          </div>
+          <div class="mini-card">
+            <span class="label">Mastery</span>
+            <strong id="spotlightMastery">0%</strong>
+            <p>Average mastery rate</p>
+          </div>
+          <div class="mini-card">
+            <span class="label">Badge Count</span>
+            <strong id="spotlightBadges">0</strong>
+            <p>Total badges unlocked</p>
+          </div>
+        </div>
+
+        <div class="insight-box" id="coachMessage">
+          <strong class="lesson-box-title">Professor Pi Coach Message</strong>
+          Welcome! Create a student profile, choose a grade level, and begin building math mastery step by step.
+        </div>
+
+        <div class="mini-actions" style="margin-top:14px;">
+          <button class="btn btn-secondary" onclick="focusCurrentTopic()">Go to Current Topic</button>
+          <button class="btn btn-gold" id="favoriteTopicBtn">★ Favorite Topic</button>
         </div>
       </div>
     </section>
@@ -276,15 +929,60 @@
     <section class="dashboard-card section-space">
       <div class="label">Parent Dashboard</div>
       <h2>Learning Overview</h2>
+
       <div class="dashboard-grid">
-        <div class="mini-card"><span class="label">Completed Lessons</span><strong id="dashCompleted">0</strong><p>Total lessons finished</p></div>
-        <div class="mini-card"><span class="label">Unlocked Lessons</span><strong id="dashUnlocked">1</strong><p>Lessons currently available</p></div>
-        <div class="mini-card"><span class="label">Accuracy</span><strong id="dashAccuracy">0%</strong><p>Correct answers rate</p></div>
-        <div class="mini-card"><span class="label">Last Lesson</span><strong id="dashLastLesson">—</strong><p>Most recent topic practiced</p></div>
+        <div class="mini-card">
+          <span class="label">Completed Lessons</span>
+          <strong id="dashCompleted">0</strong>
+          <p>Total lessons finished</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Unlocked Lessons</span>
+          <strong id="dashUnlocked">1</strong>
+          <p>Lessons currently available</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Accuracy</span>
+          <strong id="dashAccuracy">0%</strong>
+          <p>Correct answer rate</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Last Lesson</span>
+          <strong id="dashLastLesson">—</strong>
+          <p>Most recent topic practiced</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Learning Goal</span>
+          <strong id="dashGoal">—</strong>
+          <p>Current student target</p>
+        </div>
+      </div>
+
+      <div class="achievement-strip">
+        <div class="achievement-item" id="badgeStarter">
+          <div class="icon">🌟</div>
+          <h4>Starter Badge</h4>
+          <p>Unlock by completing the first lesson.</p>
+        </div>
+        <div class="achievement-item locked" id="badgeExplorer">
+          <div class="icon">🧭</div>
+          <h4>Explorer Badge</h4>
+          <p>Unlock by opening multiple topics.</p>
+        </div>
+        <div class="achievement-item locked" id="badgeAccuracy">
+          <div class="icon">🎯</div>
+          <h4>Accuracy Badge</h4>
+          <p>Unlock with strong overall accuracy.</p>
+        </div>
+        <div class="achievement-item locked" id="badgeChampion">
+          <div class="icon">🏆</div>
+          <h4>Math Champion</h4>
+          <p>Unlock by building stars and XP.</p>
+        </div>
       </div>
     </section>
 
-    <section class="map-card section-space">
+    <section class="map-card section-space" id="mapSection">
       <div class="label">Adventure Progress</div>
       <h2>Lesson Unlock Map</h2>
       <div class="map-grid" id="mapGrid"></div>
@@ -293,14 +991,22 @@
     <section class="grid-main" id="tutorialSection">
       <aside class="panel">
         <h2>Lesson Control</h2>
+
         <div class="control">
           <label for="topicSearch">Search Topic</label>
-          <input id="topicSearch" type="text" placeholder="Type a keyword like addition" />
+          <input id="topicSearch" type="text" placeholder="Type a keyword like addition, regrouping, percent..." />
         </div>
-        <div class="toolbar">
+
+        <div class="cluster">
           <button class="btn btn-secondary" id="prevTopicBtn">← Previous</button>
           <button class="btn btn-secondary" id="nextTopicBtn">Next →</button>
         </div>
+
+        <div class="quick-summary" id="quickSummary">
+          <strong>Continue Learning:</strong><br />
+          Start by selecting a student profile and choosing a grade level.
+        </div>
+
         <div class="section-space">
           <div class="label">Topics</div>
           <div class="topic-list" id="topicList"></div>
@@ -309,24 +1015,52 @@
 
       <main>
         <section class="lesson-card">
-          <div class="label">Lesson</div>
-          <h2 id="lessonTitle">Loading lesson...</h2>
+          <div class="lesson-header">
+            <div>
+              <div class="label">Lesson</div>
+              <h2 id="lessonTitle">Loading lesson...</h2>
+            </div>
+            <button class="btn btn-gold" id="bookmarkBtn">☆ Save Topic</button>
+          </div>
+
           <div class="lesson-meta">
             <span class="pill" id="lessonGradePill">Grade 1</span>
             <span class="pill" id="lessonTopicPill">Topic</span>
             <span class="pill" id="lessonDifficultyPill">Beginner</span>
             <span class="pill" id="lessonLockPill">Unlocked</span>
+            <span class="pill" id="lessonMasteryPill">Mastery: 0%</span>
           </div>
-          <div class="explain-box" id="lessonExplanation"></div>
-          <div class="example-box" id="lessonExample"></div>
-          <div class="tip-box" id="lessonTip"></div>
+
+          <div class="info-grid">
+            <div>
+              <div class="objective-box" id="lessonObjectives"></div>
+              <div class="explain-box" id="lessonExplanation"></div>
+              <div class="example-box" id="lessonExample"></div>
+            </div>
+            <div>
+              <div class="vocab-box" id="lessonVocabulary"></div>
+              <div class="tip-box" id="lessonTip"></div>
+            </div>
+          </div>
         </section>
 
         <section class="practice-card section-space">
           <div class="label">Practice</div>
-          <h2>Try it yourself</h2>
-          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+          <div class="practice-top">
+            <h2 style="margin:0;">Try it yourself</h2>
+            <div class="micro-stats">
+              <span class="micro-pill" id="practiceStars">Lesson Stars: 0</span>
+              <span class="micro-pill" id="practiceCorrect">Correct: 0</span>
+              <span class="micro-pill" id="practiceTimer">Time: 0s</span>
+            </div>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
           <div style="margin-top:10px;color:var(--text);font-weight:700" id="progressText">Question 1 of 3</div>
+
           <div class="practice-question">
             <h4 id="questionText"></h4>
             <div class="options" id="optionsWrap"></div>
@@ -334,6 +1068,7 @@
             <div class="hint-box hidden" id="hintBox"></div>
             <div class="answer-box hidden" id="explanationBox"></div>
           </div>
+
           <div class="practice-actions">
             <button class="btn btn-secondary" onclick="showHint()">Show Hint</button>
             <button class="btn btn-primary" onclick="nextQuestion()">Next Question</button>
@@ -345,20 +1080,24 @@
         <section class="certificate-card" id="certificateCard">
           <div class="label">Achievement</div>
           <h2>Certificate Unlocked</h2>
+
           <div class="certificate">
             <div class="label" style="font-size:14px">I Love Math</div>
             <h3>Certificate of Completion</h3>
             <p>This certifies that</p>
-            <h2 id="certName" style="font-size:38px; margin:6px 0;">Student Name</h2>
+            <h2 id="certName" style="font-size:40px;margin:6px 0;">Student Name</h2>
             <p>has successfully completed the interactive tutorial lesson in</p>
             <p><strong id="certTopic">Topic Name</strong> — <span id="certGrade">Grade 1</span></p>
             <p>with guidance from <strong>Professor Pi</strong>.</p>
+            <p><strong id="certStars">3 Stars</strong> • <span id="certMastery">Mastery 100%</span></p>
+
             <div class="sig">
               <div>________________________<br>Student Signature</div>
               <div>________________________<br>Professor Pi / Instructor</div>
             </div>
           </div>
-          <div class="hero-actions" style="justify-content:center; margin-top:18px;">
+
+          <div class="hero-actions" style="justify-content:center;margin-top:18px;">
             <button class="btn btn-gold" onclick="printCertificate()">Print Certificate</button>
           </div>
         </section>
@@ -366,267 +1105,560 @@
     </section>
 
     <div class="footer-note">
-      © I Love Math • Premium Interactive Tutorial System • Local student tracking and progress saving enabled on this device.
+      © I Love Math • Premium Interactive Tutorial System • Progress, badges, and student tracking are saved locally on this device.
     </div>
   </div>
 
+  <div class="toast" id="toast"></div>
+  <div class="confetti-wrap" id="confettiWrap"></div>
+
   <script>
     const curriculum = {
+      "Grade 1": [
+        {
+          title:"Addition Within 20",
+          difficulty:"Beginner",
+          timeEstimate:"8 min",
+          goals:[
+            "Add small numbers accurately within 20",
+            "Use counting on to solve addition facts",
+            "Recognize doubles and near-doubles"
+          ],
+          vocabulary:["sum","add","plus","total"],
+          explanation:"Addition means putting two groups together to find the total. In Grade 1, students learn to add within 20 by counting on, making groups, and recognizing number relationships.",
+          example:"Example: 8 + 5. Start at 8, then count on 5 more: 9, 10, 11, 12, 13. So, 8 + 5 = 13.",
+          tip:"Try starting from the bigger number, then count on the smaller number. This is faster and helps build number sense.",
+          questions:[
+            {q:"1 + 1 = ?",options:["1","2","3","4"],answer:"2",hint:"Add one more to 1.",explain:"1 + 1 = 2 because one and one together make two."},
+            {q:"2 + 3 = ?",options:["4","5","6","7"],answer:"5",hint:"Start at 3 and count 2 more.",explain:"2 + 3 = 5."},
+            {q:"3 + 4 = ?",options:["6","7","8","9"],answer:"7",hint:"Count on four from 3.",explain:"3 + 4 = 7."},
+            {q:"5 + 5 = ?",options:["8","9","10","11"],answer:"10",hint:"This is a double fact.",explain:"5 + 5 = 10 because double 5 is 10."},
+            {q:"6 + 7 = ?",options:["12","13","14","15"],answer:"13",hint:"Start at 7 and count 6 more, or use 6 + 6 + 1.",explain:"6 + 7 = 13."},
+            {q:"8 + 6 = ?",options:["12","13","14","15"],answer:"14",hint:"Think 8 + 2 = 10, then add 4 more.",explain:"8 + 6 = 14."}
+          ]
+        },
+        {
+          title:"Subtraction Within 20",
+          difficulty:"Beginner",
+          timeEstimate:"8 min",
+          goals:[
+            "Subtract within 20",
+            "Use counting back",
+            "Understand subtraction as taking away"
+          ],
+          vocabulary:["subtract","minus","difference","take away"],
+          explanation:"Subtraction means taking away or finding how many are left. It can also mean finding the difference between two numbers.",
+          example:"Example: 12 - 5. Start at 12 and count back 5 numbers: 11, 10, 9, 8, 7. So, 12 - 5 = 7.",
+          tip:"If subtraction feels tricky, use a number line or imagine objects being taken away.",
+          questions:[
+            {q:"5 - 2 = ?",options:["2","3","4","5"],answer:"3",hint:"Take away 2 from 5.",explain:"5 - 2 = 3."},
+            {q:"9 - 4 = ?",options:["4","5","6","7"],answer:"5",hint:"Count back 4 from 9.",explain:"9 - 4 = 5."},
+            {q:"10 - 3 = ?",options:["6","7","8","9"],answer:"7",hint:"Count back three.",explain:"10 - 3 = 7."},
+            {q:"14 - 6 = ?",options:["7","8","9","10"],answer:"8",hint:"Take away 6 from 14.",explain:"14 - 6 = 8."},
+            {q:"18 - 9 = ?",options:["8","9","10","11"],answer:"9",hint:"Half of 18 is 9.",explain:"18 - 9 = 9."},
+            {q:"20 - 7 = ?",options:["11","12","13","14"],answer:"13",hint:"Count back 7 from 20.",explain:"20 - 7 = 13."}
+          ]
+        }
+      ],
 
-"Grade 1": [
-{
- title:"Addition Within 20",
- difficulty:"Beginner",
- explanation:"Addition combines numbers.",
- example:"5 + 3 = 8",
- tip:"Count forward.",
- questions:[
-  {q:"1+1",options:["1","2","3","4"],answer:"2",hint:"Add one.",explain:"1+1=2"},
-  {q:"2+3",options:["4","5","6","7"],answer:"5",hint:"Count up.",explain:"2+3=5"},
-  {q:"3+4",options:["6","7","8","9"],answer:"7",hint:"Add.",explain:"3+4=7"},
-  {q:"5+5",options:["8","9","10","11"],answer:"10",hint:"Double 5.",explain:"5+5=10"},
-  {q:"6+7",options:["12","13","14","15"],answer:"13",hint:"Add.",explain:"6+7=13"},
-  {q:"8+6",options:["12","13","14","15"],answer:"14",hint:"Add.",explain:"8+6=14"},
-  {q:"9+9",options:["16","17","18","19"],answer:"18",hint:"Double 9.",explain:"9+9=18"},
-  {q:"10+5",options:["14","15","16","17"],answer:"15",hint:"Add.",explain:"10+5=15"},
-  {q:"11+7",options:["16","17","18","19"],answer:"18",hint:"Add.",explain:"11+7=18"},
-  {q:"12+8",options:["18","19","20","21"],answer:"20",hint:"Add.",explain:"12+8=20"}
- ]
-}
-],
+      "Grade 2": [
+        {
+          title:"Addition with Regrouping",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Add two-digit numbers accurately",
+            "Regroup ones into tens when needed",
+            "Read place value correctly"
+          ],
+          vocabulary:["regroup","ones","tens","place value"],
+          explanation:"When the ones place adds to 10 or more, regroup by trading 10 ones for 1 ten. This helps keep the place values organized.",
+          example:"Example: 27 + 15. Add ones first: 7 + 5 = 12. Write 2 ones and regroup 1 ten. Then add tens: 2 + 1 + 1 = 4 tens. The answer is 42.",
+          tip:"Always line up tens under tens and ones under ones before adding.",
+          questions:[
+            {q:"23 + 19 = ?",options:["40","41","42","43"],answer:"42",hint:"3 + 9 makes 12 ones.",explain:"23 + 19 = 42."},
+            {q:"34 + 28 = ?",options:["60","61","62","63"],answer:"62",hint:"Regroup the ones.",explain:"34 + 28 = 62."},
+            {q:"45 + 17 = ?",options:["60","61","62","63"],answer:"62",hint:"Add ones first.",explain:"45 + 17 = 62."},
+            {q:"56 + 29 = ?",options:["83","84","85","86"],answer:"85",hint:"6 + 9 = 15 ones.",explain:"56 + 29 = 85."},
+            {q:"78 + 14 = ?",options:["90","91","92","93"],answer:"92",hint:"8 + 4 = 12 ones.",explain:"78 + 14 = 92."},
+            {q:"41 + 59 = ?",options:["99","100","101","102"],answer:"100",hint:"Make a full hundred.",explain:"41 + 59 = 100."}
+          ]
+        },
+        {
+          title:"Subtraction with Regrouping",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Subtract two-digit numbers",
+            "Borrow from tens when ones are too small",
+            "Understand regrouping in subtraction"
+          ],
+          vocabulary:["borrow","regroup","difference","tens"],
+          explanation:"If the top number in the ones place is smaller than the bottom number, regroup by taking 1 ten and turning it into 10 ones.",
+          example:"Example: 52 - 27. Since 2 is smaller than 7, borrow 1 ten. Then 12 - 7 = 5 and 4 - 2 = 2. So, 52 - 27 = 25.",
+          tip:"Check whether the ones place needs regrouping before subtracting.",
+          questions:[
+            {q:"52 - 27 = ?",options:["24","25","26","27"],answer:"25",hint:"Borrow from the tens.",explain:"52 - 27 = 25."},
+            {q:"61 - 36 = ?",options:["24","25","26","27"],answer:"25",hint:"11 - 6 after regrouping.",explain:"61 - 36 = 25."},
+            {q:"73 - 48 = ?",options:["24","25","26","27"],answer:"25",hint:"Regroup the ones.",explain:"73 - 48 = 25."},
+            {q:"84 - 29 = ?",options:["54","55","56","57"],answer:"55",hint:"14 - 9 after regrouping.",explain:"84 - 29 = 55."},
+            {q:"90 - 46 = ?",options:["42","43","44","45"],answer:"44",hint:"Borrow from 9 tens.",explain:"90 - 46 = 44."},
+            {q:"72 - 18 = ?",options:["52","53","54","55"],answer:"54",hint:"12 - 8 first.",explain:"72 - 18 = 54."}
+          ]
+        }
+      ],
 
-"Grade 2": [
-{
- title:"Addition with Regrouping",
- difficulty:"Intermediate",
- explanation:"Regroup when sum is 10+",
- example:"27+15=42",
- tip:"Carry over.",
- questions:[
-  {q:"23+19",options:["40","41","42","43"],answer:"42",hint:"3+9=12.",explain:"23+19=42"},
-  {q:"34+28",options:["60","61","62","63"],answer:"62",hint:"Add.",explain:"34+28=62"},
-  {q:"45+17",options:["60","61","62","63"],answer:"62",hint:"Add.",explain:"45+17=62"},
-  {q:"56+29",options:["83","84","85","86"],answer:"85",hint:"Add.",explain:"56+29=85"},
-  {q:"67+18",options:["83","84","85","86"],answer:"85",hint:"Add.",explain:"67+18=85"},
-  {q:"78+14",options:["90","91","92","93"],answer:"92",hint:"Add.",explain:"78+14=92"},
-  {q:"89+11",options:["99","100","101","102"],answer:"100",hint:"Add.",explain:"89+11=100"},
-  {q:"32+49",options:["80","81","82","83"],answer:"81",hint:"Add.",explain:"32+49=81"},
-  {q:"24+38",options:["60","61","62","63"],answer:"62",hint:"Add.",explain:"24+38=62"},
-  {q:"41+59",options:["99","100","101","102"],answer:"100",hint:"Add.",explain:"41+59=100"}
- ]
-}
-],
+      "Grade 3": [
+        {
+          title:"Multiplication Facts",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Understand multiplication as equal groups",
+            "Recall basic facts quickly",
+            "Use skip counting and repeated addition"
+          ],
+          vocabulary:["multiply","product","equal groups","array"],
+          explanation:"Multiplication shows equal groups. For example, 4 × 3 means 4 groups of 3. It can also be written as repeated addition: 3 + 3 + 3 + 3.",
+          example:"Example: 4 × 3 = 12 because 3 + 3 + 3 + 3 = 12.",
+          tip:"Use patterns you know, like doubles, fives, and tens, to solve harder multiplication facts.",
+          questions:[
+            {q:"2 × 2 = ?",options:["2","3","4","5"],answer:"4",hint:"Two groups of two.",explain:"2 × 2 = 4."},
+            {q:"3 × 4 = ?",options:["10","11","12","13"],answer:"12",hint:"Think 4 + 4 + 4.",explain:"3 × 4 = 12."},
+            {q:"5 × 6 = ?",options:["28","29","30","31"],answer:"30",hint:"Five groups of six.",explain:"5 × 6 = 30."},
+            {q:"7 × 8 = ?",options:["54","55","56","57"],answer:"56",hint:"Use known facts.",explain:"7 × 8 = 56."},
+            {q:"9 × 9 = ?",options:["80","81","82","83"],answer:"81",hint:"Nine nines.",explain:"9 × 9 = 81."},
+            {q:"4 × 7 = ?",options:["26","27","28","29"],answer:"28",hint:"7 + 7 + 7 + 7.",explain:"4 × 7 = 28."}
+          ]
+        },
+        {
+          title:"Intro to Fractions",
+          difficulty:"Intermediate",
+          timeEstimate:"9 min",
+          goals:[
+            "Identify fractions as parts of a whole",
+            "Read numerator and denominator",
+            "Recognize simple fraction models"
+          ],
+          vocabulary:["fraction","numerator","denominator","whole"],
+          explanation:"A fraction shows equal parts of a whole. The numerator tells how many parts are used, and the denominator tells how many equal parts the whole is divided into.",
+          example:"Example: 3/4 means 3 of 4 equal parts are shaded or chosen.",
+          tip:"The bottom number tells the total equal parts. The top number tells how many parts are selected.",
+          questions:[
+            {q:"Which fraction means 1 out of 2 equal parts?",options:["1/2","2/1","1/3","2/3"],answer:"1/2",hint:"One of two parts.",explain:"1/2 means one out of two equal parts."},
+            {q:"In 3/5, what is the denominator?",options:["3","5","8","15"],answer:"5",hint:"The denominator is the bottom number.",explain:"The denominator in 3/5 is 5."},
+            {q:"Which fraction is read as 'two thirds'?",options:["2/2","2/3","3/2","1/3"],answer:"2/3",hint:"Look for 2 over 3.",explain:"2/3 is read as two thirds."},
+            {q:"If a pizza is cut into 4 equal slices and you eat 1, what fraction did you eat?",options:["1/2","1/3","1/4","4/1"],answer:"1/4",hint:"One out of four.",explain:"You ate 1/4 of the pizza."},
+            {q:"Which is bigger?",options:["1/4","1/2","They are equal","Cannot tell"],answer:"1/2",hint:"Half is more than a quarter.",explain:"1/2 is bigger than 1/4."},
+            {q:"Which fraction shows 3 equal parts taken from 6 equal parts?",options:["3/6","6/3","3/3","1/2"],answer:"3/6",hint:"Top is used parts, bottom is total parts.",explain:"3/6 means 3 parts out of 6 equal parts."}
+          ]
+        }
+      ],
 
-"Grade 3": [
-{
- title:"Multiplication",
- difficulty:"Intermediate",
- explanation:"Repeated addition",
- example:"4x3=12",
- tip:"Memorize facts",
- questions:[
-  {q:"2x2",options:["2","3","4","5"],answer:"4",hint:"2 groups of 2.",explain:"2x2=4"},
-  {q:"3x4",options:["10","11","12","13"],answer:"12",hint:"Multiply.",explain:"3x4=12"},
-  {q:"5x6",options:["28","29","30","31"],answer:"30",hint:"Multiply.",explain:"5x6=30"},
-  {q:"7x8",options:["54","55","56","57"],answer:"56",hint:"Multiply.",explain:"7x8=56"},
-  {q:"9x9",options:["80","81","82","83"],answer:"81",hint:"Multiply.",explain:"9x9=81"},
-  {q:"6x7",options:["40","41","42","43"],answer:"42",hint:"Multiply.",explain:"6x7=42"},
-  {q:"8x4",options:["30","31","32","33"],answer:"32",hint:"Multiply.",explain:"8x4=32"},
-  {q:"3x9",options:["26","27","28","29"],answer:"27",hint:"Multiply.",explain:"3x9=27"},
-  {q:"10x5",options:["40","50","60","70"],answer:"50",hint:"Multiply.",explain:"10x5=50"},
-  {q:"4x7",options:["26","27","28","29"],answer:"28",hint:"Multiply.",explain:"4x7=28"}
- ]
-}
-],
+      "Grade 4": [
+        {
+          title:"Division",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Divide numbers using known multiplication facts",
+            "Understand equal sharing",
+            "Connect multiplication and division"
+          ],
+          vocabulary:["divide","quotient","equal groups","remainder"],
+          explanation:"Division means splitting equally or finding how many groups can be made. It is the opposite of multiplication.",
+          example:"Example: 24 ÷ 6 = 4 because 6 × 4 = 24.",
+          tip:"When dividing, ask yourself: what number times the divisor gives the dividend?",
+          questions:[
+            {q:"12 ÷ 3 = ?",options:["3","4","5","6"],answer:"4",hint:"What times 3 equals 12?",explain:"12 ÷ 3 = 4."},
+            {q:"24 ÷ 6 = ?",options:["2","3","4","5"],answer:"4",hint:"6 × ? = 24",explain:"24 ÷ 6 = 4."},
+            {q:"36 ÷ 6 = ?",options:["5","6","7","8"],answer:"6",hint:"6 × ? = 36",explain:"36 ÷ 6 = 6."},
+            {q:"40 ÷ 5 = ?",options:["6","7","8","9"],answer:"8",hint:"5 × ? = 40",explain:"40 ÷ 5 = 8."},
+            {q:"63 ÷ 7 = ?",options:["8","9","10","11"],answer:"9",hint:"7 × ? = 63",explain:"63 ÷ 7 = 9."},
+            {q:"56 ÷ 7 = ?",options:["6","7","8","9"],answer:"8",hint:"7 × ? = 56",explain:"56 ÷ 7 = 8."}
+          ]
+        },
+        {
+          title:"Equivalent Fractions",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Recognize equal fractions",
+            "Multiply numerator and denominator by the same number",
+            "Simplify simple fractions"
+          ],
+          vocabulary:["equivalent","simplify","numerator","denominator"],
+          explanation:"Equivalent fractions name the same amount even though they look different. You can create equivalent fractions by multiplying or dividing the numerator and denominator by the same number.",
+          example:"Example: 1/2 = 2/4 because both fractions represent the same amount of a whole.",
+          tip:"If both top and bottom numbers can be divided by the same number, the fraction can often be simplified.",
+          questions:[
+            {q:"Which fraction is equivalent to 1/2?",options:["2/4","2/3","3/4","1/3"],answer:"2/4",hint:"Multiply top and bottom by 2.",explain:"1/2 = 2/4."},
+            {q:"Which fraction is equivalent to 3/4?",options:["6/8","4/8","3/8","9/16"],answer:"6/8",hint:"Multiply by 2.",explain:"3/4 = 6/8."},
+            {q:"Simplify 2/4.",options:["1/2","2/2","1/4","4/2"],answer:"1/2",hint:"Divide by 2.",explain:"2/4 simplifies to 1/2."},
+            {q:"Which fraction is equal to 2/3?",options:["4/6","2/6","3/4","1/3"],answer:"4/6",hint:"Multiply by 2.",explain:"2/3 = 4/6."},
+            {q:"Simplify 6/8.",options:["3/4","2/4","1/2","6/4"],answer:"3/4",hint:"Divide by 2.",explain:"6/8 simplifies to 3/4."},
+            {q:"Which pair is equivalent?",options:["1/2 and 2/4","1/3 and 2/3","2/5 and 3/5","3/4 and 4/5"],answer:"1/2 and 2/4",hint:"Look for same value.",explain:"1/2 and 2/4 are equivalent fractions."}
+          ]
+        }
+      ],
 
-"Grade 4": [
-{
- title:"Division",
- difficulty:"Intermediate",
- explanation:"Split equally",
- example:"12÷3=4",
- tip:"Use multiplication.",
- questions:[
-  {q:"12÷3",options:["3","4","5","6"],answer:"4",hint:"Think multiply.",explain:"12÷3=4"},
-  {q:"24÷6",options:["2","3","4","5"],answer:"4",hint:"Multiply.",explain:"24÷6=4"},
-  {q:"36÷6",options:["5","6","7","8"],answer:"6",hint:"Multiply.",explain:"36÷6=6"},
-  {q:"40÷5",options:["6","7","8","9"],answer:"8",hint:"Multiply.",explain:"40÷5=8"},
-  {q:"45÷9",options:["4","5","6","7"],answer:"5",hint:"Multiply.",explain:"45÷9=5"},
-  {q:"63÷7",options:["8","9","10","11"],answer:"9",hint:"Multiply.",explain:"63÷7=9"},
-  {q:"72÷8",options:["8","9","10","11"],answer:"9",hint:"Multiply.",explain:"72÷8=9"},
-  {q:"81÷9",options:["8","9","10","11"],answer:"9",hint:"Multiply.",explain:"81÷9=9"},
-  {q:"56÷7",options:["6","7","8","9"],answer:"8",hint:"Multiply.",explain:"56÷7=8"},
-  {q:"90÷10",options:["7","8","9","10"],answer:"9",hint:"Multiply.",explain:"90÷10=9"}
- ]
-}
-],
+      "Grade 5": [
+        {
+          title:"Decimals",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Read and compare decimals",
+            "Add and subtract decimals",
+            "Understand place value in decimals"
+          ],
+          vocabulary:["decimal","tenths","hundredths","place value"],
+          explanation:"Decimals show parts of a whole based on tens, hundredths, and beyond. The place value to the right of the decimal point matters when adding or subtracting.",
+          example:"Example: 0.25 means twenty-five hundredths. If you add 0.25 + 0.25, you get 0.50 or 0.5.",
+          tip:"Line up decimal points before adding or subtracting.",
+          questions:[
+            {q:"0.2 + 0.3 = ?",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Add tenths.",explain:"0.2 + 0.3 = 0.5."},
+            {q:"0.7 - 0.2 = ?",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract tenths.",explain:"0.7 - 0.2 = 0.5."},
+            {q:"0.5 + 0.5 = ?",options:["0.5","1.0","1.5","2.0"],answer:"1.0",hint:"Two halves make one whole.",explain:"0.5 + 0.5 = 1.0."},
+            {q:"1.2 - 0.2 = ?",options:["0.8","0.9","1.0","1.1"],answer:"1.0",hint:"Subtract two tenths from twelve tenths.",explain:"1.2 - 0.2 = 1.0."},
+            {q:"0.25 + 0.25 = ?",options:["0.25","0.5","0.75","1"],answer:"0.5",hint:"Two quarters make one half.",explain:"0.25 + 0.25 = 0.5."},
+            {q:"2.3 - 1.1 = ?",options:["1.0","1.1","1.2","1.3"],answer:"1.2",hint:"Line up the decimals.",explain:"2.3 - 1.1 = 1.2."}
+          ]
+        },
+        {
+          title:"Volume of Rectangular Prisms",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Understand volume as space inside a solid",
+            "Use the formula length × width × height",
+            "Solve basic volume problems"
+          ],
+          vocabulary:["volume","prism","cubic units","length","width","height"],
+          explanation:"Volume measures how much space is inside a 3D shape. For a rectangular prism, multiply length × width × height.",
+          example:"Example: A prism with length 4, width 3, and height 2 has a volume of 4 × 3 × 2 = 24 cubic units.",
+          tip:"Volume uses cubic units because the shape is three-dimensional.",
+          questions:[
+            {q:"What is the volume of a prism with length 2, width 3, height 4?",options:["9","12","18","24"],answer:"24",hint:"Multiply all three numbers.",explain:"2 × 3 × 4 = 24 cubic units."},
+            {q:"Volume = 5 × 2 × 3. What is it?",options:["10","20","30","40"],answer:"30",hint:"Multiply in any order.",explain:"5 × 2 × 3 = 30."},
+            {q:"A box is 6 by 1 by 2. What is the volume?",options:["8","10","12","14"],answer:"12",hint:"Multiply the dimensions.",explain:"6 × 1 × 2 = 12."},
+            {q:"A prism is 3 by 3 by 3. What is the volume?",options:["9","18","27","36"],answer:"27",hint:"3 × 3 × 3",explain:"The volume is 27 cubic units."},
+            {q:"Which formula finds volume of a rectangular prism?",options:["l + w + h","l × w × h","2l + 2w","l × w"],answer:"l × w × h",hint:"Multiply all three dimensions.",explain:"The correct formula is length × width × height."},
+            {q:"A prism has dimensions 7, 2, and 1. What is the volume?",options:["9","10","14","21"],answer:"14",hint:"7 × 2 × 1",explain:"The volume is 14 cubic units."}
+          ]
+        }
+      ],
 
-"Grade 5": [
-{
- title:"Decimals",
- difficulty:"Intermediate",
- explanation:"Parts of whole",
- example:"0.5",
- tip:"Align decimals",
- questions:[
-  {q:"0.2+0.3",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Add.",explain:"0.2+0.3=0.5"},
-  {q:"0.7-0.2",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract.",explain:"0.7-0.2=0.5"},
-  {q:"0.5+0.5",options:["0.5","1.0","1.5","2.0"],answer:"1.0",hint:"Add.",explain:"0.5+0.5=1.0"},
-  {q:"1.2-0.2",options:["0.8","0.9","1.0","1.1"],answer:"1.0",hint:"Subtract.",explain:"1.2-0.2=1.0"},
-  {q:"0.9+0.8",options:["1.5","1.6","1.7","1.8"],answer:"1.7",hint:"Add.",explain:"0.9+0.8=1.7"},
-  {q:"2.0-1.5",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract.",explain:"2.0-1.5=0.5"},
-  {q:"0.25+0.25",options:["0.25","0.5","0.75","1"],answer:"0.5",hint:"Add.",explain:"0.25+0.25=0.5"},
-  {q:"0.1+0.9",options:["0.9","1.0","1.1","1.2"],answer:"1.0",hint:"Add.",explain:"0.1+0.9=1.0"},
-  {q:"1.5+0.5",options:["1.5","1.8","2.0","2.5"],answer:"2.0",hint:"Add.",explain:"1.5+0.5=2.0"},
-  {q:"2.3-1.1",options:["1.0","1.1","1.2","1.3"],answer:"1.2",hint:"Subtract.",explain:"2.3-1.1=1.2"}
- ]
-}
-],
-
-"Grade 6": [
-{
- title:"Percents",
- difficulty:"Intermediate",
- explanation:"Out of 100",
- example:"50%=0.5",
- tip:"Divide by 100",
- questions:[
-  {q:"50% as decimal",options:["5","0.5","0.05","0.005"],answer:"0.5",hint:"Divide by 100.",explain:"50%=0.5"},
-  {q:"25% as decimal",options:["0.25","0.5","2.5","25"],answer:"0.25",hint:"Divide by 100.",explain:"25%=0.25"},
-  {q:"10% of 100",options:["5","10","15","20"],answer:"10",hint:"Percent.",explain:"10% of 100=10"},
-  {q:"20% of 50",options:["5","10","15","20"],answer:"10",hint:"Multiply.",explain:"20% of 50=10"},
-  {q:"75% as fraction",options:["1/4","3/4","2/5","5/2"],answer:"3/4",hint:"Simplify.",explain:"75%=3/4"},
-  {q:"30% of 200",options:["30","40","50","60"],answer:"60",hint:"Multiply.",explain:"30% of 200=60"},
-  {q:"5% of 100",options:["1","3","5","10"],answer:"5",hint:"Percent.",explain:"5% of 100=5"},
-  {q:"80% as decimal",options:["0.8","0.08","8","80"],answer:"0.8",hint:"Divide.",explain:"80%=0.8"},
-  {q:"60% of 50",options:["20","25","30","35"],answer:"30",hint:"Multiply.",explain:"60% of 50=30"},
-  {q:"90% as decimal",options:["0.9","0.09","9","90"],answer:"0.9",hint:"Divide.",explain:"90%=0.9"}
- ]
-}
-]
-
-};
-
-    const STORAGE_KEY = 'ilovemath_premium_student_v1';
-    const gradeSelect = document.getElementById('gradeSelect');
-    const topicSearch = document.getElementById('topicSearch');
-    const topicList = document.getElementById('topicList');
-    const studentName = document.getElementById('studentName');
-    const lessonTitle = document.getElementById('lessonTitle');
-    const lessonGradePill = document.getElementById('lessonGradePill');
-    const lessonTopicPill = document.getElementById('lessonTopicPill');
-    const lessonDifficultyPill = document.getElementById('lessonDifficultyPill');
-    const lessonLockPill = document.getElementById('lessonLockPill');
-    const lessonExplanation = document.getElementById('lessonExplanation');
-    const lessonExample = document.getElementById('lessonExample');
-    const lessonTip = document.getElementById('lessonTip');
-    const questionText = document.getElementById('questionText');
-    const optionsWrap = document.getElementById('optionsWrap');
-    const feedback = document.getElementById('feedback');
-    const explanationBox = document.getElementById('explanationBox');
-    const hintBox = document.getElementById('hintBox');
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
-    const certificateCard = document.getElementById('certificateCard');
-    const certName = document.getElementById('certName');
-    const certTopic = document.getElementById('certTopic');
-    const certGrade = document.getElementById('certGrade');
-    const statStudent = document.getElementById('statStudent');
-    const statGrade = document.getElementById('statGrade');
-    const statScore = document.getElementById('statScore');
-    const statStars = document.getElementById('statStars');
-    const studentSummary = document.getElementById('studentSummary');
-    const dashCompleted = document.getElementById('dashCompleted');
-    const dashUnlocked = document.getElementById('dashUnlocked');
-    const dashAccuracy = document.getElementById('dashAccuracy');
-    const dashLastLesson = document.getElementById('dashLastLesson');
-    const mapGrid = document.getElementById('mapGrid');
-    const soundToggleBtn = document.getElementById('soundToggleBtn');
-
-    let currentGrade = 'Grade 1';
-    let currentTopicIndex = 0;
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let answered = false;
-    let soundOn = true;
-
-    let studentState = {
-      name: '',
-      grade: 'Grade 1',
-      completed: {},
-      unlocked: {},
-      totalCorrect: 0,
-      totalAnswered: 0,
-      totalStars: 0,
-      lastLesson: ''
+      "Grade 6": [
+        {
+          title:"Percents",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Convert percent to decimal and fraction",
+            "Find simple percentages of numbers",
+            "Understand percent as out of 100"
+          ],
+          vocabulary:["percent","decimal","fraction","out of 100"],
+          explanation:"Percent means 'out of 100.' To write a percent as a decimal, divide by 100. To find a percent of a number, multiply the decimal form by the number.",
+          example:"Example: 25% = 25/100 = 0.25. Also, 20% of 50 means 0.20 × 50 = 10.",
+          tip:"Move the decimal point two places left when converting a percent to a decimal.",
+          questions:[
+            {q:"50% as a decimal is ?",options:["5","0.5","0.05","0.005"],answer:"0.5",hint:"Divide by 100.",explain:"50% = 0.5."},
+            {q:"25% as a decimal is ?",options:["0.25","0.5","2.5","25"],answer:"0.25",hint:"Move decimal two places left.",explain:"25% = 0.25."},
+            {q:"10% of 100 = ?",options:["5","10","15","20"],answer:"10",hint:"10% means 10 out of 100.",explain:"10% of 100 is 10."},
+            {q:"20% of 50 = ?",options:["5","10","15","20"],answer:"10",hint:"0.20 × 50",explain:"20% of 50 = 10."},
+            {q:"75% as a fraction is ?",options:["1/4","3/4","2/5","5/2"],answer:"3/4",hint:"75/100 simplifies.",explain:"75% = 75/100 = 3/4."},
+            {q:"30% of 200 = ?",options:["30","40","50","60"],answer:"60",hint:"0.30 × 200",explain:"30% of 200 = 60."}
+          ]
+        },
+        {
+          title:"Ratios and Rates",
+          difficulty:"Intermediate",
+          timeEstimate:"10 min",
+          goals:[
+            "Understand ratio comparisons",
+            "Read and write ratios correctly",
+            "Solve basic unit rate problems"
+          ],
+          vocabulary:["ratio","rate","unit rate","comparison"],
+          explanation:"A ratio compares two quantities. A rate is a ratio comparing quantities with different units. A unit rate tells how much for one unit.",
+          example:"Example: If 12 apples cost $6, then the unit rate is $0.50 per apple because 6 ÷ 12 = 0.5.",
+          tip:"To find a unit rate, divide so the second quantity becomes 1.",
+          questions:[
+            {q:"Which ratio compares 2 red marbles to 3 blue marbles?",options:["2:3","3:2","2/5","5/2"],answer:"2:3",hint:"Red to blue.",explain:"The ratio is 2:3."},
+            {q:"A car travels 120 miles in 3 hours. What is the unit rate?",options:["20 mph","30 mph","40 mph","50 mph"],answer:"40 mph",hint:"Divide miles by hours.",explain:"120 ÷ 3 = 40 miles per hour."},
+            {q:"If 8 notebooks cost $16, what is the cost per notebook?",options:["$1","$2","$3","$4"],answer:"$2",hint:"Divide cost by number of notebooks.",explain:"16 ÷ 8 = 2."},
+            {q:"Which is a rate?",options:["3:4","5 to 2","60 miles per hour","2/3"],answer:"60 miles per hour",hint:"A rate uses different units.",explain:"Miles per hour is a rate."},
+            {q:"If 15 pencils cost $5, what is the cost per pencil?",options:["$0.25","$0.33","$0.50","$1.00"],answer:"$0.33",hint:"5 ÷ 15",explain:"5 ÷ 15 ≈ 0.33 dollars per pencil."},
+            {q:"Which ratio is equivalent to 4:6?",options:["1:2","2:3","3:4","6:4"],answer:"2:3",hint:"Simplify by dividing by 2.",explain:"4:6 simplifies to 2:3."}
+          ]
+        }
+      ]
     };
 
-    function getGradeKey(grade){ return grade; }
-    function getTopicKey(grade, index){ return `${grade}__${index}`; }
+    const STORAGE_KEY = "ilovemath_premium_student_v3";
+
+    const gradeSelect = document.getElementById("gradeSelect");
+    const topicSearch = document.getElementById("topicSearch");
+    const topicList = document.getElementById("topicList");
+    const studentName = document.getElementById("studentName");
+    const learningGoalInput = document.getElementById("learningGoalInput");
+
+    const lessonTitle = document.getElementById("lessonTitle");
+    const lessonGradePill = document.getElementById("lessonGradePill");
+    const lessonTopicPill = document.getElementById("lessonTopicPill");
+    const lessonDifficultyPill = document.getElementById("lessonDifficultyPill");
+    const lessonLockPill = document.getElementById("lessonLockPill");
+    const lessonMasteryPill = document.getElementById("lessonMasteryPill");
+
+    const lessonObjectives = document.getElementById("lessonObjectives");
+    const lessonVocabulary = document.getElementById("lessonVocabulary");
+    const lessonExplanation = document.getElementById("lessonExplanation");
+    const lessonExample = document.getElementById("lessonExample");
+    const lessonTip = document.getElementById("lessonTip");
+
+    const questionText = document.getElementById("questionText");
+    const optionsWrap = document.getElementById("optionsWrap");
+    const feedback = document.getElementById("feedback");
+    const explanationBox = document.getElementById("explanationBox");
+    const hintBox = document.getElementById("hintBox");
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+
+    const certificateCard = document.getElementById("certificateCard");
+    const certName = document.getElementById("certName");
+    const certTopic = document.getElementById("certTopic");
+    const certGrade = document.getElementById("certGrade");
+    const certStars = document.getElementById("certStars");
+    const certMastery = document.getElementById("certMastery");
+
+    const statStudent = document.getElementById("statStudent");
+    const statGrade = document.getElementById("statGrade");
+    const statXP = document.getElementById("statXP");
+    const statStars = document.getElementById("statStars");
+
+    const studentSummary = document.getElementById("studentSummary");
+    const dashCompleted = document.getElementById("dashCompleted");
+    const dashUnlocked = document.getElementById("dashUnlocked");
+    const dashAccuracy = document.getElementById("dashAccuracy");
+    const dashLastLesson = document.getElementById("dashLastLesson");
+    const dashGoal = document.getElementById("dashGoal");
+
+    const mapGrid = document.getElementById("mapGrid");
+    const soundToggleBtn = document.getElementById("soundToggleBtn");
+    const coachMessage = document.getElementById("coachMessage");
+    const bookmarkBtn = document.getElementById("bookmarkBtn");
+    const favoriteTopicBtn = document.getElementById("favoriteTopicBtn");
+    const quickSummary = document.getElementById("quickSummary");
+    const toast = document.getElementById("toast");
+    const confettiWrap = document.getElementById("confettiWrap");
+
+    const spotlightStreak = document.getElementById("spotlightStreak");
+    const spotlightSession = document.getElementById("spotlightSession");
+    const spotlightMastery = document.getElementById("spotlightMastery");
+    const spotlightBadges = document.getElementById("spotlightBadges");
+
+    const practiceStars = document.getElementById("practiceStars");
+    const practiceCorrect = document.getElementById("practiceCorrect");
+    const practiceTimer = document.getElementById("practiceTimer");
+
+    let currentGrade = "Grade 1";
+    let currentTopicIndex = 0;
+    let currentQuestionIndex = 0;
+    let lessonCorrect = 0;
+    let answered = false;
+    let soundOn = true;
+    let lessonSeconds = 0;
+    let lessonTimer = null;
+    let sessionStartedAt = Date.now();
+
+    let studentState = {
+      name:"",
+      grade:"Grade 1",
+      goal:"",
+      completed:{},
+      unlocked:{},
+      mastery:{},
+      starsByTopic:{},
+      favorites:{},
+      totalCorrect:0,
+      totalAnswered:0,
+      totalStars:0,
+      totalXP:0,
+      totalLessonsOpened:0,
+      lastLesson:"",
+      lastActiveDate:"",
+      streak:0
+    };
+
+    function getTopicKey(grade, index){
+      return `${grade}__${index}`;
+    }
+
+    function getTodayKey(){
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth()+1).padStart(2,"0");
+      const dd = String(now.getDate()).padStart(2,"0");
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function getYesterdayKey(){
+      const d = new Date();
+      d.setDate(d.getDate()-1);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth()+1).padStart(2,"0");
+      const dd = String(d.getDate()).padStart(2,"0");
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function getGradeTopicCount(grade){
+      return (curriculum[grade] || []).length;
+    }
+
+    function isTopicUnlocked(grade, index){
+      return !!studentState.unlocked[getTopicKey(grade,index)];
+    }
+
+    function isTopicCompleted(grade, index){
+      return !!studentState.completed[getTopicKey(grade,index)];
+    }
+
+    function getTopicMastery(grade, index){
+      return studentState.mastery[getTopicKey(grade,index)] || 0;
+    }
+
+    function getTopicStars(grade, index){
+      return studentState.starsByTopic[getTopicKey(grade,index)] || 0;
+    }
+
     function getUnlockedCount(grade){
       const topics = curriculum[grade] || [];
       let count = 0;
-      topics.forEach((_, i) => { if(isTopicUnlocked(grade, i)) count++; });
+      topics.forEach((_, i) => {
+        if(isTopicUnlocked(grade, i)) count++;
+      });
       return count;
     }
 
-    function init(){
-      Object.keys(curriculum).forEach(grade => {
-        const opt = document.createElement('option');
-        opt.value = grade;
-        opt.textContent = grade;
-        gradeSelect.appendChild(opt);
-      });
-      ensureDefaultUnlocks();
-      loadSavedProgress();
-      bindEvents();
-      refreshAll();
+    function getCompletedCount(){
+      return Object.keys(studentState.completed || {}).length;
+    }
+
+    function getBadgeCount(){
+      let count = 0;
+      if(getCompletedCount() >= 1) count++;
+      if((studentState.totalLessonsOpened || 0) >= 3) count++;
+      if(getAccuracy() >= 80 && (studentState.totalAnswered || 0) >= 8) count++;
+      if((studentState.totalStars || 0) >= 8 || (studentState.totalXP || 0) >= 150) count++;
+      return count;
+    }
+
+    function getAccuracy(){
+      return studentState.totalAnswered
+        ? Math.round((studentState.totalCorrect / studentState.totalAnswered) * 100)
+        : 0;
+    }
+
+    function firstAvailableTopicIndex(grade){
+      const topics = curriculum[grade] || [];
+      for(let i = 0; i < topics.length; i++){
+        if(isTopicUnlocked(grade, i)) return i;
+      }
+      return 0;
     }
 
     function ensureDefaultUnlocks(){
       Object.keys(curriculum).forEach(grade => {
-        if(!studentState.unlocked[getTopicKey(grade,0)]) studentState.unlocked[getTopicKey(grade,0)] = true;
+        const key = getTopicKey(grade, 0);
+        if(!studentState.unlocked[key]) studentState.unlocked[key] = true;
       });
     }
 
-    function bindEvents(){
-      gradeSelect.addEventListener('change', e => {
-        currentGrade = e.target.value;
-        currentTopicIndex = firstAvailableTopicIndex(currentGrade);
-        currentQuestionIndex = 0;
-        score = 0;
-        certificateCard.style.display = 'none';
-        studentState.grade = currentGrade;
-        saveProgress();
-        refreshAll();
+    function initStreak(){
+      const today = getTodayKey();
+      const yesterday = getYesterdayKey();
+      if(!studentState.lastActiveDate){
+        studentState.lastActiveDate = today;
+        studentState.streak = 1;
+      }else if(studentState.lastActiveDate === today){
+        // no change
+      }else if(studentState.lastActiveDate === yesterday){
+        studentState.streak = (studentState.streak || 0) + 1;
+        studentState.lastActiveDate = today;
+      }else{
+        studentState.streak = 1;
+        studentState.lastActiveDate = today;
+      }
+    }
+
+    function init(){
+      Object.keys(curriculum).forEach(grade => {
+        const opt = document.createElement("option");
+        opt.value = grade;
+        opt.textContent = grade;
+        gradeSelect.appendChild(opt);
       });
 
-      topicSearch.addEventListener('input', renderTopics);
-      document.getElementById('saveStudentBtn').addEventListener('click', saveStudentProfile);
-      document.getElementById('loadStudentBtn').addEventListener('click', loadSavedProgress);
-      document.getElementById('resetAllBtn').addEventListener('click', resetAllProgress);
-      document.getElementById('prevTopicBtn').addEventListener('click', goPrevTopic);
-      document.getElementById('nextTopicBtn').addEventListener('click', goNextTopic);
-      soundToggleBtn.addEventListener('click', toggleSound);
+      loadSavedProgress();
+      ensureDefaultUnlocks();
+      initStreak();
+      bindEvents();
+      gradeSelect.value = currentGrade;
+      startLessonTimer();
+      refreshAll();
+      saveProgress();
+    }
+
+    function bindEvents(){
+      gradeSelect.addEventListener("change", e => {
+        currentGrade = e.target.value;
+        currentTopicIndex = firstAvailableTopicIndex(currentGrade);
+        studentState.grade = currentGrade;
+        resetLessonSession();
+        saveProgress();
+        refreshAll();
+        showToast(`Switched to ${currentGrade}.`);
+      });
+
+      topicSearch.addEventListener("input", renderTopics);
+      document.getElementById("saveStudentBtn").addEventListener("click", saveStudentProfile);
+      document.getElementById("loadStudentBtn").addEventListener("click", loadSavedProgressAndRefresh);
+      document.getElementById("resetAllBtn").addEventListener("click", resetAllProgress);
+      document.getElementById("prevTopicBtn").addEventListener("click", goPrevTopic);
+      document.getElementById("nextTopicBtn").addEventListener("click", goNextTopic);
+      soundToggleBtn.addEventListener("click", toggleSound);
+      bookmarkBtn.addEventListener("click", toggleFavoriteCurrentTopic);
+      favoriteTopicBtn.addEventListener("click", toggleFavoriteCurrentTopic);
     }
 
     function saveStudentProfile(){
       const name = studentName.value.trim();
-      if(!name){ alert('Please enter a student name first.'); return; }
+      const goal = learningGoalInput.value.trim();
+
+      if(!name){
+        alert("Please enter a student name first.");
+        return;
+      }
+
       studentState.name = name;
+      studentState.goal = goal;
       studentState.grade = gradeSelect.value;
       currentGrade = gradeSelect.value;
       ensureDefaultUnlocks();
+      initStreak();
       saveProgress();
       refreshAll();
-      playTone('success');
+      playTone("success");
+      showToast(`Welcome, ${name}! Your student profile has been saved.`);
     }
 
     function saveProgress(){
       try{
         localStorage.setItem(STORAGE_KEY, JSON.stringify(studentState));
       }catch(err){
-        console.log('Saving progress failed.', err);
+        console.log("Saving progress failed.", err);
       }
     }
 
@@ -638,35 +1670,61 @@
           studentState = Object.assign(studentState, parsed || {});
         }
       }catch(err){
-        console.log('Loading progress failed.', err);
+        console.log("Loading progress failed.", err);
       }
+
       ensureDefaultUnlocks();
-      currentGrade = studentState.grade || 'Grade 1';
-      gradeSelect.value = currentGrade;
-      studentName.value = studentState.name || '';
+      currentGrade = studentState.grade || "Grade 1";
+      studentName.value = studentState.name || "";
+      learningGoalInput.value = studentState.goal || "";
       currentTopicIndex = firstAvailableTopicIndex(currentGrade);
-      currentQuestionIndex = 0;
-      score = 0;
+      resetLessonSession(false);
+    }
+
+    function loadSavedProgressAndRefresh(){
+      loadSavedProgress();
+      gradeSelect.value = currentGrade;
       refreshAll();
+      showToast("Saved progress loaded.");
+      playTone("success");
     }
 
     function resetAllProgress(){
-      if(!confirm('Reset all saved student progress on this device?')) return;
+      if(!confirm("Reset all saved student progress on this device?")) return;
+
       localStorage.removeItem(STORAGE_KEY);
       studentState = {
-        name:'', grade:'Grade 1', completed:{}, unlocked:{}, totalCorrect:0, totalAnswered:0, totalStars:0, lastLesson:''
+        name:"",
+        grade:"Grade 1",
+        goal:"",
+        completed:{},
+        unlocked:{},
+        mastery:{},
+        starsByTopic:{},
+        favorites:{},
+        totalCorrect:0,
+        totalAnswered:0,
+        totalStars:0,
+        totalXP:0,
+        totalLessonsOpened:0,
+        lastLesson:"",
+        lastActiveDate:"",
+        streak:0
       };
+
       ensureDefaultUnlocks();
-      currentGrade = 'Grade 1';
+      currentGrade = "Grade 1";
       currentTopicIndex = 0;
-      currentQuestionIndex = 0;
-      score = 0;
-      answered = false;
-      studentName.value = '';
+      studentName.value = "";
+      learningGoalInput.value = "";
       gradeSelect.value = currentGrade;
-      certificateCard.style.display = 'none';
+      resetLessonSession();
+      certificateCard.style.display = "none";
+      initStreak();
+      saveProgress();
       refreshAll();
-      playTone('reset');
+      playTone("reset");
+      showToast("All saved progress has been reset.");
     }
 
     function refreshAll(){
@@ -676,180 +1734,271 @@
       renderLesson();
       updateStats();
       updateDashboard();
-    }
-
-    function isTopicUnlocked(grade, index){
-      return !!studentState.unlocked[getTopicKey(grade,index)];
-    }
-
-    function firstAvailableTopicIndex(grade){
-      const topics = curriculum[grade] || [];
-      for(let i=0;i<topics.length;i++) if(isTopicUnlocked(grade, i)) return i;
-      return 0;
+      updateCoachMessage();
+      updateQuickSummary();
+      updateBadges();
+      updateSpotlight();
     }
 
     function renderStudentSummary(){
-      const name = studentState.name || 'Guest Student';
+      const name = studentState.name || "Guest Student";
       const unlocked = getUnlockedCount(currentGrade);
-      const completedCount = Object.keys(studentState.completed || {}).length;
-      studentSummary.innerHTML = `<strong>${name}</strong><br>
+      const completedCount = getCompletedCount();
+      const accuracy = getAccuracy();
+      const goal = studentState.goal || "No goal saved yet";
+
+      studentSummary.innerHTML = `
+        <strong>${name}</strong><br>
         Current grade: <strong>${currentGrade}</strong><br>
+        Learning goal: <strong>${escapeHTML(goal)}</strong><br>
         Unlocked lessons in this grade: <strong>${unlocked}</strong><br>
         Total completed lessons: <strong>${completedCount}</strong><br>
+        Total XP: <strong>${studentState.totalXP || 0}</strong><br>
         Total stars earned: <strong>${studentState.totalStars || 0}</strong><br>
-        Last lesson: <strong>${studentState.lastLesson || 'None yet'}</strong>`;
+        Overall accuracy: <strong>${accuracy}%</strong><br>
+        Last lesson: <strong>${studentState.lastLesson || "None yet"}</strong>
+      `;
     }
 
     function renderMap(){
-      mapGrid.innerHTML = '';
-      const topics = curriculum[currentGrade];
+      mapGrid.innerHTML = "";
+      const topics = curriculum[currentGrade] || [];
+
       topics.forEach((topic, index) => {
         const unlocked = isTopicUnlocked(currentGrade, index);
-        const completed = !!studentState.completed[getTopicKey(currentGrade,index)];
-        const card = document.createElement('button');
-        card.type = 'button';
-        card.className = 'world-card' + (unlocked ? '' : ' locked') + (index === currentTopicIndex ? ' active' : '');
+        const completed = isTopicCompleted(currentGrade, index);
+        const stars = getTopicStars(currentGrade, index);
+        const mastery = getTopicMastery(currentGrade, index);
+
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className =
+          "world-card" +
+          (unlocked ? "" : " locked") +
+          (index === currentTopicIndex ? " active" : "") +
+          (completed ? " completed" : "");
+
+        card.disabled = !unlocked;
         card.innerHTML = `
           <div class="world-top">
             <strong>Level ${index + 1}</strong>
-            <span class="world-badge">${unlocked ? (completed ? 'Completed' : 'Unlocked') : 'Locked'}</span>
+            <span class="world-badge">${unlocked ? (completed ? "Completed" : "Unlocked") : "Locked"}</span>
           </div>
           <div><strong>${topic.title}</strong></div>
-          <div style="color:var(--text);margin-top:6px">${topic.difficulty}</div>
-          <div class="stars-row">${completed ? '★★★' : unlocked ? '★☆☆' : '☆☆☆'}</div>
+          <div class="world-meta">${topic.difficulty} • ${topic.timeEstimate} • ${topic.questions.length} questions</div>
+          <div class="world-meta">Mastery: ${mastery}%</div>
+          <div class="stars-row">${renderStarString(stars)}</div>
         `;
-        card.disabled = !unlocked;
+
         card.onclick = () => {
           currentTopicIndex = index;
-          currentQuestionIndex = 0;
-          score = 0;
-          certificateCard.style.display = 'none';
+          resetLessonSession();
+          certificateCard.style.display = "none";
+          incrementLessonOpenCount();
           renderMap();
           renderTopics();
           renderLesson();
           updateStats();
+          updateCoachMessage();
+          updateQuickSummary();
         };
+
         mapGrid.appendChild(card);
       });
     }
 
     function renderTopics(){
       const query = topicSearch.value.trim().toLowerCase();
-      topicList.innerHTML = '';
-      const topics = curriculum[currentGrade];
+      topicList.innerHTML = "";
+      const topics = curriculum[currentGrade] || [];
       let matchCount = 0;
+
       topics.forEach((topic, index) => {
-        if(query && !topic.title.toLowerCase().includes(query) && !topic.explanation.toLowerCase().includes(query)) return;
+        const searchable = [
+          topic.title,
+          topic.explanation,
+          ...(topic.vocabulary || []),
+          ...(topic.goals || [])
+        ].join(" ").toLowerCase();
+
+        if(query && !searchable.includes(query)) return;
+
         matchCount++;
         const unlocked = isTopicUnlocked(currentGrade, index);
-        const completed = !!studentState.completed[getTopicKey(currentGrade,index)];
-        const card = document.createElement('div');
-        card.className = 'topic-card' + (index === currentTopicIndex ? ' active' : '') + (unlocked ? '' : ' locked');
-        card.innerHTML = `<h4>${topic.title}</h4><p>${topic.difficulty} • ${topic.questions.length} questions • ${completed ? 'Completed' : unlocked ? 'Unlocked' : 'Locked'}</p>`;
+        const completed = isTopicCompleted(currentGrade, index);
+        const mastery = getTopicMastery(currentGrade, index);
+        const favorite = !!studentState.favorites[getTopicKey(currentGrade,index)];
+
+        const card = document.createElement("div");
+        card.className =
+          "topic-card" +
+          (index === currentTopicIndex ? " active" : "") +
+          (unlocked ? "" : " locked") +
+          (favorite ? " favorite" : "");
+
+        card.innerHTML = `
+          <h4>${topic.title}</h4>
+          <p>${topic.difficulty} • ${topic.questions.length} questions • Mastery ${mastery}% • ${completed ? "Completed" : unlocked ? "Unlocked" : "Locked"}</p>
+        `;
+
         card.onclick = () => {
-          if(!unlocked){ playTone('locked'); return; }
+          if(!unlocked){
+            playTone("locked");
+            showToast("This lesson is locked. Complete earlier lessons first.");
+            return;
+          }
           currentTopicIndex = index;
-          currentQuestionIndex = 0;
-          score = 0;
-          answered = false;
-          certificateCard.style.display = 'none';
+          resetLessonSession();
+          certificateCard.style.display = "none";
+          incrementLessonOpenCount();
           renderMap();
           renderTopics();
           renderLesson();
           updateStats();
+          updateCoachMessage();
+          updateQuickSummary();
         };
+
         topicList.appendChild(card);
       });
+
       if(matchCount === 0){
-        topicList.innerHTML = `<div class="topic-card"><h4>No topics found</h4><p>Try a different keyword.</p></div>`;
+        topicList.innerHTML = `<div class="topic-card"><h4>No topics found</h4><p>Try another keyword like fraction, decimal, regrouping, or percent.</p></div>`;
       }
     }
 
     function renderLesson(){
       const topic = curriculum[currentGrade][currentTopicIndex];
+      const mastery = getTopicMastery(currentGrade, currentTopicIndex);
+
       lessonTitle.textContent = topic.title;
       lessonGradePill.textContent = currentGrade;
       lessonTopicPill.textContent = topic.title;
       lessonDifficultyPill.textContent = topic.difficulty;
-      lessonLockPill.textContent = isTopicUnlocked(currentGrade, currentTopicIndex) ? 'Unlocked' : 'Locked';
-      lessonExplanation.innerHTML = `<strong>Learn:</strong> ${topic.explanation}`;
-      lessonExample.innerHTML = `<strong>Worked Example:</strong> ${topic.example}`;
-      lessonTip.innerHTML = `<strong>Professor Pi Tip:</strong> ${topic.tip}`;
+      lessonLockPill.textContent = isTopicUnlocked(currentGrade, currentTopicIndex) ? "Unlocked" : "Locked";
+      lessonMasteryPill.textContent = `Mastery: ${mastery}%`;
+
+      lessonObjectives.innerHTML = `
+        <strong class="lesson-box-title">Learning Goals</strong>
+        <ul style="margin:0;padding-left:18px;">
+          ${topic.goals.map(goal => `<li>${escapeHTML(goal)}</li>`).join("")}
+        </ul>
+      `;
+
+      lessonVocabulary.innerHTML = `
+        <strong class="lesson-box-title">Key Vocabulary</strong>
+        ${topic.vocabulary.map(v => `<span class="badge" style="margin:4px 6px 0 0;display:inline-block;">${escapeHTML(v)}</span>`).join("")}
+      `;
+
+      lessonExplanation.innerHTML = `
+        <strong class="lesson-box-title">Clear Explanation</strong>
+        ${escapeHTML(topic.explanation)}
+      `;
+
+      lessonExample.innerHTML = `
+        <strong class="lesson-box-title">Worked Example</strong>
+        ${escapeHTML(topic.example)}
+      `;
+
+      lessonTip.innerHTML = `
+        <strong class="lesson-box-title">Professor Pi Tip</strong>
+        ${escapeHTML(topic.tip)}
+      `;
+
+      updateBookmarkButton();
       renderQuestion();
     }
 
     function renderQuestion(){
       const topic = curriculum[currentGrade][currentTopicIndex];
       const unlocked = isTopicUnlocked(currentGrade, currentTopicIndex);
+
       if(!unlocked){
-        questionText.textContent = 'This lesson is locked. Finish earlier lessons to unlock it.';
-        optionsWrap.innerHTML = '';
-        feedback.textContent = '';
-        explanationBox.classList.add('hidden');
-        hintBox.classList.add('hidden');
-        progressFill.style.width = '0%';
-        progressText.textContent = 'Lesson locked';
+        questionText.textContent = "This lesson is locked. Finish earlier lessons to unlock it.";
+        optionsWrap.innerHTML = "";
+        feedback.textContent = "";
+        explanationBox.classList.add("hidden");
+        hintBox.classList.add("hidden");
+        progressFill.style.width = "0%";
+        progressText.textContent = "Lesson locked";
         return;
       }
+
       const question = topic.questions[currentQuestionIndex];
       questionText.textContent = question.q;
-      optionsWrap.innerHTML = '';
-      feedback.textContent = '';
-      feedback.className = 'feedback';
-      explanationBox.classList.add('hidden');
-      hintBox.classList.add('hidden');
-      explanationBox.textContent = '';
-      hintBox.textContent = '';
+      optionsWrap.innerHTML = "";
+      feedback.textContent = "";
+      feedback.className = "feedback";
+      explanationBox.classList.add("hidden");
+      hintBox.classList.add("hidden");
+      explanationBox.textContent = "";
+      hintBox.textContent = "";
       answered = false;
+
       question.options.forEach(option => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
         btn.textContent = option;
         btn.onclick = () => checkAnswer(option);
         optionsWrap.appendChild(btn);
       });
+
       const pct = (currentQuestionIndex / topic.questions.length) * 100;
-      progressFill.style.width = pct + '%';
+      progressFill.style.width = pct + "%";
       progressText.textContent = `Question ${currentQuestionIndex + 1} of ${topic.questions.length}`;
+      updatePracticeMicroStats();
     }
 
     function checkAnswer(selected){
       if(answered) return;
       answered = true;
+
       const topic = curriculum[currentGrade][currentTopicIndex];
       const question = topic.questions[currentQuestionIndex];
-      const optionButtons = [...document.querySelectorAll('.option-btn')];
-      optionButtons.forEach(b => {
-        if(b.textContent === question.answer) b.classList.add('correct');
-        if(b.textContent === selected && selected !== question.answer) b.classList.add('wrong');
-        b.disabled = true;
+      const optionButtons = [...document.querySelectorAll(".option-btn")];
+
+      optionButtons.forEach(btn => {
+        if(btn.textContent === question.answer) btn.classList.add("correct");
+        if(btn.textContent === selected && selected !== question.answer) btn.classList.add("wrong");
+        btn.disabled = true;
       });
+
       studentState.totalAnswered = (studentState.totalAnswered || 0) + 1;
+
       if(selected === question.answer){
-        score++;
+        lessonCorrect++;
         studentState.totalCorrect = (studentState.totalCorrect || 0) + 1;
-        feedback.textContent = 'Correct! Great job.';
-        feedback.classList.add('ok');
-        playTone('success');
-      } else {
-        feedback.textContent = 'Not quite. Review the explanation below.';
-        feedback.classList.add('no');
-        playTone('wrong');
+        studentState.totalXP = (studentState.totalXP || 0) + 10;
+        feedback.textContent = "Correct! Great job.";
+        feedback.classList.add("ok");
+        playTone("success");
+      }else{
+        feedback.textContent = "Not quite. Review the explanation below.";
+        feedback.classList.add("no");
+        playTone("wrong");
       }
-      explanationBox.classList.remove('hidden');
-      explanationBox.innerHTML = `<strong>Explanation:</strong> ${question.explain}`;
+
+      explanationBox.classList.remove("hidden");
+      explanationBox.innerHTML = `<strong class="lesson-box-title">Explanation</strong>${escapeHTML(question.explain)}`;
       saveProgress();
       updateStats();
       updateDashboard();
+      updatePracticeMicroStats();
     }
 
     function nextQuestion(){
       const topic = curriculum[currentGrade][currentTopicIndex];
       if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+
+      if(!answered){
+        showToast("Answer the current question first.");
+        return;
+      }
+
       if(currentQuestionIndex < topic.questions.length - 1){
         currentQuestionIndex++;
         renderQuestion();
-      } else {
+      }else{
         finishLesson();
       }
     }
@@ -857,37 +2006,64 @@
     function showHint(){
       const topic = curriculum[currentGrade][currentTopicIndex];
       if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+
       const question = topic.questions[currentQuestionIndex];
-      hintBox.classList.remove('hidden');
-      hintBox.innerHTML = `<strong>Hint:</strong> ${question.hint}`;
-      playTone('hint');
+      hintBox.classList.remove("hidden");
+      hintBox.innerHTML = `<strong class="lesson-box-title">Hint</strong>${escapeHTML(question.hint)}`;
+      playTone("hint");
     }
 
     function finishLesson(){
       if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+
       const topic = curriculum[currentGrade][currentTopicIndex];
-      const name = studentName.value.trim() || studentState.name || 'Math Star';
+      const totalQuestions = topic.questions.length;
+      const mastery = Math.round((lessonCorrect / totalQuestions) * 100);
+      const stars = mastery >= 90 ? 3 : mastery >= 70 ? 2 : 1;
+      const topicKey = getTopicKey(currentGrade, currentTopicIndex);
+      const previousStars = studentState.starsByTopic[topicKey] || 0;
+      const previousMastery = studentState.mastery[topicKey] || 0;
+      const name = studentName.value.trim() || studentState.name || "Math Star";
+
       studentState.name = name;
+      studentState.goal = learningGoalInput.value.trim();
       studentState.grade = currentGrade;
       studentState.lastLesson = topic.title;
-      studentState.completed[getTopicKey(currentGrade,currentTopicIndex)] = true;
-      const earnedStars = Math.max(1, Math.min(3, score));
-      studentState.totalStars = (studentState.totalStars || 0) + earnedStars;
+      studentState.completed[topicKey] = true;
+      studentState.mastery[topicKey] = Math.max(previousMastery, mastery);
+
+      if(stars > previousStars){
+        studentState.totalStars = (studentState.totalStars || 0) + (stars - previousStars);
+        studentState.starsByTopic[topicKey] = stars;
+      }
+
+      studentState.totalXP = (studentState.totalXP || 0) + 25;
       unlockNextTopic();
-      progressFill.style.width = '100%';
-      progressText.textContent = `Completed ${topic.questions.length} of ${topic.questions.length} questions`;
+      progressFill.style.width = "100%";
+      progressText.textContent = `Completed ${totalQuestions} of ${totalQuestions} questions`;
+
       certName.textContent = name;
       certTopic.textContent = topic.title;
       certGrade.textContent = currentGrade;
-      certificateCard.style.display = 'block';
+      certStars.textContent = `${stars} Star${stars > 1 ? "s" : ""}`;
+      certMastery.textContent = `Mastery ${mastery}%`;
+      certificateCard.style.display = "block";
+
       saveProgress();
       renderMap();
       renderTopics();
       renderStudentSummary();
       updateStats();
       updateDashboard();
-      playTone('finish');
-      certificateCard.scrollIntoView({behavior:'smooth', block:'start'});
+      updateCoachMessage();
+      updateQuickSummary();
+      updateBadges();
+      updateSpotlight();
+      playTone("finish");
+      launchConfetti();
+      certificateCard.scrollIntoView({behavior:"smooth", block:"start"});
+
+      showToast(`Lesson complete! You earned ${stars} star${stars > 1 ? "s" : ""} and reached ${mastery}% mastery.`);
     }
 
     function unlockNextTopic(){
@@ -899,99 +2075,246 @@
     }
 
     function resetLesson(){
-      currentQuestionIndex = 0;
-      score = 0;
-      answered = false;
-      certificateCard.style.display = 'none';
+      resetLessonSession();
+      certificateCard.style.display = "none";
       renderLesson();
       updateStats();
-      playTone('reset');
+      playTone("reset");
+      showToast("Lesson reset.");
+    }
+
+    function resetLessonSession(resetIndex = true){
+      if(resetIndex) currentQuestionIndex = 0;
+      lessonCorrect = 0;
+      answered = false;
+      lessonSeconds = 0;
+      startLessonTimer();
+      updatePracticeMicroStats();
     }
 
     function updateStats(){
-      statStudent.textContent = studentState.name || 'Guest';
-      statGrade.textContent = currentGrade.replace('Grade ','').replace('Kindergarten','K');
-      statScore.textContent = score;
+      statStudent.textContent = studentState.name || "Guest";
+      statGrade.textContent = currentGrade.replace("Grade ","");
+      statXP.textContent = studentState.totalXP || 0;
       statStars.textContent = studentState.totalStars || 0;
     }
 
     function updateDashboard(){
-      const completedCount = Object.keys(studentState.completed || {}).length;
-      dashCompleted.textContent = completedCount;
+      dashCompleted.textContent = getCompletedCount();
       dashUnlocked.textContent = getUnlockedCount(currentGrade);
-      const accuracy = studentState.totalAnswered ? Math.round((studentState.totalCorrect / studentState.totalAnswered) * 100) : 0;
-      dashAccuracy.textContent = accuracy + '%';
-      dashLastLesson.textContent = studentState.lastLesson || '—';
+      dashAccuracy.textContent = getAccuracy() + "%";
+      dashLastLesson.textContent = studentState.lastLesson || "—";
+      dashGoal.textContent = studentState.goal || "—";
+    }
+
+    function updateCoachMessage(){
+      const topic = curriculum[currentGrade][currentTopicIndex];
+      const mastery = getTopicMastery(currentGrade, currentTopicIndex);
+      let message = "";
+
+      if(!studentState.name){
+        message = "Welcome! Start by saving a student name so progress can be tracked on this device.";
+      }else if(mastery >= 90){
+        message = `Excellent work, ${studentState.name}. You already have strong mastery in ${topic.title}. You can review it or move to the next unlocked lesson.`;
+      }else if(mastery >= 60){
+        message = `Good progress, ${studentState.name}. Keep practicing ${topic.title} to improve fluency and accuracy.`;
+      }else{
+        message = `Today’s focus is ${topic.title}. Read the explanation carefully, use the hint when needed, and aim for stronger mastery.`;
+      }
+
+      coachMessage.innerHTML = `<strong class="lesson-box-title">Professor Pi Coach Message</strong>${escapeHTML(message)}`;
+    }
+
+    function updateQuickSummary(){
+      const topic = curriculum[currentGrade][currentTopicIndex];
+      const mastery = getTopicMastery(currentGrade, currentTopicIndex);
+      const favorite = studentState.favorites[getTopicKey(currentGrade, currentTopicIndex)] ? "Yes" : "No";
+
+      quickSummary.innerHTML = `
+        <strong>Continue Learning:</strong><br>
+        Topic: <strong>${escapeHTML(topic.title)}</strong><br>
+        Difficulty: <strong>${escapeHTML(topic.difficulty)}</strong><br>
+        Time estimate: <strong>${escapeHTML(topic.timeEstimate)}</strong><br>
+        Current mastery: <strong>${mastery}%</strong><br>
+        Favorite: <strong>${favorite}</strong>
+      `;
+    }
+
+    function updateBadges(){
+      const completed = getCompletedCount();
+      const accuracy = getAccuracy();
+      const stars = studentState.totalStars || 0;
+      const opened = studentState.totalLessonsOpened || 0;
+      const xp = studentState.totalXP || 0;
+
+      const badgeStarter = document.getElementById("badgeStarter");
+      const badgeExplorer = document.getElementById("badgeExplorer");
+      const badgeAccuracy = document.getElementById("badgeAccuracy");
+      const badgeChampion = document.getElementById("badgeChampion");
+
+      badgeStarter.classList.toggle("locked", completed < 1);
+      badgeExplorer.classList.toggle("locked", opened < 3);
+      badgeAccuracy.classList.toggle("locked", !(accuracy >= 80 && (studentState.totalAnswered || 0) >= 8));
+      badgeChampion.classList.toggle("locked", !(stars >= 8 || xp >= 150));
+    }
+
+    function updateSpotlight(){
+      spotlightStreak.textContent = studentState.streak || 0;
+      spotlightSession.textContent = Math.floor((Date.now() - sessionStartedAt) / 60000) + "m";
+      spotlightMastery.textContent = getAverageMastery() + "%";
+      spotlightBadges.textContent = getBadgeCount();
+    }
+
+    function updatePracticeMicroStats(){
+      const topic = curriculum[currentGrade][currentTopicIndex];
+      const totalQuestions = topic.questions.length;
+      const starsPreview = totalQuestions ? (lessonCorrect / totalQuestions) : 0;
+      let previewStars = 0;
+      if(starsPreview >= 0.9) previewStars = 3;
+      else if(starsPreview >= 0.7) previewStars = 2;
+      else if(lessonCorrect > 0) previewStars = 1;
+
+      practiceStars.textContent = `Lesson Stars: ${previewStars}`;
+      practiceCorrect.textContent = `Correct: ${lessonCorrect}`;
+      practiceTimer.textContent = `Time: ${lessonSeconds}s`;
+    }
+
+    function getAverageMastery(){
+      const values = Object.values(studentState.mastery || {});
+      if(!values.length) return 0;
+      return Math.round(values.reduce((a,b) => a+b, 0) / values.length);
+    }
+
+    function renderStarString(count){
+      return "★".repeat(count) + "☆".repeat(3 - count);
+    }
+
+    function incrementLessonOpenCount(){
+      studentState.totalLessonsOpened = (studentState.totalLessonsOpened || 0) + 1;
+      saveProgress();
+      updateBadges();
+      updateSpotlight();
     }
 
     function goPrevTopic(){
-      for(let i=currentTopicIndex-1; i>=0; i--){
+      for(let i = currentTopicIndex - 1; i >= 0; i--){
         if(isTopicUnlocked(currentGrade, i)){
           currentTopicIndex = i;
-          currentQuestionIndex = 0;
-          score = 0;
-          certificateCard.style.display = 'none';
-          renderMap(); renderTopics(); renderLesson(); updateStats();
-          break;
+          resetLessonSession();
+          certificateCard.style.display = "none";
+          renderMap();
+          renderTopics();
+          renderLesson();
+          updateStats();
+          updateCoachMessage();
+          updateQuickSummary();
+          return;
         }
       }
+      playTone("locked");
     }
 
     function goNextTopic(){
       const topics = curriculum[currentGrade];
-      for(let i=currentTopicIndex+1; i<topics.length; i++){
+      for(let i = currentTopicIndex + 1; i < topics.length; i++){
         if(isTopicUnlocked(currentGrade, i)){
           currentTopicIndex = i;
-          currentQuestionIndex = 0;
-          score = 0;
-          certificateCard.style.display = 'none';
-          renderMap(); renderTopics(); renderLesson(); updateStats();
+          resetLessonSession();
+          certificateCard.style.display = "none";
+          renderMap();
+          renderTopics();
+          renderLesson();
+          updateStats();
+          updateCoachMessage();
+          updateQuickSummary();
           return;
         }
       }
-      playTone('locked');
+      playTone("locked");
+      showToast("No further unlocked lesson yet.");
+    }
+
+    function toggleFavoriteCurrentTopic(){
+      const key = getTopicKey(currentGrade, currentTopicIndex);
+      studentState.favorites[key] = !studentState.favorites[key];
+      saveProgress();
+      renderTopics();
+      updateBookmarkButton();
+      updateQuickSummary();
+      showToast(studentState.favorites[key] ? "Topic added to favorites." : "Topic removed from favorites.");
+      playTone("hint");
+    }
+
+    function updateBookmarkButton(){
+      const key = getTopicKey(currentGrade, currentTopicIndex);
+      const favorite = !!studentState.favorites[key];
+      bookmarkBtn.textContent = favorite ? "★ Saved Topic" : "☆ Save Topic";
+      favoriteTopicBtn.textContent = favorite ? "★ Favorited" : "★ Favorite Topic";
     }
 
     function printCertificate(){
-      if(certificateCard.style.display === 'none' || certificateCard.style.display === ''){
-        alert('Please finish the lesson first to unlock the certificate.');
+      if(certificateCard.style.display === "none" || certificateCard.style.display === ""){
+        alert("Please finish the lesson first to unlock the certificate.");
         return;
       }
       window.print();
     }
 
     function scrollToTutorial(){
-      document.getElementById('tutorialSection').scrollIntoView({behavior:'smooth'});
+      document.getElementById("tutorialSection").scrollIntoView({behavior:"smooth"});
     }
 
     function scrollToLogin(){
-      document.getElementById('loginSection').scrollIntoView({behavior:'smooth'});
+      document.getElementById("loginSection").scrollIntoView({behavior:"smooth"});
+    }
+
+    function jumpToMap(){
+      document.getElementById("mapSection").scrollIntoView({behavior:"smooth"});
+    }
+
+    function focusCurrentTopic(){
+      document.getElementById("tutorialSection").scrollIntoView({behavior:"smooth"});
     }
 
     function toggleSound(){
       soundOn = !soundOn;
-      soundToggleBtn.textContent = soundOn ? '🔊 Sound On' : '🔇 Sound Off';
+      soundToggleBtn.textContent = soundOn ? "🔊 Sound On" : "🔇 Sound Off";
+      showToast(soundOn ? "Sound enabled." : "Sound disabled.");
+    }
+
+    function startLessonTimer(){
+      if(lessonTimer) clearInterval(lessonTimer);
+      lessonTimer = setInterval(() => {
+        lessonSeconds++;
+        updatePracticeMicroStats();
+        updateSpotlight();
+      }, 1000);
     }
 
     function playTone(type){
       if(!soundOn) return;
+
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if(!AudioContextClass) return;
+
       const ctx = new AudioContextClass();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
+
       osc.connect(gain);
       gain.connect(ctx.destination);
+
       const tones = {
-        success: [660, 0.12],
-        wrong: [220, 0.18],
-        hint: [520, 0.08],
-        finish: [880, 0.22],
-        locked: [180, 0.15],
-        reset: [300, 0.08]
+        success:[660,0.12],
+        wrong:[220,0.18],
+        hint:[520,0.08],
+        finish:[880,0.22],
+        locked:[180,0.15],
+        reset:[300,0.08]
       };
-      const [freq, dur] = tones[type] || [440, 0.1];
-      osc.type = 'sine';
+
+      const [freq, dur] = tones[type] || [440,0.1];
+      osc.type = "sine";
       osc.frequency.value = freq;
       gain.gain.setValueAtTime(0.0001, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.01);
@@ -1001,6 +2324,40 @@
       osc.onended = () => ctx.close();
     }
 
+    function showToast(message){
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+    function launchConfetti(){
+      confettiWrap.innerHTML = "";
+      const colors = ["#0f6fff","#ffbf3f","#7f5cff","#21b66f","#ff7cb4"];
+      for(let i = 0; i < 32; i++){
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.top = (-10 - Math.random() * 20) + "px";
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (2.4 + Math.random() * 1.9) + "s";
+        piece.style.transform = `rotate(${Math.random()*360}deg)`;
+        confettiWrap.appendChild(piece);
+      }
+      setTimeout(() => confettiWrap.innerHTML = "", 4200);
+    }
+
+    function escapeHTML(str){
+      return String(str)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#39;");
+    }
+
     window.showHint = showHint;
     window.nextQuestion = nextQuestion;
     window.finishLesson = finishLesson;
@@ -1008,6 +2365,8 @@
     window.printCertificate = printCertificate;
     window.scrollToTutorial = scrollToTutorial;
     window.scrollToLogin = scrollToLogin;
+    window.jumpToMap = jumpToMap;
+    window.focusCurrentTopic = focusCurrentTopic;
 
     init();
   </script>
