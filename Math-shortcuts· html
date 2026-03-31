@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Love Math | Premium Math Shortcuts</title>
+  <meta
+    name="description"
+    content="Premium math shortcuts library for I Love Math with grade filters, quick tricks, worked examples, printable cheat sheet mode, and practice cards."
+  />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <style>
+    :root{
+      --blue:#0f6fff;
+      --blue2:#5ab9ff;
+      --nav:#0d67d7;
+      --dark:#123252;
+      --text:#506982;
+      --muted:#7b93ac;
+      --white:#ffffff;
+      --gold:#ffbf3f;
+      --gold2:#ffe08f;
+      --green:#20b66f;
+      --green2:#69dca0;
+      --red:#ef5350;
+      --purple:#7f5cff;
+      --purple2:#b099ff;
+      --pink:#ff7cb4;
+      --bg1:#eaf7ff;
+      --bg2:#fff8eb;
+      --glass:rgba(255,255,255,.80);
+      --glass-strong:rgba(255,255,255,.93);
+      --border:rgba(18,50,82,.08);
+      --shadow:0 18px 42px rgba(18,50,82,.12);
+      --shadow-hover:0 24px 56px rgba(18,50,82,.16);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --radius-sm:12px;
+      --maxw:1360px;
+      --transition:.22s ease;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--dark);
+      background:
+        radial-gradient(circle at top left, rgba(90,185,255,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,191,63,.16), transparent 28%),
+        linear-gradient(180deg,var(--bg1),#f7fbff 40%,var(--bg2));
+    }
+
+    a{text-decoration:none;color:inherit}
+    button,input,select{font:inherit}
+    button{border:none}
+
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:var(--maxw);
+      margin:auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;align-items:center;gap:14px;font-weight:800;color:var(--dark);
+    }
+    .brand img{
+      width:58px;height:58px;border-radius:18px;object-fit:contain;background:#fff;padding:6px;box-shadow:var(--shadow);
+    }
+    .brand-text strong{display:block;font-size:20px}
+    .brand-text small{display:block;color:var(--muted);font-weight:700;letter-spacing:.35px;margin-top:2px;font-size:12px}
+
+    .nav-actions,.hero-actions,.filter-row,.mini-actions,.practice-actions,.cheat-actions{
+      display:flex;flex-wrap:wrap;gap:12px;
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:16px;padding:13px 18px;font-weight:800;cursor:pointer;
+      transition:transform var(--transition), box-shadow var(--transition), opacity var(--transition), background var(--transition);
+      box-shadow:var(--shadow);user-select:none;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+    .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
+    .btn-secondary{background:#fff;color:var(--dark)}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#5b4100}
+    .btn-success{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff}
+    .btn-purple{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff}
+    .btn-ghost{background:rgba(255,255,255,.68);color:var(--dark);box-shadow:none;border:1px solid rgba(18,50,82,.08)}
+
+    .wrap{max-width:var(--maxw);margin:auto;padding:22px 18px 60px}
+    .section-space{margin-top:22px}
+
+    .hero{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:stretch;margin-top:16px;
+    }
+
+    .hero-card,.side-card,.panel,.shortcut-card,.summary-card,.practice-card,.cheat-card,.section-card,.spotlight-card,.mini-card,.tip-card{
+      background:var(--glass);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.62);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius-xl);
+    }
+    .hero-card,.side-card,.panel,.shortcut-card,.summary-card,.practice-card,.cheat-card,.section-card,.spotlight-card,.tip-card{padding:24px}
+
+    .label{
+      display:inline-block;font-size:12px;font-weight:800;color:var(--nav);letter-spacing:.7px;text-transform:uppercase;margin-bottom:10px;
+    }
+
+    .hero h1{font-size:clamp(32px,4.5vw,58px);line-height:1.02;margin:0 0 14px}
+    .hero p{font-size:18px;line-height:1.74;color:var(--text);margin:0 0 18px}
+    .headline-accent{color:var(--blue)}
+    .headline-gold{color:#d19100}
+    .headline-purple{color:var(--purple)}
+
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+    .badge-pill{
+      padding:10px 14px;border-radius:999px;background:#fff;color:var(--nav);font-weight:800;font-size:14px;border:1px solid rgba(15,111,255,.08);
+    }
+
+    .hero-grid,.stats-grid,.shortcut-grid,.mini-grid,.tip-grid{
+      display:grid;gap:14px;
+    }
+    .hero-grid{grid-template-columns:1fr 1fr;margin-top:18px}
+    .stats-grid{grid-template-columns:repeat(2,1fr);margin-top:18px}
+    .shortcut-grid{grid-template-columns:repeat(3,1fr);margin-top:16px}
+    .mini-grid{grid-template-columns:repeat(4,1fr)}
+    .tip-grid{grid-template-columns:repeat(3,1fr);margin-top:14px}
+
+    .summary-card{border-radius:22px;background:linear-gradient(180deg,#eef6ff,#ffffff);border:1px solid #dbe9f7}
+    .summary-card h4,.tip-card h4{margin:0 0 8px;font-size:18px}
+    .summary-card p,.tip-card p{margin:0;color:var(--text);font-size:14px;line-height:1.6}
+
+    .mascot{
+      min-height:250px;border-radius:24px;padding:22px;background:linear-gradient(180deg,#eef8ff,#fff7e8);display:flex;align-items:center;justify-content:center;text-align:center;border:1px dashed rgba(15,111,255,.18);position:relative;overflow:hidden;
+    }
+    .mascot::before,.mascot::after{content:"";position:absolute;border-radius:50%;filter:blur(6px);opacity:.55}
+    .mascot::before{width:120px;height:120px;background:rgba(127,92,255,.14);top:-18px;right:-18px}
+    .mascot::after{width:110px;height:110px;background:rgba(255,191,63,.18);bottom:-14px;left:-14px}
+    .pi{width:148px;height:148px;margin:0 auto 14px;border-radius:36px;background:linear-gradient(135deg,#ffdd79,#ffbe3f);box-shadow:0 18px 35px rgba(255,191,63,.3);display:grid;place-items:center;font-size:64px}
+    .mascot h3{margin:0 0 8px;font-size:26px}
+    .mascot p{margin:0;color:var(--text);line-height:1.68;font-size:15px}
+
+    .mini-card{
+      padding:16px;border-radius:20px;text-align:center;background:rgba(255,255,255,.84);border:1px solid rgba(18,50,82,.06);
+    }
+    .mini-card strong{display:block;font-size:28px;margin-top:6px}
+    .mini-card p{margin:8px 0 0;color:var(--text);font-size:14px;line-height:1.45}
+
+    .panel h2,.section-card h2,.practice-card h2,.cheat-card h2,.spotlight-card h2{margin:0 0 14px;font-size:26px}
+
+    .controls-grid{display:grid;grid-template-columns:1.3fr .9fr .9fr auto;gap:12px;align-items:end}
+    .control{margin-bottom:0}
+    .control label{display:block;margin-bottom:8px;font-weight:800;color:var(--dark)}
+    .control select,.control input{
+      width:100%;padding:14px 15px;border-radius:14px;border:1px solid #d9e7f6;background:#fff;outline:none;
+      transition:border-color var(--transition), box-shadow var(--transition);
+    }
+    .control select:focus,.control input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(15,111,255,.1)}
+
+    .section-card{overflow:hidden}
+    .section-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+    .section-name{font-size:30px;margin:0}
+    .section-sub{color:var(--text);line-height:1.7;margin:0}
+
+    .section-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .tab-btn{
+      padding:11px 14px;border-radius:999px;background:#fff;color:var(--dark);font-weight:800;border:1px solid #dcecff;cursor:pointer;
+      transition:.2s ease;
+    }
+    .tab-btn.active{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}
+
+    .shortcut-card{
+      background:linear-gradient(180deg,#ffffff,#f8fbff);border:1px solid #e3edf7;position:relative;overflow:hidden;
+      transition:transform var(--transition), box-shadow var(--transition), border var(--transition);
+    }
+    .shortcut-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:#cfe3ff}
+    .shortcut-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}
+    .shortcut-title{margin:0;font-size:21px}
+    .level-pill{
+      padding:8px 12px;border-radius:999px;background:#eef6ff;color:var(--nav);font-size:12px;font-weight:800;white-space:nowrap;
+    }
+    .shortcut-rule,.shortcut-why,.shortcut-tip,.shortcut-practice{font-size:14px;line-height:1.7;color:var(--text);margin:10px 0}
+    .shortcut-rule strong,.shortcut-why strong,.shortcut-tip strong,.shortcut-practice strong{color:var(--dark)}
+    .example-box{
+      margin-top:12px;padding:16px;border-radius:18px;background:#fff8ea;border:1px solid #f5dfaa;color:#5d4b14;line-height:1.7;font-weight:700;
+    }
+    .practice-mini{
+      margin-top:14px;padding:14px;border-radius:16px;background:#eefcf4;border:1px solid #ccefdc;color:#124c31;font-weight:700;line-height:1.7;
+    }
+
+    .spotlight-box{
+      padding:16px;border-radius:20px;background:#fff;border:1px solid #e3edf7;color:var(--text);line-height:1.75;font-size:14px;
+    }
+    .spotlight-box strong{color:var(--dark)}
+
+    .practice-layout{display:grid;grid-template-columns:1fr .95fr;gap:18px;align-items:start}
+    .practice-question{
+      background:#fff;border:1px solid #e2edf7;border-radius:24px;padding:18px;position:relative;
+    }
+    .practice-question h4{margin:0 0 10px;font-size:24px;line-height:1.4}
+    .practice-question p{margin:0 0 12px;color:var(--text);line-height:1.7}
+    .practice-options{display:grid;gap:10px;margin-top:14px}
+    .practice-option{
+      width:100%;text-align:left;padding:15px 16px;border-radius:14px;border:1px solid #d7e5f5;background:#fff;cursor:pointer;font-weight:700;
+      transition:transform var(--transition), border var(--transition), background var(--transition);
+    }
+    .practice-option:hover{transform:translateY(-1px);border-color:var(--blue)}
+    .practice-option.correct{background:#eafaf1;border-color:var(--green)}
+    .practice-option.wrong{background:#fff0ef;border-color:var(--red)}
+
+    .feedback{margin-top:12px;font-weight:800;min-height:22px}
+    .feedback.ok{color:var(--green)}
+    .feedback.no{color:var(--red)}
+
+    .cheat-sheet{
+      background:linear-gradient(180deg,#fffef8,#fff7db);border:4px solid #f3d277;border-radius:28px;padding:28px 22px;position:relative;overflow:hidden;
+    }
+    .cheat-sheet::before,.cheat-sheet::after{content:"✦";position:absolute;font-size:38px;color:rgba(243,210,119,.55)}
+    .cheat-sheet::before{top:18px;left:18px}
+    .cheat-sheet::after{bottom:18px;right:18px}
+    .cheat-sheet h3{font-size:36px;margin:6px 0 10px;text-align:center}
+    .cheat-sheet p{margin:8px 0;line-height:1.7;color:var(--text);text-align:center}
+    .cheat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+    .cheat-item{background:#fff;border:1px solid #efdca4;border-radius:18px;padding:14px}
+    .cheat-item strong{display:block;margin-bottom:6px}
+    .cheat-item span{color:var(--text);line-height:1.6;font-size:14px}
+
+    .footer-note{margin-top:28px;text-align:center;color:var(--text);line-height:1.7;font-size:14px}
+
+    .hidden{display:none !important}
+
+    @media print{
+      body{background:#fff}
+      .topbar,.hero-actions,.nav-actions,.filter-row,.practice-card,.spotlight-card,.footer-note,.btn,.tip-grid{display:none !important}
+      .wrap{padding:0}
+      .hero,.controls-grid,.practice-layout,.shortcut-grid,.cheat-grid,.mini-grid{grid-template-columns:1fr !important}
+      .hero-card,.side-card,.panel,.shortcut-card,.summary-card,.cheat-card,.section-card{box-shadow:none;border:1px solid #ddd;background:#fff}
+      .section-tabs{display:none}
+      #shortcutGrid .shortcut-card{break-inside:avoid;margin-bottom:12px}
+    }
+
+    @media (max-width: 1180px){
+      .hero,.practice-layout{grid-template-columns:1fr}
+      .controls-grid{grid-template-columns:1fr 1fr}
+      .shortcut-grid{grid-template-columns:repeat(2,1fr)}
+      .mini-grid,.tip-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 820px){
+      .hero-grid,.stats-grid,.shortcut-grid,.mini-grid,.tip-grid,.cheat-grid,.controls-grid{grid-template-columns:1fr}
+      .wrap{padding:18px 14px 50px}
+      .hero-card,.side-card,.panel,.shortcut-card,.summary-card,.practice-card,.cheat-card,.section-card,.spotlight-card,.tip-card{padding:18px}
+      .nav-actions,.hero-actions,.filter-row,.practice-actions,.mini-actions,.cheat-actions{flex-direction:column}
+      .btn{width:100%}
+      .section-name{font-size:26px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="assets/logo.png" alt="I Love Math logo" onerror="this.style.display='none'">
+        <div class="brand-text">
+          <strong>I Love Math</strong>
+          <small>Premium Math Shortcuts</small>
+        </div>
+      </div>
+
+      <nav class="nav-actions">
+        <a href="index.html" class="btn btn-secondary">Home</a>
+        <a href="worksheets.html" class="btn btn-secondary">Worksheets</a>
+        <a href="game.html" class="btn btn-secondary">Games</a>
+        <a href="puzzle.html" class="btn btn-secondary">Puzzles</a>
+        <button type="button" class="btn btn-primary" id="jumpLibraryBtn">Open Shortcut Library</button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <div>
+          <div class="label">Premium Shortcut Library</div>
+          <h1>
+            Learn <span class="headline-accent">math faster</span> with
+            <span class="headline-purple">smart tricks</span>,
+            <span class="headline-gold">clear examples</span>, and mini practice
+          </h1>
+          <p>
+            This page gives students and parents a premium shortcut library for faster thinking,
+            stronger number sense, and easier review. Every shortcut includes a simple rule,
+            a worked example, a reason why it works, and a quick way to practice it.
+          </p>
+
+          <div class="badges">
+            <span class="badge-pill">K–6 Shortcuts</span>
+            <span class="badge-pill">Worked Examples</span>
+            <span class="badge-pill">Why It Works</span>
+            <span class="badge-pill">Quick Practice</span>
+            <span class="badge-pill">Printable Cheat Sheet</span>
+            <span class="badge-pill">Parent Friendly</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="startExploringBtn">Start Exploring</button>
+            <button class="btn btn-gold" id="printCheatBtn">Print Cheat Sheet</button>
+            <button class="btn btn-purple" id="jumpPracticeBtn">Practice a Shortcut</button>
+          </div>
+
+          <div class="hero-grid">
+            <div class="summary-card">
+              <div class="label">Student Benefit</div>
+              <h4>Think faster, not harder</h4>
+              <p>Students learn quick mental strategies like making 10, doubling, using friendly numbers, and spotting patterns.</p>
+            </div>
+            <div class="summary-card">
+              <div class="label">Parent Benefit</div>
+              <h4>Easy to review at home</h4>
+              <p>Parents can quickly explain each trick using the simple rule, example, and mini practice prompt in every card.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="mascot">
+          <div>
+            <div class="pi">🧠</div>
+            <h3>Professor Pi</h3>
+            <p>
+              “Math shortcuts should make thinking clearer, not confusing.
+              Use them to build understanding, speed, and confidence.”
+            </p>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="mini-card">
+            <span class="label">Shortcut Cards</span>
+            <strong id="statShortcuts">24</strong>
+            <p>Carefully organized premium tricks</p>
+          </div>
+          <div class="mini-card">
+            <span class="label">Grade Bands</span>
+            <strong>4</strong>
+            <p>K–2, 3–4, 5–6, all grades</p>
+          </div>
+          <div class="mini-card">
+            <span class="label">Mini Practice</span>
+            <strong>24</strong>
+            <p>Every card includes a quick try-it</p>
+          </div>
+          <div class="mini-card">
+            <span class="label">Cheat Sheet</span>
+            <strong>Print</strong>
+            <p>Ready for home or classroom review</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="spotlight-card section-space">
+      <div class="label">Shortcut Spotlight</div>
+      <h2>How to use this page</h2>
+      <div class="mini-grid" style="margin-top:10px;">
+        <div class="mini-card">
+          <span class="label">Step 1</span>
+          <strong>Choose</strong>
+          <p>Pick a grade band or search a keyword like fractions, multiply, or percent.</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Step 2</span>
+          <strong>Read</strong>
+          <p>Look at the shortcut rule and the worked example first.</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Step 3</span>
+          <strong>Understand</strong>
+          <p>Use the “Why it works” section so the trick makes sense.</p>
+        </div>
+        <div class="mini-card">
+          <span class="label">Step 4</span>
+          <strong>Practice</strong>
+          <p>Try the quick prompt or use the practice area below.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section-space" id="librarySection">
+      <div class="label">Filter the Library</div>
+      <h2>Find the right shortcut fast</h2>
+      <div class="controls-grid">
+        <div class="control">
+          <label for="searchInput">Search Shortcut</label>
+          <input id="searchInput" type="text" placeholder="Type a keyword like doubles, fractions, percent, or PEMDAS" />
+        </div>
+        <div class="control">
+          <label for="gradeFilter">Grade Band</label>
+          <select id="gradeFilter">
+            <option value="all">All Grades</option>
+            <option value="K-2">K–2</option>
+            <option value="3-4">3–4</option>
+            <option value="5-6">5–6</option>
+            <option value="All">All Levels</option>
+          </select>
+        </div>
+        <div class="control">
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter">
+            <option value="all">All Categories</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+      </div>
+    </section>
+
+    <section class="section-card section-space">
+      <div class="section-top">
+        <div>
+          <div class="label">Shortcut Library</div>
+          <h2 class="section-name">Premium Math Shortcut Cards</h2>
+          <p class="section-sub">Use the tabs or filters to move through the shortcut library. Every card has a rule, example, explanation, and a quick practice prompt.</p>
+        </div>
+      </div>
+
+      <div class="section-tabs" id="sectionTabs"></div>
+      <div class="shortcut-grid" id="shortcutGrid"></div>
+    </section>
+
+    <section class="practice-card section-space" id="practiceSection">
+      <div class="label">Try One Now</div>
+      <h2>Practice a shortcut</h2>
+      <div class="practice-layout">
+        <div class="practice-question">
+          <h4 id="practiceQuestionTitle">Choose a practice card</h4>
+          <p id="practiceQuestionText">Select a shortcut from the list on the right to load a quick question.</p>
+          <div class="practice-options" id="practiceOptions"></div>
+          <div class="feedback" id="practiceFeedback"></div>
+          <div class="practice-actions">
+            <button class="btn btn-secondary" id="newPracticeBtn">New Practice</button>
+            <button class="btn btn-primary" id="showAnswerBtn">Show Explanation</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="spotlight-box">
+            <strong>Shortcut in focus</strong><br>
+            <span id="practiceFocusText">No shortcut selected yet.</span>
+          </div>
+          <div class="tip-grid">
+            <div class="tip-card">
+              <h4>Use shortcuts wisely</h4>
+              <p>Shortcuts should support understanding. They work best when students also know the main method.</p>
+            </div>
+            <div class="tip-card">
+              <h4>Practice in small bursts</h4>
+              <p>Reviewing 3–5 shortcuts often is better than trying to memorize everything at once.</p>
+            </div>
+            <div class="tip-card">
+              <h4>Say the rule aloud</h4>
+              <p>Students remember faster when they explain the trick in their own words.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cheat-card section-space" id="cheatSheetSection">
+      <div class="label">Printable Review</div>
+      <h2>Quick cheat sheet</h2>
+      <div class="cheat-sheet">
+        <h3>Math Shortcut Cheat Sheet</h3>
+        <p>Fast review for students, parents, and classroom practice.</p>
+        <div class="cheat-grid" id="cheatGrid"></div>
+        <div class="cheat-actions" style="justify-content:center;margin-top:18px;">
+          <button class="btn btn-gold" id="printSheetBtn">Print This Sheet</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      © I Love Math • Premium Math Shortcuts Library • Built for quick review, stronger number sense, and easier home practice.
+    </div>
+  </div>
+
+  <script>
+    const shortcuts = [
+      {
+        id:"make10",
+        title:"Make 10 First",
+        grade:"K-2",
+        category:"Addition",
+        tags:["addition","make 10","mental math","number bonds"],
+        rule:"If a number is close to 10, break the other number apart to make 10 first.",
+        example:"8 + 5 = 8 + 2 + 3 = 10 + 3 = 13",
+        why:"Making 10 first helps the brain add faster because 10 is a friendly number.",
+        tip:"Look for numbers like 8 or 9 and ask, “How much more to make 10?”",
+        practicePrompt:"What is 9 + 6 using make 10 first?",
+        practiceOptions:["14","15","16","17"],
+        practiceAnswer:"15",
+        practiceExplain:"9 needs 1 to make 10. Break 6 into 1 and 5. So 9 + 6 = 10 + 5 = 15."
+      },
+      {
+        id:"doubles",
+        title:"Use Doubles Facts",
+        grade:"K-2",
+        category:"Addition",
+        tags:["doubles","addition","facts"],
+        rule:"When the two addends are the same, double the number.",
+        example:"6 + 6 = 12",
+        why:"Doubles are easy to memorize and help with faster addition.",
+        tip:"Learn doubles from 1+1 to 10+10 until they feel automatic.",
+        practicePrompt:"What is 7 + 7?",
+        practiceOptions:["12","13","14","15"],
+        practiceAnswer:"14",
+        practiceExplain:"Double 7 is 14."
+      },
+      {
+        id:"nearDoubles",
+        title:"Use Near Doubles",
+        grade:"K-2",
+        category:"Addition",
+        tags:["near doubles","addition","facts"],
+        rule:"If the numbers are almost the same, use the double you know and adjust by 1.",
+        example:"6 + 7 = 6 + 6 + 1 = 13",
+        why:"Near doubles help students move from memorized doubles into harder facts.",
+        tip:"Ask: “What double is close to this?”",
+        practicePrompt:"What is 8 + 9 using near doubles?",
+        practiceOptions:["15","16","17","18"],
+        practiceAnswer:"17",
+        practiceExplain:"Use 8 + 8 = 16, then add 1 more to get 17."
+      },
+      {
+        id:"countOn",
+        title:"Count On from the Bigger Number",
+        grade:"K-2",
+        category:"Addition",
+        tags:["count on","addition","mental math"],
+        rule:"Start with the bigger number, then count on the smaller number.",
+        example:"4 + 9 becomes start at 9, count on 4: 10, 11, 12, 13",
+        why:"Starting from the bigger number saves time and reduces counting mistakes.",
+        tip:"Say the bigger number first in your head.",
+        practicePrompt:"What is 3 + 8 using count on?",
+        practiceOptions:["10","11","12","13"],
+        practiceAnswer:"11",
+        practiceExplain:"Start at 8 and count on 3 more: 9, 10, 11."
+      },
+      {
+        id:"countUpSub",
+        title:"Subtract by Counting Up",
+        grade:"K-2",
+        category:"Subtraction",
+        tags:["subtraction","count up","difference"],
+        rule:"For subtraction, count up from the smaller number to the bigger number.",
+        example:"13 - 9: count from 9 to 13 → 10, 11, 12, 13. That is 4 steps.",
+        why:"Counting up is helpful when the numbers are close together.",
+        tip:"This is a great trick for subtraction facts and missing addend problems.",
+        practicePrompt:"What is 12 - 8 by counting up?",
+        practiceOptions:["3","4","5","6"],
+        practiceAnswer:"4",
+        practiceExplain:"Count up from 8 to 12: 9, 10, 11, 12. That is 4."
+      },
+      {
+        id:"tensOnes",
+        title:"Read Tens and Ones Fast",
+        grade:"K-2",
+        category:"Place Value",
+        tags:["place value","tens","ones"],
+        rule:"In a two-digit number, the first digit tells tens and the second digit tells ones.",
+        example:"47 means 4 tens and 7 ones",
+        why:"Place value understanding makes addition, subtraction, and comparing numbers much easier.",
+        tip:"Break numbers into parts: 47 = 40 + 7.",
+        practicePrompt:"How many tens are in 63?",
+        practiceOptions:["3","6","9","63"],
+        practiceAnswer:"6",
+        practiceExplain:"63 has 6 tens and 3 ones."
+      },
+      {
+        id:"skip2",
+        title:"Skip Count by 2",
+        grade:"K-2",
+        category:"Patterns",
+        tags:["skip counting","patterns","count by 2"],
+        rule:"Add 2 each time.",
+        example:"2, 4, 6, 8, 10",
+        why:"Skip counting builds a bridge from addition to multiplication.",
+        tip:"Say the numbers out loud in a rhythm.",
+        practicePrompt:"What comes next: 6, 8, 10, ?",
+        practiceOptions:["11","12","13","14"],
+        practiceAnswer:"12",
+        practiceExplain:"The pattern adds 2 each time, so 10 + 2 = 12."
+      },
+      {
+        id:"skip5",
+        title:"Skip Count by 5",
+        grade:"K-2",
+        category:"Patterns",
+        tags:["skip counting","count by 5","patterns"],
+        rule:"Add 5 each time.",
+        example:"5, 10, 15, 20, 25",
+        why:"Counting by 5 helps with clocks, money, and multiplication facts.",
+        tip:"Notice many answers end in 0 or 5.",
+        practicePrompt:"What comes next: 15, 20, 25, ?",
+        practiceOptions:["28","30","35","40"],
+        practiceAnswer:"30",
+        practiceExplain:"The pattern adds 5 each time, so 25 + 5 = 30."
+      },
+      {
+        id:"multBy2",
+        title:"Multiply by 2",
+        grade:"3-4",
+        category:"Multiplication",
+        tags:["multiply by 2","doubling","multiplication"],
+        rule:"Multiplying by 2 means doubling the number.",
+        example:"14 × 2 = 28",
+        why:"Doubling is one of the easiest multiplication patterns to spot mentally.",
+        tip:"If you know the double, you know ×2.",
+        practicePrompt:"What is 18 × 2?",
+        practiceOptions:["34","36","38","40"],
+        practiceAnswer:"36",
+        practiceExplain:"Double 18 is 36."
+      },
+      {
+        id:"multBy5",
+        title:"Multiply by 5",
+        grade:"3-4",
+        category:"Multiplication",
+        tags:["multiply by 5","multiplication"],
+        rule:"Multiply by 5 by taking half of ×10.",
+        example:"18 × 5 = 18 × 10 ÷ 2 = 180 ÷ 2 = 90",
+        why:"Students often know ×10 quickly, so halving that answer gives ×5.",
+        tip:"For even numbers, this shortcut is especially fast.",
+        practicePrompt:"What is 14 × 5?",
+        practiceOptions:["60","65","70","75"],
+        practiceAnswer:"70",
+        practiceExplain:"14 × 10 = 140, then half of 140 is 70."
+      },
+      {
+        id:"multBy9",
+        title:"Multiply by 9",
+        grade:"3-4",
+        category:"Multiplication",
+        tags:["multiply by 9","multiplication"],
+        rule:"Multiply by 10, then subtract the original number.",
+        example:"7 × 9 = 70 - 7 = 63",
+        why:"It uses the easy ×10 fact to reach ×9 fast.",
+        tip:"This works for whole numbers and mental math.",
+        practicePrompt:"What is 8 × 9?",
+        practiceOptions:["63","64","72","81"],
+        practiceAnswer:"72",
+        practiceExplain:"8 × 10 = 80, then 80 - 8 = 72."
+      },
+      {
+        id:"multBy10",
+        title:"Multiply by 10",
+        grade:"3-4",
+        category:"Multiplication",
+        tags:["multiply by 10","place value"],
+        rule:"When multiplying a whole number by 10, shift the digits one place left and add a zero.",
+        example:"34 × 10 = 340",
+        why:"Each digit becomes ten times greater in value.",
+        tip:"Think of every digit moving one place left.",
+        practicePrompt:"What is 46 × 10?",
+        practiceOptions:["406","460","4,600","56"],
+        practiceAnswer:"460",
+        practiceExplain:"46 multiplied by 10 becomes 460."
+      },
+      {
+        id:"divideUseMult",
+        title:"Use Multiplication to Divide",
+        grade:"3-4",
+        category:"Division",
+        tags:["division","multiplication facts"],
+        rule:"Ask: what number times the divisor gives the dividend?",
+        example:"24 ÷ 6 = 4 because 6 × 4 = 24",
+        why:"Division and multiplication are inverse operations.",
+        tip:"Turn the division problem into a missing multiplication fact.",
+        practicePrompt:"What is 35 ÷ 5?",
+        practiceOptions:["5","6","7","8"],
+        practiceAnswer:"7",
+        practiceExplain:"5 × 7 = 35, so 35 ÷ 5 = 7."
+      },
+      {
+        id:"divisible2",
+        title:"Divisibility by 2",
+        grade:"3-4",
+        category:"Number Tricks",
+        tags:["divisibility","divide by 2","even"],
+        rule:"A number is divisible by 2 if the last digit is even.",
+        example:"48 is divisible by 2 because it ends in 8",
+        why:"Even last digits mean the number can be split into two equal groups.",
+        tip:"Even digits are 0, 2, 4, 6, and 8.",
+        practicePrompt:"Which number is divisible by 2?",
+        practiceOptions:["37","41","56","73"],
+        practiceAnswer:"56",
+        practiceExplain:"56 ends in 6, which is even."
+      },
+      {
+        id:"divisible5",
+        title:"Divisibility by 5",
+        grade:"3-4",
+        category:"Number Tricks",
+        tags:["divisibility","divide by 5"],
+        rule:"A number is divisible by 5 if it ends in 0 or 5.",
+        example:"75 is divisible by 5 because it ends in 5",
+        why:"Multiples of 5 always end in 0 or 5.",
+        tip:"Check the last digit only.",
+        practicePrompt:"Which number is divisible by 5?",
+        practiceOptions:["42","56","63","95"],
+        practiceAnswer:"95",
+        practiceExplain:"95 ends in 5, so it is divisible by 5."
+      },
+      {
+        id:"divisible10",
+        title:"Divisibility by 10",
+        grade:"3-4",
+        category:"Number Tricks",
+        tags:["divisibility","divide by 10"],
+        rule:"A number is divisible by 10 if it ends in 0.",
+        example:"120 is divisible by 10 because it ends in 0",
+        why:"Every group of 10 ends with a zero in base-10 place value.",
+        tip:"Only check the last digit.",
+        practicePrompt:"Which number is divisible by 10?",
+        practiceOptions:["82","100","115","126"],
+        practiceAnswer:"100",
+        practiceExplain:"100 ends in 0, so it is divisible by 10."
+      },
+      {
+        id:"sameDenominator",
+        title:"Compare Fractions with the Same Denominator",
+        grade:"5-6",
+        category:"Fractions",
+        tags:["fractions","compare fractions","same denominator"],
+        rule:"If the denominators are the same, the fraction with the bigger numerator is bigger.",
+        example:"5/8 is greater than 3/8",
+        why:"Both fractions are cut into the same size pieces, so more pieces means more value.",
+        tip:"Same bottom number means compare the top number.",
+        practicePrompt:"Which is bigger: 4/9 or 7/9?",
+        practiceOptions:["4/9","7/9","They are equal","Cannot tell"],
+        practiceAnswer:"7/9",
+        practiceExplain:"The denominators are both 9, so compare numerators. 7 is greater than 4."
+      },
+      {
+        id:"sameNumerator",
+        title:"Compare Fractions with the Same Numerator",
+        grade:"5-6",
+        category:"Fractions",
+        tags:["fractions","same numerator","compare fractions"],
+        rule:"If the numerators are the same, the fraction with the smaller denominator is bigger.",
+        example:"3/4 is greater than 3/8",
+        why:"With the same number of parts chosen, larger pieces make the fraction bigger.",
+        tip:"Smaller denominator means bigger pieces.",
+        practicePrompt:"Which is bigger: 2/5 or 2/7?",
+        practiceOptions:["2/5","2/7","They are equal","Cannot tell"],
+        practiceAnswer:"2/5",
+        practiceExplain:"The numerators are the same. Fifths are larger pieces than sevenths, so 2/5 is bigger."
+      },
+      {
+        id:"fractionFriendly",
+        title:"Turn Fractions into Friendly Benchmarks",
+        grade:"5-6",
+        category:"Fractions",
+        tags:["fractions","benchmarks","one half"],
+        rule:"Compare a fraction to 1/2, 1, or 0 to estimate quickly.",
+        example:"5/8 is a little more than 1/2 because 4/8 = 1/2",
+        why:"Benchmarks make fraction size easier to visualize.",
+        tip:"Ask if the fraction is less than, equal to, or more than one-half.",
+        practicePrompt:"Is 3/8 less than or greater than 1/2?",
+        practiceOptions:["Less than 1/2","Greater than 1/2","Equal to 1/2","Cannot tell"],
+        practiceAnswer:"Less than 1/2",
+        practiceExplain:"1/2 = 4/8, and 3/8 is smaller than 4/8."
+      },
+      {
+        id:"decimalPlace",
+        title:"Line Up Decimal Points",
+        grade:"5-6",
+        category:"Decimals",
+        tags:["decimals","place value","add decimals","subtract decimals"],
+        rule:"When adding or subtracting decimals, line up the decimal points first.",
+        example:"2.4 + 0.35 = 2.40 + 0.35 = 2.75",
+        why:"Each place value must match before combining the numbers.",
+        tip:"Add zeros if needed so the places line up clearly.",
+        practicePrompt:"What is 1.2 + 0.8?",
+        practiceOptions:["1.0","1.8","2.0","2.8"],
+        practiceAnswer:"2.0",
+        practiceExplain:"1.2 + 0.8 = 2.0 because 12 tenths + 8 tenths = 20 tenths."
+      },
+      {
+        id:"percent100",
+        title:"Percent Means Out of 100",
+        grade:"5-6",
+        category:"Percents",
+        tags:["percent","out of 100","decimals"],
+        rule:"A percent is just a number out of 100.",
+        example:"25% means 25 out of 100, or 25/100, or 0.25",
+        why:"Seeing percent as “out of 100” makes conversion easier.",
+        tip:"Move the decimal point two places left to turn percent into decimal.",
+        practicePrompt:"What decimal is 40%?",
+        practiceOptions:["0.04","0.4","4.0","40.0"],
+        practiceAnswer:"0.4",
+        practiceExplain:"40% means 40 out of 100, which is 0.40 or 0.4."
+      },
+      {
+        id:"tenPercent",
+        title:"Find 10% First",
+        grade:"5-6",
+        category:"Percents",
+        tags:["percent","10 percent","mental math"],
+        rule:"To find 10%, divide by 10. Then build other percents from that.",
+        example:"10% of 80 is 8, so 20% of 80 is 16",
+        why:"Many percent problems become easier when 10% is known first.",
+        tip:"Once you know 10%, double it for 20% or halve it for 5%.",
+        practicePrompt:"What is 10% of 90?",
+        practiceOptions:["0.9","9","19","90"],
+        practiceAnswer:"9",
+        practiceExplain:"10% means divide by 10. 90 ÷ 10 = 9."
+      },
+      {
+        id:"areaRowsCols",
+        title:"Area is Rows × Columns",
+        grade:"3-6",
+        category:"Geometry",
+        tags:["area","arrays","rectangles"],
+        rule:"For rectangles, multiply the length by the width.",
+        example:"A 4 by 3 rectangle has area 12 square units",
+        why:"Area counts how many square units fit inside the shape.",
+        tip:"Think of rows and columns in an array.",
+        practicePrompt:"What is the area of a 6 by 2 rectangle?",
+        practiceOptions:["8","10","12","14"],
+        practiceAnswer:"12",
+        practiceExplain:"Area = 6 × 2 = 12 square units."
+      },
+      {
+        id:"perimeterSides",
+        title:"Perimeter is All Sides Added",
+        grade:"3-6",
+        category:"Geometry",
+        tags:["perimeter","geometry","add sides"],
+        rule:"Add all side lengths to find the perimeter.",
+        example:"A 5 by 3 rectangle has perimeter 5 + 3 + 5 + 3 = 16",
+        why:"Perimeter measures the distance around a shape.",
+        tip:"For rectangles, you can also use 2 × (length + width).",
+        practicePrompt:"What is the perimeter of a rectangle with sides 4 and 2?",
+        practiceOptions:["6","8","10","12"],
+        practiceAnswer:"12",
+        practiceExplain:"4 + 2 + 4 + 2 = 12."
+      },
+      {
+        id:"pemdas",
+        title:"PEMDAS Reminder",
+        grade:"5-6",
+        category:"Operations",
+        tags:["PEMDAS","order of operations","operations"],
+        rule:"Do parentheses first, then multiplication and division, then addition and subtraction.",
+        example:"2 + 3 × 4 = 2 + 12 = 14",
+        why:"Order of operations keeps expressions consistent for everyone.",
+        tip:"Do not always go left to right without checking the rule.",
+        practicePrompt:"What is 5 + 2 × 3?",
+        practiceOptions:["11","15","21","9"],
+        practiceAnswer:"11",
+        practiceExplain:"Multiply first: 2 × 3 = 6. Then add 5 to get 11."
+      }
+    ];
+
+    const sectionOrder = ["All", "Addition", "Subtraction", "Multiplication", "Division", "Number Tricks", "Patterns", "Place Value", "Fractions", "Decimals", "Percents", "Geometry", "Operations"];
+
+    const searchInput = document.getElementById("searchInput");
+    const gradeFilter = document.getElementById("gradeFilter");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const sectionTabs = document.getElementById("sectionTabs");
+    const shortcutGrid = document.getElementById("shortcutGrid");
+    const cheatGrid = document.getElementById("cheatGrid");
+    const practiceQuestionTitle = document.getElementById("practiceQuestionTitle");
+    const practiceQuestionText = document.getElementById("practiceQuestionText");
+    const practiceOptions = document.getElementById("practiceOptions");
+    const practiceFeedback = document.getElementById("practiceFeedback");
+    const practiceFocusText = document.getElementById("practiceFocusText");
+    const statShortcuts = document.getElementById("statShortcuts");
+
+    const jumpLibraryBtn = document.getElementById("jumpLibraryBtn");
+    const startExploringBtn = document.getElementById("startExploringBtn");
+    const jumpPracticeBtn = document.getElementById("jumpPracticeBtn");
+    const printCheatBtn = document.getElementById("printCheatBtn");
+    const printSheetBtn = document.getElementById("printSheetBtn");
+    const clearFiltersBtn = document.getElementById("clearFiltersBtn");
+    const newPracticeBtn = document.getElementById("newPracticeBtn");
+    const showAnswerBtn = document.getElementById("showAnswerBtn");
+
+    let activeSection = "All";
+    let currentPractice = null;
+    let practiceAnswered = false;
+
+    function init(){
+      statShortcuts.textContent = shortcuts.length;
+      buildCategoryFilter();
+      buildSectionTabs();
+      renderShortcutCards();
+      renderCheatSheet();
+      wireEvents();
+    }
+
+    function buildCategoryFilter(){
+      const categories = [...new Set(shortcuts.map(item => item.category))].sort();
+      categoryFilter.innerHTML = `<option value="all">All Categories</option>` + categories.map(cat => `<option value="${cat}">${cat}</option>`).join("");
+    }
+
+    function buildSectionTabs(){
+      const available = sectionOrder.filter(section => section === "All" || shortcuts.some(item => item.category === section));
+      sectionTabs.innerHTML = available.map(section => `
+        <button class="tab-btn ${section === activeSection ? "active" : ""}" data-section="${section}">${section}</button>
+      `).join("");
+
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeSection = btn.dataset.section;
+          buildSectionTabs();
+          renderShortcutCards();
+        });
+      });
+    }
+
+    function getFilteredShortcuts(){
+      const query = searchInput.value.trim().toLowerCase();
+      const grade = gradeFilter.value;
+      const category = categoryFilter.value;
+
+      return shortcuts.filter(item => {
+        const matchSection = activeSection === "All" || item.category === activeSection;
+        const matchGrade = grade === "all" || item.grade === grade || item.grade === "All" || (grade === "3-4" && item.grade === "3-6") || (grade === "5-6" && item.grade === "3-6");
+        const matchCategory = category === "all" || item.category === category;
+        const haystack = [item.title, item.category, item.grade, item.rule, item.example, item.why, item.tip, ...(item.tags || [])].join(" ").toLowerCase();
+        const matchQuery = !query || haystack.includes(query);
+        return matchSection && matchGrade && matchCategory && matchQuery;
+      });
+    }
+
+    function renderShortcutCards(){
+      const items = getFilteredShortcuts();
+      if(items.length === 0){
+        shortcutGrid.innerHTML = `
+          <div class="shortcut-card" style="grid-column:1/-1;">
+            <h3 class="shortcut-title">No shortcuts found</h3>
+            <p class="shortcut-rule">Try another search word or clear the filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      shortcutGrid.innerHTML = items.map(item => `
+        <article class="shortcut-card">
+          <div class="shortcut-head">
+            <h3 class="shortcut-title">${item.title}</h3>
+            <span class="level-pill">${item.grade}</span>
+          </div>
+          <div class="label">${item.category}</div>
+          <div class="shortcut-rule"><strong>Shortcut:</strong> ${item.rule}</div>
+          <div class="example-box"><strong>Example:</strong> ${item.example}</div>
+          <div class="shortcut-why"><strong>Why it works:</strong> ${item.why}</div>
+          <div class="shortcut-tip"><strong>Tip:</strong> ${item.tip}</div>
+          <div class="practice-mini"><strong>Try it:</strong> ${item.practicePrompt}</div>
+          <div class="mini-actions" style="margin-top:14px;">
+            <button class="btn btn-secondary use-practice-btn" data-id="${item.id}">Practice This</button>
+          </div>
+        </article>
+      `).join("");
+
+      document.querySelectorAll(".use-practice-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const item = shortcuts.find(x => x.id === btn.dataset.id);
+          loadPractice(item);
+          document.getElementById("practiceSection").scrollIntoView({behavior:"smooth"});
+        });
+      });
+    }
+
+    function renderCheatSheet(){
+      const picks = [
+        "make10","doubles","nearDoubles","countUpSub","multBy5","multBy9","divideUseMult","sameDenominator","decimalPlace","percent100","areaRowsCols","pemdas"
+      ].map(id => shortcuts.find(item => item.id === id)).filter(Boolean);
+
+      cheatGrid.innerHTML = picks.map(item => `
+        <div class="cheat-item">
+          <strong>${item.title}</strong>
+          <span>${item.rule}<br><em>${item.example}</em></span>
+        </div>
+      `).join("");
+    }
+
+    function loadPractice(item){
+      currentPractice = item;
+      practiceAnswered = false;
+      practiceQuestionTitle.textContent = item.title;
+      practiceQuestionText.textContent = item.practicePrompt;
+      practiceFocusText.textContent = `${item.title} • ${item.category} • ${item.grade}`;
+      practiceFeedback.textContent = "";
+      practiceFeedback.className = "feedback";
+
+      practiceOptions.innerHTML = item.practiceOptions.map(option => `
+        <button class="practice-option" data-option="${option}">${option}</button>
+      `).join("");
+
+      document.querySelectorAll(".practice-option").forEach(btn => {
+        btn.addEventListener("click", () => checkPractice(btn.dataset.option));
+      });
+    }
+
+    function checkPractice(selected){
+      if(!currentPractice || practiceAnswered) return;
+      practiceAnswered = true;
+
+      document.querySelectorAll(".practice-option").forEach(btn => {
+        if(btn.dataset.option === currentPractice.practiceAnswer) btn.classList.add("correct");
+        if(btn.dataset.option === selected && selected !== currentPractice.practiceAnswer) btn.classList.add("wrong");
+        btn.disabled = true;
+      });
+
+      if(selected === currentPractice.practiceAnswer){
+        practiceFeedback.textContent = `Correct! ${currentPractice.practiceExplain}`;
+        practiceFeedback.className = "feedback ok";
+      }else{
+        practiceFeedback.textContent = `Not quite. ${currentPractice.practiceExplain}`;
+        practiceFeedback.className = "feedback no";
+      }
+    }
+
+    function newRandomPractice(){
+      const filtered = getFilteredShortcuts();
+      const pool = filtered.length ? filtered : shortcuts;
+      const next = pool[Math.floor(Math.random() * pool.length)];
+      loadPractice(next);
+    }
+
+    function wireEvents(){
+      [searchInput, gradeFilter, categoryFilter].forEach(el => {
+        el.addEventListener("input", renderShortcutCards);
+        el.addEventListener("change", renderShortcutCards);
+      });
+
+      clearFiltersBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        gradeFilter.value = "all";
+        categoryFilter.value = "all";
+        activeSection = "All";
+        buildSectionTabs();
+        renderShortcutCards();
+      });
+
+      jumpLibraryBtn.addEventListener("click", () => document.getElementById("librarySection").scrollIntoView({behavior:"smooth"}));
+      startExploringBtn.addEventListener("click", () => document.getElementById("librarySection").scrollIntoView({behavior:"smooth"}));
+      jumpPracticeBtn.addEventListener("click", () => document.getElementById("practiceSection").scrollIntoView({behavior:"smooth"}));
+      printCheatBtn.addEventListener("click", () => window.print());
+      printSheetBtn.addEventListener("click", () => window.print());
+
+      newPracticeBtn.addEventListener("click", newRandomPractice);
+      showAnswerBtn.addEventListener("click", () => {
+        if(!currentPractice) return;
+        practiceFeedback.textContent = currentPractice.practiceExplain;
+        practiceFeedback.className = "feedback ok";
+      });
+    }
+
+    init();
+    newRandomPractice();
+  </script>
+</body>
+</html>
