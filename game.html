@@ -869,1441 +869,1384 @@
   </footer>
 
   <script>
-    const subjectMap = {
-      K: ["Counting", "Number Matching", "Shapes", "Patterns", "Bigger or Smaller"],
-      1: ["Addition", "Subtraction", "Number Bonds", "Place Value", "Time", "Shapes"],
-      2: ["Addition", "Subtraction", "Skip Counting", "Place Value", "Money", "Measurement"],
-      3: ["Multiplication", "Division", "Fractions", "Area", "Perimeter", "Word Problems", "Geometry"],
-      4: ["Multiplication", "Division", "Equivalent Fractions", "Comparing Fractions", "Decimals", "Factors", "Geometry"],
-      5: ["Fractions", "Decimals", "Volume", "Order of Operations", "Percent", "Coordinate Plane", "Geometry"],
-      6: ["Ratios", "Percents", "Integers", "Expressions", "Equations", "Geometry"],
-      7: ["Integers", "Rational Numbers", "Proportions", "Percent Problems", "Expressions", "One-Step Equations", "Probability", "Area and Volume"],
-      8: ["Linear Equations", "Graphing", "Slope", "Systems of Equations", "Exponents", "Square Roots", "Transformations"],
-      9: ["Algebra", "Factoring", "Linear Functions", "Inequalities", "Polynomials", "Coordinate Geometry"],
-      10: ["Quadratics", "Radicals", "Function Notation", "Circles", "Statistics", "Geometry Proofs"],
-      11: ["Trigonometry", "Unit Circle", "Logarithms", "Sequences and Series", "Exponential Functions", "Advanced Probability"],
-      12: ["Precalculus", "Limits", "Derivatives Intro", "Advanced Functions", "Statistics", "Mixed Senior Review"]
-    };
+  const subjectMap = {
+    K: [
+      "Counting",
+      "Number Matching",
+      "Shapes",
+      "Patterns",
+      "Bigger or Smaller",
+      "Before and After",
+      "Sorting",
+      "Ten Frames",
+      "Simple Addition",
+      "Simple Subtraction"
+    ],
+    1: [
+      "Addition",
+      "Subtraction",
+      "Number Bonds",
+      "Place Value",
+      "Time",
+      "Money",
+      "Measurement",
+      "Shapes",
+      "Comparing Numbers",
+      "Word Problems"
+    ],
+    2: [
+      "Addition with Regrouping",
+      "Subtraction with Regrouping",
+      "Skip Counting",
+      "Place Value",
+      "Money",
+      "Measurement",
+      "Time",
+      "Fractions Basics",
+      "Shapes and Geometry",
+      "Word Problems"
+    ],
+    3: [
+      "Multiplication",
+      "Division",
+      "Fractions",
+      "Area",
+      "Perimeter",
+      "Geometry",
+      "Place Value",
+      "Measurement",
+      "Time and Elapsed Time",
+      "Word Problems"
+    ],
+    4: [
+      "Multi-Digit Multiplication",
+      "Division",
+      "Equivalent Fractions",
+      "Comparing Fractions",
+      "Decimals",
+      "Factors and Multiples",
+      "Area and Perimeter",
+      "Angles and Geometry",
+      "Word Problems",
+      "Place Value"
+    ],
+    5: [
+      "Fractions Operations",
+      "Decimals",
+      "Volume",
+      "Order of Operations",
+      "Percent",
+      "Coordinate Plane",
+      "Geometry",
+      "Measurement Conversions",
+      "Area and Perimeter",
+      "Word Problems"
+    ],
+    6: [
+      "Ratios",
+      "Percents",
+      "Integers",
+      "Expressions",
+      "Equations",
+      "Geometry",
+      "Area of Triangles and Parallelograms",
+      "Statistics",
+      "Coordinate Plane",
+      "Word Problems"
+    ]
+  };
 
-    const LEADERBOARD_KEY = "ilovemath_game_leaderboard_v2";
+  const LEADERBOARD_KEY = "ilovemath_game_leaderboard_v3_k6";
 
-    const el = {
-      gradeSelect: document.getElementById("gradeSelect"),
-      difficultySelect: document.getElementById("difficultySelect"),
-      modeSelect: document.getElementById("modeSelect"),
-      timeSelect: document.getElementById("timeSelect"),
-      questionCountSelect: document.getElementById("questionCountSelect"),
-      soundToggle: document.getElementById("soundToggle"),
-      subjectGrid: document.getElementById("subjectGrid"),
-      subjectDisplay: document.getElementById("subjectDisplay"),
-      score: document.getElementById("score"),
-      timer: document.getElementById("timer"),
-      streak: document.getElementById("streak"),
-      levelLabel: document.getElementById("levelLabel"),
-      livesLabel: document.getElementById("livesLabel"),
-      badgeLabel: document.getElementById("badgeLabel"),
-      starsLine: document.getElementById("starsLine"),
-      modeLabel: document.getElementById("modeLabel"),
-      questionCounter: document.getElementById("questionCounter"),
-      progressBar: document.getElementById("progressBar"),
-      questionText: document.getElementById("questionText"),
-      answerInput: document.getElementById("answerInput"),
-      textAnswerWrap: document.getElementById("textAnswerWrap"),
-      submitBtn: document.getElementById("submitBtn"),
-      choicesGrid: document.getElementById("choicesGrid"),
-      message: document.getElementById("message"),
-      helperText: document.getElementById("helperText"),
-      visualArea: document.getElementById("visualArea"),
-      visualTitle: document.getElementById("visualTitle"),
-      visualContent: document.getElementById("visualContent"),
-      explanationBox: document.getElementById("explanationBox"),
-      explanationBody: document.getElementById("explanationBody"),
-      reviewBox: document.getElementById("reviewBox"),
-      reviewBody: document.getElementById("reviewBody"),
-      leaderboardList: document.getElementById("leaderboardList"),
-      bestScoreBox: document.getElementById("bestScoreBox"),
-      bestSubjectBox: document.getElementById("bestSubjectBox"),
-      bestGradeBox: document.getElementById("bestGradeBox"),
-      startBtn: document.getElementById("startBtn"),
-      resetBtn: document.getElementById("resetBtn"),
-      clearBoardBtn: document.getElementById("clearBoardBtn"),
-      heroSubtitle: document.getElementById("heroSubtitle"),
-      setupTip: document.getElementById("setupTip")
-    };
+  const el = {
+    gradeSelect: document.getElementById("gradeSelect"),
+    difficultySelect: document.getElementById("difficultySelect"),
+    modeSelect: document.getElementById("modeSelect"),
+    timeSelect: document.getElementById("timeSelect"),
+    questionCountSelect: document.getElementById("questionCountSelect"),
+    soundToggle: document.getElementById("soundToggle"),
+    subjectGrid: document.getElementById("subjectGrid"),
+    subjectDisplay: document.getElementById("subjectDisplay"),
+    score: document.getElementById("score"),
+    timer: document.getElementById("timer"),
+    streak: document.getElementById("streak"),
+    levelLabel: document.getElementById("levelLabel"),
+    livesLabel: document.getElementById("livesLabel"),
+    badgeLabel: document.getElementById("badgeLabel"),
+    starsLine: document.getElementById("starsLine"),
+    modeLabel: document.getElementById("modeLabel"),
+    questionCounter: document.getElementById("questionCounter"),
+    progressBar: document.getElementById("progressBar"),
+    questionText: document.getElementById("questionText"),
+    answerInput: document.getElementById("answerInput"),
+    textAnswerWrap: document.getElementById("textAnswerWrap"),
+    submitBtn: document.getElementById("submitBtn"),
+    choicesGrid: document.getElementById("choicesGrid"),
+    message: document.getElementById("message"),
+    helperText: document.getElementById("helperText"),
+    visualArea: document.getElementById("visualArea"),
+    visualTitle: document.getElementById("visualTitle"),
+    visualContent: document.getElementById("visualContent"),
+    explanationBox: document.getElementById("explanationBox"),
+    explanationBody: document.getElementById("explanationBody"),
+    reviewBox: document.getElementById("reviewBox"),
+    reviewBody: document.getElementById("reviewBody"),
+    leaderboardList: document.getElementById("leaderboardList"),
+    bestScoreBox: document.getElementById("bestScoreBox"),
+    bestSubjectBox: document.getElementById("bestSubjectBox"),
+    bestGradeBox: document.getElementById("bestGradeBox"),
+    startBtn: document.getElementById("startBtn"),
+    resetBtn: document.getElementById("resetBtn"),
+    clearBoardBtn: document.getElementById("clearBoardBtn"),
+    heroSubtitle: document.getElementById("heroSubtitle"),
+    setupTip: document.getElementById("setupTip")
+  };
 
-    const state = {
-      selectedSubject: "Multiplication",
-      gameRunning: false,
-      score: 0,
-      streak: 0,
-      timeLeft: 45,
-      timerId: null,
-      currentQuestion: null,
-      questionNumber: 0,
-      totalQuestions: 10,
-      lives: 3,
-      waitingForNext: false,
-      roundResults: []
-    };
+  const state = {
+    selectedSubject: "Counting",
+    gameRunning: false,
+    score: 0,
+    streak: 0,
+    timeLeft: 45,
+    timerId: null,
+    currentQuestion: null,
+    questionNumber: 0,
+    totalQuestions: 20,
+    lives: 3,
+    waitingForNext: false,
+    roundResults: []
+  };
 
-    function randomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function pick(arr) {
+    return arr[randomInt(0, arr.length - 1)];
+  }
+
+  function shuffle(arr) {
+    return [...arr].sort(() => Math.random() - 0.5);
+  }
+
+  function gcd(a, b) {
+    let x = Math.abs(a);
+    let y = Math.abs(b);
+    while (y) [x, y] = [y, x % y];
+    return x || 1;
+  }
+
+  function simplifyFraction(n, d) {
+    const g = gcd(n, d);
+    return `${n / g}/${d / g}`;
+  }
+
+  function getRangeByDifficulty(easy, medium, hard) {
+    const difficulty = el.difficultySelect.value;
+    if (difficulty === "easy") return easy;
+    if (difficulty === "hard") return hard;
+    return medium;
+  }
+
+  function getGradeLabel() {
+    return el.gradeSelect.value === "K" ? "Kindergarten" : `Grade ${el.gradeSelect.value}`;
+  }
+
+  function getModeLabel() {
+    switch (el.modeSelect.value) {
+      case "practice": return "Practice Mode";
+      case "challenge": return "Challenge Mode";
+      case "exam": return "Exam Mode";
+      default: return "Timed Mode";
     }
+  }
 
-    function pick(arr) {
-      return arr[randomInt(0, arr.length - 1)];
+  function updateThemeByGrade() {
+    document.body.classList.remove("senior-mode");
+    if (el.heroSubtitle) {
+      el.heroSubtitle.textContent =
+        "Practice K–6 math by grade level, subject, difficulty, and mode with Professor Pi. This upgraded version now includes 10 topics per grade and supports longer 20-question premium rounds.";
     }
+  }
 
-    function shuffle(arr) {
-      return [...arr].sort(() => Math.random() - 0.5);
+  function playTone(type) {
+    if (!el.soundToggle.checked) return;
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      oscillator.connect(gain);
+      gain.connect(audioCtx.destination);
+      oscillator.type = type === "error" ? "square" : type === "start" ? "triangle" : "sine";
+      oscillator.frequency.value = type === "success" ? 660 : type === "error" ? 220 : type === "start" ? 440 : 300;
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(type === "error" ? 0.08 : 0.10, audioCtx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (type === "end" ? 0.35 : 0.22));
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + (type === "end" ? 0.35 : 0.22));
+    } catch (e) {}
+  }
+
+  function setMessage(text = "", type = "") {
+    el.message.textContent = text;
+    el.message.className = `message${type ? ` ${type}` : ""}`;
+  }
+
+  function showExplanation(text = "") {
+    if (!text) {
+      el.explanationBox.style.display = "none";
+      el.explanationBody.innerHTML = "";
+      return;
     }
+    el.explanationBox.style.display = "block";
+    el.explanationBody.innerHTML = text;
+  }
 
-    function gcd(a, b) {
-      let x = Math.abs(a);
-      let y = Math.abs(b);
-      while (y) {
-        [x, y] = [y, x % y];
-      }
-      return x || 1;
+  function showReview(text = "") {
+    if (!text) {
+      el.reviewBox.style.display = "none";
+      el.reviewBody.innerHTML = "";
+      return;
     }
+    el.reviewBox.style.display = "block";
+    el.reviewBody.innerHTML = text;
+  }
 
-    function simplifyFraction(n, d) {
-      const g = gcd(n, d);
-      return `${n / g}/${d / g}`;
-    }
+  function updateRewards() {
+    let badge = "Beginner";
+    let stars = 0;
+    if (state.score >= 18) { badge = "Professor Pi Champion"; stars = 5; }
+    else if (state.score >= 15) { badge = "Math Master"; stars = 4; }
+    else if (state.score >= 10) { badge = "Math Explorer"; stars = 3; }
+    else if (state.score >= 5) { badge = "Rising Star"; stars = 2; }
+    else if (state.score >= 2) { badge = "Starter"; stars = 1; }
+    el.badgeLabel.textContent = badge;
+    el.starsLine.textContent = "★".repeat(stars) + "☆".repeat(5 - stars);
+  }
 
-    function getRangeByDifficulty(easy, medium, hard) {
-      const difficulty = el.difficultySelect.value;
-      if (difficulty === "easy") return easy;
-      if (difficulty === "hard") return hard;
-      return medium;
-    }
+  function updateStatus() {
+    el.score.textContent = state.score;
+    el.streak.textContent = state.streak;
+    el.timer.textContent = el.modeSelect.value === "practice" ? "∞" : state.timeLeft;
+    el.levelLabel.textContent = el.gradeSelect.value === "K" ? "K" : `G${el.gradeSelect.value}`;
+    el.modeLabel.textContent = getModeLabel();
+    el.questionCounter.textContent = `Question ${Math.min(state.questionNumber, state.totalQuestions)} / ${state.totalQuestions}`;
+    const progress = state.totalQuestions ? Math.min((state.questionNumber / state.totalQuestions) * 100, 100) : 0;
+    el.progressBar.style.width = `${progress}%`;
+    el.livesLabel.textContent = el.modeSelect.value === "challenge" ? "❤".repeat(Math.max(0, state.lives)) : "—";
+    updateRewards();
+  }
 
-    function getGradeLabel() {
-      return el.gradeSelect.value === "K" ? "Kindergarten" : `Grade ${el.gradeSelect.value}`;
-    }
+  function renderSubjects() {
+    updateThemeByGrade();
+    const grade = el.gradeSelect.value;
+    const subjects = subjectMap[grade] || subjectMap["K"];
+    if (!subjects.includes(state.selectedSubject)) state.selectedSubject = subjects[0];
 
-    function getModeLabel() {
-      switch (el.modeSelect.value) {
-        case "practice": return "Practice Mode";
-        case "challenge": return "Challenge Mode";
-        case "exam": return "Exam Mode";
-        default: return "Timed Mode";
-      }
-    }
+    el.subjectGrid.innerHTML = "";
+    el.subjectDisplay.innerHTML = `<option>${state.selectedSubject}</option>`;
 
-    function isSeniorGrade() {
-      const grade = el.gradeSelect.value;
-      return grade !== "K" && Number(grade) >= 10;
-    }
-
-    function updateThemeByGrade() {
-      document.body.classList.toggle("senior-mode", isSeniorGrade());
-      el.heroSubtitle.textContent = isSeniorGrade()
-        ? "Practice algebra, functions, trigonometry, statistics, and senior-level review in a cleaner academic game style."
-        : "Practice by grade level, subject, difficulty, and mode with Professor Pi. This upgraded version supports elementary, middle school, and high school topics in one premium game page.";
-    }
-
-    function playTone(type) {
-      if (!el.soundToggle.checked) return;
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        oscillator.connect(gain);
-        gain.connect(audioCtx.destination);
-        oscillator.type = type === "error" ? "square" : type === "start" ? "triangle" : "sine";
-        oscillator.frequency.value = type === "success" ? 660 : type === "error" ? 220 : type === "start" ? 440 : 300;
-        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(type === "error" ? 0.08 : 0.10, audioCtx.currentTime + 0.01);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (type === "end" ? 0.35 : 0.22));
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + (type === "end" ? 0.35 : 0.22));
-      } catch (e) {}
-    }
-
-    function setMessage(text = "", type = "") {
-      el.message.textContent = text;
-      el.message.className = `message${type ? ` ${type}` : ""}`;
-    }
-
-    function showExplanation(text = "") {
-      if (!text) {
-        el.explanationBox.style.display = "none";
-        el.explanationBody.innerHTML = "";
-        return;
-      }
-      el.explanationBox.style.display = "block";
-      el.explanationBody.innerHTML = text;
-    }
-
-    function showReview(text = "") {
-      if (!text) {
-        el.reviewBox.style.display = "none";
-        el.reviewBody.innerHTML = "";
-        return;
-      }
-      el.reviewBox.style.display = "block";
-      el.reviewBody.innerHTML = text;
-    }
-
-    function updateRewards() {
-      let badge = "Beginner";
-      let stars = 0;
-      if (state.score >= 15) { badge = "Professor Pi Champion"; stars = 5; }
-      else if (state.score >= 12) { badge = "Math Master"; stars = 4; }
-      else if (state.score >= 8) { badge = "Math Explorer"; stars = 3; }
-      else if (state.score >= 5) { badge = "Rising Star"; stars = 2; }
-      else if (state.score >= 2) { badge = "Starter"; stars = 1; }
-      el.badgeLabel.textContent = badge;
-      el.starsLine.textContent = "★".repeat(stars) + "☆".repeat(5 - stars);
-    }
-
-    function updateStatus() {
-      el.score.textContent = state.score;
-      el.streak.textContent = state.streak;
-      el.timer.textContent = el.modeSelect.value === "practice" ? "∞" : state.timeLeft;
-      el.levelLabel.textContent = el.gradeSelect.value === "K" ? "K" : `G${el.gradeSelect.value}`;
-      el.modeLabel.textContent = getModeLabel();
-      el.questionCounter.textContent = `Question ${Math.min(state.questionNumber, state.totalQuestions)} / ${state.totalQuestions}`;
-      const progress = state.totalQuestions ? Math.min((state.questionNumber / state.totalQuestions) * 100, 100) : 0;
-      el.progressBar.style.width = `${progress}%`;
-      el.livesLabel.textContent = el.modeSelect.value === "challenge" ? "❤".repeat(Math.max(0, state.lives)) : "—";
-      updateRewards();
-    }
-
-    function renderSubjects() {
-      updateThemeByGrade();
-      const grade = el.gradeSelect.value;
-      const subjects = subjectMap[grade];
-      if (!subjects.includes(state.selectedSubject)) state.selectedSubject = subjects[0];
-      el.subjectGrid.innerHTML = "";
-      el.subjectDisplay.innerHTML = `<option>${state.selectedSubject}</option>`;
-
-      subjects.forEach(subject => {
-        const btn = document.createElement("button");
-        btn.className = `subject-pill${subject === state.selectedSubject ? " active" : ""}`;
-        btn.type = "button";
-        btn.textContent = subject;
-        btn.addEventListener("click", () => {
-          state.selectedSubject = subject;
-          el.subjectDisplay.innerHTML = `<option>${state.selectedSubject}</option>`;
-          renderSubjects();
-          resetGame(false);
-        });
-        el.subjectGrid.appendChild(btn);
+    subjects.forEach(subject => {
+      const btn = document.createElement("button");
+      btn.className = `subject-pill${subject === state.selectedSubject ? " active" : ""}`;
+      btn.type = "button";
+      btn.textContent = subject;
+      btn.addEventListener("click", () => {
+        state.selectedSubject = subject;
+        el.subjectDisplay.innerHTML = `<option>${state.selectedSubject}</option>`;
+        renderSubjects();
+        resetGame(false);
       });
+      el.subjectGrid.appendChild(btn);
+    });
+
+    if (el.setupTip) {
+      el.setupTip.textContent = `Professor Pi tip: ${getGradeLabel()} now has ${subjects.length} topics. Choose one and play up to 20 questions per round.`;
     }
+  }
 
-    function updateVisualArea(data) {
-      if (!data) {
-        el.visualArea.style.display = "none";
-        el.visualContent.innerHTML = "";
-        return;
-      }
-
-      el.visualArea.style.display = "block";
-      el.visualTitle.textContent = data.title || "Visual Helper";
-
-      if (data.type === "fraction") {
-        let pieces = "";
-        for (let i = 1; i <= data.denominator; i++) {
-          pieces += `<div class="fraction-piece ${i <= data.numerator ? "filled" : ""}">${i}</div>`;
-        }
-        el.visualContent.innerHTML = `
-          <div class="fraction-visual">${pieces}</div>
-          <div class="visual-caption">${data.caption || "Fraction helper"}</div>
-        `;
-        return;
-      }
-
-      if (data.type === "geometry") {
-        el.visualContent.innerHTML = `
-          <div class="geometry-visual">
-            <div class="shape-box">${data.shapeHtml || ""}</div>
-            <div class="visual-caption">${data.caption || "Geometry helper"}</div>
-          </div>
-        `;
-        return;
-      }
-
-      if (data.type === "coordinate") {
-        const gridSize = 30;
-        const origin = 90;
-        const left = origin + data.x * gridSize;
-        const top = origin - data.y * gridSize;
-        el.visualContent.innerHTML = `
-          <div class="coordinate-grid">
-            <div class="axis-x"></div>
-            <div class="axis-y"></div>
-            <div class="plot-point" style="left:${left}px; top:${top}px;"></div>
-          </div>
-          <div class="visual-caption">${data.caption || "Coordinate plane helper"}</div>
-        `;
-        return;
-      }
-
+  function updateVisualArea(data) {
+    if (!data) {
       el.visualArea.style.display = "none";
+      el.visualContent.innerHTML = "";
+      return;
     }
 
-    function buildTextQuestion(question, answer, explanation, options = {}) {
-      return {
-        type: options.type || "text",
-        question,
-        answer,
-        explanation,
-        visual: options.visual || null,
-        compare: options.compare || null,
-        choices: options.choices || []
-      };
-    }
+    el.visualArea.style.display = "block";
+    el.visualTitle.textContent = data.title || "Visual Helper";
 
-    function buildChoiceQuestion(question, choices, answer, explanation, options = {}) {
-      return {
-        type: "multiple-choice",
-        question,
-        choices,
-        answer,
-        explanation,
-        visual: options.visual || null,
-        compare: options.compare || null
-      };
-    }
-
-    function normalizeMathString(value) {
-      return String(value)
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, "")
-        .replace(/^x=/, "")
-        .replace(/^y=/, "");
-    }
-
-    function fractionEquivalent(a, b) {
-      const [an, ad] = a.split("/").map(Number);
-      const [bn, bd] = b.split("/").map(Number);
-      if (![an, ad, bn, bd].every(Number.isFinite)) return false;
-      return an * bd === bn * ad;
-    }
-
-    function answersMatch(userAnswer, questionObj) {
-      const compare = questionObj.compare;
-      if (typeof compare === "function") return compare(userAnswer, questionObj.answer);
-
-      if (Array.isArray(questionObj.answer)) {
-        return questionObj.answer.some(ans => answersMatch(userAnswer, { ...questionObj, answer: ans }));
+    if (data.type === "fraction") {
+      let pieces = "";
+      for (let i = 1; i <= data.denominator; i++) {
+        pieces += `<div class="fraction-piece ${i <= data.numerator ? "filled" : ""}">${i}</div>`;
       }
+      el.visualContent.innerHTML = `
+        <div class="fraction-visual">${pieces}</div>
+        <div class="visual-caption">${data.caption || "Fraction helper"}</div>
+      `;
+      return;
+    }
 
-      const rawUser = String(userAnswer).trim();
-      const rawCorrect = String(questionObj.answer).trim();
+    if (data.type === "geometry") {
+      el.visualContent.innerHTML = `
+        <div class="geometry-visual">
+          <div class="shape-box">${data.shapeHtml || ""}</div>
+          <div class="visual-caption">${data.caption || "Geometry helper"}</div>
+        </div>
+      `;
+      return;
+    }
 
-      if (rawUser === "") return false;
+    if (data.type === "coordinate") {
+      const gridSize = 30;
+      const origin = 90;
+      const left = origin + data.x * gridSize;
+      const top = origin - data.y * gridSize;
+      el.visualContent.innerHTML = `
+        <div class="coordinate-grid">
+          <div class="axis-x"></div>
+          <div class="axis-y"></div>
+          <div class="plot-point" style="left:${left}px; top:${top}px;"></div>
+        </div>
+        <div class="visual-caption">${data.caption || "Coordinate plane helper"}</div>
+      `;
+      return;
+    }
 
-      if (questionObj.type === "multiple-choice") {
-        return normalizeMathString(rawUser) === normalizeMathString(rawCorrect);
-      }
+    el.visualArea.style.display = "none";
+  }
 
-      if (rawCorrect.includes("/") && rawUser.includes("/")) {
-        return fractionEquivalent(normalizeMathString(rawUser), normalizeMathString(rawCorrect));
-      }
+  function buildTextQuestion(question, answer, explanation, options = {}) {
+    return {
+      type: options.type || "text",
+      question,
+      answer,
+      explanation,
+      visual: options.visual || null,
+      compare: options.compare || null,
+      choices: options.choices || []
+    };
+  }
 
-      const userNum = Number(rawUser);
-      const correctNum = Number(rawCorrect);
-      if (!Number.isNaN(userNum) && !Number.isNaN(correctNum)) {
-        return Math.abs(userNum - correctNum) < 0.0001;
-      }
+  function buildChoiceQuestion(question, choices, answer, explanation, options = {}) {
+    return {
+      type: "multiple-choice",
+      question,
+      choices,
+      answer,
+      explanation,
+      visual: options.visual || null,
+      compare: options.compare || null
+    };
+  }
 
+  function normalizeMathString(value) {
+    return String(value)
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .replace(/^x=/, "")
+      .replace(/^y=/, "");
+  }
+
+  function fractionEquivalent(a, b) {
+    const [an, ad] = a.split("/").map(Number);
+    const [bn, bd] = b.split("/").map(Number);
+    if (![an, ad, bn, bd].every(Number.isFinite)) return false;
+    return an * bd === bn * ad;
+  }
+
+  function answersMatch(userAnswer, questionObj) {
+    const compare = questionObj.compare;
+    if (typeof compare === "function") return compare(userAnswer, questionObj.answer);
+
+    if (Array.isArray(questionObj.answer)) {
+      return questionObj.answer.some(ans => answersMatch(userAnswer, { ...questionObj, answer: ans }));
+    }
+
+    const rawUser = String(userAnswer).trim();
+    const rawCorrect = String(questionObj.answer).trim();
+
+    if (rawUser === "") return false;
+
+    if (questionObj.type === "multiple-choice") {
       return normalizeMathString(rawUser) === normalizeMathString(rawCorrect);
     }
 
-    function makeChoices(correct, extras = []) {
-      const set = new Set([String(correct)]);
-      extras.forEach(item => set.add(String(item)));
-      while (set.size < 4) {
-        const num = Number(correct);
-        if (!Number.isNaN(num)) set.add(String(num + randomInt(-6, 6)));
-        else set.add(String(correct) + pick(["A", "B", "C", "D"]));
-      }
-      return shuffle([...set].slice(0, 4));
+    if (rawCorrect.includes("/") && rawUser.includes("/")) {
+      return fractionEquivalent(normalizeMathString(rawUser), normalizeMathString(rawCorrect));
     }
 
-    const questionGenerators = {
-      "Counting": () => {
-        const range = getRangeByDifficulty([1,10],[1,20],[10,50]);
-        const n = randomInt(range[0], range[1]);
-        return buildTextQuestion(
-          `What number comes after ${n}?`,
-          n + 1,
-          `Counting forward means adding 1. After <strong>${n}</strong> comes <strong>${n + 1}</strong>.`
-        );
-      },
+    const userNum = Number(rawUser);
+    const correctNum = Number(rawCorrect);
+    if (!Number.isNaN(userNum) && !Number.isNaN(correctNum)) {
+      return Math.abs(userNum - correctNum) < 0.0001;
+    }
 
-      "Number Matching": () => {
-        const n = randomInt(1, 50);
-        return buildTextQuestion(
-          `Type this number: ${n}`,
-          n,
-          `The number shown is <strong>${n}</strong>, so the correct answer is <strong>${n}</strong>.`
-        );
-      },
+    return normalizeMathString(rawUser) === normalizeMathString(rawCorrect);
+  }
 
-      "Shapes": () => {
-        const items = [
-          ["triangle", "A shape with 3 sides", '<div class="shape-triangle"></div>'],
-          ["square", "A shape with 4 equal sides", '<div class="shape-square"></div>'],
-          ["circle", "A round shape", '<div class="shape-circle"></div>'],
-          ["rectangle", "A shape with 4 sides and 2 longer sides", '<div class="shape-rectangle"></div>']
-        ];
-        const [answer, question, shapeHtml] = pick(items);
-        return buildTextQuestion(
-          question,
-          answer,
-          `This shape is a <strong>${answer}</strong>. Learn to match the number of sides or the overall shape name.`,
-          { visual: { type: "geometry", title: "Shape Visual", shapeHtml, caption: "Look at the shape and type its name." } }
-        );
-      },
+  function makeChoices(correct, extras = []) {
+    const set = new Set([String(correct)]);
+    extras.forEach(item => set.add(String(item)));
+    while (set.size < 4) {
+      const num = Number(correct);
+      if (!Number.isNaN(num)) set.add(String(num + randomInt(-6, 6)));
+      else set.add(String(correct) + pick(["A", "B", "C", "D"]));
+    }
+    return shuffle([...set].slice(0, 4));
+  }
 
-      "Patterns": () => {
-        const start = randomInt(1, 10);
-        const step = randomInt(1, 4);
-        const answer = start + step * 3;
-        return buildTextQuestion(
-          `${start}, ${start + step}, ${start + step * 2}, ?`,
-          answer,
-          `The pattern increases by <strong>${step}</strong> each time. So the next number is <strong>${answer}</strong>.`
-        );
-      },
+  const questionGenerators = {
+    "Counting": () => {
+      const range = getRangeByDifficulty([1,10],[1,20],[10,50]);
+      const n = randomInt(range[0], range[1]);
+      return buildTextQuestion(
+        `What number comes after ${n}?`,
+        n + 1,
+        `Counting forward means adding 1. After <strong>${n}</strong> comes <strong>${n + 1}</strong>.`
+      );
+    },
 
-      "Bigger or Smaller": () => {
-        const x = randomInt(1, 25);
-        const y = randomInt(1, 25);
-        const answer = Math.max(x, y);
-        return buildTextQuestion(
-          `Type the bigger number: ${x} or ${y}`,
-          answer,
-          `Compare the two numbers. The bigger number is <strong>${answer}</strong>.`
-        );
-      },
+    "Number Matching": () => {
+      const n = randomInt(1, 50);
+      return buildTextQuestion(
+        `Type this number: ${n}`,
+        n,
+        `The number shown is <strong>${n}</strong>, so the correct answer is <strong>${n}</strong>.`
+      );
+    },
 
-      "Addition": () => {
-        const grade = el.gradeSelect.value;
-        const range = grade === "1"
-          ? getRangeByDifficulty([1,10],[1,20],[5,30])
-          : getRangeByDifficulty([10,40],[20,70],[30,99]);
-        const x = randomInt(range[0], range[1]);
-        const y = randomInt(range[0], range[1]);
+    "Shapes": () => {
+      const items = [
+        ["triangle", "A shape with 3 sides", '<div class="shape-triangle"></div>'],
+        ["square", "A shape with 4 equal sides", '<div class="shape-square"></div>'],
+        ["circle", "A round shape", '<div class="shape-circle"></div>'],
+        ["rectangle", "A shape with 4 sides", '<div class="shape-rectangle"></div>']
+      ];
+      const [answer, question, shapeHtml] = pick(items);
+      return buildTextQuestion(
+        question,
+        answer,
+        `This shape is a <strong>${answer}</strong>.`,
+        { visual: { type: "geometry", title: "Shape Visual", shapeHtml, caption: "Look at the shape and type its name." } }
+      );
+    },
+
+    "Patterns": () => {
+      const start = randomInt(1, 10);
+      const step = randomInt(1, 4);
+      const answer = start + step * 3;
+      return buildTextQuestion(
+        `${start}, ${start + step}, ${start + step * 2}, ?`,
+        answer,
+        `The pattern increases by <strong>${step}</strong> each time. So the next number is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Bigger or Smaller": () => {
+      const x = randomInt(1, 25);
+      const y = randomInt(1, 25);
+      const answer = Math.max(x, y);
+      return buildTextQuestion(
+        `Type the bigger number: ${x} or ${y}`,
+        answer,
+        `Compare the two numbers. The bigger number is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Before and After": () => {
+      const n = randomInt(2, 30);
+      const askAfter = Math.random() > 0.5;
+      return buildTextQuestion(
+        `What number comes ${askAfter ? "after" : "before"} ${n}?`,
+        askAfter ? n + 1 : n - 1,
+        askAfter
+          ? `The number after <strong>${n}</strong> is <strong>${n + 1}</strong>.`
+          : `The number before <strong>${n}</strong> is <strong>${n - 1}</strong>.`
+      );
+    },
+
+    "Sorting": () => {
+      const a = randomInt(1, 20), b = randomInt(1, 20), c = randomInt(1, 20);
+      const sorted = [a, b, c].sort((x, y) => x - y).join(", ");
+      return buildTextQuestion(
+        `Put these in order from smallest to biggest: ${a}, ${b}, ${c}`,
+        sorted,
+        `When arranged from smallest to biggest, the numbers are <strong>${sorted}</strong>.`,
+        {
+          compare: (userAnswer, answer) => normalizeMathString(userAnswer).replace(/;/g, ",") === normalizeMathString(answer)
+        }
+      );
+    },
+
+    "Ten Frames": () => {
+      const filled = randomInt(1, 10);
+      return buildTextQuestion(
+        `A ten frame has ${filled} filled boxes. How many more are needed to make 10?`,
+        10 - filled,
+        `A full ten frame has 10 boxes. So <strong>10 - ${filled} = ${10 - filled}</strong>.`
+      );
+    },
+
+    "Simple Addition": () => {
+      const x = randomInt(1, 10);
+      const y = randomInt(1, 10);
+      return buildTextQuestion(
+        `${x} + ${y} = ?`,
+        x + y,
+        `Add the numbers: <strong>${x} + ${y} = ${x + y}</strong>.`
+      );
+    },
+
+    "Simple Subtraction": () => {
+      let x = randomInt(3, 10);
+      let y = randomInt(1, x);
+      return buildTextQuestion(
+        `${x} - ${y} = ?`,
+        x - y,
+        `Subtract <strong>${y}</strong> from <strong>${x}</strong> to get <strong>${x - y}</strong>.`
+      );
+    },
+
+    "Addition": () => {
+      const range = getRangeByDifficulty([1,10],[1,20],[5,30]);
+      const x = randomInt(range[0], range[1]);
+      const y = randomInt(range[0], range[1]);
+      return buildTextQuestion(
+        `${x} + ${y} = ?`,
+        x + y,
+        `Add the numbers: <strong>${x} + ${y} = ${x + y}</strong>.`
+      );
+    },
+
+    "Subtraction": () => {
+      const range = getRangeByDifficulty([1,10],[1,20],[5,30]);
+      let x = randomInt(range[0], range[1]);
+      let y = randomInt(range[0], range[1]);
+      if (y > x) [x, y] = [y, x];
+      return buildTextQuestion(
+        `${x} - ${y} = ?`,
+        x - y,
+        `Subtract <strong>${y}</strong> from <strong>${x}</strong>. The answer is <strong>${x - y}</strong>.`
+      );
+    },
+
+    "Number Bonds": () => {
+      const total = randomInt(5, 20);
+      const part = randomInt(1, total - 1);
+      return buildTextQuestion(
+        `${part} + ? = ${total}`,
+        total - part,
+        `Find the missing part by subtracting: <strong>${total} - ${part} = ${total - part}</strong>.`
+      );
+    },
+
+    "Place Value": () => {
+      const grade = el.gradeSelect.value;
+      const n = grade === "1" ? randomInt(10, 99) : randomInt(100, 999);
+      const digits = String(n).split("");
+      const placeOptions = grade === "1"
+        ? [
+            { name: "tens", value: Number(digits[0]) * 10, digit: digits[0] },
+            { name: "ones", value: Number(digits[1]), digit: digits[1] }
+          ]
+        : [
+            { name: "hundreds", value: Number(digits[0]) * 100, digit: digits[0] },
+            { name: "tens", value: Number(digits[1]) * 10, digit: digits[1] },
+            { name: "ones", value: Number(digits[2]), digit: digits[2] }
+          ];
+      const place = pick(placeOptions);
+      return buildChoiceQuestion(
+        `What is the value of the digit ${place.digit} in ${n}?`,
+        makeChoices(place.value, [place.digit, Number(place.digit) * 10, Number(place.digit) * 100]),
+        String(place.value),
+        `The digit <strong>${place.digit}</strong> is in the <strong>${place.name}</strong> place, so its value is <strong>${place.value}</strong>.`
+      );
+    },
+
+    "Time": () => {
+      const hour = randomInt(1, 12);
+      const answer = hour === 12 ? 1 : hour + 1;
+      return buildTextQuestion(
+        `What hour comes after ${hour} o'clock?`,
+        answer,
+        `One hour after <strong>${hour}</strong> o'clock is <strong>${answer}</strong> o'clock.`
+      );
+    },
+
+    "Money": () => {
+      const x = randomInt(1, 9);
+      const y = randomInt(1, 9);
+      return buildTextQuestion(
+        `${x} coins + ${y} coins = ? coins`,
+        x + y,
+        `Add the coins together: <strong>${x} + ${y} = ${x + y}</strong> coins.`
+      );
+    },
+
+    "Measurement": () => {
+      const x = randomInt(1,20);
+      const y = randomInt(1,20);
+      return buildTextQuestion(
+        `${x} cm + ${y} cm = ? cm`,
+        x + y,
+        `Add the lengths: <strong>${x} cm + ${y} cm = ${x + y} cm</strong>.`
+      );
+    },
+
+    "Comparing Numbers": () => {
+      const x = randomInt(1, 99);
+      const y = randomInt(1, 99);
+      const answer = x > y ? ">" : x < y ? "<" : "=";
+      return buildChoiceQuestion(
+        `${x} __ ${y}`,
+        [">", "<", "="],
+        answer,
+        `Compare the numbers directly. The correct symbol is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Addition with Regrouping": () => {
+      const x = randomInt(15, 79);
+      const y = randomInt(15, 79);
+      return buildTextQuestion(
+        `${x} + ${y} = ?`,
+        x + y,
+        `Add the ones, regroup if needed, then add the tens. The answer is <strong>${x + y}</strong>.`
+      );
+    },
+
+    "Subtraction with Regrouping": () => {
+      let x = randomInt(35, 99);
+      let y = randomInt(12, 68);
+      if (y > x) [x, y] = [y, x];
+      return buildTextQuestion(
+        `${x} - ${y} = ?`,
+        x - y,
+        `Subtract carefully and regroup if needed. The answer is <strong>${x - y}</strong>.`
+      );
+    },
+
+    "Skip Counting": () => {
+      const step = pick([2,5,10]);
+      const start = step * randomInt(1,5);
+      const answer = start + step * 3;
+      return buildTextQuestion(
+        `${start}, ${start + step}, ${start + step * 2}, ?`,
+        answer,
+        `This is skip counting by <strong>${step}</strong>. So the next number is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Fractions Basics": () => {
+      const denominator = randomInt(2, 6);
+      const numerator = randomInt(1, denominator - 1);
+      const answer = `${numerator}/${denominator}`;
+      return buildTextQuestion(
+        `What fraction is shown? Type it like ${answer}`,
+        answer,
+        `The picture shows <strong>${numerator}</strong> filled parts out of <strong>${denominator}</strong> equal parts, so the fraction is <strong>${answer}</strong>.`,
+        {
+          visual: {
+            type: "fraction",
+            title: "Fraction Visual",
+            numerator,
+            denominator,
+            caption: `${numerator} of ${denominator} parts are filled.`
+          }
+        }
+      );
+    },
+
+    "Shapes and Geometry": () => {
+      const items = [
+        ["triangle", 3, '<div class="shape-triangle"></div>'],
+        ["square", 4, '<div class="shape-square"></div>'],
+        ["rectangle", 4, '<div class="shape-rectangle"></div>'],
+        ["pentagon", 5, '<div class="shape-pentagon"></div>']
+      ];
+      const [name, sides, html] = pick(items);
+      return buildTextQuestion(
+        `How many sides does this shape have?`,
+        sides,
+        `This shape is a <strong>${name}</strong>, and it has <strong>${sides}</strong> sides.`,
+        { visual: { type: "geometry", title: "Geometry Visual", shapeHtml: html, caption: "Count the sides carefully." } }
+      );
+    },
+
+    "Word Problems": () => {
+      const grade = el.gradeSelect.value;
+      if (grade === "K" || grade === "1") {
+        const x = randomInt(2, 12), y = randomInt(2, 12);
         return buildTextQuestion(
-          `${x} + ${y} = ?`,
+          `Professor Pi has ${x} apples and gets ${y} more. How many apples now?`,
           x + y,
-          `Add the numbers: <strong>${x} + ${y} = ${x + y}</strong>.`
+          `This is an addition story problem. <strong>${x} + ${y} = ${x + y}</strong>.`
         );
-      },
-
-      "Subtraction": () => {
-        const grade = el.gradeSelect.value;
-        const range = grade === "1"
-          ? getRangeByDifficulty([1,10],[1,20],[5,30])
-          : getRangeByDifficulty([10,40],[20,70],[30,99]);
-        let x = randomInt(range[0], range[1]);
-        let y = randomInt(range[0], range[1]);
-        if (y > x) [x, y] = [y, x];
+      }
+      if (grade === "2" || grade === "3") {
+        const x = randomInt(10, 40), y = randomInt(5, 20);
         return buildTextQuestion(
-          `${x} - ${y} = ?`,
+          `A class has ${x} crayons. ${y} are used. How many are left?`,
           x - y,
-          `Subtract <strong>${y}</strong> from <strong>${x}</strong>. The answer is <strong>${x - y}</strong>.`
+          `This is subtraction: <strong>${x} - ${y} = ${x - y}</strong>.`
         );
-      },
-
-      "Number Bonds": () => {
-        const total = randomInt(5, 20);
-        const part = randomInt(1, total - 1);
-        return buildTextQuestion(
-          `${part} + ? = ${total}`,
-          total - part,
-          `Find the missing part by subtracting: <strong>${total} - ${part} = ${total - part}</strong>.`
-        );
-      },
-
-      "Place Value": () => {
-        const n = randomInt(100, 999);
-        const digits = String(n).split("");
-        const place = pick([
-          { name: "hundreds", value: Number(digits[0]) * 100, digit: digits[0] },
-          { name: "tens", value: Number(digits[1]) * 10, digit: digits[1] },
-          { name: "ones", value: Number(digits[2]), digit: digits[2] }
-        ]);
-        return buildChoiceQuestion(
-          `What is the value of the digit ${place.digit} in ${n}?`,
-          makeChoices(place.value, [place.digit, Number(place.digit) * 10, Number(place.digit) * 100]),
-          String(place.value),
-          `The digit <strong>${place.digit}</strong> is in the <strong>${place.name}</strong> place, so its value is <strong>${place.value}</strong>.`
-        );
-      },
-
-      "Time": () => {
-        const hour = randomInt(1, 12);
-        const answer = hour === 12 ? 1 : hour + 1;
-        return buildTextQuestion(
-          `What hour comes after ${hour} o'clock?`,
-          answer,
-          `When one hour passes, the next hour after <strong>${hour}</strong> o'clock is <strong>${answer}</strong> o'clock.`
-        );
-      },
-
-      "Money": () => {
-        const x = randomInt(1, 9);
-        const y = randomInt(1, 9);
-        return buildTextQuestion(
-          `${x} coins + ${y} coins = ? coins`,
-          x + y,
-          `Add the coins together: <strong>${x} + ${y} = ${x + y}</strong> coins.`
-        );
-      },
-
-      "Measurement": () => {
-        const x = randomInt(1,20);
-        const y = randomInt(1,20);
-        return buildTextQuestion(
-          `${x} cm + ${y} cm = ? cm`,
-          x + y,
-          `Add the lengths: <strong>${x} cm + ${y} cm = ${x + y} cm</strong>.`
-        );
-      },
-
-      "Skip Counting": () => {
-        const step = pick([2,5,10]);
-        const start = step * randomInt(1,5);
-        const answer = start + step * 3;
-        return buildTextQuestion(
-          `${start}, ${start + step}, ${start + step * 2}, ?`,
-          answer,
-          `This is skip counting by <strong>${step}</strong>. So the next number is <strong>${answer}</strong>.`
-        );
-      },
-
-      "Multiplication": () => {
-        const range = getRangeByDifficulty([1,5],[2,10],[4,12]);
-        const x = randomInt(range[0], range[1]);
-        const y = randomInt(range[0], range[1]);
-        return buildTextQuestion(
-          `${x} × ${y} = ?`,
-          x * y,
-          `Multiplication means repeated addition. <strong>${x} × ${y} = ${x * y}</strong>.`
-        );
-      },
-
-      "Division": () => {
-        const range = getRangeByDifficulty([1,5],[2,10],[4,12]);
-        const y = randomInt(range[0], range[1]);
-        const answer = randomInt(range[0], range[1]);
-        const x = y * answer;
-        return buildTextQuestion(
-          `${x} ÷ ${y} = ?`,
-          answer,
-          `Division is the opposite of multiplication. Since <strong>${answer} × ${y} = ${x}</strong>, the answer is <strong>${answer}</strong>.`
-        );
-      },
-
-      "Fractions": () => {
-        const denominator = randomInt(2, 8);
-        const numerator = randomInt(1, denominator - 1);
-        const answer = `${numerator}/${denominator}`;
-        return buildTextQuestion(
-          `What fraction is shown? Type it like ${answer}`,
-          answer,
-          `The picture shows <strong>${numerator}</strong> filled parts out of <strong>${denominator}</strong> equal parts, so the fraction is <strong>${answer}</strong>.`,
-          {
-            visual: {
-              type: "fraction",
-              title: "Fraction Visual",
-              numerator,
-              denominator,
-              caption: `${numerator} of ${denominator} parts are filled.`
-            }
-          }
-        );
-      },
-
-      "Equivalent Fractions": () => {
-        const baseNum = randomInt(1, 6);
-        const baseDen = randomInt(baseNum + 1, 8);
-        const factor = randomInt(2, 4);
-        const answer = baseNum * factor;
-        return buildTextQuestion(
-          `${baseNum}/${baseDen} = ?/${baseDen * factor}`,
-          answer,
-          `To make equivalent fractions, multiply numerator and denominator by the same number. <strong>${baseNum} × ${factor} = ${answer}</strong>.`,
-          {
-            visual: {
-              type: "fraction",
-              title: "Equivalent Fraction Helper",
-              numerator: baseNum,
-              denominator: baseDen,
-              caption: `Multiply both parts by ${factor} to create an equivalent fraction.`
-            }
-          }
-        );
-      },
-
-      "Comparing Fractions": () => {
-        const den = randomInt(4, 8);
-        let aNum = randomInt(1, den - 1);
-        let bNum = randomInt(1, den - 1);
-        while (aNum === bNum) bNum = randomInt(1, den - 1);
-        const answer = aNum > bNum ? `${aNum}/${den}` : `${bNum}/${den}`;
-        return buildTextQuestion(
-          `Which is bigger: ${aNum}/${den} or ${bNum}/${den}? Type the bigger fraction.`,
-          answer,
-          `When denominators are the same, compare the numerators. Since <strong>${Math.max(aNum, bNum)}</strong> is greater, the bigger fraction is <strong>${answer}</strong>.`,
-          {
-            visual: {
-              type: "fraction",
-              title: "Fraction Compare",
-              numerator: Math.max(aNum, bNum),
-              denominator: den,
-              caption: `More filled parts means the larger fraction when denominators match.`
-            }
-          }
-        );
-      },
-
-      "Decimals": () => {
-        const x = (randomInt(1, 20) / 10).toFixed(1);
-        const y = (randomInt(1, 20) / 10).toFixed(1);
-        const ans = (parseFloat(x) + parseFloat(y)).toFixed(1);
-        return buildTextQuestion(
-          `${x} + ${y} = ?`,
-          ans,
-          `Line up the decimal places and add. <strong>${x} + ${y} = ${ans}</strong>.`
-        );
-      },
-
-      "Area": () => {
-        const l = randomInt(2, 12);
-        const w = randomInt(2, 12);
-        const answer = l * w;
-        return buildTextQuestion(
-          `Area of a rectangle: ${l} × ${w} = ?`,
-          answer,
-          `Area of a rectangle is <strong>length × width</strong>. So <strong>${l} × ${w} = ${answer}</strong>.`,
-          {
-            visual: {
-              type: "geometry",
-              title: "Area Visual",
-              shapeHtml: '<div class="shape-rectangle"></div>',
-              caption: `Rectangle area = length × width = ${l} × ${w}.`
-            }
-          }
-        );
-      },
-
-      "Perimeter": () => {
-        const l = randomInt(2, 12);
-        const w = randomInt(2, 12);
-        const answer = 2 * (l + w);
-        return buildTextQuestion(
-          `Perimeter of a rectangle with sides ${l} and ${w} = ?`,
-          answer,
-          `Perimeter means the distance around the shape. Add all sides: <strong>${l} + ${w} + ${l} + ${w} = ${answer}</strong>.`,
-          {
-            visual: {
-              type: "geometry",
-              title: "Perimeter Visual",
-              shapeHtml: '<div class="shape-rectangle"></div>',
-              caption: `Add all four sides of the rectangle.`
-            }
-          }
-        );
-      },
-
-      "Factors": () => {
-        const n = randomInt(12, 60);
-        const validFactors = [];
-        for (let i = 2; i <= n; i++) if (n % i === 0) validFactors.push(i);
-        return buildTextQuestion(
-          `Type one factor of ${n} besides 1`,
-          validFactors.map(String),
-          `A factor divides ${n} exactly with no remainder. Valid answers include <strong>${validFactors.join(", ")}</strong>.`,
-          {
-            compare: (userAnswer, answers) => answers.includes(String(Number(userAnswer)))
-          }
-        );
-      },
-
-      "Volume": () => {
-        const l = randomInt(2, 6);
-        const w = randomInt(2, 6);
-        const h = randomInt(2, 6);
-        const answer = l * w * h;
-        return buildTextQuestion(
-          `Volume: ${l} × ${w} × ${h} = ?`,
-          answer,
-          `Volume of a rectangular prism is <strong>length × width × height</strong>. So <strong>${l} × ${w} × ${h} = ${answer}</strong>.`
-        );
-      },
-
-      "Order of Operations": () => {
-        const a = randomInt(1,9), b = randomInt(1,9), c = randomInt(1,9);
-        const answer = a + b * c;
-        return buildTextQuestion(
-          `${a} + ${b} × ${c} = ?`,
-          answer,
-          `Use order of operations: multiply first, then add. <strong>${b} × ${c} = ${b*c}</strong>, then <strong>${a} + ${b*c} = ${answer}</strong>.`
-        );
-      },
-
-      "Percent": () => {
-        const base = pick([100, 50, 20]);
-        const pct = pick([10, 20, 25, 50]);
-        const answer = (pct / 100) * base;
-        return buildTextQuestion(
-          `${pct}% of ${base} = ?`,
-          answer,
-          `Convert the percent to a fraction or decimal. <strong>${pct}% = ${pct}/100</strong>, so <strong>${pct}% of ${base} = ${answer}</strong>.`
-        );
-      },
-
-      "Coordinate Plane": () => {
-        const x = randomInt(0, 5);
-        const y = randomInt(0, 5);
-        return buildTextQuestion(
-          `Point (${x}, ${y}) has x-coordinate = ?`,
-          x,
-          `In an ordered pair <strong>(x, y)</strong>, the first number is the <strong>x-coordinate</strong>. So the answer is <strong>${x}</strong>.`,
-          {
-            visual: { type: "coordinate", title: "Coordinate Plane", x, y, caption: `The point is plotted at (${x}, ${y}).` }
-          }
-        );
-      },
-
-      "Ratios": () => {
-        const a = randomInt(1,10), b = randomInt(1,10);
-        return buildTextQuestion(
-          `In the ratio ${a}:${b}, what is the first number?`,
-          a,
-          `A ratio written as <strong>${a}:${b}</strong> has <strong>${a}</strong> as the first term.`
-        );
-      },
-
-      "Percents": () => questionGenerators["Percent"](),
-
-      "Integers": () => {
-        const x = randomInt(-20, 20);
-        const y = randomInt(-20, 20);
-        return buildTextQuestion(
-          `${x} + ${y} = ?`,
-          x + y,
-          `Add the integers carefully, watching the signs. <strong>${x} + ${y} = ${x + y}</strong>.`
-        );
-      },
-
-      "Expressions": () => {
-        const x = randomInt(1,10);
-        const answer = 2 * x + 3;
-        return buildTextQuestion(
-          `If x = ${x}, what is 2x + 3?`,
-          answer,
-          `Substitute <strong>${x}</strong> for x: <strong>2(${x}) + 3 = ${2*x} + 3 = ${answer}</strong>.`
-        );
-      },
-
-      "Equations": () => {
-        const x = randomInt(1,12);
-        const b = randomInt(1,12);
-        const c = x + b;
-        return buildTextQuestion(
-          `Solve: x + ${b} = ${c}`,
-          x,
-          `Subtract <strong>${b}</strong> from both sides: <strong>x = ${c} - ${b} = ${x}</strong>.`
-        );
-      },
-
-      "Geometry": () => {
-        const items = [
-          ["triangle", 3, '<div class="shape-triangle"></div>'],
-          ["square", 4, '<div class="shape-square"></div>'],
-          ["circle", 0, '<div class="shape-circle"></div>'],
-          ["rectangle", 4, '<div class="shape-rectangle"></div>'],
-          ["pentagon", 5, '<div class="shape-pentagon"></div>'],
-          ["hexagon", 6, '<div class="shape-hexagon"></div>']
-        ];
-        const [name, sides, html] = pick(items);
-        return buildTextQuestion(
-          `How many sides does this shape have?`,
-          sides,
-          name === "circle"
-            ? `A <strong>circle</strong> has no straight sides, so the answer is <strong>0</strong>.`
-            : `This shape is a <strong>${name}</strong>, and it has <strong>${sides}</strong> sides.`,
-          { visual: { type: "geometry", title: "Geometry Visual", shapeHtml: html, caption: `Look at the shape and count its sides.` } }
-        );
-      },
-
-      "Word Problems": () => {
-        const x = randomInt(2,12), y = randomInt(2,12);
-        return buildTextQuestion(
-          `Professor Pi has ${x} books and buys ${y} more. How many books now?`,
-          x + y,
-          `This is an addition story problem. Start with <strong>${x}</strong>, add <strong>${y}</strong>, and get <strong>${x + y}</strong>.`
-        );
-      },
-
-      "Rational Numbers": () => {
-        const denominator = randomInt(2, 9);
-        const numerator = randomInt(1, denominator - 1);
-        const answer = (numerator / denominator).toFixed(2);
-        return buildTextQuestion(
-          `Convert ${numerator}/${denominator} to a decimal rounded to 2 decimal places.`,
-          answer,
-          `Divide numerator by denominator: <strong>${numerator} ÷ ${denominator} = ${answer}</strong> (rounded to 2 decimal places).`
-        );
-      },
-
-      "Proportions": () => {
-        const a = randomInt(1, 6);
-        const b = randomInt(a + 1, 9);
-        const c = randomInt(2, 8);
-        const answer = (b * c) / a;
-        return buildTextQuestion(
-          `Solve the proportion: ${a}/${b} = ${c}/x`,
-          answer,
-          `Use cross multiplication: <strong>${a}x = ${b} × ${c} = ${b*c}</strong>. Then divide by <strong>${a}</strong> to get <strong>x = ${answer}</strong>.`
-        );
-      },
-
-      "Percent Problems": () => {
-        const original = pick([40, 50, 80, 120, 200]);
-        const percent = pick([10, 15, 20, 25]);
-        const increase = Math.random() > 0.5;
-        const amount = original * percent / 100;
-        const answer = increase ? original + amount : original - amount;
-        return buildTextQuestion(
-          `${increase ? "Increase" : "Decrease"} ${original} by ${percent}%.`,
-          answer,
-          `${percent}% of ${original} is <strong>${amount}</strong>. ${increase ? "Add" : "Subtract"} that amount: <strong>${answer}</strong>.`
-        );
-      },
-
-      "One-Step Equations": () => {
-        const x = randomInt(-8, 12);
-        const op = Math.random() > 0.5 ? "+" : "-";
-        const num = randomInt(2, 12);
-        const rhs = op === "+" ? x + num : x - num;
-        return buildTextQuestion(
-          `Solve: x ${op} ${num} = ${rhs}`,
-          x,
-          op === "+"
-            ? `Undo addition by subtracting <strong>${num}</strong> from both sides. <strong>x = ${rhs} - ${num} = ${x}</strong>.`
-            : `Undo subtraction by adding <strong>${num}</strong> to both sides. <strong>x = ${rhs} + ${num} = ${x}</strong>.`
-        );
-      },
-
-      "Probability": () => {
-        const favorable = randomInt(1, 5);
-        const total = favorable + randomInt(1, 5);
-        const answer = simplifyFraction(favorable, total);
-        return buildTextQuestion(
-          `A bag has ${favorable} red balls and ${total - favorable} blue balls. What is the probability of choosing red?`,
-          answer,
-          `Probability = favorable outcomes ÷ total outcomes. So the probability is <strong>${favorable}/${total}</strong>, which simplifies to <strong>${answer}</strong>.`
-        );
-      },
-
-      "Area and Volume": () => {
-        const l = randomInt(2, 6), w = randomInt(2, 6), h = randomInt(2, 6);
-        const answer = l * w * h;
-        return buildTextQuestion(
-          `Find the volume of a prism with length ${l}, width ${w}, and height ${h}.`,
-          answer,
-          `Volume = length × width × height = <strong>${l} × ${w} × ${h} = ${answer}</strong>.`
-        );
-      },
-
-      "Linear Equations": () => {
-        const x = randomInt(-5, 10);
-        const a = randomInt(2, 6);
-        const b = randomInt(1, 12);
-        const rhs = a * x + b;
-        return buildTextQuestion(
-          `Solve: ${a}x + ${b} = ${rhs}`,
-          x,
-          `Subtract <strong>${b}</strong> from both sides to get <strong>${a}x = ${rhs - b}</strong>. Then divide by <strong>${a}</strong> to get <strong>x = ${x}</strong>.`
-        );
-      },
-
-      "Graphing": () => {
-        const m = pick([1, 2, 3]);
-        const b = randomInt(-2, 5);
-        return buildChoiceQuestion(
-          `In the equation y = ${m}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}, what is the slope?`,
-          makeChoices(m, [m + 1, m - 1, b]),
-          String(m),
-          `In slope-intercept form <strong>y = mx + b</strong>, the slope is the coefficient of x. So the slope is <strong>${m}</strong>.`
-        );
-      },
-
-      "Slope": () => {
-        const x1 = randomInt(0, 4), y1 = randomInt(0, 4);
-        const stepX = pick([1, 2, 3]);
-        const stepY = pick([1, 2, 3]);
-        const x2 = x1 + stepX;
-        const y2 = y1 + stepY;
-        const answer = simplifyFraction(y2 - y1, x2 - x1);
-        return buildTextQuestion(
-          `Find the slope between (${x1}, ${y1}) and (${x2}, ${y2}).`,
-          answer,
-          `Slope = rise/run = <strong>(${y2} - ${y1}) / (${x2} - ${x1}) = ${y2-y1}/${x2-x1}</strong>, which simplifies to <strong>${answer}</strong>.`
-        );
-      },
-
-      "Systems of Equations": () => {
-        const x = randomInt(1, 6), y = randomInt(1, 6);
-        const a1 = 1, b1 = 1, c1 = x + y;
-        const a2 = 1, b2 = -1, c2 = x - y;
-        return buildTextQuestion(
-          `Solve the system: x + y = ${c1}, x - y = ${c2}. What is x?`,
-          x,
-          `Add the equations: <strong>(x + y) + (x - y) = ${c1} + ${c2}</strong>, so <strong>2x = ${c1 + c2}</strong>. Then <strong>x = ${x}</strong>.`
-        );
-      },
-
-      "Exponents": () => {
-        const a = randomInt(2, 6), n = randomInt(2, 4);
-        return buildTextQuestion(
-          `${a}^${n} = ?`,
-          a ** n,
-          `An exponent means repeated multiplication. <strong>${a}^${n} = ${Array(n).fill(a).join(" × ")} = ${a ** n}</strong>.`
-        );
-      },
-
-      "Square Roots": () => {
-        const base = randomInt(2, 12);
-        return buildTextQuestion(
-          `√${base * base} = ?`,
-          base,
-          `The square root asks what number times itself equals <strong>${base * base}</strong>. That number is <strong>${base}</strong>.`
-        );
-      },
-
-      "Transformations": () => {
-        return buildChoiceQuestion(
-          `If a shape slides without turning, what transformation happened?`,
-          ["Translation", "Rotation", "Reflection", "Dilation"],
-          "Translation",
-          `A slide is called a <strong>translation</strong>. It changes position but not size or orientation.`
-        );
-      },
-
-      "Algebra": () => {
-        const x = randomInt(1, 8);
-        const expr = 3 * x - 4;
-        return buildTextQuestion(
-          `If x = ${x}, evaluate 3x - 4.`,
-          expr,
-          `Substitute <strong>${x}</strong> into the expression: <strong>3(${x}) - 4 = ${3*x} - 4 = ${expr}</strong>.`
-        );
-      },
-
-      "Factoring": () => {
-        const a = randomInt(2, 9), b = randomInt(2, 9);
-        const sum = a + b, product = a * b;
-        return buildTextQuestion(
-          `Factor: x² + ${sum}x + ${product}. Type like (x+2)(x+3).`,
-          [`(x+${a})(x+${b})`, `(x+${b})(x+${a})`],
-          `Find two numbers that add to <strong>${sum}</strong> and multiply to <strong>${product}</strong>. Those numbers are <strong>${a}</strong> and <strong>${b}</strong>, so the factorization is <strong>(x+${a})(x+${b})</strong>.`,
-          {
-            compare: (userAnswer, answers) => {
-              const u = normalizeMathString(userAnswer).replace(/\)\(/g, ")(");
-              return answers.some(ans => normalizeMathString(ans) === u);
-            }
-          }
-        );
-      },
-
-      "Linear Functions": () => {
-        const m = randomInt(1, 5), b = randomInt(-5, 5), x = randomInt(0, 5);
-        const y = m * x + b;
-        return buildTextQuestion(
-          `For y = ${m}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}, find y when x = ${x}.`,
-          y,
-          `Substitute x = <strong>${x}</strong>: <strong>y = ${m}(${x}) ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${y}</strong>.`
-        );
-      },
-
-      "Inequalities": () => {
-        const x = randomInt(2, 10), b = randomInt(1, 8);
-        return buildChoiceQuestion(
-          `Which symbol makes this true when x = ${x}? x __ ${b}`,
-          [">", "<", "=", "≤"],
-          x > b ? ">" : x < b ? "<" : "=",
-          `Compare the values directly. Since <strong>${x}</strong> ${x > b ? "is greater than" : x < b ? "is less than" : "equals"} <strong>${b}</strong>, the correct symbol is <strong>${x > b ? ">" : x < b ? "<" : "="}</strong>.`
-        );
-      },
-
-      "Polynomials": () => {
-        const x = randomInt(1, 4);
-        const value = x*x + 2*x + 1;
-        return buildTextQuestion(
-          `If x = ${x}, what is x² + 2x + 1?`,
-          value,
-          `Substitute x = <strong>${x}</strong>: <strong>${x}² + 2(${x}) + 1 = ${x*x} + ${2*x} + 1 = ${value}</strong>.`
-        );
-      },
-
-      "Coordinate Geometry": () => {
-        const x = randomInt(-2, 3), y = randomInt(-2, 3);
-        return buildChoiceQuestion(
-          `The point (${x}, ${y}) is closest to which axis if |x| < |y|?`,
-          ["x-axis", "y-axis", "both equally", "neither"],
-          Math.abs(x) < Math.abs(y) ? "y-axis" : Math.abs(x) > Math.abs(y) ? "x-axis" : "both equally",
-          `Distance to the <strong>y-axis</strong> is |x|, and distance to the <strong>x-axis</strong> is |y|. Compare those distances to decide.`
-        );
-      },
-
-      "Quadratics": () => {
-        const x = randomInt(-4, 4);
-        return buildTextQuestion(
-          `Evaluate x² when x = ${x}.`,
-          x * x,
-          `Square means multiply the number by itself: <strong>${x}² = ${x} × ${x} = ${x*x}</strong>.`
-        );
-      },
-
-      "Radicals": () => {
-        const base = randomInt(2, 15);
-        return buildChoiceQuestion(
-          `Which is equal to √${base * base}?`,
-          makeChoices(base, [base - 1, base + 1, base * 2]),
-          String(base),
-          `The square root of <strong>${base * base}</strong> is the positive number that squares to it, which is <strong>${base}</strong>.`
-        );
-      },
-
-      "Function Notation": () => {
-        const x = randomInt(1, 5);
-        const answer = 2 * x + 1;
-        return buildTextQuestion(
-          `If f(x) = 2x + 1, find f(${x}).`,
-          answer,
-          `Substitute <strong>${x}</strong> into the function: <strong>f(${x}) = 2(${x}) + 1 = ${answer}</strong>.`
-        );
-      },
-
-      "Circles": () => {
-        const r = randomInt(2, 10);
-        return buildChoiceQuestion(
-          `What is the diameter of a circle with radius ${r}?`,
-          makeChoices(r * 2, [r, r + 2, r * 3]),
-          String(r * 2),
-          `The diameter is twice the radius. So <strong>2 × ${r} = ${r * 2}</strong>.`
-        );
-      },
-
-      "Statistics": () => {
-        const nums = shuffle([randomInt(2,10), randomInt(2,10), randomInt(2,10), randomInt(2,10), randomInt(2,10)]);
-        const answer = (nums.reduce((a,b)=>a+b,0) / nums.length).toFixed(1);
-        return buildTextQuestion(
-          `Find the mean of: ${nums.join(", ")}`,
-          answer,
-          `Add all values and divide by the number of values. The sum is <strong>${nums.reduce((a,b)=>a+b,0)}</strong>, and dividing by <strong>${nums.length}</strong> gives <strong>${answer}</strong>.`
-        );
-      },
-
-      "Geometry Proofs": () => {
-        return buildChoiceQuestion(
-          `If all sides of a quadrilateral are equal and all angles are right angles, what shape is it?`,
-          ["Rectangle", "Square", "Rhombus", "Trapezoid"],
-          "Square",
-          `A <strong>square</strong> has four equal sides and four right angles.`
-        );
-      },
-
-      "Trigonometry": () => {
-        return buildChoiceQuestion(
-          `In a right triangle, sin(θ) equals:`,
-          ["opposite/hypotenuse", "adjacent/hypotenuse", "opposite/adjacent", "hypotenuse/opposite"],
-          "opposite/hypotenuse",
-          `Use SOH-CAH-TOA. <strong>SOH</strong> means <strong>sin = opposite / hypotenuse</strong>.`
-        );
-      },
-
-      "Unit Circle": () => {
-        return buildChoiceQuestion(
-          `On the unit circle, the point at 0° is:`,
-          ["(1,0)", "(0,1)", "(-1,0)", "(0,-1)"],
-          "(1,0)",
-          `At 0°, the point on the unit circle is <strong>(1,0)</strong>.`
-        );
-      },
-
-      "Logarithms": () => {
-        return buildTextQuestion(
-          `log₁₀(100) = ?`,
-          2,
-          `A logarithm asks, “10 raised to what power equals 100?” Since <strong>10² = 100</strong>, the answer is <strong>2</strong>.`
-        );
-      },
-
-      "Sequences and Series": () => {
-        const start = randomInt(1, 6), step = randomInt(2, 6);
-        const answer = start + step * 4;
-        return buildTextQuestion(
-          `Find the 5th term: ${start}, ${start + step}, ${start + step * 2}, ...`,
-          answer,
-          `This is an arithmetic sequence with common difference <strong>${step}</strong>. The 5th term is <strong>${answer}</strong>.`
-        );
-      },
-
-      "Exponential Functions": () => {
-        return buildTextQuestion(
-          `2³ = ?`,
-          8,
-          `Exponential notation means repeated multiplication: <strong>2 × 2 × 2 = 8</strong>.`
-        );
-      },
-
-      "Advanced Probability": () => {
-        return buildTextQuestion(
-          `A fair coin is tossed twice. What is the probability of getting two heads? Type as a fraction.`,
-          `1/4`,
-          `The outcomes are HH, HT, TH, TT. Only one of the four outcomes is two heads, so the probability is <strong>1/4</strong>.`
-        );
-      },
-
-      "Precalculus": () => {
-        return buildChoiceQuestion(
-          `Which function is quadratic?`,
-          ["y = x² + 3x + 1", "y = 2x + 5", "y = 3/x", "y = √x"],
-          "y = x² + 3x + 1",
-          `A quadratic function has highest exponent <strong>2</strong>, so <strong>y = x² + 3x + 1</strong> is quadratic.`
-        );
-      },
-
-      "Limits": () => {
-        return buildTextQuestion(
-          `As x approaches 2, what does x + 3 approach?`,
-          5,
-          `For a simple linear expression, substitute the approaching value. If x approaches <strong>2</strong>, then <strong>x + 3</strong> approaches <strong>5</strong>.`
-        );
-      },
-
-      "Derivatives Intro": () => {
-        return buildChoiceQuestion(
-          `The derivative tells us the:`,
-          ["instantaneous rate of change", "total area", "average only", "shape color"],
-          "instantaneous rate of change",
-          `A derivative describes the <strong>instantaneous rate of change</strong> or slope at a point.`
-        );
-      },
-
-      "Advanced Functions": () => {
-        return buildTextQuestion(
-          `If g(x) = x² - 1, find g(3).`,
-          8,
-          `Substitute x = 3: <strong>g(3) = 3² - 1 = 9 - 1 = 8</strong>.`
-        );
-      },
-
-      "Mixed Senior Review": () => {
-        const seniorSubjects = ["Precalculus", "Limits", "Derivatives Intro", "Advanced Functions", "Statistics"];
-        return questionGenerators[pick(seniorSubjects)]();
       }
-    };
+      const x = randomInt(2, 12), y = randomInt(2, 12);
+      return buildTextQuestion(
+        `There are ${x} bags with ${y} marbles in each bag. How many marbles are there altogether?`,
+        x * y,
+        `This is multiplication: <strong>${x} × ${y} = ${x * y}</strong>.`
+      );
+    },
 
-    function generateQuestion() {
-      const generator = questionGenerators[state.selectedSubject] || (() => buildTextQuestion("2 + 2 = ?", 4, "Add 2 and 2 to get 4."));
-      const questionObj = generator();
-      state.currentQuestion = questionObj;
-      state.questionNumber += 1;
-      state.waitingForNext = false;
+    "Multiplication": () => {
+      const range = getRangeByDifficulty([1,5],[2,10],[4,12]);
+      const x = randomInt(range[0], range[1]);
+      const y = randomInt(range[0], range[1]);
+      return buildTextQuestion(
+        `${x} × ${y} = ?`,
+        x * y,
+        `Multiplication means repeated addition. <strong>${x} × ${y} = ${x * y}</strong>.`
+      );
+    },
 
-      el.questionText.textContent = questionObj.question;
-      el.answerInput.value = "";
-      el.answerInput.focus();
-      setMessage("", "");
-      showExplanation("");
-      showReview("");
-      updateVisualArea(questionObj.visual || null);
-      renderAnswerInterface(questionObj);
-      updateStatus();
-    }
+    "Division": () => {
+      const range = getRangeByDifficulty([1,5],[2,10],[4,12]);
+      const y = randomInt(range[0], range[1]);
+      const answer = randomInt(range[0], range[1]);
+      const x = y * answer;
+      return buildTextQuestion(
+        `${x} ÷ ${y} = ?`,
+        answer,
+        `Division is the opposite of multiplication. Since <strong>${answer} × ${y} = ${x}</strong>, the answer is <strong>${answer}</strong>.`
+      );
+    },
 
-    function renderAnswerInterface(questionObj) {
-      if (questionObj.type === "multiple-choice") {
-        el.textAnswerWrap.style.display = "none";
-        el.choicesGrid.style.display = "grid";
-        el.choicesGrid.innerHTML = "";
-        questionObj.choices.forEach(choice => {
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "choice-btn";
-          btn.textContent = choice;
-          btn.addEventListener("click", () => handleAnswer(choice, btn));
-          el.choicesGrid.appendChild(btn);
-        });
-      } else {
-        el.textAnswerWrap.style.display = "flex";
-        el.choicesGrid.style.display = "none";
-        el.choicesGrid.innerHTML = "";
-      }
-    }
-
-    function lockChoices(correctValue, selectedButton = null) {
-      const buttons = [...el.choicesGrid.querySelectorAll(".choice-btn")];
-      buttons.forEach(btn => {
-        btn.disabled = true;
-        const isCorrect = normalizeMathString(btn.textContent) === normalizeMathString(correctValue);
-        if (isCorrect) btn.classList.add("correct");
-        if (selectedButton && btn === selectedButton && !isCorrect) btn.classList.add("wrong");
-      });
-    }
-
-    function rememberRoundResult(correct, givenAnswer) {
-      state.roundResults.push({
-        question: state.currentQuestion.question,
-        correct,
-        givenAnswer,
-        answer: Array.isArray(state.currentQuestion.answer) ? state.currentQuestion.answer[0] : state.currentQuestion.answer
-      });
-    }
-
-    function afterAnswer(correct) {
-      updateStatus();
-      if (el.modeSelect.value === "challenge" && state.lives <= 0) {
-        endGame("Challenge over — you ran out of lives.");
-        return;
-      }
-      if (state.questionNumber >= state.totalQuestions) {
-        if (el.modeSelect.value === "practice") {
-          endGame("Practice round complete.");
-        } else if (el.modeSelect.value === "exam") {
-          endGame("Exam round complete.");
-        } else if (el.modeSelect.value === "challenge") {
-          endGame("Challenge round complete.");
+    "Fractions": () => {
+      const denominator = randomInt(2, 8);
+      const numerator = randomInt(1, denominator - 1);
+      const answer = `${numerator}/${denominator}`;
+      return buildTextQuestion(
+        `What fraction is shown? Type it like ${answer}`,
+        answer,
+        `The picture shows <strong>${numerator}</strong> filled parts out of <strong>${denominator}</strong> equal parts, so the fraction is <strong>${answer}</strong>.`,
+        {
+          visual: {
+            type: "fraction",
+            title: "Fraction Visual",
+            numerator,
+            denominator,
+            caption: `${numerator} of ${denominator} parts are filled.`
+          }
         }
-        return;
-      }
-      state.waitingForNext = true;
-      setTimeout(() => {
-        if (state.gameRunning) generateQuestion();
-      }, correct ? 850 : 1450);
-    }
+      );
+    },
 
-    function handleCorrect(userAnswer, selectedButton = null) {
-      state.score += 1;
-      state.streak += 1;
-      if (el.modeSelect.value === "challenge") state.timeLeft += 2;
-      playTone("success");
-      setMessage("✅ Correct!", "success");
-      showExplanation(state.currentQuestion.explanation);
-      rememberRoundResult(true, userAnswer);
-      if (selectedButton) lockChoices(state.currentQuestion.answer, selectedButton);
-      afterAnswer(true);
-    }
-
-    function handleWrong(userAnswer, selectedButton = null) {
-      state.streak = 0;
-      playTone("error");
-      const shownAnswer = Array.isArray(state.currentQuestion.answer) ? state.currentQuestion.answer[0] : state.currentQuestion.answer;
-      setMessage(`❌ Not quite. Correct answer: ${shownAnswer}`, "error");
-      showExplanation(state.currentQuestion.explanation);
-      rememberRoundResult(false, userAnswer);
-      if (selectedButton) lockChoices(shownAnswer, selectedButton);
-
-      if (el.modeSelect.value === "challenge") {
-        state.lives -= 1;
-        state.timeLeft = Math.max(0, state.timeLeft - 3);
-        if (state.timeLeft <= 0) {
-          endGame("Challenge over — time ran out.");
-          return;
+    "Area": () => {
+      const l = randomInt(2, 12);
+      const w = randomInt(2, 12);
+      const answer = l * w;
+      return buildTextQuestion(
+        `Area of a rectangle: ${l} × ${w} = ?`,
+        answer,
+        `Area of a rectangle is <strong>length × width</strong>. So <strong>${l} × ${w} = ${answer}</strong>.`,
+        {
+          visual: {
+            type: "geometry",
+            title: "Area Visual",
+            shapeHtml: '<div class="shape-rectangle"></div>',
+            caption: `Rectangle area = ${l} × ${w}.`
+          }
         }
-      }
-      afterAnswer(false);
-    }
+      );
+    },
 
-    function handleAnswer(rawAnswer, selectedButton = null) {
-      if (!state.gameRunning || !state.currentQuestion || state.waitingForNext) return;
-      const userAnswer = String(rawAnswer).trim();
-      if (!userAnswer) return;
-      if (answersMatch(userAnswer, state.currentQuestion)) handleCorrect(userAnswer, selectedButton);
-      else handleWrong(userAnswer, selectedButton);
-    }
+    "Perimeter": () => {
+      const l = randomInt(2, 12);
+      const w = randomInt(2, 12);
+      const answer = 2 * (l + w);
+      return buildTextQuestion(
+        `Perimeter of a rectangle with sides ${l} and ${w} = ?`,
+        answer,
+        `Perimeter means distance around the shape: <strong>${l} + ${w} + ${l} + ${w} = ${answer}</strong>.`
+      );
+    },
 
-    function startTimerIfNeeded() {
-      clearInterval(state.timerId);
-      if (el.modeSelect.value === "practice") {
-        el.timer.textContent = "∞";
-        return;
-      }
-      state.timerId = setInterval(() => {
-        state.timeLeft -= 1;
-        updateStatus();
-        if (state.timeLeft <= 0) {
-          endGame("⏰ Time's up!");
+    "Multi-Digit Multiplication": () => {
+      const x = randomInt(12, 69);
+      const y = randomInt(2, 9);
+      return buildTextQuestion(
+        `${x} × ${y} = ?`,
+        x * y,
+        `Multiply each place carefully. The product is <strong>${x * y}</strong>.`
+      );
+    },
+
+    "Equivalent Fractions": () => {
+      const baseNum = randomInt(1, 6);
+      const baseDen = randomInt(baseNum + 1, 8);
+      const factor = randomInt(2, 4);
+      const answer = baseNum * factor;
+      return buildTextQuestion(
+        `${baseNum}/${baseDen} = ?/${baseDen * factor}`,
+        answer,
+        `Multiply numerator and denominator by the same number. <strong>${baseNum} × ${factor} = ${answer}</strong>.`,
+        {
+          visual: {
+            type: "fraction",
+            title: "Equivalent Fraction Helper",
+            numerator: baseNum,
+            denominator: baseDen,
+            caption: `Multiply both parts by ${factor}.`
+          }
         }
-      }, 1000);
-    }
+      );
+    },
 
-    function startGame() {
-      clearInterval(state.timerId);
-      state.gameRunning = true;
-      state.score = 0;
-      state.streak = 0;
-      state.questionNumber = 0;
-      state.totalQuestions = Number(el.questionCountSelect.value);
-      state.lives = 3;
-      state.roundResults = [];
-      state.timeLeft = Number(el.timeSelect.value);
-      state.currentQuestion = null;
-      state.waitingForNext = false;
-      el.helperText.textContent = `${getGradeLabel()} • ${state.selectedSubject} • ${el.difficultySelect.value[0].toUpperCase() + el.difficultySelect.value.slice(1)} difficulty`;
-      playTone("start");
-      showReview("");
-      showExplanation("");
-      generateQuestion();
-      startTimerIfNeeded();
-      updateStatus();
-    }
+    "Comparing Fractions": () => {
+      const den = randomInt(4, 8);
+      let aNum = randomInt(1, den - 1);
+      let bNum = randomInt(1, den - 1);
+      while (aNum === bNum) bNum = randomInt(1, den - 1);
+      const answer = aNum > bNum ? `${aNum}/${den}` : `${bNum}/${den}`;
+      return buildTextQuestion(
+        `Which is bigger: ${aNum}/${den} or ${bNum}/${den}? Type the bigger fraction.`,
+        answer,
+        `When denominators are the same, compare numerators. The bigger fraction is <strong>${answer}</strong>.`,
+        {
+          visual: {
+            type: "fraction",
+            title: "Fraction Compare",
+            numerator: Math.max(aNum, bNum),
+            denominator: den,
+            caption: `More filled parts means the larger fraction.`
+          }
+        }
+      );
+    },
 
-    function buildRoundSummary() {
-      const correct = state.roundResults.filter(item => item.correct).length;
-      const wrong = state.roundResults.length - correct;
-      const accuracy = state.roundResults.length ? Math.round((correct / state.roundResults.length) * 100) : 0;
-      return `
-        <strong>Final score:</strong> ${state.score}<br>
-        <strong>Correct answers:</strong> ${correct}<br>
-        <strong>Wrong answers:</strong> ${wrong}<br>
-        <strong>Accuracy:</strong> ${accuracy}%<br>
-        <strong>Subject:</strong> ${state.selectedSubject}<br>
-        <strong>Grade:</strong> ${getGradeLabel()}<br>
-        <strong>Mode:</strong> ${getModeLabel()}
-      `;
-    }
+    "Decimals": () => {
+      const x = (randomInt(1, 20) / 10).toFixed(1);
+      const y = (randomInt(1, 20) / 10).toFixed(1);
+      const ans = (parseFloat(x) + parseFloat(y)).toFixed(1);
+      return buildTextQuestion(
+        `${x} + ${y} = ?`,
+        ans,
+        `Line up the decimal places and add. <strong>${x} + ${y} = ${ans}</strong>.`
+      );
+    },
 
-    function endGame(reason = "Game over") {
-      clearInterval(state.timerId);
-      state.gameRunning = false;
-      state.waitingForNext = false;
-      playTone("end");
-      el.questionText.textContent = reason;
-      setMessage(`Great job! Final score: ${state.score}`, "success");
-      el.helperText.textContent = "Press Start Game to play again with a new setup.";
-      showReview(buildRoundSummary());
-      saveCurrentScoreToLeaderboard();
-      updateStatus();
-    }
+    "Factors and Multiples": () => {
+      const n = randomInt(12, 60);
+      const validFactors = [];
+      for (let i = 2; i <= n; i++) if (n % i === 0) validFactors.push(i);
+      return buildTextQuestion(
+        `Type one factor of ${n} besides 1`,
+        validFactors.map(String),
+        `A factor divides ${n} exactly. Valid answers include <strong>${validFactors.join(", ")}</strong>.`,
+        {
+          compare: (userAnswer, answers) => answers.includes(String(Number(userAnswer)))
+        }
+      );
+    },
 
-    function resetGame(resetSubject = false) {
-      clearInterval(state.timerId);
-      state.gameRunning = false;
-      state.score = 0;
-      state.streak = 0;
-      state.timeLeft = Number(el.timeSelect.value);
-      state.questionNumber = 0;
-      state.totalQuestions = Number(el.questionCountSelect.value);
-      state.lives = 3;
-      state.currentQuestion = null;
-      state.waitingForNext = false;
-      state.roundResults = [];
-      el.questionText.textContent = "Press Start Game";
-      el.answerInput.value = "";
-      el.helperText.textContent = "Select your setup, press Start Game, then answer as many questions as you can.";
-      setMessage("", "");
-      showExplanation("");
-      showReview("");
-      updateVisualArea(null);
+    "Angles and Geometry": () => {
+      const items = [
+        ["acute", "less than 90°"],
+        ["right", "exactly 90°"],
+        ["obtuse", "more than 90° but less than 180°"]
+      ];
+      const [answer, clue] = pick(items);
+      return buildTextQuestion(
+        `What kind of angle is ${clue}?`,
+        answer,
+        `An angle that is ${clue} is called an <strong>${answer}</strong> angle.`
+      );
+    },
+
+    "Fractions Operations": () => {
+      const denominator = randomInt(4, 10);
+      const a = randomInt(1, denominator - 1);
+      const b = randomInt(1, denominator - a);
+      const answer = `${a + b}/${denominator}`;
+      return buildTextQuestion(
+        `${a}/${denominator} + ${b}/${denominator} = ?`,
+        answer,
+        `When denominators are the same, add numerators only. So the answer is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Volume": () => {
+      const l = randomInt(2, 6);
+      const w = randomInt(2, 6);
+      const h = randomInt(2, 6);
+      const answer = l * w * h;
+      return buildTextQuestion(
+        `Volume: ${l} × ${w} × ${h} = ?`,
+        answer,
+        `Volume = length × width × height = <strong>${answer}</strong>.`
+      );
+    },
+
+    "Order of Operations": () => {
+      const a = randomInt(1,9), b = randomInt(1,9), c = randomInt(1,9);
+      const answer = a + b * c;
+      return buildTextQuestion(
+        `${a} + ${b} × ${c} = ?`,
+        answer,
+        `Multiply first: <strong>${b} × ${c} = ${b*c}</strong>. Then add <strong>${a}</strong>. Final answer: <strong>${answer}</strong>.`
+      );
+    },
+
+    "Percent": () => {
+      const base = pick([100, 50, 20]);
+      const pct = pick([10, 20, 25, 50]);
+      const answer = (pct / 100) * base;
+      return buildTextQuestion(
+        `${pct}% of ${base} = ?`,
+        answer,
+        `Convert percent to a fraction or decimal. <strong>${pct}% of ${base} = ${answer}</strong>.`
+      );
+    },
+
+    "Coordinate Plane": () => {
+      const x = randomInt(0, 5);
+      const y = randomInt(0, 5);
+      return buildTextQuestion(
+        `Point (${x}, ${y}) has x-coordinate = ?`,
+        x,
+        `In an ordered pair <strong>(x, y)</strong>, the first number is the <strong>x-coordinate</strong>.`,
+        {
+          visual: { type: "coordinate", title: "Coordinate Plane", x, y, caption: `The point is plotted at (${x}, ${y}).` }
+        }
+      );
+    },
+
+    "Geometry": () => {
+      const items = [
+        ["triangle", 3, '<div class="shape-triangle"></div>'],
+        ["square", 4, '<div class="shape-square"></div>'],
+        ["circle", 0, '<div class="shape-circle"></div>'],
+        ["rectangle", 4, '<div class="shape-rectangle"></div>'],
+        ["pentagon", 5, '<div class="shape-pentagon"></div>'],
+        ["hexagon", 6, '<div class="shape-hexagon"></div>']
+      ];
+      const [name, sides, html] = pick(items);
+      return buildTextQuestion(
+        `How many sides does this shape have?`,
+        sides,
+        name === "circle"
+          ? `A <strong>circle</strong> has no straight sides, so the answer is <strong>0</strong>.`
+          : `This shape is a <strong>${name}</strong>, and it has <strong>${sides}</strong> sides.`,
+        { visual: { type: "geometry", title: "Geometry Visual", shapeHtml: html, caption: `Look at the shape and count its sides.` } }
+      );
+    },
+
+    "Measurement Conversions": () => {
+      const meters = randomInt(2, 9);
+      return buildTextQuestion(
+        `${meters} meters = ? centimeters`,
+        meters * 100,
+        `1 meter = 100 centimeters, so <strong>${meters} × 100 = ${meters * 100}</strong>.`
+      );
+    },
+
+    "Ratios": () => {
+      const a = randomInt(1,10), b = randomInt(1,10);
+      return buildTextQuestion(
+        `In the ratio ${a}:${b}, what is the first number?`,
+        a,
+        `A ratio written as <strong>${a}:${b}</strong> has <strong>${a}</strong> as the first term.`
+      );
+    },
+
+    "Percents": () => {
+      const base = pick([40, 50, 80, 100, 200]);
+      const pct = pick([10, 20, 25, 50]);
+      const answer = (pct / 100) * base;
+      return buildTextQuestion(
+        `${pct}% of ${base} = ?`,
+        answer,
+        `<strong>${pct}%</strong> means <strong>${pct}/100</strong>. So the answer is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Integers": () => {
+      const x = randomInt(-20, 20);
+      const y = randomInt(-20, 20);
+      return buildTextQuestion(
+        `${x} + ${y} = ?`,
+        x + y,
+        `Add the integers carefully, watching the signs. <strong>${x} + ${y} = ${x + y}</strong>.`
+      );
+    },
+
+    "Expressions": () => {
+      const x = randomInt(1,10);
+      const answer = 2 * x + 3;
+      return buildTextQuestion(
+        `If x = ${x}, what is 2x + 3?`,
+        answer,
+        `Substitute <strong>${x}</strong> for x: <strong>2(${x}) + 3 = ${answer}</strong>.`
+      );
+    },
+
+    "Equations": () => {
+      const x = randomInt(1,12);
+      const b = randomInt(1,12);
+      const c = x + b;
+      return buildTextQuestion(
+        `Solve: x + ${b} = ${c}`,
+        x,
+        `Subtract <strong>${b}</strong> from both sides: <strong>x = ${c} - ${b} = ${x}</strong>.`
+      );
+    },
+
+    "Area of Triangles and Parallelograms": () => {
+      if (Math.random() > 0.5) {
+        const b = randomInt(2, 12), h = randomInt(2, 10);
+        return buildTextQuestion(
+          `Area of a triangle with base ${b} and height ${h} = ?`,
+          (b * h) / 2,
+          `Triangle area = 1/2 × base × height = <strong>1/2 × ${b} × ${h} = ${(b*h)/2}</strong>.`
+        );
+      }
+      const b = randomInt(2, 12), h = randomInt(2, 10);
+      return buildTextQuestion(
+        `Area of a parallelogram with base ${b} and height ${h} = ?`,
+        b * h,
+        `Parallelogram area = base × height = <strong>${b} × ${h} = ${b*h}</strong>.`
+      );
+    },
+
+    "Statistics": () => {
+      const nums = shuffle([randomInt(2,10), randomInt(2,10), randomInt(2,10), randomInt(2,10), randomInt(2,10)]);
+      const answer = (nums.reduce((a,b)=>a+b,0) / nums.length).toFixed(1);
+      return buildTextQuestion(
+        `Find the mean of: ${nums.join(", ")}`,
+        answer,
+        `Add all values and divide by the number of values. The mean is <strong>${answer}</strong>.`
+      );
+    },
+
+    "Time and Elapsed Time": () => {
+      const hour = randomInt(1, 10);
+      const jump = pick([1, 2, 3, 4]);
+      const answer = ((hour - 1 + jump) % 12) + 1;
+      return buildTextQuestion(
+        `It is ${hour} o'clock now. What time will it be in ${jump} hours?`,
+        answer,
+        `Add ${jump} hours to ${hour}. The new hour is <strong>${answer}</strong> o'clock.`
+      );
+    }
+  };
+
+  function generateQuestion() {
+    const generator = questionGenerators[state.selectedSubject] || (() => buildTextQuestion("2 + 2 = ?", 4, "Add 2 and 2 to get 4."));
+    const questionObj = generator();
+    state.currentQuestion = questionObj;
+    state.questionNumber += 1;
+    state.waitingForNext = false;
+
+    el.questionText.textContent = questionObj.question;
+    el.answerInput.value = "";
+    el.answerInput.focus();
+    setMessage("", "");
+    showExplanation("");
+    showReview("");
+    updateVisualArea(questionObj.visual || null);
+    renderAnswerInterface(questionObj);
+    updateStatus();
+  }
+
+  function renderAnswerInterface(questionObj) {
+    if (questionObj.type === "multiple-choice") {
+      el.textAnswerWrap.style.display = "none";
+      el.choicesGrid.style.display = "grid";
       el.choicesGrid.innerHTML = "";
-      el.choicesGrid.style.display = "none";
+      questionObj.choices.forEach(choice => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "choice-btn";
+        btn.textContent = choice;
+        btn.addEventListener("click", () => handleAnswer(choice, btn));
+        el.choicesGrid.appendChild(btn);
+      });
+    } else {
       el.textAnswerWrap.style.display = "flex";
-      if (resetSubject) renderSubjects();
-      updateStatus();
+      el.choicesGrid.style.display = "none";
+      el.choicesGrid.innerHTML = "";
     }
+  }
 
-    function getLeaderboard() {
-      try {
-        const raw = localStorage.getItem(LEADERBOARD_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        return [];
-      }
+  function lockChoices(correctValue, selectedButton = null) {
+    const buttons = [...el.choicesGrid.querySelectorAll(".choice-btn")];
+    buttons.forEach(btn => {
+      btn.disabled = true;
+      const isCorrect = normalizeMathString(btn.textContent) === normalizeMathString(correctValue);
+      if (isCorrect) btn.classList.add("correct");
+      if (selectedButton && btn === selectedButton && !isCorrect) btn.classList.add("wrong");
+    });
+  }
+
+  function rememberRoundResult(correct, givenAnswer) {
+    state.roundResults.push({
+      question: state.currentQuestion.question,
+      correct,
+      givenAnswer,
+      answer: Array.isArray(state.currentQuestion.answer) ? state.currentQuestion.answer[0] : state.currentQuestion.answer
+    });
+  }
+
+  function afterAnswer(correct) {
+    updateStatus();
+    if (el.modeSelect.value === "challenge" && state.lives <= 0) {
+      endGame("Challenge over — you ran out of lives.");
+      return;
     }
-
-    function saveLeaderboard(data) {
-      localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(data));
+    if (state.questionNumber >= state.totalQuestions) {
+      if (el.modeSelect.value === "practice") endGame("Practice round complete.");
+      else if (el.modeSelect.value === "exam") endGame("Exam round complete.");
+      else if (el.modeSelect.value === "challenge") endGame("Challenge round complete.");
+      else endGame("Timed round complete.");
+      return;
     }
+    state.waitingForNext = true;
+    setTimeout(() => {
+      if (state.gameRunning) generateQuestion();
+    }, correct ? 850 : 1450);
+  }
 
-    function formatDate(timestamp) {
-      const d = new Date(timestamp);
-      return d.toLocaleDateString() + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    }
+  function handleCorrect(userAnswer, selectedButton = null) {
+    state.score += 1;
+    state.streak += 1;
+    if (el.modeSelect.value === "challenge") state.timeLeft += 2;
+    playTone("success");
+    setMessage("✅ Correct!", "success");
+    showExplanation(state.currentQuestion.explanation);
+    rememberRoundResult(true, userAnswer);
+    if (selectedButton) lockChoices(state.currentQuestion.answer, selectedButton);
+    afterAnswer(true);
+  }
 
-    function renderLeaderboard() {
-      const board = getLeaderboard().sort((a, b) => b.score - a.score).slice(0, 10);
-      if (!board.length) {
-        el.leaderboardList.innerHTML = `<div class="empty-board">No saved scores yet. Play your first game to create your leaderboard.</div>`;
-        el.bestScoreBox.textContent = "0";
-        el.bestSubjectBox.textContent = "-";
-        el.bestGradeBox.textContent = "-";
+  function handleWrong(userAnswer, selectedButton = null) {
+    state.streak = 0;
+    playTone("error");
+    const shownAnswer = Array.isArray(state.currentQuestion.answer) ? state.currentQuestion.answer[0] : state.currentQuestion.answer;
+    setMessage(`❌ Not quite. Correct answer: ${shownAnswer}`, "error");
+    showExplanation(state.currentQuestion.explanation);
+    rememberRoundResult(false, userAnswer);
+    if (selectedButton) lockChoices(shownAnswer, selectedButton);
+
+    if (el.modeSelect.value === "challenge") {
+      state.lives -= 1;
+      state.timeLeft = Math.max(0, state.timeLeft - 3);
+      if (state.timeLeft <= 0) {
+        endGame("Challenge over — time ran out.");
         return;
       }
-      const best = board[0];
-      el.bestScoreBox.textContent = best.score;
-      el.bestSubjectBox.textContent = best.subject;
-      el.bestGradeBox.textContent = best.gradeLabel;
-      el.leaderboardList.innerHTML = board.map((item, index) => `
-        <div class="leaderboard-item">
-          <div class="leaderboard-rank">${index + 1}</div>
-          <div class="leaderboard-main">
-            <div class="leaderboard-title">${item.subject} • ${item.gradeLabel}</div>
-            <div class="leaderboard-meta">${item.mode} • ${item.difficulty} • ${item.timeLabel} • ${formatDate(item.timestamp)}</div>
-          </div>
-          <div class="leaderboard-score">${item.score}</div>
+    }
+    afterAnswer(false);
+  }
+
+  function handleAnswer(rawAnswer, selectedButton = null) {
+    if (!state.gameRunning || !state.currentQuestion || state.waitingForNext) return;
+    const userAnswer = String(rawAnswer).trim();
+    if (!userAnswer) return;
+    if (answersMatch(userAnswer, state.currentQuestion)) handleCorrect(userAnswer, selectedButton);
+    else handleWrong(userAnswer, selectedButton);
+  }
+
+  function startTimerIfNeeded() {
+    clearInterval(state.timerId);
+    if (el.modeSelect.value === "practice") {
+      el.timer.textContent = "∞";
+      return;
+    }
+    state.timerId = setInterval(() => {
+      state.timeLeft -= 1;
+      updateStatus();
+      if (state.timeLeft <= 0) {
+        endGame("⏰ Time's up!");
+      }
+    }, 1000);
+  }
+
+  function startGame() {
+    clearInterval(state.timerId);
+    state.gameRunning = true;
+    state.score = 0;
+    state.streak = 0;
+    state.questionNumber = 0;
+    state.totalQuestions = Number(el.questionCountSelect.value);
+    state.lives = 3;
+    state.roundResults = [];
+    state.timeLeft = Number(el.timeSelect.value);
+    state.currentQuestion = null;
+    state.waitingForNext = false;
+    el.helperText.textContent = `${getGradeLabel()} • ${state.selectedSubject} • ${el.difficultySelect.value[0].toUpperCase() + el.difficultySelect.value.slice(1)} difficulty • ${state.totalQuestions} questions`;
+    playTone("start");
+    showReview("");
+    showExplanation("");
+    generateQuestion();
+    startTimerIfNeeded();
+    updateStatus();
+  }
+
+  function buildRoundSummary() {
+    const correct = state.roundResults.filter(item => item.correct).length;
+    const wrong = state.roundResults.length - correct;
+    const accuracy = state.roundResults.length ? Math.round((correct / state.roundResults.length) * 100) : 0;
+    return `
+      <strong>Final score:</strong> ${state.score}<br>
+      <strong>Correct answers:</strong> ${correct}<br>
+      <strong>Wrong answers:</strong> ${wrong}<br>
+      <strong>Accuracy:</strong> ${accuracy}%<br>
+      <strong>Subject:</strong> ${state.selectedSubject}<br>
+      <strong>Grade:</strong> ${getGradeLabel()}<br>
+      <strong>Mode:</strong> ${getModeLabel()}
+    `;
+  }
+
+  function endGame(reason = "Game over") {
+    clearInterval(state.timerId);
+    state.gameRunning = false;
+    state.waitingForNext = false;
+    playTone("end");
+    el.questionText.textContent = reason;
+    setMessage(`Great job! Final score: ${state.score}`, "success");
+    el.helperText.textContent = "Press Start Game to play again with a new setup.";
+    showReview(buildRoundSummary());
+    saveCurrentScoreToLeaderboard();
+    updateStatus();
+  }
+
+  function resetGame(resetSubject = false) {
+    clearInterval(state.timerId);
+    state.gameRunning = false;
+    state.score = 0;
+    state.streak = 0;
+    state.timeLeft = Number(el.timeSelect.value);
+    state.questionNumber = 0;
+    state.totalQuestions = Number(el.questionCountSelect.value);
+    state.lives = 3;
+    state.currentQuestion = null;
+    state.waitingForNext = false;
+    state.roundResults = [];
+    el.questionText.textContent = "Press Start Game";
+    el.answerInput.value = "";
+    el.helperText.textContent = "Select your setup, press Start Game, then answer as many questions as you can.";
+    setMessage("", "");
+    showExplanation("");
+    showReview("");
+    updateVisualArea(null);
+    el.choicesGrid.innerHTML = "";
+    el.choicesGrid.style.display = "none";
+    el.textAnswerWrap.style.display = "flex";
+    if (resetSubject) renderSubjects();
+    updateStatus();
+  }
+
+  function getLeaderboard() {
+    try {
+      const raw = localStorage.getItem(LEADERBOARD_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveLeaderboard(data) {
+    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(data));
+  }
+
+  function formatDate(timestamp) {
+    const d = new Date(timestamp);
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function renderLeaderboard() {
+    const board = getLeaderboard().sort((a, b) => b.score - a.score).slice(0, 10);
+    if (!board.length) {
+      el.leaderboardList.innerHTML = `<div class="empty-board">No saved scores yet. Play your first game to create your leaderboard.</div>`;
+      el.bestScoreBox.textContent = "0";
+      el.bestSubjectBox.textContent = "-";
+      el.bestGradeBox.textContent = "-";
+      return;
+    }
+    const best = board[0];
+    el.bestScoreBox.textContent = best.score;
+    el.bestSubjectBox.textContent = best.subject;
+    el.bestGradeBox.textContent = best.gradeLabel;
+    el.leaderboardList.innerHTML = board.map((item, index) => `
+      <div class="leaderboard-item">
+        <div class="leaderboard-rank">${index + 1}</div>
+        <div class="leaderboard-main">
+          <div class="leaderboard-title">${item.subject} • ${item.gradeLabel}</div>
+          <div class="leaderboard-meta">${item.mode} • ${item.difficulty} • ${item.timeLabel} • ${formatDate(item.timestamp)}</div>
         </div>
-      `).join("");
-    }
+        <div class="leaderboard-score">${item.score}</div>
+      </div>
+    `).join("");
+  }
 
-    function saveCurrentScoreToLeaderboard() {
-      if (state.score <= 0) return;
-      const entry = {
-        score: state.score,
-        subject: state.selectedSubject,
-        grade: el.gradeSelect.value,
-        gradeLabel: getGradeLabel(),
-        difficulty: el.difficultySelect.value.charAt(0).toUpperCase() + el.difficultySelect.value.slice(1),
-        mode: getModeLabel().replace(" Mode", ""),
-        timeLabel: el.modeSelect.value === "practice" ? "No Limit" : `${el.timeSelect.value}s`,
-        timestamp: Date.now()
-      };
-      const board = getLeaderboard();
-      board.push(entry);
-      board.sort((a, b) => b.score - a.score);
-      saveLeaderboard(board.slice(0, 20));
-      renderLeaderboard();
-    }
+  function saveCurrentScoreToLeaderboard() {
+    if (state.score <= 0) return;
+    const entry = {
+      score: state.score,
+      subject: state.selectedSubject,
+      grade: el.gradeSelect.value,
+      gradeLabel: getGradeLabel(),
+      difficulty: el.difficultySelect.value.charAt(0).toUpperCase() + el.difficultySelect.value.slice(1),
+      mode: getModeLabel().replace(" Mode", ""),
+      timeLabel: el.modeSelect.value === "practice" ? "No Limit" : `${el.timeSelect.value}s`,
+      timestamp: Date.now()
+    };
+    const board = getLeaderboard();
+    board.push(entry);
+    board.sort((a, b) => b.score - a.score);
+    saveLeaderboard(board.slice(0, 20));
+    renderLeaderboard();
+  }
 
-    function clearLeaderboard() {
-      localStorage.removeItem(LEADERBOARD_KEY);
-      renderLeaderboard();
-    }
+  function clearLeaderboard() {
+    localStorage.removeItem(LEADERBOARD_KEY);
+    renderLeaderboard();
+  }
 
-    el.answerInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") handleAnswer(el.answerInput.value);
-    });
-    el.submitBtn.addEventListener("click", () => handleAnswer(el.answerInput.value));
-    el.startBtn.addEventListener("click", startGame);
-    el.resetBtn.addEventListener("click", () => resetGame());
-    el.clearBoardBtn.addEventListener("click", clearLeaderboard);
-    el.gradeSelect.addEventListener("change", () => {
-      renderSubjects();
-      resetGame();
-    });
-    el.modeSelect.addEventListener("change", () => resetGame());
-    el.timeSelect.addEventListener("change", () => resetGame());
-    el.questionCountSelect.addEventListener("change", () => resetGame());
-    el.difficultySelect.addEventListener("change", () => resetGame());
-
+  el.answerInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") handleAnswer(el.answerInput.value);
+  });
+  el.submitBtn.addEventListener("click", () => handleAnswer(el.answerInput.value));
+  el.startBtn.addEventListener("click", startGame);
+  el.resetBtn.addEventListener("click", () => resetGame());
+  el.clearBoardBtn.addEventListener("click", clearLeaderboard);
+  el.gradeSelect.addEventListener("change", () => {
     renderSubjects();
     resetGame();
-    renderLeaderboard();
-  </script>
+  });
+  el.modeSelect.addEventListener("change", () => resetGame());
+  el.timeSelect.addEventListener("change", () => resetGame());
+  el.questionCountSelect.addEventListener("change", () => resetGame());
+  el.difficultySelect.addEventListener("change", () => resetGame());
+
+  Array.from(el.gradeSelect.options).forEach(opt => {
+    if (!["K","1","2","3","4","5","6"].includes(opt.value)) opt.remove();
+  });
+
+  if (![...el.questionCountSelect.options].some(o => o.value === "20")) {
+    const opt = document.createElement("option");
+    opt.value = "20";
+    opt.textContent = "20 questions";
+    el.questionCountSelect.appendChild(opt);
+  }
+  el.questionCountSelect.value = "20";
+
+  renderSubjects();
+  resetGame();
+  renderLeaderboard();
+</script>
 </body>
 </html>
