@@ -1113,367 +1113,1102 @@
   <div class="confetti-wrap" id="confettiWrap"></div>
 
   <script>
-    const curriculum = {
-      "Grade 1": [
-        {
-          title:"Addition Within 20",
-          difficulty:"Beginner",
-          timeEstimate:"8 min",
-          goals:[
-            "Add small numbers accurately within 20",
-            "Use counting on to solve addition facts",
-            "Recognize doubles and near-doubles"
-          ],
-          vocabulary:["sum","add","plus","total"],
-          explanation:"Addition means putting two groups together to find the total. In Grade 1, students learn to add within 20 by counting on, making groups, and recognizing number relationships.",
-          example:"Example: 8 + 5. Start at 8, then count on 5 more: 9, 10, 11, 12, 13. So, 8 + 5 = 13.",
-          tip:"Try starting from the bigger number, then count on the smaller number. This is faster and helps build number sense.",
-          questions:[
-            {q:"1 + 1 = ?",options:["1","2","3","4"],answer:"2",hint:"Add one more to 1.",explain:"1 + 1 = 2 because one and one together make two."},
-            {q:"2 + 3 = ?",options:["4","5","6","7"],answer:"5",hint:"Start at 3 and count 2 more.",explain:"2 + 3 = 5."},
-            {q:"3 + 4 = ?",options:["6","7","8","9"],answer:"7",hint:"Count on four from 3.",explain:"3 + 4 = 7."},
-            {q:"5 + 5 = ?",options:["8","9","10","11"],answer:"10",hint:"This is a double fact.",explain:"5 + 5 = 10 because double 5 is 10."},
-            {q:"6 + 7 = ?",options:["12","13","14","15"],answer:"13",hint:"Start at 7 and count 6 more, or use 6 + 6 + 1.",explain:"6 + 7 = 13."},
-            {q:"8 + 6 = ?",options:["12","13","14","15"],answer:"14",hint:"Think 8 + 2 = 10, then add 4 more.",explain:"8 + 6 = 14."}
-          ]
-        },
-        {
-          title:"Subtraction Within 20",
-          difficulty:"Beginner",
-          timeEstimate:"8 min",
-          goals:[
-            "Subtract within 20",
-            "Use counting back",
-            "Understand subtraction as taking away"
-          ],
-          vocabulary:["subtract","minus","difference","take away"],
-          explanation:"Subtraction means taking away or finding how many are left. It can also mean finding the difference between two numbers.",
-          example:"Example: 12 - 5. Start at 12 and count back 5 numbers: 11, 10, 9, 8, 7. So, 12 - 5 = 7.",
-          tip:"If subtraction feels tricky, use a number line or imagine objects being taken away.",
-          questions:[
-            {q:"5 - 2 = ?",options:["2","3","4","5"],answer:"3",hint:"Take away 2 from 5.",explain:"5 - 2 = 3."},
-            {q:"9 - 4 = ?",options:["4","5","6","7"],answer:"5",hint:"Count back 4 from 9.",explain:"9 - 4 = 5."},
-            {q:"10 - 3 = ?",options:["6","7","8","9"],answer:"7",hint:"Count back three.",explain:"10 - 3 = 7."},
-            {q:"14 - 6 = ?",options:["7","8","9","10"],answer:"8",hint:"Take away 6 from 14.",explain:"14 - 6 = 8."},
-            {q:"18 - 9 = ?",options:["8","9","10","11"],answer:"9",hint:"Half of 18 is 9.",explain:"18 - 9 = 9."},
-            {q:"20 - 7 = ?",options:["11","12","13","14"],answer:"13",hint:"Count back 7 from 20.",explain:"20 - 7 = 13."}
-          ]
-        }
-      ],
+  const curriculum = {
+    "Grade 1": [
+      {
+        title:"Addition Within 20",
+        difficulty:"Beginner",
+        timeEstimate:"10 min",
+        goals:[
+          "Add numbers within 20",
+          "Use counting on",
+          "Build confidence with basic addition facts"
+        ],
+        vocabulary:["sum","add","plus","total"],
+        explanation:"Addition means putting groups together to find the total. Grade 1 students learn to count on and recognize simple number patterns to add more quickly.",
+        example:"Example: 7 + 5 = 12. Start at 7 and count on 5 more: 8, 9, 10, 11, 12.",
+        tip:"Start from the bigger number, then count on the smaller number.",
+        questions:[
+          {q:"1 + 2 = ?",options:["2","3","4","5"],answer:"3",hint:"Count one more than 2.",explain:"1 + 2 = 3."},
+          {q:"3 + 4 = ?",options:["6","7","8","9"],answer:"7",hint:"Count on 4 from 3.",explain:"3 + 4 = 7."},
+          {q:"5 + 2 = ?",options:["6","7","8","9"],answer:"7",hint:"Add 2 more to 5.",explain:"5 + 2 = 7."},
+          {q:"6 + 3 = ?",options:["8","9","10","11"],answer:"9",hint:"Count on 3 from 6.",explain:"6 + 3 = 9."},
+          {q:"4 + 5 = ?",options:["7","8","9","10"],answer:"9",hint:"4 plus 5 makes 9.",explain:"4 + 5 = 9."},
+          {q:"7 + 1 = ?",options:["7","8","9","10"],answer:"8",hint:"One more than 7.",explain:"7 + 1 = 8."},
+          {q:"8 + 2 = ?",options:["9","10","11","12"],answer:"10",hint:"Two more than 8.",explain:"8 + 2 = 10."},
+          {q:"9 + 3 = ?",options:["11","12","13","14"],answer:"12",hint:"Count on 3 from 9.",explain:"9 + 3 = 12."},
+          {q:"10 + 4 = ?",options:["12","13","14","15"],answer:"14",hint:"Add 4 to 10.",explain:"10 + 4 = 14."},
+          {q:"6 + 6 = ?",options:["10","11","12","13"],answer:"12",hint:"This is a doubles fact.",explain:"6 + 6 = 12."}
+        ]
+      },
+      {
+        title:"Subtraction Within 20",
+        difficulty:"Beginner",
+        timeEstimate:"10 min",
+        goals:[
+          "Subtract within 20",
+          "Use counting back",
+          "Understand subtraction as taking away"
+        ],
+        vocabulary:["subtract","minus","difference","take away"],
+        explanation:"Subtraction means taking away from a number or finding how many are left. Students can count back to solve subtraction problems.",
+        example:"Example: 13 - 4 = 9. Start at 13 and count back 4 steps.",
+        tip:"Use your fingers or a number line if you need help counting back.",
+        questions:[
+          {q:"5 - 2 = ?",options:["2","3","4","5"],answer:"3",hint:"Take away 2 from 5.",explain:"5 - 2 = 3."},
+          {q:"8 - 3 = ?",options:["4","5","6","7"],answer:"5",hint:"Count back 3 from 8.",explain:"8 - 3 = 5."},
+          {q:"10 - 4 = ?",options:["5","6","7","8"],answer:"6",hint:"Take away 4 from 10.",explain:"10 - 4 = 6."},
+          {q:"12 - 2 = ?",options:["8","9","10","11"],answer:"10",hint:"Subtract 2 from 12.",explain:"12 - 2 = 10."},
+          {q:"9 - 1 = ?",options:["7","8","9","10"],answer:"8",hint:"One less than 9.",explain:"9 - 1 = 8."},
+          {q:"14 - 5 = ?",options:["8","9","10","11"],answer:"9",hint:"Count back 5.",explain:"14 - 5 = 9."},
+          {q:"15 - 3 = ?",options:["11","12","13","14"],answer:"12",hint:"Take away 3 from 15.",explain:"15 - 3 = 12."},
+          {q:"18 - 6 = ?",options:["11","12","13","14"],answer:"12",hint:"Count back 6 from 18.",explain:"18 - 6 = 12."},
+          {q:"20 - 7 = ?",options:["11","12","13","14"],answer:"13",hint:"Take away 7 from 20.",explain:"20 - 7 = 13."},
+          {q:"11 - 9 = ?",options:["1","2","3","4"],answer:"2",hint:"How many are left?",explain:"11 - 9 = 2."}
+        ]
+      },
+      {
+        title:"Place Value to 100",
+        difficulty:"Beginner",
+        timeEstimate:"10 min",
+        goals:[
+          "Identify tens and ones",
+          "Read numbers to 100",
+          "Understand place value"
+        ],
+        vocabulary:["tens","ones","digit","place value"],
+        explanation:"Place value tells what each digit is worth. In a two-digit number, the first digit usually tells the tens and the second digit tells the ones.",
+        example:"Example: In 34, the 3 means 3 tens and the 4 means 4 ones.",
+        tip:"Say the number in parts: 34 is 3 tens and 4 ones.",
+        questions:[
+          {q:"How many tens are in 24?",options:["2","4","6","24"],answer:"2",hint:"Look at the first digit.",explain:"24 has 2 tens and 4 ones."},
+          {q:"How many ones are in 37?",options:["3","7","10","37"],answer:"7",hint:"Look at the second digit.",explain:"37 has 7 ones."},
+          {q:"Which number has 4 tens and 2 ones?",options:["24","42","14","40"],answer:"42",hint:"4 tens = 40 and 2 ones = 2.",explain:"42 has 4 tens and 2 ones."},
+          {q:"What number is 5 tens and 0 ones?",options:["5","50","15","500"],answer:"50",hint:"5 tens means 50.",explain:"5 tens and 0 ones is 50."},
+          {q:"In 61, what digit is in the ones place?",options:["6","1","0","7"],answer:"1",hint:"The ones digit is last.",explain:"In 61, the ones digit is 1."},
+          {q:"In 83, what digit is in the tens place?",options:["8","3","0","1"],answer:"8",hint:"The tens digit is first.",explain:"In 83, the tens digit is 8."},
+          {q:"Which number shows 7 tens and 5 ones?",options:["57","75","70","705"],answer:"75",hint:"7 tens = 70, plus 5 ones.",explain:"75 has 7 tens and 5 ones."},
+          {q:"How many ones are in 90?",options:["9","0","90","10"],answer:"0",hint:"Look at the last digit.",explain:"90 has 0 ones."},
+          {q:"Which number is made of 1 ten and 8 ones?",options:["81","18","10","8"],answer:"18",hint:"1 ten is 10 plus 8 ones.",explain:"18 has 1 ten and 8 ones."},
+          {q:"What is the value of the 6 in 68?",options:["6","8","60","68"],answer:"60",hint:"The 6 is in the tens place.",explain:"The 6 in 68 means 6 tens, or 60."}
+        ]
+      },
+      {
+        title:"Comparing Numbers",
+        difficulty:"Beginner",
+        timeEstimate:"10 min",
+        goals:[
+          "Compare numbers to 100",
+          "Use greater than and less than",
+          "Order numbers correctly"
+        ],
+        vocabulary:["greater than","less than","equal","compare"],
+        explanation:"When comparing numbers, look at which number has more tens first. If the tens are the same, compare the ones.",
+        example:"Example: 45 is greater than 39 because 4 tens is more than 3 tens.",
+        tip:"The symbol > points to the bigger number.",
+        questions:[
+          {q:"Which is greater?",options:["12","9","They are equal","Cannot tell"],answer:"12",hint:"12 is bigger than 9.",explain:"12 is greater than 9."},
+          {q:"Which is less?",options:["15","18","20","25"],answer:"15",hint:"Find the smallest number.",explain:"15 is the least."},
+          {q:"30 __ 28",options:[">","<","=","+"],answer:">",hint:"30 is bigger than 28.",explain:"30 > 28."},
+          {q:"17 __ 17",options:[">","<","=","-"],answer:"=",hint:"They are the same.",explain:"17 = 17."},
+          {q:"Which is greater?",options:["41","14","They are equal","None"],answer:"41",hint:"Look at tens first.",explain:"41 is greater than 14."},
+          {q:"22 __ 25",options:[">","<","=","÷"],answer:"<",hint:"22 is smaller than 25.",explain:"22 < 25."},
+          {q:"Which number is the largest?",options:["33","36","31","35"],answer:"36",hint:"Compare the ones after tens.",explain:"36 is the greatest."},
+          {q:"Which number is the smallest?",options:["49","52","45","47"],answer:"45",hint:"Compare tens and ones.",explain:"45 is the smallest."},
+          {q:"58 __ 58",options:[">","<","=","x"],answer:"=",hint:"Same number.",explain:"58 = 58."},
+          {q:"Which is greater?",options:["67","76","66","60"],answer:"76",hint:"7 tens is more than 6 tens.",explain:"76 is greater."}
+        ]
+      },
+      {
+        title:"2D and 3D Shapes",
+        difficulty:"Beginner",
+        timeEstimate:"10 min",
+        goals:[
+          "Identify common shapes",
+          "Describe simple shape features",
+          "Distinguish 2D and 3D shapes"
+        ],
+        vocabulary:["square","triangle","circle","cube","sphere","rectangle"],
+        explanation:"2D shapes are flat and have only length and width. 3D shapes are solid and have length, width, and height.",
+        example:"Example: A square is a 2D shape. A cube is a 3D shape.",
+        tip:"If it can be stacked like a box, it is probably a 3D shape.",
+        questions:[
+          {q:"Which shape has 3 sides?",options:["Square","Triangle","Circle","Rectangle"],answer:"Triangle",hint:"Count the sides.",explain:"A triangle has 3 sides."},
+          {q:"Which shape is round with no sides?",options:["Triangle","Square","Circle","Rectangle"],answer:"Circle",hint:"It is curved all around.",explain:"A circle has no straight sides."},
+          {q:"Which is a 3D shape?",options:["Square","Triangle","Cube","Circle"],answer:"Cube",hint:"It is solid like a box.",explain:"A cube is a 3D shape."},
+          {q:"Which shape has 4 equal sides?",options:["Triangle","Square","Circle","Oval"],answer:"Square",hint:"All sides match.",explain:"A square has 4 equal sides."},
+          {q:"Which shape looks like a ball?",options:["Cube","Rectangle","Sphere","Triangle"],answer:"Sphere",hint:"It is round all over.",explain:"A sphere looks like a ball."},
+          {q:"Which shape has 4 sides but not always equal?",options:["Rectangle","Circle","Triangle","Sphere"],answer:"Rectangle",hint:"Think of a book cover.",explain:"A rectangle has 4 sides."},
+          {q:"Which is flat?",options:["Cube","Sphere","Circle","Cone"],answer:"Circle",hint:"2D means flat.",explain:"A circle is a flat 2D shape."},
+          {q:"How many sides does a rectangle have?",options:["2","3","4","5"],answer:"4",hint:"Count the edges.",explain:"A rectangle has 4 sides."},
+          {q:"Which is not a 2D shape?",options:["Square","Triangle","Cube","Circle"],answer:"Cube",hint:"It is solid.",explain:"A cube is not 2D."},
+          {q:"Which shape has corners and 3 sides?",options:["Circle","Triangle","Sphere","Oval"],answer:"Triangle",hint:"Three straight edges.",explain:"A triangle has 3 sides and 3 corners."}
+        ]
+      }
+    ],
 
-      "Grade 2": [
-        {
-          title:"Addition with Regrouping",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Add two-digit numbers accurately",
-            "Regroup ones into tens when needed",
-            "Read place value correctly"
-          ],
-          vocabulary:["regroup","ones","tens","place value"],
-          explanation:"When the ones place adds to 10 or more, regroup by trading 10 ones for 1 ten. This helps keep the place values organized.",
-          example:"Example: 27 + 15. Add ones first: 7 + 5 = 12. Write 2 ones and regroup 1 ten. Then add tens: 2 + 1 + 1 = 4 tens. The answer is 42.",
-          tip:"Always line up tens under tens and ones under ones before adding.",
-          questions:[
-            {q:"23 + 19 = ?",options:["40","41","42","43"],answer:"42",hint:"3 + 9 makes 12 ones.",explain:"23 + 19 = 42."},
-            {q:"34 + 28 = ?",options:["60","61","62","63"],answer:"62",hint:"Regroup the ones.",explain:"34 + 28 = 62."},
-            {q:"45 + 17 = ?",options:["60","61","62","63"],answer:"62",hint:"Add ones first.",explain:"45 + 17 = 62."},
-            {q:"56 + 29 = ?",options:["83","84","85","86"],answer:"85",hint:"6 + 9 = 15 ones.",explain:"56 + 29 = 85."},
-            {q:"78 + 14 = ?",options:["90","91","92","93"],answer:"92",hint:"8 + 4 = 12 ones.",explain:"78 + 14 = 92."},
-            {q:"41 + 59 = ?",options:["99","100","101","102"],answer:"100",hint:"Make a full hundred.",explain:"41 + 59 = 100."}
-          ]
-        },
-        {
-          title:"Subtraction with Regrouping",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Subtract two-digit numbers",
-            "Borrow from tens when ones are too small",
-            "Understand regrouping in subtraction"
-          ],
-          vocabulary:["borrow","regroup","difference","tens"],
-          explanation:"If the top number in the ones place is smaller than the bottom number, regroup by taking 1 ten and turning it into 10 ones.",
-          example:"Example: 52 - 27. Since 2 is smaller than 7, borrow 1 ten. Then 12 - 7 = 5 and 4 - 2 = 2. So, 52 - 27 = 25.",
-          tip:"Check whether the ones place needs regrouping before subtracting.",
-          questions:[
-            {q:"52 - 27 = ?",options:["24","25","26","27"],answer:"25",hint:"Borrow from the tens.",explain:"52 - 27 = 25."},
-            {q:"61 - 36 = ?",options:["24","25","26","27"],answer:"25",hint:"11 - 6 after regrouping.",explain:"61 - 36 = 25."},
-            {q:"73 - 48 = ?",options:["24","25","26","27"],answer:"25",hint:"Regroup the ones.",explain:"73 - 48 = 25."},
-            {q:"84 - 29 = ?",options:["54","55","56","57"],answer:"55",hint:"14 - 9 after regrouping.",explain:"84 - 29 = 55."},
-            {q:"90 - 46 = ?",options:["42","43","44","45"],answer:"44",hint:"Borrow from 9 tens.",explain:"90 - 46 = 44."},
-            {q:"72 - 18 = ?",options:["52","53","54","55"],answer:"54",hint:"12 - 8 first.",explain:"72 - 18 = 54."}
-          ]
-        }
-      ],
+    "Grade 2": [
+      {
+        title:"Addition with Regrouping",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Add two-digit numbers",
+          "Regroup ones into tens",
+          "Build accuracy in addition"
+        ],
+        vocabulary:["regroup","ones","tens","sum"],
+        explanation:"When the ones add up to 10 or more, regroup by making 1 extra ten.",
+        example:"Example: 27 + 15 = 42 because 7 + 5 = 12, write 2 ones and regroup 1 ten.",
+        tip:"Add ones first, then tens.",
+        questions:[
+          {q:"23 + 19 = ?",options:["41","42","43","44"],answer:"42",hint:"3 + 9 = 12.",explain:"23 + 19 = 42."},
+          {q:"34 + 28 = ?",options:["60","61","62","63"],answer:"62",hint:"Regroup the ones.",explain:"34 + 28 = 62."},
+          {q:"45 + 17 = ?",options:["60","61","62","63"],answer:"62",hint:"5 + 7 = 12.",explain:"45 + 17 = 62."},
+          {q:"56 + 29 = ?",options:["84","85","86","87"],answer:"85",hint:"6 + 9 = 15.",explain:"56 + 29 = 85."},
+          {q:"18 + 27 = ?",options:["44","45","46","47"],answer:"45",hint:"8 + 7 = 15.",explain:"18 + 27 = 45."},
+          {q:"39 + 16 = ?",options:["54","55","56","57"],answer:"55",hint:"9 + 6 = 15.",explain:"39 + 16 = 55."},
+          {q:"47 + 35 = ?",options:["81","82","83","84"],answer:"82",hint:"7 + 5 = 12.",explain:"47 + 35 = 82."},
+          {q:"68 + 14 = ?",options:["80","81","82","83"],answer:"82",hint:"8 + 4 = 12.",explain:"68 + 14 = 82."},
+          {q:"59 + 23 = ?",options:["80","81","82","83"],answer:"82",hint:"9 + 3 = 12.",explain:"59 + 23 = 82."},
+          {q:"41 + 59 = ?",options:["99","100","101","102"],answer:"100",hint:"Make a full hundred.",explain:"41 + 59 = 100."}
+        ]
+      },
+      {
+        title:"Subtraction with Regrouping",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Subtract two-digit numbers",
+          "Regroup tens into ones",
+          "Understand borrowing"
+        ],
+        vocabulary:["difference","regroup","borrow","tens"],
+        explanation:"If the top ones digit is smaller than the bottom ones digit, regroup by taking 1 ten and turning it into 10 ones.",
+        example:"Example: 52 - 27 = 25 because 12 - 7 = 5 and 4 - 2 = 2.",
+        tip:"Check the ones place first before subtracting.",
+        questions:[
+          {q:"52 - 27 = ?",options:["24","25","26","27"],answer:"25",hint:"Regroup first.",explain:"52 - 27 = 25."},
+          {q:"61 - 36 = ?",options:["24","25","26","27"],answer:"25",hint:"11 - 6 after regrouping.",explain:"61 - 36 = 25."},
+          {q:"73 - 48 = ?",options:["24","25","26","27"],answer:"25",hint:"Regroup the ones.",explain:"73 - 48 = 25."},
+          {q:"84 - 29 = ?",options:["54","55","56","57"],answer:"55",hint:"14 - 9.",explain:"84 - 29 = 55."},
+          {q:"90 - 46 = ?",options:["42","43","44","45"],answer:"44",hint:"Borrow from 9 tens.",explain:"90 - 46 = 44."},
+          {q:"72 - 18 = ?",options:["52","53","54","55"],answer:"54",hint:"12 - 8.",explain:"72 - 18 = 54."},
+          {q:"63 - 27 = ?",options:["35","36","37","38"],answer:"36",hint:"Regroup 13 - 7.",explain:"63 - 27 = 36."},
+          {q:"50 - 14 = ?",options:["35","36","37","38"],answer:"36",hint:"10 - 4 after regrouping.",explain:"50 - 14 = 36."},
+          {q:"71 - 25 = ?",options:["44","45","46","47"],answer:"46",hint:"11 - 5.",explain:"71 - 25 = 46."},
+          {q:"82 - 37 = ?",options:["44","45","46","47"],answer:"45",hint:"12 - 7.",explain:"82 - 37 = 45."}
+        ]
+      },
+      {
+        title:"Skip Counting",
+        difficulty:"Beginner",
+        timeEstimate:"8 min",
+        goals:[
+          "Skip count by 2s, 5s, and 10s",
+          "Recognize number patterns",
+          "Prepare for multiplication"
+        ],
+        vocabulary:["skip count","pattern","sequence","count by"],
+        explanation:"Skip counting means counting forward by the same amount each time, like 2, 4, 6, 8.",
+        example:"Example: Counting by 5s goes 5, 10, 15, 20.",
+        tip:"Listen for the pattern and add the same number each time.",
+        questions:[
+          {q:"Count by 2s: 2, 4, 6, __",options:["7","8","9","10"],answer:"8",hint:"Add 2.",explain:"The next number is 8."},
+          {q:"Count by 5s: 5, 10, 15, __",options:["18","19","20","25"],answer:"20",hint:"Add 5.",explain:"The next number is 20."},
+          {q:"Count by 10s: 10, 20, 30, __",options:["35","40","45","50"],answer:"40",hint:"Add 10.",explain:"The next number is 40."},
+          {q:"2, 4, 6, 8, __",options:["9","10","11","12"],answer:"10",hint:"Keep counting by 2.",explain:"The next number is 10."},
+          {q:"25, 30, 35, __",options:["38","39","40","45"],answer:"40",hint:"Add 5.",explain:"The next number is 40."},
+          {q:"40, 50, 60, __",options:["65","70","75","80"],answer:"70",hint:"Add 10.",explain:"The next number is 70."},
+          {q:"3 skip-counts of 2 make ?",options:["4","5","6","7"],answer:"6",hint:"2 + 2 + 2.",explain:"Three 2s make 6."},
+          {q:"4 skip-counts of 5 make ?",options:["15","20","25","30"],answer:"20",hint:"5 + 5 + 5 + 5.",explain:"Four 5s make 20."},
+          {q:"6 skip-counts of 10 make ?",options:["50","60","70","80"],answer:"60",hint:"Add 10 six times.",explain:"Six 10s make 60."},
+          {q:"Which number comes next? 12, 14, 16, __",options:["17","18","19","20"],answer:"18",hint:"Count by 2.",explain:"The next number is 18."}
+        ]
+      },
+      {
+        title:"Money",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Identify coin values",
+          "Add simple money amounts",
+          "Use cents and dollars correctly"
+        ],
+        vocabulary:["cent","dollar","nickel","dime","quarter","penny"],
+        explanation:"Money has different values. A penny is 1 cent, a nickel is 5 cents, a dime is 10 cents, and a quarter is 25 cents.",
+        example:"Example: 1 dime and 1 nickel = 10¢ + 5¢ = 15¢.",
+        tip:"Count the coin values carefully before choosing the answer.",
+        questions:[
+          {q:"How much is 1 dime?",options:["5¢","10¢","15¢","25¢"],answer:"10¢",hint:"A dime is worth ten cents.",explain:"1 dime = 10¢."},
+          {q:"How much is 1 nickel?",options:["1¢","5¢","10¢","25¢"],answer:"5¢",hint:"A nickel is five cents.",explain:"1 nickel = 5¢."},
+          {q:"How much is 1 quarter?",options:["10¢","15¢","20¢","25¢"],answer:"25¢",hint:"A quarter is one-fourth of a dollar.",explain:"1 quarter = 25¢."},
+          {q:"1 dime + 1 nickel = ?",options:["10¢","15¢","20¢","25¢"],answer:"15¢",hint:"10 + 5.",explain:"1 dime + 1 nickel = 15¢."},
+          {q:"2 dimes = ?",options:["10¢","15¢","20¢","25¢"],answer:"20¢",hint:"10 + 10.",explain:"2 dimes = 20¢."},
+          {q:"3 nickels = ?",options:["10¢","15¢","20¢","25¢"],answer:"15¢",hint:"5 + 5 + 5.",explain:"3 nickels = 15¢."},
+          {q:"2 quarters = ?",options:["25¢","30¢","40¢","50¢"],answer:"50¢",hint:"25 + 25.",explain:"2 quarters = 50¢."},
+          {q:"4 quarters = ?",options:["75¢","$1.00","$0.50","$1.25"],answer:"$1.00",hint:"Four quarters make a dollar.",explain:"4 quarters = $1.00."},
+          {q:"1 dime + 2 pennies = ?",options:["10¢","11¢","12¢","13¢"],answer:"12¢",hint:"10 + 1 + 1.",explain:"1 dime and 2 pennies = 12¢."},
+          {q:"5 pennies = ?",options:["1¢","5¢","10¢","25¢"],answer:"5¢",hint:"Each penny is 1 cent.",explain:"5 pennies = 5¢."}
+        ]
+      },
+      {
+        title:"Measurement",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Measure with inches and centimeters",
+          "Compare lengths",
+          "Solve simple measurement questions"
+        ],
+        vocabulary:["length","inch","centimeter","longer","shorter"],
+        explanation:"Measurement tells how long, tall, or wide something is. Tools like rulers help measure objects.",
+        example:"Example: If a pencil is 7 inches long and a crayon is 4 inches long, the pencil is longer.",
+        tip:"Compare the numbers to decide which object is longer or shorter.",
+        questions:[
+          {q:"Which is longer: 8 inches or 5 inches?",options:["8 inches","5 inches","They are equal","Cannot tell"],answer:"8 inches",hint:"Compare the numbers.",explain:"8 inches is longer than 5 inches."},
+          {q:"Which is shorter: 3 cm or 6 cm?",options:["3 cm","6 cm","They are equal","Cannot tell"],answer:"3 cm",hint:"Smaller number means shorter.",explain:"3 cm is shorter."},
+          {q:"A ribbon is 9 inches long. Another is 7 inches long. Which is longer?",options:["9 inches","7 inches","Same length","Neither"],answer:"9 inches",hint:"9 is greater than 7.",explain:"The 9-inch ribbon is longer."},
+          {q:"Which unit could measure a book?",options:["Inches","Miles","Hours","Dollars"],answer:"Inches",hint:"A book is small enough for a ruler.",explain:"A book can be measured in inches."},
+          {q:"Which is more: 10 cm or 8 cm?",options:["10 cm","8 cm","Same","None"],answer:"10 cm",hint:"Compare the numbers.",explain:"10 cm is longer."},
+          {q:"If a toy is 6 inches long and another is 2 inches long, how many inches longer is the first toy?",options:["2","3","4","5"],answer:"4",hint:"Subtract 2 from 6.",explain:"6 - 2 = 4 inches."},
+          {q:"Which is the best tool to measure a pencil?",options:["Ruler","Clock","Scale","Thermometer"],answer:"Ruler",hint:"Think about length.",explain:"A ruler measures length."},
+          {q:"What is longer than 4 inches?",options:["3 inches","2 inches","5 inches","1 inch"],answer:"5 inches",hint:"Find the bigger number.",explain:"5 inches is longer than 4 inches."},
+          {q:"Which is shorter than 9 cm?",options:["10 cm","11 cm","8 cm","12 cm"],answer:"8 cm",hint:"Find the smaller number.",explain:"8 cm is shorter than 9 cm."},
+          {q:"A line is 7 cm long. Another is 7 cm long. They are __.",options:["longer","shorter","equal","different"],answer:"equal",hint:"Same number means same length.",explain:"Both are equal in length."}
+        ]
+      }
+    ],
 
-      "Grade 3": [
-        {
-          title:"Multiplication Facts",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Understand multiplication as equal groups",
-            "Recall basic facts quickly",
-            "Use skip counting and repeated addition"
-          ],
-          vocabulary:["multiply","product","equal groups","array"],
-          explanation:"Multiplication shows equal groups. For example, 4 × 3 means 4 groups of 3. It can also be written as repeated addition: 3 + 3 + 3 + 3.",
-          example:"Example: 4 × 3 = 12 because 3 + 3 + 3 + 3 = 12.",
-          tip:"Use patterns you know, like doubles, fives, and tens, to solve harder multiplication facts.",
-          questions:[
-            {q:"2 × 2 = ?",options:["2","3","4","5"],answer:"4",hint:"Two groups of two.",explain:"2 × 2 = 4."},
-            {q:"3 × 4 = ?",options:["10","11","12","13"],answer:"12",hint:"Think 4 + 4 + 4.",explain:"3 × 4 = 12."},
-            {q:"5 × 6 = ?",options:["28","29","30","31"],answer:"30",hint:"Five groups of six.",explain:"5 × 6 = 30."},
-            {q:"7 × 8 = ?",options:["54","55","56","57"],answer:"56",hint:"Use known facts.",explain:"7 × 8 = 56."},
-            {q:"9 × 9 = ?",options:["80","81","82","83"],answer:"81",hint:"Nine nines.",explain:"9 × 9 = 81."},
-            {q:"4 × 7 = ?",options:["26","27","28","29"],answer:"28",hint:"7 + 7 + 7 + 7.",explain:"4 × 7 = 28."}
-          ]
-        },
-        {
-          title:"Intro to Fractions",
-          difficulty:"Intermediate",
-          timeEstimate:"9 min",
-          goals:[
-            "Identify fractions as parts of a whole",
-            "Read numerator and denominator",
-            "Recognize simple fraction models"
-          ],
-          vocabulary:["fraction","numerator","denominator","whole"],
-          explanation:"A fraction shows equal parts of a whole. The numerator tells how many parts are used, and the denominator tells how many equal parts the whole is divided into.",
-          example:"Example: 3/4 means 3 of 4 equal parts are shaded or chosen.",
-          tip:"The bottom number tells the total equal parts. The top number tells how many parts are selected.",
-          questions:[
-            {q:"Which fraction means 1 out of 2 equal parts?",options:["1/2","2/1","1/3","2/3"],answer:"1/2",hint:"One of two parts.",explain:"1/2 means one out of two equal parts."},
-            {q:"In 3/5, what is the denominator?",options:["3","5","8","15"],answer:"5",hint:"The denominator is the bottom number.",explain:"The denominator in 3/5 is 5."},
-            {q:"Which fraction is read as 'two thirds'?",options:["2/2","2/3","3/2","1/3"],answer:"2/3",hint:"Look for 2 over 3.",explain:"2/3 is read as two thirds."},
-            {q:"If a pizza is cut into 4 equal slices and you eat 1, what fraction did you eat?",options:["1/2","1/3","1/4","4/1"],answer:"1/4",hint:"One out of four.",explain:"You ate 1/4 of the pizza."},
-            {q:"Which is bigger?",options:["1/4","1/2","They are equal","Cannot tell"],answer:"1/2",hint:"Half is more than a quarter.",explain:"1/2 is bigger than 1/4."},
-            {q:"Which fraction shows 3 equal parts taken from 6 equal parts?",options:["3/6","6/3","3/3","1/2"],answer:"3/6",hint:"Top is used parts, bottom is total parts.",explain:"3/6 means 3 parts out of 6 equal parts."}
-          ]
-        }
-      ],
+    "Grade 3": [
+      {
+        title:"Multiplication Facts",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Understand multiplication as equal groups",
+          "Recall basic facts",
+          "Use repeated addition"
+        ],
+        vocabulary:["multiply","product","equal groups","array"],
+        explanation:"Multiplication shows equal groups. For example, 4 × 3 means 4 groups of 3.",
+        example:"Example: 4 × 3 = 12 because 3 + 3 + 3 + 3 = 12.",
+        tip:"Use facts you already know, like doubles, fives, and tens.",
+        questions:[
+          {q:"2 × 3 = ?",options:["5","6","7","8"],answer:"6",hint:"Two groups of 3.",explain:"2 × 3 = 6."},
+          {q:"3 × 4 = ?",options:["10","11","12","13"],answer:"12",hint:"Think 4 + 4 + 4.",explain:"3 × 4 = 12."},
+          {q:"5 × 6 = ?",options:["28","29","30","31"],answer:"30",hint:"Five groups of 6.",explain:"5 × 6 = 30."},
+          {q:"7 × 8 = ?",options:["54","55","56","57"],answer:"56",hint:"Use known multiplication facts.",explain:"7 × 8 = 56."},
+          {q:"9 × 9 = ?",options:["80","81","82","83"],answer:"81",hint:"Nine groups of 9.",explain:"9 × 9 = 81."},
+          {q:"4 × 7 = ?",options:["26","27","28","29"],answer:"28",hint:"7 + 7 + 7 + 7.",explain:"4 × 7 = 28."},
+          {q:"6 × 5 = ?",options:["25","30","35","40"],answer:"30",hint:"Six groups of 5.",explain:"6 × 5 = 30."},
+          {q:"8 × 4 = ?",options:["30","31","32","33"],answer:"32",hint:"4 added 8 times.",explain:"8 × 4 = 32."},
+          {q:"10 × 3 = ?",options:["20","30","40","50"],answer:"30",hint:"Three tens.",explain:"10 × 3 = 30."},
+          {q:"6 × 6 = ?",options:["30","32","34","36"],answer:"36",hint:"Double 6, then double again.",explain:"6 × 6 = 36."}
+        ]
+      },
+      {
+        title:"Division Basics",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Understand division as equal sharing",
+          "Use multiplication to divide",
+          "Solve simple division facts"
+        ],
+        vocabulary:["divide","quotient","equal groups","share"],
+        explanation:"Division means splitting equally into groups. It is the opposite of multiplication.",
+        example:"Example: 12 ÷ 3 = 4 because 3 × 4 = 12.",
+        tip:"Ask: what number times the divisor gives the dividend?",
+        questions:[
+          {q:"12 ÷ 3 = ?",options:["3","4","5","6"],answer:"4",hint:"3 times what equals 12?",explain:"12 ÷ 3 = 4."},
+          {q:"20 ÷ 4 = ?",options:["4","5","6","7"],answer:"5",hint:"4 × 5 = 20.",explain:"20 ÷ 4 = 5."},
+          {q:"18 ÷ 2 = ?",options:["8","9","10","11"],answer:"9",hint:"Half of 18.",explain:"18 ÷ 2 = 9."},
+          {q:"15 ÷ 5 = ?",options:["2","3","4","5"],answer:"3",hint:"5 × 3 = 15.",explain:"15 ÷ 5 = 3."},
+          {q:"24 ÷ 6 = ?",options:["3","4","5","6"],answer:"4",hint:"6 × 4 = 24.",explain:"24 ÷ 6 = 4."},
+          {q:"21 ÷ 7 = ?",options:["2","3","4","5"],answer:"3",hint:"7 × 3 = 21.",explain:"21 ÷ 7 = 3."},
+          {q:"16 ÷ 4 = ?",options:["2","3","4","5"],answer:"4",hint:"Four equal groups.",explain:"16 ÷ 4 = 4."},
+          {q:"30 ÷ 5 = ?",options:["5","6","7","8"],answer:"6",hint:"5 × 6 = 30.",explain:"30 ÷ 5 = 6."},
+          {q:"27 ÷ 3 = ?",options:["8","9","10","11"],answer:"9",hint:"3 × 9 = 27.",explain:"27 ÷ 3 = 9."},
+          {q:"14 ÷ 2 = ?",options:["6","7","8","9"],answer:"7",hint:"Half of 14.",explain:"14 ÷ 2 = 7."}
+        ]
+      },
+      {
+        title:"Intro to Fractions",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Recognize fractions as parts of a whole",
+          "Read numerator and denominator",
+          "Identify simple fractions"
+        ],
+        vocabulary:["fraction","numerator","denominator","whole"],
+        explanation:"A fraction shows equal parts of a whole. The top number is the numerator and the bottom number is the denominator.",
+        example:"Example: 3/4 means 3 out of 4 equal parts.",
+        tip:"Bottom tells total parts. Top tells selected parts.",
+        questions:[
+          {q:"Which fraction means 1 out of 2 equal parts?",options:["1/2","2/1","1/3","2/3"],answer:"1/2",hint:"One of two parts.",explain:"1/2 means one out of two equal parts."},
+          {q:"In 3/5, what is the denominator?",options:["3","5","8","15"],answer:"5",hint:"The denominator is the bottom number.",explain:"The denominator in 3/5 is 5."},
+          {q:"Which fraction is read as 'two thirds'?",options:["2/2","2/3","3/2","1/3"],answer:"2/3",hint:"Look for 2 over 3.",explain:"2/3 is read as two thirds."},
+          {q:"If a pizza is cut into 4 equal slices and you eat 1, what fraction did you eat?",options:["1/2","1/3","1/4","4/1"],answer:"1/4",hint:"One out of four.",explain:"You ate 1/4."},
+          {q:"Which is bigger?",options:["1/4","1/2","They are equal","Cannot tell"],answer:"1/2",hint:"Half is more than a quarter.",explain:"1/2 is bigger than 1/4."},
+          {q:"Which fraction shows 3 parts out of 6 equal parts?",options:["3/6","6/3","3/3","1/2"],answer:"3/6",hint:"Top is used parts, bottom is total parts.",explain:"3/6 means 3 of 6 equal parts."},
+          {q:"What is the numerator in 4/7?",options:["4","7","11","1"],answer:"4",hint:"It is the top number.",explain:"The numerator is 4."},
+          {q:"Which fraction is one whole split into 8 equal parts with 2 shaded?",options:["2/8","8/2","2/2","1/8"],answer:"2/8",hint:"Top = shaded, bottom = total.",explain:"2/8 is correct."},
+          {q:"Which fraction is smaller?",options:["1/2","1/3","They are equal","Cannot tell"],answer:"1/3",hint:"Thirds are smaller than halves.",explain:"1/3 is smaller."},
+          {q:"How many equal parts are in 5/9?",options:["5","9","14","4"],answer:"9",hint:"Look at the denominator.",explain:"The whole is divided into 9 equal parts."}
+        ]
+      },
+      {
+        title:"Area and Perimeter",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Find perimeter by adding side lengths",
+          "Find area by counting squares",
+          "Compare area and perimeter"
+        ],
+        vocabulary:["area","perimeter","length","width","square units"],
+        explanation:"Perimeter is the distance around a shape. Area is the amount of space inside a shape.",
+        example:"Example: A rectangle with sides 4 and 3 has perimeter 4+3+4+3 = 14 and area 4×3 = 12 square units.",
+        tip:"Perimeter is around. Area is inside.",
+        questions:[
+          {q:"A rectangle has sides 4 and 3. What is the perimeter?",options:["7","12","14","16"],answer:"14",hint:"Add all sides.",explain:"4 + 3 + 4 + 3 = 14."},
+          {q:"A rectangle has length 5 and width 2. What is the area?",options:["7","10","12","14"],answer:"10",hint:"Multiply length and width.",explain:"5 × 2 = 10."},
+          {q:"Which measures space inside a shape?",options:["Area","Perimeter","Length","Height"],answer:"Area",hint:"Think about inside.",explain:"Area measures inside space."},
+          {q:"Which measures distance around a shape?",options:["Area","Perimeter","Volume","Width"],answer:"Perimeter",hint:"Think about around.",explain:"Perimeter measures around."},
+          {q:"A square has side 3. What is the perimeter?",options:["6","9","12","15"],answer:"12",hint:"4 equal sides.",explain:"3 + 3 + 3 + 3 = 12."},
+          {q:"A square has side 4. What is the area?",options:["8","12","16","20"],answer:"16",hint:"4 × 4.",explain:"Area = 16 square units."},
+          {q:"A rectangle is 6 by 2. Area = ?",options:["8","10","12","14"],answer:"12",hint:"Multiply.",explain:"6 × 2 = 12."},
+          {q:"A rectangle is 6 by 2. Perimeter = ?",options:["8","12","16","20"],answer:"16",hint:"Add all sides.",explain:"6 + 2 + 6 + 2 = 16."},
+          {q:"Which is correct for a 3 by 5 rectangle?",options:["Area 8","Area 15","Perimeter 15","Perimeter 12"],answer:"Area 15",hint:"Area is length × width.",explain:"3 × 5 = 15."},
+          {q:"A shape has perimeter 10. Which could be true?",options:["2+3+2+3","2×3","5×5","10×10"],answer:"2+3+2+3",hint:"Perimeter is total around.",explain:"2+3+2+3 = 10."}
+        ]
+      },
+      {
+        title:"Place Value to 10,000",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Read and write large numbers",
+          "Identify place values",
+          "Compare numbers to 10,000"
+        ],
+        vocabulary:["thousands","hundreds","tens","ones","digit"],
+        explanation:"In larger numbers, each place has a value: ones, tens, hundreds, and thousands.",
+        example:"Example: In 4,582, the 4 means 4 thousands.",
+        tip:"Start reading a number from left to right.",
+        questions:[
+          {q:"What is the value of the 5 in 5,321?",options:["5","50","500","5,000"],answer:"5,000",hint:"It is in the thousands place.",explain:"The 5 means 5,000."},
+          {q:"Which digit is in the hundreds place in 3,482?",options:["3","4","8","2"],answer:"4",hint:"Thousands, hundreds, tens, ones.",explain:"The hundreds digit is 4."},
+          {q:"Which number is greater?",options:["4,201","4,021","4,102","4,120"],answer:"4,201",hint:"Compare place values.",explain:"4,201 is the greatest."},
+          {q:"What number has 6 thousands, 3 hundreds, 2 tens, and 1 one?",options:["6,321","6,231","3,621","6,312"],answer:"6,321",hint:"Build each place carefully.",explain:"The number is 6,321."},
+          {q:"What is the value of the 8 in 2,845?",options:["8","80","800","8,000"],answer:"800",hint:"It is in the hundreds place.",explain:"The value is 800."},
+          {q:"Which is smaller?",options:["7,500","7,050","7,505","7,550"],answer:"7,050",hint:"Compare hundreds and tens.",explain:"7,050 is the smallest."},
+          {q:"What is the tens digit in 9,876?",options:["9","8","7","6"],answer:"7",hint:"The tens place is second from the right.",explain:"The tens digit is 7."},
+          {q:"Which number shows 4 thousands and 9 ones?",options:["4,090","4,900","4,009","4,019"],answer:"4,009",hint:"Only 9 ones, no tens or hundreds.",explain:"4,009 is correct."},
+          {q:"In 1,234, what is the value of 2?",options:["2","20","200","2,000"],answer:"200",hint:"Look at the hundreds place.",explain:"The 2 means 200."},
+          {q:"Which is the largest?",options:["8,765","8,756","8,675","8,657"],answer:"8,765",hint:"Compare digits from left to right.",explain:"8,765 is the largest."}
+        ]
+      }
+    ],
 
-      "Grade 4": [
-        {
-          title:"Division",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Divide numbers using known multiplication facts",
-            "Understand equal sharing",
-            "Connect multiplication and division"
-          ],
-          vocabulary:["divide","quotient","equal groups","remainder"],
-          explanation:"Division means splitting equally or finding how many groups can be made. It is the opposite of multiplication.",
-          example:"Example: 24 ÷ 6 = 4 because 6 × 4 = 24.",
-          tip:"When dividing, ask yourself: what number times the divisor gives the dividend?",
-          questions:[
-            {q:"12 ÷ 3 = ?",options:["3","4","5","6"],answer:"4",hint:"What times 3 equals 12?",explain:"12 ÷ 3 = 4."},
-            {q:"24 ÷ 6 = ?",options:["2","3","4","5"],answer:"4",hint:"6 × ? = 24",explain:"24 ÷ 6 = 4."},
-            {q:"36 ÷ 6 = ?",options:["5","6","7","8"],answer:"6",hint:"6 × ? = 36",explain:"36 ÷ 6 = 6."},
-            {q:"40 ÷ 5 = ?",options:["6","7","8","9"],answer:"8",hint:"5 × ? = 40",explain:"40 ÷ 5 = 8."},
-            {q:"63 ÷ 7 = ?",options:["8","9","10","11"],answer:"9",hint:"7 × ? = 63",explain:"63 ÷ 7 = 9."},
-            {q:"56 ÷ 7 = ?",options:["6","7","8","9"],answer:"8",hint:"7 × ? = 56",explain:"56 ÷ 7 = 8."}
-          ]
-        },
-        {
-          title:"Equivalent Fractions",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Recognize equal fractions",
-            "Multiply numerator and denominator by the same number",
-            "Simplify simple fractions"
-          ],
-          vocabulary:["equivalent","simplify","numerator","denominator"],
-          explanation:"Equivalent fractions name the same amount even though they look different. You can create equivalent fractions by multiplying or dividing the numerator and denominator by the same number.",
-          example:"Example: 1/2 = 2/4 because both fractions represent the same amount of a whole.",
-          tip:"If both top and bottom numbers can be divided by the same number, the fraction can often be simplified.",
-          questions:[
-            {q:"Which fraction is equivalent to 1/2?",options:["2/4","2/3","3/4","1/3"],answer:"2/4",hint:"Multiply top and bottom by 2.",explain:"1/2 = 2/4."},
-            {q:"Which fraction is equivalent to 3/4?",options:["6/8","4/8","3/8","9/16"],answer:"6/8",hint:"Multiply by 2.",explain:"3/4 = 6/8."},
-            {q:"Simplify 2/4.",options:["1/2","2/2","1/4","4/2"],answer:"1/2",hint:"Divide by 2.",explain:"2/4 simplifies to 1/2."},
-            {q:"Which fraction is equal to 2/3?",options:["4/6","2/6","3/4","1/3"],answer:"4/6",hint:"Multiply by 2.",explain:"2/3 = 4/6."},
-            {q:"Simplify 6/8.",options:["3/4","2/4","1/2","6/4"],answer:"3/4",hint:"Divide by 2.",explain:"6/8 simplifies to 3/4."},
-            {q:"Which pair is equivalent?",options:["1/2 and 2/4","1/3 and 2/3","2/5 and 3/5","3/4 and 4/5"],answer:"1/2 and 2/4",hint:"Look for same value.",explain:"1/2 and 2/4 are equivalent fractions."}
-          ]
-        }
-      ],
+    "Grade 4": [
+      {
+        title:"Multi-Digit Multiplication",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Multiply larger numbers",
+          "Use place value correctly",
+          "Solve one-digit by multi-digit products"
+        ],
+        vocabulary:["product","factor","multiply","place value"],
+        explanation:"When multiplying multi-digit numbers by one digit, multiply each place carefully and regroup if needed.",
+        example:"Example: 23 × 4 = 92 because 20×4 = 80 and 3×4 = 12, then 80 + 12 = 92.",
+        tip:"Multiply ones first, then tens and hundreds.",
+        questions:[
+          {q:"23 × 4 = ?",options:["82","92","96","84"],answer:"92",hint:"20×4 + 3×4.",explain:"23 × 4 = 92."},
+          {q:"15 × 6 = ?",options:["80","85","90","95"],answer:"90",hint:"10×6 + 5×6.",explain:"15 × 6 = 90."},
+          {q:"32 × 3 = ?",options:["86","96","106","92"],answer:"96",hint:"30×3 + 2×3.",explain:"32 × 3 = 96."},
+          {q:"47 × 2 = ?",options:["84","94","96","98"],answer:"94",hint:"Double 47.",explain:"47 × 2 = 94."},
+          {q:"18 × 5 = ?",options:["80","85","90","95"],answer:"90",hint:"10×5 + 8×5.",explain:"18 × 5 = 90."},
+          {q:"64 × 3 = ?",options:["182","192","202","172"],answer:"192",hint:"60×3 + 4×3.",explain:"64 × 3 = 192."},
+          {q:"25 × 4 = ?",options:["90","95","100","105"],answer:"100",hint:"A quarter of 400.",explain:"25 × 4 = 100."},
+          {q:"39 × 2 = ?",options:["76","77","78","79"],answer:"78",hint:"Double 39.",explain:"39 × 2 = 78."},
+          {q:"56 × 5 = ?",options:["260","270","280","290"],answer:"280",hint:"50×5 + 6×5.",explain:"56 × 5 = 280."},
+          {q:"71 × 3 = ?",options:["203","213","223","233"],answer:"213",hint:"70×3 + 1×3.",explain:"71 × 3 = 213."}
+        ]
+      },
+      {
+        title:"Long Division",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Divide larger numbers",
+          "Use multiplication to check division",
+          "Understand quotient and remainder"
+        ],
+        vocabulary:["divide","quotient","remainder","divisor","dividend"],
+        explanation:"Division breaks a number into equal groups. Sometimes there is a remainder left over.",
+        example:"Example: 25 ÷ 4 = 6 remainder 1 because 4×6 = 24 and 1 is left.",
+        tip:"Multiply the quotient by the divisor to check your answer.",
+        questions:[
+          {q:"24 ÷ 6 = ?",options:["3","4","5","6"],answer:"4",hint:"6 × ? = 24.",explain:"24 ÷ 6 = 4."},
+          {q:"35 ÷ 5 = ?",options:["5","6","7","8"],answer:"7",hint:"5 × 7 = 35.",explain:"35 ÷ 5 = 7."},
+          {q:"48 ÷ 8 = ?",options:["5","6","7","8"],answer:"6",hint:"8 × 6 = 48.",explain:"48 ÷ 8 = 6."},
+          {q:"25 ÷ 4 = ?",options:["5 R0","6 R1","7 R1","6 R2"],answer:"6 R1",hint:"4 × 6 = 24.",explain:"25 ÷ 4 = 6 remainder 1."},
+          {q:"33 ÷ 5 = ?",options:["5 R3","6 R3","6 R2","7 R1"],answer:"6 R3",hint:"5 × 6 = 30.",explain:"33 ÷ 5 = 6 remainder 3."},
+          {q:"42 ÷ 7 = ?",options:["5","6","7","8"],answer:"6",hint:"7 × 6 = 42.",explain:"42 ÷ 7 = 6."},
+          {q:"50 ÷ 9 = ?",options:["5 R5","6 R4","4 R6","5 R4"],answer:"5 R5",hint:"9 × 5 = 45.",explain:"50 ÷ 9 = 5 remainder 5."},
+          {q:"64 ÷ 8 = ?",options:["6","7","8","9"],answer:"8",hint:"8 × 8 = 64.",explain:"64 ÷ 8 = 8."},
+          {q:"19 ÷ 3 = ?",options:["5 R4","6 R1","7 R1","6 R2"],answer:"6 R1",hint:"3 × 6 = 18.",explain:"19 ÷ 3 = 6 remainder 1."},
+          {q:"54 ÷ 6 = ?",options:["7","8","9","10"],answer:"9",hint:"6 × 9 = 54.",explain:"54 ÷ 6 = 9."}
+        ]
+      },
+      {
+        title:"Equivalent Fractions",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Recognize equivalent fractions",
+          "Simplify fractions",
+          "Multiply numerator and denominator by same number"
+        ],
+        vocabulary:["equivalent","simplify","numerator","denominator"],
+        explanation:"Equivalent fractions name the same amount even if they look different.",
+        example:"Example: 1/2 = 2/4 because both show the same amount.",
+        tip:"Multiply or divide top and bottom by the same number.",
+        questions:[
+          {q:"Which fraction is equivalent to 1/2?",options:["2/4","2/3","3/4","1/3"],answer:"2/4",hint:"Multiply by 2.",explain:"1/2 = 2/4."},
+          {q:"Which fraction is equivalent to 3/4?",options:["6/8","4/8","3/8","9/16"],answer:"6/8",hint:"Multiply by 2.",explain:"3/4 = 6/8."},
+          {q:"Simplify 2/4.",options:["1/2","2/2","1/4","4/2"],answer:"1/2",hint:"Divide by 2.",explain:"2/4 simplifies to 1/2."},
+          {q:"Which fraction is equal to 2/3?",options:["4/6","2/6","3/4","1/3"],answer:"4/6",hint:"Multiply by 2.",explain:"2/3 = 4/6."},
+          {q:"Simplify 6/8.",options:["3/4","2/4","1/2","6/4"],answer:"3/4",hint:"Divide by 2.",explain:"6/8 simplifies to 3/4."},
+          {q:"Which pair is equivalent?",options:["1/2 and 2/4","1/3 and 2/3","2/5 and 3/5","3/4 and 4/5"],answer:"1/2 and 2/4",hint:"Look for same value.",explain:"1/2 and 2/4 are equivalent."},
+          {q:"Which fraction equals 4/8?",options:["1/2","1/3","2/3","3/4"],answer:"1/2",hint:"Simplify.",explain:"4/8 = 1/2."},
+          {q:"Which is equivalent to 5/6?",options:["10/12","5/12","6/10","15/24"],answer:"10/12",hint:"Multiply by 2.",explain:"5/6 = 10/12."},
+          {q:"Simplify 9/12.",options:["2/3","3/4","4/5","1/2"],answer:"3/4",hint:"Divide by 3.",explain:"9/12 = 3/4."},
+          {q:"Which is equivalent to 2/5?",options:["4/10","3/10","5/2","6/10"],answer:"4/10",hint:"Multiply by 2.",explain:"2/5 = 4/10."}
+        ]
+      },
+      {
+        title:"Decimals to Hundredths",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Read decimals",
+          "Compare decimal values",
+          "Understand tenths and hundredths"
+        ],
+        vocabulary:["decimal","tenths","hundredths","place value"],
+        explanation:"Decimals show parts of a whole. The first place after the decimal is tenths. The second is hundredths.",
+        example:"Example: 0.45 means 45 hundredths.",
+        tip:"Line up decimal points when comparing.",
+        questions:[
+          {q:"Which decimal is greater?",options:["0.4","0.7","They are equal","Cannot tell"],answer:"0.7",hint:"7 tenths is more than 4 tenths.",explain:"0.7 is greater."},
+          {q:"What does 0.3 mean?",options:["3 ones","3 tenths","3 hundredths","30 ones"],answer:"3 tenths",hint:"First place after the decimal.",explain:"0.3 means 3 tenths."},
+          {q:"Which is equal to 45 hundredths?",options:["0.45","4.5","0.54","45.0"],answer:"0.45",hint:"Hundredths has two digits after decimal.",explain:"45 hundredths = 0.45."},
+          {q:"Which is smaller?",options:["0.8","0.08","They are equal","None"],answer:"0.08",hint:"Eight hundredths is smaller than eight tenths.",explain:"0.08 is smaller."},
+          {q:"What is the tenths digit in 2.6?",options:["2","6","0","1"],answer:"6",hint:"Look right after the decimal.",explain:"The tenths digit is 6."},
+          {q:"What is the hundredths digit in 0.37?",options:["3","7","0","37"],answer:"7",hint:"Second digit after the decimal.",explain:"The hundredths digit is 7."},
+          {q:"Which decimal is larger?",options:["0.52","0.25","They are equal","Cannot tell"],answer:"0.52",hint:"Compare tenths first.",explain:"0.52 is larger."},
+          {q:"0.1 means ?",options:["1 tenth","1 hundredth","10 ones","100"],answer:"1 tenth",hint:"One place after decimal.",explain:"0.1 is one tenth."},
+          {q:"Which is the same as 9 tenths?",options:["0.09","0.9","9.0","0.19"],answer:"0.9",hint:"Tenths uses one digit after decimal.",explain:"9 tenths = 0.9."},
+          {q:"Which number is the greatest?",options:["0.61","0.16","0.06","0.51"],answer:"0.61",hint:"Compare tenths, then hundredths.",explain:"0.61 is the greatest."}
+        ]
+      },
+      {
+        title:"Factors and Multiples",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Find factors of a number",
+          "Recognize multiples",
+          "Use division and multiplication facts"
+        ],
+        vocabulary:["factor","multiple","product","divisible"],
+        explanation:"Factors multiply together to make a number. Multiples are numbers you get by multiplying.",
+        example:"Example: Factors of 12 include 1, 2, 3, 4, 6, and 12. Multiples of 4 are 4, 8, 12, 16...",
+        tip:"Factors divide exactly. Multiples keep going up.",
+        questions:[
+          {q:"Which is a factor of 12?",options:["5","6","7","8"],answer:"6",hint:"Does 12 divide evenly by it?",explain:"6 is a factor of 12."},
+          {q:"Which is a multiple of 5?",options:["12","15","18","22"],answer:"15",hint:"Multiples of 5 end in 0 or 5.",explain:"15 is a multiple of 5."},
+          {q:"Which number has 3 as a factor?",options:["10","11","12","14"],answer:"12",hint:"Can it divide by 3 evenly?",explain:"12 ÷ 3 = 4."},
+          {q:"Which is a multiple of 4?",options:["10","12","14","18"],answer:"12",hint:"4 × 3 = ?",explain:"12 is a multiple of 4."},
+          {q:"Which is not a factor of 18?",options:["1","2","3","6"],answer:"2",hint:"18 ÷ 2 is not whole.",explain:"2 is not a factor of 18."},
+          {q:"Which is a factor pair of 20?",options:["3 and 6","4 and 5","2 and 7","6 and 7"],answer:"4 and 5",hint:"Multiply to get 20.",explain:"4 × 5 = 20."},
+          {q:"The first multiple of 7 after 21 is ?",options:["27","28","29","30"],answer:"28",hint:"Add 7.",explain:"21 + 7 = 28."},
+          {q:"Which is a common multiple of 2 and 3?",options:["4","5","6","7"],answer:"6",hint:"Both 2 and 3 go into it.",explain:"6 is a multiple of both 2 and 3."},
+          {q:"Which is a factor of 24?",options:["5","7","8","10"],answer:"8",hint:"24 ÷ 8 = ?",explain:"8 is a factor of 24."},
+          {q:"Which list shows multiples of 3?",options:["3, 6, 9","2, 4, 6","5, 10, 15","4, 8, 12"],answer:"3, 6, 9",hint:"Add 3 each time.",explain:"3, 6, 9 are multiples of 3."}
+        ]
+      }
+    ],
 
-      "Grade 5": [
-        {
-          title:"Decimals",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Read and compare decimals",
-            "Add and subtract decimals",
-            "Understand place value in decimals"
-          ],
-          vocabulary:["decimal","tenths","hundredths","place value"],
-          explanation:"Decimals show parts of a whole based on tens, hundredths, and beyond. The place value to the right of the decimal point matters when adding or subtracting.",
-          example:"Example: 0.25 means twenty-five hundredths. If you add 0.25 + 0.25, you get 0.50 or 0.5.",
-          tip:"Line up decimal points before adding or subtracting.",
-          questions:[
-            {q:"0.2 + 0.3 = ?",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Add tenths.",explain:"0.2 + 0.3 = 0.5."},
-            {q:"0.7 - 0.2 = ?",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract tenths.",explain:"0.7 - 0.2 = 0.5."},
-            {q:"0.5 + 0.5 = ?",options:["0.5","1.0","1.5","2.0"],answer:"1.0",hint:"Two halves make one whole.",explain:"0.5 + 0.5 = 1.0."},
-            {q:"1.2 - 0.2 = ?",options:["0.8","0.9","1.0","1.1"],answer:"1.0",hint:"Subtract two tenths from twelve tenths.",explain:"1.2 - 0.2 = 1.0."},
-            {q:"0.25 + 0.25 = ?",options:["0.25","0.5","0.75","1"],answer:"0.5",hint:"Two quarters make one half.",explain:"0.25 + 0.25 = 0.5."},
-            {q:"2.3 - 1.1 = ?",options:["1.0","1.1","1.2","1.3"],answer:"1.2",hint:"Line up the decimals.",explain:"2.3 - 1.1 = 1.2."}
-          ]
-        },
-        {
-          title:"Volume of Rectangular Prisms",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Understand volume as space inside a solid",
-            "Use the formula length × width × height",
-            "Solve basic volume problems"
-          ],
-          vocabulary:["volume","prism","cubic units","length","width","height"],
-          explanation:"Volume measures how much space is inside a 3D shape. For a rectangular prism, multiply length × width × height.",
-          example:"Example: A prism with length 4, width 3, and height 2 has a volume of 4 × 3 × 2 = 24 cubic units.",
-          tip:"Volume uses cubic units because the shape is three-dimensional.",
-          questions:[
-            {q:"What is the volume of a prism with length 2, width 3, height 4?",options:["9","12","18","24"],answer:"24",hint:"Multiply all three numbers.",explain:"2 × 3 × 4 = 24 cubic units."},
-            {q:"Volume = 5 × 2 × 3. What is it?",options:["10","20","30","40"],answer:"30",hint:"Multiply in any order.",explain:"5 × 2 × 3 = 30."},
-            {q:"A box is 6 by 1 by 2. What is the volume?",options:["8","10","12","14"],answer:"12",hint:"Multiply the dimensions.",explain:"6 × 1 × 2 = 12."},
-            {q:"A prism is 3 by 3 by 3. What is the volume?",options:["9","18","27","36"],answer:"27",hint:"3 × 3 × 3",explain:"The volume is 27 cubic units."},
-            {q:"Which formula finds volume of a rectangular prism?",options:["l + w + h","l × w × h","2l + 2w","l × w"],answer:"l × w × h",hint:"Multiply all three dimensions.",explain:"The correct formula is length × width × height."},
-            {q:"A prism has dimensions 7, 2, and 1. What is the volume?",options:["9","10","14","21"],answer:"14",hint:"7 × 2 × 1",explain:"The volume is 14 cubic units."}
-          ]
-        }
-      ],
+    "Grade 5": [
+      {
+        title:"Decimals",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Read and compare decimals",
+          "Add and subtract decimals",
+          "Understand decimal place value"
+        ],
+        vocabulary:["decimal","tenths","hundredths","place value"],
+        explanation:"Decimals show parts of a whole. Line up decimal points when adding or subtracting.",
+        example:"Example: 0.25 + 0.25 = 0.50 or 0.5.",
+        tip:"Always line up the decimal points.",
+        questions:[
+          {q:"0.2 + 0.3 = ?",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Add tenths.",explain:"0.2 + 0.3 = 0.5."},
+          {q:"0.7 - 0.2 = ?",options:["0.4","0.5","0.6","0.7"],answer:"0.5",hint:"Subtract tenths.",explain:"0.7 - 0.2 = 0.5."},
+          {q:"0.5 + 0.5 = ?",options:["0.5","1.0","1.5","2.0"],answer:"1.0",hint:"Two halves make one whole.",explain:"0.5 + 0.5 = 1.0."},
+          {q:"1.2 - 0.2 = ?",options:["0.8","0.9","1.0","1.1"],answer:"1.0",hint:"Subtract two tenths.",explain:"1.2 - 0.2 = 1.0."},
+          {q:"0.25 + 0.25 = ?",options:["0.25","0.5","0.75","1"],answer:"0.5",hint:"Two quarters make one half.",explain:"0.25 + 0.25 = 0.5."},
+          {q:"2.3 - 1.1 = ?",options:["1.0","1.1","1.2","1.3"],answer:"1.2",hint:"Line up decimals.",explain:"2.3 - 1.1 = 1.2."},
+          {q:"Which is greater?",options:["0.45","0.54","They are equal","Cannot tell"],answer:"0.54",hint:"Compare tenths first.",explain:"0.54 is greater."},
+          {q:"3.6 + 0.4 = ?",options:["3.8","3.9","4.0","4.1"],answer:"4.0",hint:"Add 4 tenths to 3.6.",explain:"3.6 + 0.4 = 4.0."},
+          {q:"5.0 - 2.7 = ?",options:["2.1","2.2","2.3","2.4"],answer:"2.3",hint:"Line up decimals carefully.",explain:"5.0 - 2.7 = 2.3."},
+          {q:"Which is smaller?",options:["1.08","1.8","1.18","1.80"],answer:"1.08",hint:"Compare tenths, then hundredths.",explain:"1.08 is the smallest."}
+        ]
+      },
+      {
+        title:"Volume of Rectangular Prisms",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Understand volume",
+          "Use l × w × h",
+          "Solve basic volume problems"
+        ],
+        vocabulary:["volume","prism","cubic units","length","width","height"],
+        explanation:"Volume measures how much space is inside a 3D shape. For a rectangular prism, multiply length × width × height.",
+        example:"Example: 4 × 3 × 2 = 24 cubic units.",
+        tip:"Volume uses cubic units because it is 3D.",
+        questions:[
+          {q:"What is the volume of a prism with length 2, width 3, height 4?",options:["9","12","18","24"],answer:"24",hint:"Multiply all three numbers.",explain:"2 × 3 × 4 = 24."},
+          {q:"Volume = 5 × 2 × 3. What is it?",options:["10","20","30","40"],answer:"30",hint:"Multiply in any order.",explain:"5 × 2 × 3 = 30."},
+          {q:"A box is 6 by 1 by 2. What is the volume?",options:["8","10","12","14"],answer:"12",hint:"Multiply dimensions.",explain:"6 × 1 × 2 = 12."},
+          {q:"A prism is 3 by 3 by 3. What is the volume?",options:["9","18","27","36"],answer:"27",hint:"3 × 3 × 3.",explain:"The volume is 27."},
+          {q:"Which formula finds volume?",options:["l + w + h","l × w × h","2l + 2w","l × w"],answer:"l × w × h",hint:"Multiply all three dimensions.",explain:"Use l × w × h."},
+          {q:"A prism has dimensions 7, 2, and 1. Volume = ?",options:["9","10","14","21"],answer:"14",hint:"7 × 2 × 1.",explain:"Volume = 14."},
+          {q:"A prism is 4 by 5 by 2. Volume = ?",options:["20","30","40","50"],answer:"40",hint:"Multiply 4 × 5 × 2.",explain:"Volume = 40."},
+          {q:"A prism is 9 by 1 by 3. Volume = ?",options:["12","18","27","36"],answer:"27",hint:"9 × 1 × 3.",explain:"Volume = 27."},
+          {q:"A cube has side 2. Volume = ?",options:["4","6","8","10"],answer:"8",hint:"2 × 2 × 2.",explain:"Volume = 8."},
+          {q:"A prism is 10 by 2 by 2. Volume = ?",options:["20","30","40","50"],answer:"40",hint:"10 × 2 × 2.",explain:"Volume = 40."}
+        ]
+      },
+      {
+        title:"Adding and Subtracting Fractions",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Add fractions with like denominators",
+          "Subtract fractions with like denominators",
+          "Simplify results when possible"
+        ],
+        vocabulary:["fraction","numerator","denominator","simplify"],
+        explanation:"When fractions have the same denominator, add or subtract the numerators and keep the denominator the same.",
+        example:"Example: 2/8 + 3/8 = 5/8.",
+        tip:"Only add or subtract the top numbers if the denominators are the same.",
+        questions:[
+          {q:"1/4 + 2/4 = ?",options:["3/4","3/8","1/2","2/8"],answer:"3/4",hint:"Add numerators.",explain:"1/4 + 2/4 = 3/4."},
+          {q:"3/5 - 1/5 = ?",options:["2/5","2/10","3/4","1/5"],answer:"2/5",hint:"Subtract numerators.",explain:"3/5 - 1/5 = 2/5."},
+          {q:"2/6 + 1/6 = ?",options:["3/6","3/12","1/2","2/12"],answer:"3/6",hint:"Same denominator.",explain:"2/6 + 1/6 = 3/6."},
+          {q:"5/8 - 2/8 = ?",options:["3/8","3/16","2/6","7/8"],answer:"3/8",hint:"Subtract the tops.",explain:"5/8 - 2/8 = 3/8."},
+          {q:"4/10 + 3/10 = ?",options:["7/10","7/20","1/10","6/10"],answer:"7/10",hint:"Keep denominator 10.",explain:"4/10 + 3/10 = 7/10."},
+          {q:"7/9 - 4/9 = ?",options:["3/9","3/18","4/9","11/9"],answer:"3/9",hint:"Subtract numerators.",explain:"7/9 - 4/9 = 3/9."},
+          {q:"2/3 + 0/3 = ?",options:["0/3","2/3","3/3","2/6"],answer:"2/3",hint:"Adding zero changes nothing.",explain:"2/3 + 0/3 = 2/3."},
+          {q:"6/7 - 1/7 = ?",options:["5/7","5/14","6/6","7/7"],answer:"5/7",hint:"Subtract the tops.",explain:"6/7 - 1/7 = 5/7."},
+          {q:"1/8 + 4/8 = ?",options:["5/8","4/16","3/8","6/8"],answer:"5/8",hint:"Add numerators.",explain:"1/8 + 4/8 = 5/8."},
+          {q:"9/10 - 3/10 = ?",options:["6/10","6/20","3/10","12/10"],answer:"6/10",hint:"Subtract numerators.",explain:"9/10 - 3/10 = 6/10."}
+        ]
+      },
+      {
+        title:"Coordinate Plane Basics",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Read ordered pairs",
+          "Plot points in the first quadrant",
+          "Understand x and y coordinates"
+        ],
+        vocabulary:["coordinate plane","ordered pair","x-axis","y-axis"],
+        explanation:"An ordered pair tells where a point is. The first number is the x-coordinate and the second is the y-coordinate.",
+        example:"Example: (3, 4) means 3 across and 4 up.",
+        tip:"Move right first, then up.",
+        questions:[
+          {q:"In (2, 5), what is the x-coordinate?",options:["2","5","7","0"],answer:"2",hint:"It is the first number.",explain:"The x-coordinate is 2."},
+          {q:"In (2, 5), what is the y-coordinate?",options:["2","5","7","0"],answer:"5",hint:"It is the second number.",explain:"The y-coordinate is 5."},
+          {q:"Which point has x = 4 and y = 3?",options:["(3,4)","(4,3)","(4,4)","(3,3)"],answer:"(4,3)",hint:"First x, then y.",explain:"(4,3) is correct."},
+          {q:"Which point is 1 across and 6 up?",options:["(1,6)","(6,1)","(1,1)","(6,6)"],answer:"(1,6)",hint:"Across first, then up.",explain:"(1,6) matches."},
+          {q:"What does (0, 4) mean?",options:["4 across","0 up","0 across, 4 up","4 across, 0 up"],answer:"0 across, 4 up",hint:"Read x first.",explain:"(0,4) means 0 across and 4 up."},
+          {q:"Which point is farther right?",options:["(2,3)","(5,1)","They are equal","Cannot tell"],answer:"(5,1)",hint:"Look at x-coordinate.",explain:"5 is farther right than 2."},
+          {q:"Which point is higher up?",options:["(4,2)","(1,6)","They are equal","Cannot tell"],answer:"(1,6)",hint:"Look at y-coordinate.",explain:"6 is higher than 2."},
+          {q:"Which is an ordered pair?",options:["4/5","(4,5)","4:5","45"],answer:"(4,5)",hint:"It uses parentheses and comma.",explain:"(4,5) is an ordered pair."},
+          {q:"The point (3, 2) means ?",options:["2 across, 3 up","3 across, 2 up","3 up, 2 across","2 down, 3 right"],answer:"3 across, 2 up",hint:"First x, then y.",explain:"(3,2) means 3 across and 2 up."},
+          {q:"Which point has y = 1?",options:["(1,4)","(2,1)","(3,5)","(4,6)"],answer:"(2,1)",hint:"Second number is y.",explain:"(2,1) has y = 1."}
+        ]
+      },
+      {
+        title:"Order of Operations",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Follow parentheses first",
+          "Multiply and divide before add and subtract",
+          "Solve simple expressions"
+        ],
+        vocabulary:["expression","operations","parentheses","order"],
+        explanation:"Order of operations tells which math steps to do first. Parentheses come before multiplication and division, which come before addition and subtraction.",
+        example:"Example: 2 + 3 × 4 = 14 because multiply first: 3 × 4 = 12, then add 2.",
+        tip:"Do not just work left to right every time.",
+        questions:[
+          {q:"2 + 3 × 4 = ?",options:["20","14","24","10"],answer:"14",hint:"Multiply first.",explain:"3 × 4 = 12, then 2 + 12 = 14."},
+          {q:"(2 + 3) × 4 = ?",options:["14","20","24","10"],answer:"20",hint:"Do inside parentheses first.",explain:"2 + 3 = 5, then 5 × 4 = 20."},
+          {q:"10 - 2 × 3 = ?",options:["24","18","4","6"],answer:"4",hint:"Multiply before subtracting.",explain:"2 × 3 = 6, then 10 - 6 = 4."},
+          {q:"6 + 8 ÷ 2 = ?",options:["7","10","14","8"],answer:"10",hint:"Divide first.",explain:"8 ÷ 2 = 4, then 6 + 4 = 10."},
+          {q:"(9 - 4) + 2 = ?",options:["5","6","7","8"],answer:"7",hint:"Do parentheses first.",explain:"9 - 4 = 5, then 5 + 2 = 7."},
+          {q:"3 × (2 + 2) = ?",options:["6","9","12","15"],answer:"12",hint:"Parentheses first.",explain:"2 + 2 = 4, then 3 × 4 = 12."},
+          {q:"18 ÷ 3 + 1 = ?",options:["5","6","7","8"],answer:"7",hint:"Divide first.",explain:"18 ÷ 3 = 6, then 6 + 1 = 7."},
+          {q:"7 + 2 × 5 = ?",options:["45","17","19","35"],answer:"17",hint:"Multiply first.",explain:"2 × 5 = 10, then 7 + 10 = 17."},
+          {q:"(8 ÷ 2) + 6 = ?",options:["8","9","10","12"],answer:"10",hint:"Do inside parentheses first.",explain:"8 ÷ 2 = 4, then 4 + 6 = 10."},
+          {q:"20 - (3 + 2) = ?",options:["13","14","15","16"],answer:"15",hint:"Add inside parentheses first.",explain:"3 + 2 = 5, then 20 - 5 = 15."}
+        ]
+      }
+    ],
 
-      "Grade 6": [
-        {
-          title:"Percents",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Convert percent to decimal and fraction",
-            "Find simple percentages of numbers",
-            "Understand percent as out of 100"
-          ],
-          vocabulary:["percent","decimal","fraction","out of 100"],
-          explanation:"Percent means 'out of 100.' To write a percent as a decimal, divide by 100. To find a percent of a number, multiply the decimal form by the number.",
-          example:"Example: 25% = 25/100 = 0.25. Also, 20% of 50 means 0.20 × 50 = 10.",
-          tip:"Move the decimal point two places left when converting a percent to a decimal.",
-          questions:[
-            {q:"50% as a decimal is ?",options:["5","0.5","0.05","0.005"],answer:"0.5",hint:"Divide by 100.",explain:"50% = 0.5."},
-            {q:"25% as a decimal is ?",options:["0.25","0.5","2.5","25"],answer:"0.25",hint:"Move decimal two places left.",explain:"25% = 0.25."},
-            {q:"10% of 100 = ?",options:["5","10","15","20"],answer:"10",hint:"10% means 10 out of 100.",explain:"10% of 100 is 10."},
-            {q:"20% of 50 = ?",options:["5","10","15","20"],answer:"10",hint:"0.20 × 50",explain:"20% of 50 = 10."},
-            {q:"75% as a fraction is ?",options:["1/4","3/4","2/5","5/2"],answer:"3/4",hint:"75/100 simplifies.",explain:"75% = 75/100 = 3/4."},
-            {q:"30% of 200 = ?",options:["30","40","50","60"],answer:"60",hint:"0.30 × 200",explain:"30% of 200 = 60."}
-          ]
-        },
-        {
-          title:"Ratios and Rates",
-          difficulty:"Intermediate",
-          timeEstimate:"10 min",
-          goals:[
-            "Understand ratio comparisons",
-            "Read and write ratios correctly",
-            "Solve basic unit rate problems"
-          ],
-          vocabulary:["ratio","rate","unit rate","comparison"],
-          explanation:"A ratio compares two quantities. A rate is a ratio comparing quantities with different units. A unit rate tells how much for one unit.",
-          example:"Example: If 12 apples cost $6, then the unit rate is $0.50 per apple because 6 ÷ 12 = 0.5.",
-          tip:"To find a unit rate, divide so the second quantity becomes 1.",
-          questions:[
-            {q:"Which ratio compares 2 red marbles to 3 blue marbles?",options:["2:3","3:2","2/5","5/2"],answer:"2:3",hint:"Red to blue.",explain:"The ratio is 2:3."},
-            {q:"A car travels 120 miles in 3 hours. What is the unit rate?",options:["20 mph","30 mph","40 mph","50 mph"],answer:"40 mph",hint:"Divide miles by hours.",explain:"120 ÷ 3 = 40 miles per hour."},
-            {q:"If 8 notebooks cost $16, what is the cost per notebook?",options:["$1","$2","$3","$4"],answer:"$2",hint:"Divide cost by number of notebooks.",explain:"16 ÷ 8 = 2."},
-            {q:"Which is a rate?",options:["3:4","5 to 2","60 miles per hour","2/3"],answer:"60 miles per hour",hint:"A rate uses different units.",explain:"Miles per hour is a rate."},
-            {q:"If 15 pencils cost $5, what is the cost per pencil?",options:["$0.25","$0.33","$0.50","$1.00"],answer:"$0.33",hint:"5 ÷ 15",explain:"5 ÷ 15 ≈ 0.33 dollars per pencil."},
-            {q:"Which ratio is equivalent to 4:6?",options:["1:2","2:3","3:4","6:4"],answer:"2:3",hint:"Simplify by dividing by 2.",explain:"4:6 simplifies to 2:3."}
-          ]
-        }
-      ]
-    };
+    "Grade 6": [
+      {
+        title:"Percents",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Convert percent to decimal and fraction",
+          "Find percentages of numbers",
+          "Understand percent as out of 100"
+        ],
+        vocabulary:["percent","decimal","fraction","out of 100"],
+        explanation:"Percent means out of 100. To write a percent as a decimal, divide by 100.",
+        example:"Example: 25% = 0.25 and 20% of 50 = 10.",
+        tip:"Move the decimal point two places left.",
+        questions:[
+          {q:"50% as a decimal is ?",options:["5","0.5","0.05","0.005"],answer:"0.5",hint:"Divide by 100.",explain:"50% = 0.5."},
+          {q:"25% as a decimal is ?",options:["0.25","0.5","2.5","25"],answer:"0.25",hint:"Move decimal two places left.",explain:"25% = 0.25."},
+          {q:"10% of 100 = ?",options:["5","10","15","20"],answer:"10",hint:"10 out of 100.",explain:"10% of 100 is 10."},
+          {q:"20% of 50 = ?",options:["5","10","15","20"],answer:"10",hint:"0.20 × 50.",explain:"20% of 50 = 10."},
+          {q:"75% as a fraction is ?",options:["1/4","3/4","2/5","5/2"],answer:"3/4",hint:"75/100 simplifies.",explain:"75% = 3/4."},
+          {q:"30% of 200 = ?",options:["30","40","50","60"],answer:"60",hint:"0.30 × 200.",explain:"30% of 200 = 60."},
+          {q:"5% as a decimal is ?",options:["0.5","0.05","0.005","5"],answer:"0.05",hint:"Move decimal two places left.",explain:"5% = 0.05."},
+          {q:"40% of 80 = ?",options:["16","24","32","40"],answer:"32",hint:"0.40 × 80.",explain:"40% of 80 = 32."},
+          {q:"Which percent equals 0.6?",options:["6%","60%","600%","0.6%"],answer:"60%",hint:"Move decimal two places right.",explain:"0.6 = 60%."},
+          {q:"12% of 50 = ?",options:["4","5","6","7"],answer:"6",hint:"0.12 × 50.",explain:"12% of 50 = 6."}
+        ]
+      },
+      {
+        title:"Ratios and Rates",
+        difficulty:"Intermediate",
+        timeEstimate:"10 min",
+        goals:[
+          "Understand ratios",
+          "Solve unit rates",
+          "Compare quantities"
+        ],
+        vocabulary:["ratio","rate","unit rate","comparison"],
+        explanation:"A ratio compares two quantities. A rate compares quantities with different units. A unit rate compares to 1 unit.",
+        example:"Example: 12 apples for $6 means $0.50 per apple.",
+        tip:"To find a unit rate, divide so one quantity becomes 1.",
+        questions:[
+          {q:"Which ratio compares 2 red marbles to 3 blue marbles?",options:["2:3","3:2","2/5","5/2"],answer:"2:3",hint:"Red to blue.",explain:"The ratio is 2:3."},
+          {q:"A car travels 120 miles in 3 hours. What is the unit rate?",options:["20 mph","30 mph","40 mph","50 mph"],answer:"40 mph",hint:"Divide miles by hours.",explain:"120 ÷ 3 = 40 mph."},
+          {q:"If 8 notebooks cost $16, what is the cost per notebook?",options:["$1","$2","$3","$4"],answer:"$2",hint:"Divide cost by number.",explain:"16 ÷ 8 = 2."},
+          {q:"Which is a rate?",options:["3:4","5 to 2","60 miles per hour","2/3"],answer:"60 miles per hour",hint:"A rate uses different units.",explain:"Miles per hour is a rate."},
+          {q:"If 15 pencils cost $5, what is the cost per pencil?",options:["$0.25","$0.33","$0.50","$1.00"],answer:"$0.33",hint:"5 ÷ 15.",explain:"5 ÷ 15 ≈ $0.33 per pencil."},
+          {q:"Which ratio is equivalent to 4:6?",options:["1:2","2:3","3:4","6:4"],answer:"2:3",hint:"Simplify by dividing by 2.",explain:"4:6 = 2:3."},
+          {q:"A runner goes 18 miles in 3 hours. Unit rate = ?",options:["5 mph","6 mph","7 mph","8 mph"],answer:"6 mph",hint:"18 ÷ 3.",explain:"18 ÷ 3 = 6 mph."},
+          {q:"Which shows a ratio of boys to girls?",options:["4 boys, 5 girls","4 mph","5 dollars each","2 inches"],answer:"4 boys, 5 girls",hint:"A ratio compares same kind of things.",explain:"That compares boys to girls."},
+          {q:"If 6 oranges cost $3, cost per orange = ?",options:["$0.25","$0.50","$0.75","$1.00"],answer:"$0.50",hint:"3 ÷ 6.",explain:"Each orange costs $0.50."},
+          {q:"Which is a unit rate?",options:["3 books for $12","$4 per book","5:7","8 to 9"],answer:"$4 per book",hint:"It compares to 1 book.",explain:"A unit rate uses 1 unit."}
+        ]
+      },
+      {
+        title:"Integers",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Understand positive and negative numbers",
+          "Compare integers",
+          "Apply integer rules in simple problems"
+        ],
+        vocabulary:["integer","positive","negative","zero","opposite"],
+        explanation:"Integers include positive numbers, negative numbers, and zero. Negative numbers are less than zero.",
+        example:"Example: -3 is less than 2 because it is on the left side of 0 on the number line.",
+        tip:"The farther left a number is, the smaller it is.",
+        questions:[
+          {q:"Which is greater?",options:["-2","3","They are equal","Cannot tell"],answer:"3",hint:"Positive is greater than negative.",explain:"3 is greater than -2."},
+          {q:"Which is smaller?",options:["-5","-1","0","4"],answer:"-5",hint:"Farther left is smaller.",explain:"-5 is the smallest."},
+          {q:"What is the opposite of 6?",options:["-6","6","0","1"],answer:"-6",hint:"Opposites are same distance from 0.",explain:"The opposite of 6 is -6."},
+          {q:"What is the opposite of -4?",options:["-4","4","0","1"],answer:"4",hint:"Switch signs.",explain:"The opposite of -4 is 4."},
+          {q:"Which is greater?",options:["-3","-7","They are equal","Cannot tell"],answer:"-3",hint:"-3 is closer to zero.",explain:"-3 is greater than -7."},
+          {q:"What integer is 2 less than 0?",options:["2","-2","0","1"],answer:"-2",hint:"Move left on the number line.",explain:"2 less than 0 is -2."},
+          {q:"Which list is in order from least to greatest?",options:["-1, 0, 2","0, -1, 2","2, 0, -1","1, -2, 0"],answer:"-1, 0, 2",hint:"Least starts farthest left.",explain:"-1, 0, 2 is correct."},
+          {q:"What is greater than -1?",options:["-2","-3","0","-5"],answer:"0",hint:"Zero is to the right of -1.",explain:"0 is greater than -1."},
+          {q:"Which integer represents 5 degrees below zero?",options:["5","-5","0","10"],answer:"-5",hint:"Below zero means negative.",explain:"5 below zero is -5."},
+          {q:"Which is the greatest?",options:["-10","-4","-7","-9"],answer:"-4",hint:"Closest to zero is greatest among negatives.",explain:"-4 is the greatest."}
+        ]
+      },
+      {
+        title:"Expressions and Equations",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Evaluate simple expressions",
+          "Solve one-step equations",
+          "Use variables"
+        ],
+        vocabulary:["expression","equation","variable","solve"],
+        explanation:"An expression has numbers, symbols, and sometimes variables. An equation has an equals sign and can be solved.",
+        example:"Example: If x = 3, then x + 5 = 8.",
+        tip:"Substitute the value of the variable before solving.",
+        questions:[
+          {q:"If x = 4, what is x + 3?",options:["6","7","8","9"],answer:"7",hint:"Replace x with 4.",explain:"4 + 3 = 7."},
+          {q:"If y = 2, what is 5y?",options:["5","7","10","12"],answer:"10",hint:"5 × 2.",explain:"5y = 5 × 2 = 10."},
+          {q:"Solve: x + 6 = 10",options:["2","3","4","5"],answer:"4",hint:"What plus 6 equals 10?",explain:"x = 4."},
+          {q:"Solve: y - 3 = 5",options:["6","7","8","9"],answer:"8",hint:"Add 3 to both sides.",explain:"y = 8."},
+          {q:"If a = 7, what is a - 2?",options:["4","5","6","7"],answer:"5",hint:"Replace a with 7.",explain:"7 - 2 = 5."},
+          {q:"Solve: 3x = 12",options:["2","3","4","5"],answer:"4",hint:"12 ÷ 3.",explain:"x = 4."},
+          {q:"Which is an equation?",options:["3x + 2","x - 5","y = 7","4a"],answer:"y = 7",hint:"It has an equals sign.",explain:"An equation has =."},
+          {q:"If m = 5, what is 2m + 1?",options:["10","11","12","13"],answer:"11",hint:"2 × 5 + 1.",explain:"2m + 1 = 11."},
+          {q:"Solve: n + 9 = 15",options:["4","5","6","7"],answer:"6",hint:"15 - 9.",explain:"n = 6."},
+          {q:"If p = 3, what is p²?",options:["6","9","12","15"],answer:"9",hint:"3 × 3.",explain:"p² = 9."}
+        ]
+      },
+      {
+        title:"Area of Triangles and Parallelograms",
+        difficulty:"Advanced",
+        timeEstimate:"10 min",
+        goals:[
+          "Use area formulas",
+          "Apply base and height",
+          "Compare areas of shapes"
+        ],
+        vocabulary:["area","triangle","parallelogram","base","height"],
+        explanation:"The area of a parallelogram is base × height. The area of a triangle is 1/2 × base × height.",
+        example:"Example: Triangle with base 6 and height 4 has area 1/2 × 6 × 4 = 12.",
+        tip:"A triangle’s area is half of a matching parallelogram.",
+        questions:[
+          {q:"Area of a parallelogram with base 5 and height 4 = ?",options:["9","10","20","40"],answer:"20",hint:"b × h.",explain:"5 × 4 = 20."},
+          {q:"Area of a triangle with base 6 and height 4 = ?",options:["10","12","14","24"],answer:"12",hint:"Half of 6 × 4.",explain:"1/2 × 6 × 4 = 12."},
+          {q:"Area of a parallelogram with base 8 and height 3 = ?",options:["11","16","24","32"],answer:"24",hint:"Multiply base and height.",explain:"8 × 3 = 24."},
+          {q:"Area of a triangle with base 10 and height 2 = ?",options:["10","12","20","24"],answer:"10",hint:"Half of 10 × 2.",explain:"1/2 × 10 × 2 = 10."},
+          {q:"Which formula finds area of a triangle?",options:["b × h","1/2 × b × h","2b + 2h","b + h"],answer:"1/2 × b × h",hint:"It is half of base times height.",explain:"Triangle area = 1/2 × b × h."},
+          {q:"Which formula finds area of a parallelogram?",options:["b + h","1/2 × b × h","b × h","2b + 2h"],answer:"b × h",hint:"Same as rectangle area.",explain:"Parallelogram area = b × h."},
+          {q:"Triangle area with base 9 and height 2 = ?",options:["9","11","18","20"],answer:"9",hint:"Half of 18.",explain:"1/2 × 9 × 2 = 9."},
+          {q:"Parallelogram area with base 7 and height 6 = ?",options:["13","21","42","84"],answer:"42",hint:"7 × 6.",explain:"Area = 42."},
+          {q:"A triangle and parallelogram have same base and height. Which has greater area?",options:["Triangle","Parallelogram","They are equal","Cannot tell"],answer:"Parallelogram",hint:"Triangle is half.",explain:"The parallelogram has greater area."},
+          {q:"Triangle area with base 12 and height 5 = ?",options:["17","30","60","25"],answer:"30",hint:"Half of 60.",explain:"1/2 × 12 × 5 = 30."}
+        ]
+      }
+    ]
+  };
 
-    const STORAGE_KEY = "ilovemath_premium_student_v3";
+  const STORAGE_KEY = "ilovemath_premium_student_v3";
 
-    const gradeSelect = document.getElementById("gradeSelect");
-    const topicSearch = document.getElementById("topicSearch");
-    const topicList = document.getElementById("topicList");
-    const studentName = document.getElementById("studentName");
-    const learningGoalInput = document.getElementById("learningGoalInput");
+  const gradeSelect = document.getElementById("gradeSelect");
+  const topicSearch = document.getElementById("topicSearch");
+  const topicList = document.getElementById("topicList");
+  const studentName = document.getElementById("studentName");
+  const learningGoalInput = document.getElementById("learningGoalInput");
 
-    const lessonTitle = document.getElementById("lessonTitle");
-    const lessonGradePill = document.getElementById("lessonGradePill");
-    const lessonTopicPill = document.getElementById("lessonTopicPill");
-    const lessonDifficultyPill = document.getElementById("lessonDifficultyPill");
-    const lessonLockPill = document.getElementById("lessonLockPill");
-    const lessonMasteryPill = document.getElementById("lessonMasteryPill");
+  const lessonTitle = document.getElementById("lessonTitle");
+  const lessonGradePill = document.getElementById("lessonGradePill");
+  const lessonTopicPill = document.getElementById("lessonTopicPill");
+  const lessonDifficultyPill = document.getElementById("lessonDifficultyPill");
+  const lessonLockPill = document.getElementById("lessonLockPill");
+  const lessonMasteryPill = document.getElementById("lessonMasteryPill");
 
-    const lessonObjectives = document.getElementById("lessonObjectives");
-    const lessonVocabulary = document.getElementById("lessonVocabulary");
-    const lessonExplanation = document.getElementById("lessonExplanation");
-    const lessonExample = document.getElementById("lessonExample");
-    const lessonTip = document.getElementById("lessonTip");
+  const lessonObjectives = document.getElementById("lessonObjectives");
+  const lessonVocabulary = document.getElementById("lessonVocabulary");
+  const lessonExplanation = document.getElementById("lessonExplanation");
+  const lessonExample = document.getElementById("lessonExample");
+  const lessonTip = document.getElementById("lessonTip");
 
-    const questionText = document.getElementById("questionText");
-    const optionsWrap = document.getElementById("optionsWrap");
-    const feedback = document.getElementById("feedback");
-    const explanationBox = document.getElementById("explanationBox");
-    const hintBox = document.getElementById("hintBox");
-    const progressFill = document.getElementById("progressFill");
-    const progressText = document.getElementById("progressText");
+  const questionText = document.getElementById("questionText");
+  const optionsWrap = document.getElementById("optionsWrap");
+  const feedback = document.getElementById("feedback");
+  const explanationBox = document.getElementById("explanationBox");
+  const hintBox = document.getElementById("hintBox");
+  const progressFill = document.getElementById("progressFill");
+  const progressText = document.getElementById("progressText");
 
-    const certificateCard = document.getElementById("certificateCard");
-    const certName = document.getElementById("certName");
-    const certTopic = document.getElementById("certTopic");
-    const certGrade = document.getElementById("certGrade");
-    const certStars = document.getElementById("certStars");
-    const certMastery = document.getElementById("certMastery");
+  const certificateCard = document.getElementById("certificateCard");
+  const certName = document.getElementById("certName");
+  const certTopic = document.getElementById("certTopic");
+  const certGrade = document.getElementById("certGrade");
+  const certStars = document.getElementById("certStars");
+  const certMastery = document.getElementById("certMastery");
 
-    const statStudent = document.getElementById("statStudent");
-    const statGrade = document.getElementById("statGrade");
-    const statXP = document.getElementById("statXP");
-    const statStars = document.getElementById("statStars");
+  const statStudent = document.getElementById("statStudent");
+  const statGrade = document.getElementById("statGrade");
+  const statXP = document.getElementById("statXP");
+  const statStars = document.getElementById("statStars");
 
-    const studentSummary = document.getElementById("studentSummary");
-    const dashCompleted = document.getElementById("dashCompleted");
-    const dashUnlocked = document.getElementById("dashUnlocked");
-    const dashAccuracy = document.getElementById("dashAccuracy");
-    const dashLastLesson = document.getElementById("dashLastLesson");
-    const dashGoal = document.getElementById("dashGoal");
+  const studentSummary = document.getElementById("studentSummary");
+  const dashCompleted = document.getElementById("dashCompleted");
+  const dashUnlocked = document.getElementById("dashUnlocked");
+  const dashAccuracy = document.getElementById("dashAccuracy");
+  const dashLastLesson = document.getElementById("dashLastLesson");
+  const dashGoal = document.getElementById("dashGoal");
 
-    const mapGrid = document.getElementById("mapGrid");
-    const soundToggleBtn = document.getElementById("soundToggleBtn");
-    const coachMessage = document.getElementById("coachMessage");
-    const bookmarkBtn = document.getElementById("bookmarkBtn");
-    const favoriteTopicBtn = document.getElementById("favoriteTopicBtn");
-    const quickSummary = document.getElementById("quickSummary");
-    const toast = document.getElementById("toast");
-    const confettiWrap = document.getElementById("confettiWrap");
+  const mapGrid = document.getElementById("mapGrid");
+  const soundToggleBtn = document.getElementById("soundToggleBtn");
+  const coachMessage = document.getElementById("coachMessage");
+  const bookmarkBtn = document.getElementById("bookmarkBtn");
+  const favoriteTopicBtn = document.getElementById("favoriteTopicBtn");
+  const quickSummary = document.getElementById("quickSummary");
+  const toast = document.getElementById("toast");
+  const confettiWrap = document.getElementById("confettiWrap");
 
-    const spotlightStreak = document.getElementById("spotlightStreak");
-    const spotlightSession = document.getElementById("spotlightSession");
-    const spotlightMastery = document.getElementById("spotlightMastery");
-    const spotlightBadges = document.getElementById("spotlightBadges");
+  const spotlightStreak = document.getElementById("spotlightStreak");
+  const spotlightSession = document.getElementById("spotlightSession");
+  const spotlightMastery = document.getElementById("spotlightMastery");
+  const spotlightBadges = document.getElementById("spotlightBadges");
 
-    const practiceStars = document.getElementById("practiceStars");
-    const practiceCorrect = document.getElementById("practiceCorrect");
-    const practiceTimer = document.getElementById("practiceTimer");
+  const practiceStars = document.getElementById("practiceStars");
+  const practiceCorrect = document.getElementById("practiceCorrect");
+  const practiceTimer = document.getElementById("practiceTimer");
 
-    let currentGrade = "Grade 1";
-    let currentTopicIndex = 0;
-    let currentQuestionIndex = 0;
-    let lessonCorrect = 0;
-    let answered = false;
-    let soundOn = true;
-    let lessonSeconds = 0;
-    let lessonTimer = null;
-    let sessionStartedAt = Date.now();
+  let currentGrade = "Grade 1";
+  let currentTopicIndex = 0;
+  let currentQuestionIndex = 0;
+  let lessonCorrect = 0;
+  let answered = false;
+  let soundOn = true;
+  let lessonSeconds = 0;
+  let lessonTimer = null;
+  let sessionStartedAt = Date.now();
 
-    let studentState = {
+  let studentState = {
+    name:"",
+    grade:"Grade 1",
+    goal:"",
+    completed:{},
+    unlocked:{},
+    mastery:{},
+    starsByTopic:{},
+    favorites:{},
+    totalCorrect:0,
+    totalAnswered:0,
+    totalStars:0,
+    totalXP:0,
+    totalLessonsOpened:0,
+    lastLesson:"",
+    lastActiveDate:"",
+    streak:0
+  };
+
+  function getTopicKey(grade, index){
+    return `${grade}__${index}`;
+  }
+
+  function getTodayKey(){
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth()+1).padStart(2,"0");
+    const dd = String(now.getDate()).padStart(2,"0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function getYesterdayKey(){
+    const d = new Date();
+    d.setDate(d.getDate()-1);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+    const dd = String(d.getDate()).padStart(2,"0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function getGradeTopicCount(grade){
+    return (curriculum[grade] || []).length;
+  }
+
+  function isTopicUnlocked(grade, index){
+    return !!studentState.unlocked[getTopicKey(grade,index)];
+  }
+
+  function isTopicCompleted(grade, index){
+    return !!studentState.completed[getTopicKey(grade,index)];
+  }
+
+  function getTopicMastery(grade, index){
+    return studentState.mastery[getTopicKey(grade,index)] || 0;
+  }
+
+  function getTopicStars(grade, index){
+    return studentState.starsByTopic[getTopicKey(grade,index)] || 0;
+  }
+
+  function getUnlockedCount(grade){
+    const topics = curriculum[grade] || [];
+    let count = 0;
+    topics.forEach((_, i) => {
+      if(isTopicUnlocked(grade, i)) count++;
+    });
+    return count;
+  }
+
+  function getCompletedCount(){
+    return Object.keys(studentState.completed || {}).length;
+  }
+
+  function getBadgeCount(){
+    let count = 0;
+    if(getCompletedCount() >= 1) count++;
+    if((studentState.totalLessonsOpened || 0) >= 3) count++;
+    if(getAccuracy() >= 80 && (studentState.totalAnswered || 0) >= 8) count++;
+    if((studentState.totalStars || 0) >= 8 || (studentState.totalXP || 0) >= 150) count++;
+    return count;
+  }
+
+  function getAccuracy(){
+    return studentState.totalAnswered
+      ? Math.round((studentState.totalCorrect / studentState.totalAnswered) * 100)
+      : 0;
+  }
+
+  function firstAvailableTopicIndex(grade){
+    const topics = curriculum[grade] || [];
+    for(let i = 0; i < topics.length; i++){
+      if(isTopicUnlocked(grade, i)) return i;
+    }
+    return 0;
+  }
+
+  function ensureDefaultUnlocks(){
+    Object.keys(curriculum).forEach(grade => {
+      const key = getTopicKey(grade, 0);
+      if(!studentState.unlocked[key]) studentState.unlocked[key] = true;
+    });
+  }
+
+  function initStreak(){
+    const today = getTodayKey();
+    const yesterday = getYesterdayKey();
+    if(!studentState.lastActiveDate){
+      studentState.lastActiveDate = today;
+      studentState.streak = 1;
+    }else if(studentState.lastActiveDate === today){
+    }else if(studentState.lastActiveDate === yesterday){
+      studentState.streak = (studentState.streak || 0) + 1;
+      studentState.lastActiveDate = today;
+    }else{
+      studentState.streak = 1;
+      studentState.lastActiveDate = today;
+    }
+  }
+
+  function init(){
+    Object.keys(curriculum).forEach(grade => {
+      const opt = document.createElement("option");
+      opt.value = grade;
+      opt.textContent = grade;
+      gradeSelect.appendChild(opt);
+    });
+
+    loadSavedProgress();
+    ensureDefaultUnlocks();
+    initStreak();
+    bindEvents();
+    gradeSelect.value = currentGrade;
+    startLessonTimer();
+    refreshAll();
+    saveProgress();
+  }
+
+  function bindEvents(){
+    gradeSelect.addEventListener("change", e => {
+      currentGrade = e.target.value;
+      currentTopicIndex = firstAvailableTopicIndex(currentGrade);
+      studentState.grade = currentGrade;
+      resetLessonSession();
+      saveProgress();
+      refreshAll();
+      showToast(`Switched to ${currentGrade}.`);
+    });
+
+    topicSearch.addEventListener("input", renderTopics);
+    document.getElementById("saveStudentBtn").addEventListener("click", saveStudentProfile);
+    document.getElementById("loadStudentBtn").addEventListener("click", loadSavedProgressAndRefresh);
+    document.getElementById("resetAllBtn").addEventListener("click", resetAllProgress);
+    document.getElementById("prevTopicBtn").addEventListener("click", goPrevTopic);
+    document.getElementById("nextTopicBtn").addEventListener("click", goNextTopic);
+    soundToggleBtn.addEventListener("click", toggleSound);
+    bookmarkBtn.addEventListener("click", toggleFavoriteCurrentTopic);
+    favoriteTopicBtn.addEventListener("click", toggleFavoriteCurrentTopic);
+  }
+
+  function saveStudentProfile(){
+    const name = studentName.value.trim();
+    const goal = learningGoalInput.value.trim();
+
+    if(!name){
+      alert("Please enter a student name first.");
+      return;
+    }
+
+    studentState.name = name;
+    studentState.goal = goal;
+    studentState.grade = gradeSelect.value;
+    currentGrade = gradeSelect.value;
+    ensureDefaultUnlocks();
+    initStreak();
+    saveProgress();
+    refreshAll();
+    playTone("success");
+    showToast(`Welcome, ${name}! Your student profile has been saved.`);
+  }
+
+  function saveProgress(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(studentState));
+    }catch(err){
+      console.log("Saving progress failed.", err);
+    }
+  }
+
+  function loadSavedProgress(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        const parsed = JSON.parse(raw);
+        studentState = Object.assign(studentState, parsed || {});
+      }
+    }catch(err){
+      console.log("Loading progress failed.", err);
+    }
+
+    ensureDefaultUnlocks();
+    currentGrade = studentState.grade || "Grade 1";
+    studentName.value = studentState.name || "";
+    learningGoalInput.value = studentState.goal || "";
+    currentTopicIndex = firstAvailableTopicIndex(currentGrade);
+    resetLessonSession(false);
+  }
+
+  function loadSavedProgressAndRefresh(){
+    loadSavedProgress();
+    gradeSelect.value = currentGrade;
+    refreshAll();
+    showToast("Saved progress loaded.");
+    playTone("success");
+  }
+
+  function resetAllProgress(){
+    if(!confirm("Reset all saved student progress on this device?")) return;
+
+    localStorage.removeItem(STORAGE_KEY);
+    studentState = {
       name:"",
       grade:"Grade 1",
       goal:"",
@@ -1492,883 +2227,663 @@
       streak:0
     };
 
-    function getTopicKey(grade, index){
-      return `${grade}__${index}`;
-    }
+    ensureDefaultUnlocks();
+    currentGrade = "Grade 1";
+    currentTopicIndex = 0;
+    studentName.value = "";
+    learningGoalInput.value = "";
+    gradeSelect.value = currentGrade;
+    resetLessonSession();
+    certificateCard.style.display = "none";
+    initStreak();
+    saveProgress();
+    refreshAll();
+    playTone("reset");
+    showToast("All saved progress has been reset.");
+  }
 
-    function getTodayKey(){
-      const now = new Date();
-      const yyyy = now.getFullYear();
-      const mm = String(now.getMonth()+1).padStart(2,"0");
-      const dd = String(now.getDate()).padStart(2,"0");
-      return `${yyyy}-${mm}-${dd}`;
-    }
+  function refreshAll(){
+    renderStudentSummary();
+    renderMap();
+    renderTopics();
+    renderLesson();
+    updateStats();
+    updateDashboard();
+    updateCoachMessage();
+    updateQuickSummary();
+    updateBadges();
+    updateSpotlight();
+  }
 
-    function getYesterdayKey(){
-      const d = new Date();
-      d.setDate(d.getDate()-1);
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth()+1).padStart(2,"0");
-      const dd = String(d.getDate()).padStart(2,"0");
-      return `${yyyy}-${mm}-${dd}`;
-    }
+  function renderStudentSummary(){
+    const name = studentState.name || "Guest Student";
+    const unlocked = getUnlockedCount(currentGrade);
+    const completedCount = getCompletedCount();
+    const accuracy = getAccuracy();
+    const goal = studentState.goal || "No goal saved yet";
 
-    function getGradeTopicCount(grade){
-      return (curriculum[grade] || []).length;
-    }
+    studentSummary.innerHTML = `
+      <strong>${name}</strong><br>
+      Current grade: <strong>${currentGrade}</strong><br>
+      Learning goal: <strong>${escapeHTML(goal)}</strong><br>
+      Unlocked lessons in this grade: <strong>${unlocked}</strong><br>
+      Total completed lessons: <strong>${completedCount}</strong><br>
+      Total XP: <strong>${studentState.totalXP || 0}</strong><br>
+      Total stars earned: <strong>${studentState.totalStars || 0}</strong><br>
+      Overall accuracy: <strong>${accuracy}%</strong><br>
+      Last lesson: <strong>${studentState.lastLesson || "None yet"}</strong>
+    `;
+  }
 
-    function isTopicUnlocked(grade, index){
-      return !!studentState.unlocked[getTopicKey(grade,index)];
-    }
+  function renderMap(){
+    mapGrid.innerHTML = "";
+    const topics = curriculum[currentGrade] || [];
 
-    function isTopicCompleted(grade, index){
-      return !!studentState.completed[getTopicKey(grade,index)];
-    }
+    topics.forEach((topic, index) => {
+      const unlocked = isTopicUnlocked(currentGrade, index);
+      const completed = isTopicCompleted(currentGrade, index);
+      const stars = getTopicStars(currentGrade, index);
+      const mastery = getTopicMastery(currentGrade, index);
 
-    function getTopicMastery(grade, index){
-      return studentState.mastery[getTopicKey(grade,index)] || 0;
-    }
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className =
+        "world-card" +
+        (unlocked ? "" : " locked") +
+        (index === currentTopicIndex ? " active" : "") +
+        (completed ? " completed" : "");
 
-    function getTopicStars(grade, index){
-      return studentState.starsByTopic[getTopicKey(grade,index)] || 0;
-    }
+      card.disabled = !unlocked;
+      card.innerHTML = `
+        <div class="world-top">
+          <strong>Level ${index + 1}</strong>
+          <span class="world-badge">${unlocked ? (completed ? "Completed" : "Unlocked") : "Locked"}</span>
+        </div>
+        <div><strong>${topic.title}</strong></div>
+        <div class="world-meta">${topic.difficulty} • ${topic.timeEstimate} • ${topic.questions.length} questions</div>
+        <div class="world-meta">Mastery: ${mastery}%</div>
+        <div class="stars-row">${renderStarString(stars)}</div>
+      `;
 
-    function getUnlockedCount(grade){
-      const topics = curriculum[grade] || [];
-      let count = 0;
-      topics.forEach((_, i) => {
-        if(isTopicUnlocked(grade, i)) count++;
-      });
-      return count;
-    }
-
-    function getCompletedCount(){
-      return Object.keys(studentState.completed || {}).length;
-    }
-
-    function getBadgeCount(){
-      let count = 0;
-      if(getCompletedCount() >= 1) count++;
-      if((studentState.totalLessonsOpened || 0) >= 3) count++;
-      if(getAccuracy() >= 80 && (studentState.totalAnswered || 0) >= 8) count++;
-      if((studentState.totalStars || 0) >= 8 || (studentState.totalXP || 0) >= 150) count++;
-      return count;
-    }
-
-    function getAccuracy(){
-      return studentState.totalAnswered
-        ? Math.round((studentState.totalCorrect / studentState.totalAnswered) * 100)
-        : 0;
-    }
-
-    function firstAvailableTopicIndex(grade){
-      const topics = curriculum[grade] || [];
-      for(let i = 0; i < topics.length; i++){
-        if(isTopicUnlocked(grade, i)) return i;
-      }
-      return 0;
-    }
-
-    function ensureDefaultUnlocks(){
-      Object.keys(curriculum).forEach(grade => {
-        const key = getTopicKey(grade, 0);
-        if(!studentState.unlocked[key]) studentState.unlocked[key] = true;
-      });
-    }
-
-    function initStreak(){
-      const today = getTodayKey();
-      const yesterday = getYesterdayKey();
-      if(!studentState.lastActiveDate){
-        studentState.lastActiveDate = today;
-        studentState.streak = 1;
-      }else if(studentState.lastActiveDate === today){
-        // no change
-      }else if(studentState.lastActiveDate === yesterday){
-        studentState.streak = (studentState.streak || 0) + 1;
-        studentState.lastActiveDate = today;
-      }else{
-        studentState.streak = 1;
-        studentState.lastActiveDate = today;
-      }
-    }
-
-    function init(){
-      Object.keys(curriculum).forEach(grade => {
-        const opt = document.createElement("option");
-        opt.value = grade;
-        opt.textContent = grade;
-        gradeSelect.appendChild(opt);
-      });
-
-      loadSavedProgress();
-      ensureDefaultUnlocks();
-      initStreak();
-      bindEvents();
-      gradeSelect.value = currentGrade;
-      startLessonTimer();
-      refreshAll();
-      saveProgress();
-    }
-
-    function bindEvents(){
-      gradeSelect.addEventListener("change", e => {
-        currentGrade = e.target.value;
-        currentTopicIndex = firstAvailableTopicIndex(currentGrade);
-        studentState.grade = currentGrade;
+      card.onclick = () => {
+        currentTopicIndex = index;
         resetLessonSession();
-        saveProgress();
-        refreshAll();
-        showToast(`Switched to ${currentGrade}.`);
-      });
-
-      topicSearch.addEventListener("input", renderTopics);
-      document.getElementById("saveStudentBtn").addEventListener("click", saveStudentProfile);
-      document.getElementById("loadStudentBtn").addEventListener("click", loadSavedProgressAndRefresh);
-      document.getElementById("resetAllBtn").addEventListener("click", resetAllProgress);
-      document.getElementById("prevTopicBtn").addEventListener("click", goPrevTopic);
-      document.getElementById("nextTopicBtn").addEventListener("click", goNextTopic);
-      soundToggleBtn.addEventListener("click", toggleSound);
-      bookmarkBtn.addEventListener("click", toggleFavoriteCurrentTopic);
-      favoriteTopicBtn.addEventListener("click", toggleFavoriteCurrentTopic);
-    }
-
-    function saveStudentProfile(){
-      const name = studentName.value.trim();
-      const goal = learningGoalInput.value.trim();
-
-      if(!name){
-        alert("Please enter a student name first.");
-        return;
-      }
-
-      studentState.name = name;
-      studentState.goal = goal;
-      studentState.grade = gradeSelect.value;
-      currentGrade = gradeSelect.value;
-      ensureDefaultUnlocks();
-      initStreak();
-      saveProgress();
-      refreshAll();
-      playTone("success");
-      showToast(`Welcome, ${name}! Your student profile has been saved.`);
-    }
-
-    function saveProgress(){
-      try{
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(studentState));
-      }catch(err){
-        console.log("Saving progress failed.", err);
-      }
-    }
-
-    function loadSavedProgress(){
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if(raw){
-          const parsed = JSON.parse(raw);
-          studentState = Object.assign(studentState, parsed || {});
-        }
-      }catch(err){
-        console.log("Loading progress failed.", err);
-      }
-
-      ensureDefaultUnlocks();
-      currentGrade = studentState.grade || "Grade 1";
-      studentName.value = studentState.name || "";
-      learningGoalInput.value = studentState.goal || "";
-      currentTopicIndex = firstAvailableTopicIndex(currentGrade);
-      resetLessonSession(false);
-    }
-
-    function loadSavedProgressAndRefresh(){
-      loadSavedProgress();
-      gradeSelect.value = currentGrade;
-      refreshAll();
-      showToast("Saved progress loaded.");
-      playTone("success");
-    }
-
-    function resetAllProgress(){
-      if(!confirm("Reset all saved student progress on this device?")) return;
-
-      localStorage.removeItem(STORAGE_KEY);
-      studentState = {
-        name:"",
-        grade:"Grade 1",
-        goal:"",
-        completed:{},
-        unlocked:{},
-        mastery:{},
-        starsByTopic:{},
-        favorites:{},
-        totalCorrect:0,
-        totalAnswered:0,
-        totalStars:0,
-        totalXP:0,
-        totalLessonsOpened:0,
-        lastLesson:"",
-        lastActiveDate:"",
-        streak:0
+        certificateCard.style.display = "none";
+        incrementLessonOpenCount();
+        renderMap();
+        renderTopics();
+        renderLesson();
+        updateStats();
+        updateCoachMessage();
+        updateQuickSummary();
       };
 
-      ensureDefaultUnlocks();
-      currentGrade = "Grade 1";
-      currentTopicIndex = 0;
-      studentName.value = "";
-      learningGoalInput.value = "";
-      gradeSelect.value = currentGrade;
-      resetLessonSession();
-      certificateCard.style.display = "none";
-      initStreak();
-      saveProgress();
-      refreshAll();
-      playTone("reset");
-      showToast("All saved progress has been reset.");
-    }
+      mapGrid.appendChild(card);
+    });
+  }
 
-    function refreshAll(){
-      renderStudentSummary();
-      renderMap();
-      renderTopics();
-      renderLesson();
-      updateStats();
-      updateDashboard();
-      updateCoachMessage();
-      updateQuickSummary();
-      updateBadges();
-      updateSpotlight();
-    }
+  function renderTopics(){
+    const query = topicSearch.value.trim().toLowerCase();
+    topicList.innerHTML = "";
+    const topics = curriculum[currentGrade] || [];
+    let matchCount = 0;
 
-    function renderStudentSummary(){
-      const name = studentState.name || "Guest Student";
-      const unlocked = getUnlockedCount(currentGrade);
-      const completedCount = getCompletedCount();
-      const accuracy = getAccuracy();
-      const goal = studentState.goal || "No goal saved yet";
+    topics.forEach((topic, index) => {
+      const searchable = [
+        topic.title,
+        topic.explanation,
+        ...(topic.vocabulary || []),
+        ...(topic.goals || [])
+      ].join(" ").toLowerCase();
 
-      studentSummary.innerHTML = `
-        <strong>${name}</strong><br>
-        Current grade: <strong>${currentGrade}</strong><br>
-        Learning goal: <strong>${escapeHTML(goal)}</strong><br>
-        Unlocked lessons in this grade: <strong>${unlocked}</strong><br>
-        Total completed lessons: <strong>${completedCount}</strong><br>
-        Total XP: <strong>${studentState.totalXP || 0}</strong><br>
-        Total stars earned: <strong>${studentState.totalStars || 0}</strong><br>
-        Overall accuracy: <strong>${accuracy}%</strong><br>
-        Last lesson: <strong>${studentState.lastLesson || "None yet"}</strong>
-      `;
-    }
+      if(query && !searchable.includes(query)) return;
 
-    function renderMap(){
-      mapGrid.innerHTML = "";
-      const topics = curriculum[currentGrade] || [];
+      matchCount++;
+      const unlocked = isTopicUnlocked(currentGrade, index);
+      const completed = isTopicCompleted(currentGrade, index);
+      const mastery = getTopicMastery(currentGrade, index);
+      const favorite = !!studentState.favorites[getTopicKey(currentGrade,index)];
 
-      topics.forEach((topic, index) => {
-        const unlocked = isTopicUnlocked(currentGrade, index);
-        const completed = isTopicCompleted(currentGrade, index);
-        const stars = getTopicStars(currentGrade, index);
-        const mastery = getTopicMastery(currentGrade, index);
+      const card = document.createElement("div");
+      card.className =
+        "topic-card" +
+        (index === currentTopicIndex ? " active" : "") +
+        (unlocked ? "" : " locked") +
+        (favorite ? " favorite" : "");
 
-        const card = document.createElement("button");
-        card.type = "button";
-        card.className =
-          "world-card" +
-          (unlocked ? "" : " locked") +
-          (index === currentTopicIndex ? " active" : "") +
-          (completed ? " completed" : "");
-
-        card.disabled = !unlocked;
-        card.innerHTML = `
-          <div class="world-top">
-            <strong>Level ${index + 1}</strong>
-            <span class="world-badge">${unlocked ? (completed ? "Completed" : "Unlocked") : "Locked"}</span>
-          </div>
-          <div><strong>${topic.title}</strong></div>
-          <div class="world-meta">${topic.difficulty} • ${topic.timeEstimate} • ${topic.questions.length} questions</div>
-          <div class="world-meta">Mastery: ${mastery}%</div>
-          <div class="stars-row">${renderStarString(stars)}</div>
-        `;
-
-        card.onclick = () => {
-          currentTopicIndex = index;
-          resetLessonSession();
-          certificateCard.style.display = "none";
-          incrementLessonOpenCount();
-          renderMap();
-          renderTopics();
-          renderLesson();
-          updateStats();
-          updateCoachMessage();
-          updateQuickSummary();
-        };
-
-        mapGrid.appendChild(card);
-      });
-    }
-
-    function renderTopics(){
-      const query = topicSearch.value.trim().toLowerCase();
-      topicList.innerHTML = "";
-      const topics = curriculum[currentGrade] || [];
-      let matchCount = 0;
-
-      topics.forEach((topic, index) => {
-        const searchable = [
-          topic.title,
-          topic.explanation,
-          ...(topic.vocabulary || []),
-          ...(topic.goals || [])
-        ].join(" ").toLowerCase();
-
-        if(query && !searchable.includes(query)) return;
-
-        matchCount++;
-        const unlocked = isTopicUnlocked(currentGrade, index);
-        const completed = isTopicCompleted(currentGrade, index);
-        const mastery = getTopicMastery(currentGrade, index);
-        const favorite = !!studentState.favorites[getTopicKey(currentGrade,index)];
-
-        const card = document.createElement("div");
-        card.className =
-          "topic-card" +
-          (index === currentTopicIndex ? " active" : "") +
-          (unlocked ? "" : " locked") +
-          (favorite ? " favorite" : "");
-
-        card.innerHTML = `
-          <h4>${topic.title}</h4>
-          <p>${topic.difficulty} • ${topic.questions.length} questions • Mastery ${mastery}% • ${completed ? "Completed" : unlocked ? "Unlocked" : "Locked"}</p>
-        `;
-
-        card.onclick = () => {
-          if(!unlocked){
-            playTone("locked");
-            showToast("This lesson is locked. Complete earlier lessons first.");
-            return;
-          }
-          currentTopicIndex = index;
-          resetLessonSession();
-          certificateCard.style.display = "none";
-          incrementLessonOpenCount();
-          renderMap();
-          renderTopics();
-          renderLesson();
-          updateStats();
-          updateCoachMessage();
-          updateQuickSummary();
-        };
-
-        topicList.appendChild(card);
-      });
-
-      if(matchCount === 0){
-        topicList.innerHTML = `<div class="topic-card"><h4>No topics found</h4><p>Try another keyword like fraction, decimal, regrouping, or percent.</p></div>`;
-      }
-    }
-
-    function renderLesson(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const mastery = getTopicMastery(currentGrade, currentTopicIndex);
-
-      lessonTitle.textContent = topic.title;
-      lessonGradePill.textContent = currentGrade;
-      lessonTopicPill.textContent = topic.title;
-      lessonDifficultyPill.textContent = topic.difficulty;
-      lessonLockPill.textContent = isTopicUnlocked(currentGrade, currentTopicIndex) ? "Unlocked" : "Locked";
-      lessonMasteryPill.textContent = `Mastery: ${mastery}%`;
-
-      lessonObjectives.innerHTML = `
-        <strong class="lesson-box-title">Learning Goals</strong>
-        <ul style="margin:0;padding-left:18px;">
-          ${topic.goals.map(goal => `<li>${escapeHTML(goal)}</li>`).join("")}
-        </ul>
+      card.innerHTML = `
+        <h4>${topic.title}</h4>
+        <p>${topic.difficulty} • ${topic.questions.length} questions • Mastery ${mastery}% • ${completed ? "Completed" : unlocked ? "Unlocked" : "Locked"}</p>
       `;
 
-      lessonVocabulary.innerHTML = `
-        <strong class="lesson-box-title">Key Vocabulary</strong>
-        ${topic.vocabulary.map(v => `<span class="badge" style="margin:4px 6px 0 0;display:inline-block;">${escapeHTML(v)}</span>`).join("")}
-      `;
+      card.onclick = () => {
+        if(!unlocked){
+          playTone("locked");
+          showToast("This lesson is locked. Complete earlier lessons first.");
+          return;
+        }
+        currentTopicIndex = index;
+        resetLessonSession();
+        certificateCard.style.display = "none";
+        incrementLessonOpenCount();
+        renderMap();
+        renderTopics();
+        renderLesson();
+        updateStats();
+        updateCoachMessage();
+        updateQuickSummary();
+      };
 
-      lessonExplanation.innerHTML = `
-        <strong class="lesson-box-title">Clear Explanation</strong>
-        ${escapeHTML(topic.explanation)}
-      `;
+      topicList.appendChild(card);
+    });
 
-      lessonExample.innerHTML = `
-        <strong class="lesson-box-title">Worked Example</strong>
-        ${escapeHTML(topic.example)}
-      `;
-
-      lessonTip.innerHTML = `
-        <strong class="lesson-box-title">Professor Pi Tip</strong>
-        ${escapeHTML(topic.tip)}
-      `;
-
-      updateBookmarkButton();
-      renderQuestion();
+    if(matchCount === 0){
+      topicList.innerHTML = `<div class="topic-card"><h4>No topics found</h4><p>Try another keyword like addition, fraction, decimal, percent, or ratio.</p></div>`;
     }
+  }
 
-    function renderQuestion(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const unlocked = isTopicUnlocked(currentGrade, currentTopicIndex);
+  function renderLesson(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const mastery = getTopicMastery(currentGrade, currentTopicIndex);
 
-      if(!unlocked){
-        questionText.textContent = "This lesson is locked. Finish earlier lessons to unlock it.";
-        optionsWrap.innerHTML = "";
-        feedback.textContent = "";
-        explanationBox.classList.add("hidden");
-        hintBox.classList.add("hidden");
-        progressFill.style.width = "0%";
-        progressText.textContent = "Lesson locked";
-        return;
-      }
+    lessonTitle.textContent = topic.title;
+    lessonGradePill.textContent = currentGrade;
+    lessonTopicPill.textContent = topic.title;
+    lessonDifficultyPill.textContent = topic.difficulty;
+    lessonLockPill.textContent = isTopicUnlocked(currentGrade, currentTopicIndex) ? "Unlocked" : "Locked";
+    lessonMasteryPill.textContent = `Mastery: ${mastery}%`;
 
-      const question = topic.questions[currentQuestionIndex];
-      questionText.textContent = question.q;
+    lessonObjectives.innerHTML = `
+      <strong class="lesson-box-title">Learning Goals</strong>
+      <ul style="margin:0;padding-left:18px;">
+        ${topic.goals.map(goal => `<li>${escapeHTML(goal)}</li>`).join("")}
+      </ul>
+    `;
+
+    lessonVocabulary.innerHTML = `
+      <strong class="lesson-box-title">Key Vocabulary</strong>
+      ${topic.vocabulary.map(v => `<span class="badge" style="margin:4px 6px 0 0;display:inline-block;">${escapeHTML(v)}</span>`).join("")}
+    `;
+
+    lessonExplanation.innerHTML = `
+      <strong class="lesson-box-title">Clear Explanation</strong>
+      ${escapeHTML(topic.explanation)}
+    `;
+
+    lessonExample.innerHTML = `
+      <strong class="lesson-box-title">Worked Example</strong>
+      ${escapeHTML(topic.example)}
+    `;
+
+    lessonTip.innerHTML = `
+      <strong class="lesson-box-title">Professor Pi Tip</strong>
+      ${escapeHTML(topic.tip)}
+    `;
+
+    updateBookmarkButton();
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const unlocked = isTopicUnlocked(currentGrade, currentTopicIndex);
+
+    if(!unlocked){
+      questionText.textContent = "This lesson is locked. Finish earlier lessons to unlock it.";
       optionsWrap.innerHTML = "";
       feedback.textContent = "";
-      feedback.className = "feedback";
       explanationBox.classList.add("hidden");
       hintBox.classList.add("hidden");
-      explanationBox.textContent = "";
-      hintBox.textContent = "";
-      answered = false;
-
-      question.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
-        optionsWrap.appendChild(btn);
-      });
-
-      const pct = (currentQuestionIndex / topic.questions.length) * 100;
-      progressFill.style.width = pct + "%";
-      progressText.textContent = `Question ${currentQuestionIndex + 1} of ${topic.questions.length}`;
-      updatePracticeMicroStats();
+      progressFill.style.width = "0%";
+      progressText.textContent = "Lesson locked";
+      return;
     }
 
-    function checkAnswer(selected){
-      if(answered) return;
-      answered = true;
+    const question = topic.questions[currentQuestionIndex];
+    questionText.textContent = question.q;
+    optionsWrap.innerHTML = "";
+    feedback.textContent = "";
+    feedback.className = "feedback";
+    explanationBox.classList.add("hidden");
+    hintBox.classList.add("hidden");
+    explanationBox.textContent = "";
+    hintBox.textContent = "";
+    answered = false;
 
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const question = topic.questions[currentQuestionIndex];
-      const optionButtons = [...document.querySelectorAll(".option-btn")];
+    question.options.forEach(option => {
+      const btn = document.createElement("button");
+      btn.className = "option-btn";
+      btn.textContent = option;
+      btn.onclick = () => checkAnswer(option);
+      optionsWrap.appendChild(btn);
+    });
 
-      optionButtons.forEach(btn => {
-        if(btn.textContent === question.answer) btn.classList.add("correct");
-        if(btn.textContent === selected && selected !== question.answer) btn.classList.add("wrong");
-        btn.disabled = true;
-      });
+    const pct = (currentQuestionIndex / topic.questions.length) * 100;
+    progressFill.style.width = pct + "%";
+    progressText.textContent = `Question ${currentQuestionIndex + 1} of ${topic.questions.length}`;
+    updatePracticeMicroStats();
+  }
 
-      studentState.totalAnswered = (studentState.totalAnswered || 0) + 1;
+  function checkAnswer(selected){
+    if(answered) return;
+    answered = true;
 
-      if(selected === question.answer){
-        lessonCorrect++;
-        studentState.totalCorrect = (studentState.totalCorrect || 0) + 1;
-        studentState.totalXP = (studentState.totalXP || 0) + 10;
-        feedback.textContent = "Correct! Great job.";
-        feedback.classList.add("ok");
-        playTone("success");
-      }else{
-        feedback.textContent = "Not quite. Review the explanation below.";
-        feedback.classList.add("no");
-        playTone("wrong");
-      }
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const question = topic.questions[currentQuestionIndex];
+    const optionButtons = [...document.querySelectorAll(".option-btn")];
 
-      explanationBox.classList.remove("hidden");
-      explanationBox.innerHTML = `<strong class="lesson-box-title">Explanation</strong>${escapeHTML(question.explain)}`;
-      saveProgress();
-      updateStats();
-      updateDashboard();
-      updatePracticeMicroStats();
+    optionButtons.forEach(btn => {
+      if(btn.textContent === question.answer) btn.classList.add("correct");
+      if(btn.textContent === selected && selected !== question.answer) btn.classList.add("wrong");
+      btn.disabled = true;
+    });
+
+    studentState.totalAnswered = (studentState.totalAnswered || 0) + 1;
+
+    if(selected === question.answer){
+      lessonCorrect++;
+      studentState.totalCorrect = (studentState.totalCorrect || 0) + 1;
+      studentState.totalXP = (studentState.totalXP || 0) + 10;
+      feedback.textContent = "Correct! Great job.";
+      feedback.classList.add("ok");
+      playTone("success");
+    }else{
+      feedback.textContent = "Not quite. Review the explanation below.";
+      feedback.classList.add("no");
+      playTone("wrong");
     }
 
-    function nextQuestion(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+    explanationBox.classList.remove("hidden");
+    explanationBox.innerHTML = `<strong class="lesson-box-title">Explanation</strong>${escapeHTML(question.explain)}`;
+    saveProgress();
+    updateStats();
+    updateDashboard();
+    updatePracticeMicroStats();
+  }
 
-      if(!answered){
-        showToast("Answer the current question first.");
+  function nextQuestion(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+
+    if(!answered){
+      showToast("Answer the current question first.");
+      return;
+    }
+
+    if(currentQuestionIndex < topic.questions.length - 1){
+      currentQuestionIndex++;
+      renderQuestion();
+    }else{
+      finishLesson();
+    }
+  }
+
+  function showHint(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+
+    const question = topic.questions[currentQuestionIndex];
+    hintBox.classList.remove("hidden");
+    hintBox.innerHTML = `<strong class="lesson-box-title">Hint</strong>${escapeHTML(question.hint)}`;
+    playTone("hint");
+  }
+
+  function finishLesson(){
+    if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
+
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const totalQuestions = topic.questions.length;
+    const mastery = Math.round((lessonCorrect / totalQuestions) * 100);
+    const stars = mastery >= 90 ? 3 : mastery >= 70 ? 2 : 1;
+    const topicKey = getTopicKey(currentGrade, currentTopicIndex);
+    const previousStars = studentState.starsByTopic[topicKey] || 0;
+    const previousMastery = studentState.mastery[topicKey] || 0;
+    const name = studentName.value.trim() || studentState.name || "Math Star";
+
+    studentState.name = name;
+    studentState.goal = learningGoalInput.value.trim();
+    studentState.grade = currentGrade;
+    studentState.lastLesson = topic.title;
+    studentState.completed[topicKey] = true;
+    studentState.mastery[topicKey] = Math.max(previousMastery, mastery);
+
+    if(stars > previousStars){
+      studentState.totalStars = (studentState.totalStars || 0) + (stars - previousStars);
+      studentState.starsByTopic[topicKey] = stars;
+    }
+
+    studentState.totalXP = (studentState.totalXP || 0) + 25;
+    unlockNextTopic();
+    progressFill.style.width = "100%";
+    progressText.textContent = `Completed ${totalQuestions} of ${totalQuestions} questions`;
+
+    certName.textContent = name;
+    certTopic.textContent = topic.title;
+    certGrade.textContent = currentGrade;
+    certStars.textContent = `${stars} Star${stars > 1 ? "s" : ""}`;
+    certMastery.textContent = `Mastery ${mastery}%`;
+    certificateCard.style.display = "block";
+
+    saveProgress();
+    renderMap();
+    renderTopics();
+    renderStudentSummary();
+    updateStats();
+    updateDashboard();
+    updateCoachMessage();
+    updateQuickSummary();
+    updateBadges();
+    updateSpotlight();
+    playTone("finish");
+    launchConfetti();
+    certificateCard.scrollIntoView({behavior:"smooth", block:"start"});
+
+    showToast(`Lesson complete! You earned ${stars} star${stars > 1 ? "s" : ""} and reached ${mastery}% mastery.`);
+  }
+
+  function unlockNextTopic(){
+    const topics = curriculum[currentGrade];
+    const nextIndex = currentTopicIndex + 1;
+    if(nextIndex < topics.length){
+      studentState.unlocked[getTopicKey(currentGrade, nextIndex)] = true;
+    }
+  }
+
+  function resetLesson(){
+    resetLessonSession();
+    certificateCard.style.display = "none";
+    renderLesson();
+    updateStats();
+    playTone("reset");
+    showToast("Lesson reset.");
+  }
+
+  function resetLessonSession(resetIndex = true){
+    if(resetIndex) currentQuestionIndex = 0;
+    lessonCorrect = 0;
+    answered = false;
+    lessonSeconds = 0;
+    startLessonTimer();
+    updatePracticeMicroStats();
+  }
+
+  function updateStats(){
+    statStudent.textContent = studentState.name || "Guest";
+    statGrade.textContent = currentGrade.replace("Grade ","");
+    statXP.textContent = studentState.totalXP || 0;
+    statStars.textContent = studentState.totalStars || 0;
+  }
+
+  function updateDashboard(){
+    dashCompleted.textContent = getCompletedCount();
+    dashUnlocked.textContent = getUnlockedCount(currentGrade);
+    dashAccuracy.textContent = getAccuracy() + "%";
+    dashLastLesson.textContent = studentState.lastLesson || "—";
+    dashGoal.textContent = studentState.goal || "—";
+  }
+
+  function updateCoachMessage(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const mastery = getTopicMastery(currentGrade, currentTopicIndex);
+    let message = "";
+
+    if(!studentState.name){
+      message = "Welcome! Start by saving a student name so progress can be tracked on this device.";
+    }else if(mastery >= 90){
+      message = `Excellent work, ${studentState.name}. You already have strong mastery in ${topic.title}. You can review it or move to the next unlocked lesson.`;
+    }else if(mastery >= 60){
+      message = `Good progress, ${studentState.name}. Keep practicing ${topic.title} to improve fluency and accuracy.`;
+    }else{
+      message = `Today’s focus is ${topic.title}. Read the explanation carefully, use the hint when needed, and aim for stronger mastery.`;
+    }
+
+    coachMessage.innerHTML = `<strong class="lesson-box-title">Professor Pi Coach Message</strong>${escapeHTML(message)}`;
+  }
+
+  function updateQuickSummary(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const mastery = getTopicMastery(currentGrade, currentTopicIndex);
+    const favorite = studentState.favorites[getTopicKey(currentGrade, currentTopicIndex)] ? "Yes" : "No";
+
+    quickSummary.innerHTML = `
+      <strong>Continue Learning:</strong><br>
+      Topic: <strong>${escapeHTML(topic.title)}</strong><br>
+      Difficulty: <strong>${escapeHTML(topic.difficulty)}</strong><br>
+      Time estimate: <strong>${escapeHTML(topic.timeEstimate)}</strong><br>
+      Current mastery: <strong>${mastery}%</strong><br>
+      Favorite: <strong>${favorite}</strong>
+    `;
+  }
+
+  function updateBadges(){
+    const completed = getCompletedCount();
+    const accuracy = getAccuracy();
+    const stars = studentState.totalStars || 0;
+    const opened = studentState.totalLessonsOpened || 0;
+    const xp = studentState.totalXP || 0;
+
+    const badgeStarter = document.getElementById("badgeStarter");
+    const badgeExplorer = document.getElementById("badgeExplorer");
+    const badgeAccuracy = document.getElementById("badgeAccuracy");
+    const badgeChampion = document.getElementById("badgeChampion");
+
+    badgeStarter.classList.toggle("locked", completed < 1);
+    badgeExplorer.classList.toggle("locked", opened < 3);
+    badgeAccuracy.classList.toggle("locked", !(accuracy >= 80 && (studentState.totalAnswered || 0) >= 8));
+    badgeChampion.classList.toggle("locked", !(stars >= 8 || xp >= 150));
+  }
+
+  function updateSpotlight(){
+    spotlightStreak.textContent = studentState.streak || 0;
+    spotlightSession.textContent = Math.floor((Date.now() - sessionStartedAt) / 60000) + "m";
+    spotlightMastery.textContent = getAverageMastery() + "%";
+    spotlightBadges.textContent = getBadgeCount();
+  }
+
+  function updatePracticeMicroStats(){
+    const topic = curriculum[currentGrade][currentTopicIndex];
+    const totalQuestions = topic.questions.length;
+    const starsPreview = totalQuestions ? (lessonCorrect / totalQuestions) : 0;
+    let previewStars = 0;
+    if(starsPreview >= 0.9) previewStars = 3;
+    else if(starsPreview >= 0.7) previewStars = 2;
+    else if(lessonCorrect > 0) previewStars = 1;
+
+    practiceStars.textContent = `Lesson Stars: ${previewStars}`;
+    practiceCorrect.textContent = `Correct: ${lessonCorrect}`;
+    practiceTimer.textContent = `Time: ${lessonSeconds}s`;
+  }
+
+  function getAverageMastery(){
+    const values = Object.values(studentState.mastery || {});
+    if(!values.length) return 0;
+    return Math.round(values.reduce((a,b) => a+b, 0) / values.length);
+  }
+
+  function renderStarString(count){
+    return "★".repeat(count) + "☆".repeat(3 - count);
+  }
+
+  function incrementLessonOpenCount(){
+    studentState.totalLessonsOpened = (studentState.totalLessonsOpened || 0) + 1;
+    saveProgress();
+    updateBadges();
+    updateSpotlight();
+  }
+
+  function goPrevTopic(){
+    for(let i = currentTopicIndex - 1; i >= 0; i--){
+      if(isTopicUnlocked(currentGrade, i)){
+        currentTopicIndex = i;
+        resetLessonSession();
+        certificateCard.style.display = "none";
+        renderMap();
+        renderTopics();
+        renderLesson();
+        updateStats();
+        updateCoachMessage();
+        updateQuickSummary();
         return;
       }
-
-      if(currentQuestionIndex < topic.questions.length - 1){
-        currentQuestionIndex++;
-        renderQuestion();
-      }else{
-        finishLesson();
-      }
     }
+    playTone("locked");
+  }
 
-    function showHint(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
-
-      const question = topic.questions[currentQuestionIndex];
-      hintBox.classList.remove("hidden");
-      hintBox.innerHTML = `<strong class="lesson-box-title">Hint</strong>${escapeHTML(question.hint)}`;
-      playTone("hint");
-    }
-
-    function finishLesson(){
-      if(!isTopicUnlocked(currentGrade, currentTopicIndex)) return;
-
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const totalQuestions = topic.questions.length;
-      const mastery = Math.round((lessonCorrect / totalQuestions) * 100);
-      const stars = mastery >= 90 ? 3 : mastery >= 70 ? 2 : 1;
-      const topicKey = getTopicKey(currentGrade, currentTopicIndex);
-      const previousStars = studentState.starsByTopic[topicKey] || 0;
-      const previousMastery = studentState.mastery[topicKey] || 0;
-      const name = studentName.value.trim() || studentState.name || "Math Star";
-
-      studentState.name = name;
-      studentState.goal = learningGoalInput.value.trim();
-      studentState.grade = currentGrade;
-      studentState.lastLesson = topic.title;
-      studentState.completed[topicKey] = true;
-      studentState.mastery[topicKey] = Math.max(previousMastery, mastery);
-
-      if(stars > previousStars){
-        studentState.totalStars = (studentState.totalStars || 0) + (stars - previousStars);
-        studentState.starsByTopic[topicKey] = stars;
-      }
-
-      studentState.totalXP = (studentState.totalXP || 0) + 25;
-      unlockNextTopic();
-      progressFill.style.width = "100%";
-      progressText.textContent = `Completed ${totalQuestions} of ${totalQuestions} questions`;
-
-      certName.textContent = name;
-      certTopic.textContent = topic.title;
-      certGrade.textContent = currentGrade;
-      certStars.textContent = `${stars} Star${stars > 1 ? "s" : ""}`;
-      certMastery.textContent = `Mastery ${mastery}%`;
-      certificateCard.style.display = "block";
-
-      saveProgress();
-      renderMap();
-      renderTopics();
-      renderStudentSummary();
-      updateStats();
-      updateDashboard();
-      updateCoachMessage();
-      updateQuickSummary();
-      updateBadges();
-      updateSpotlight();
-      playTone("finish");
-      launchConfetti();
-      certificateCard.scrollIntoView({behavior:"smooth", block:"start"});
-
-      showToast(`Lesson complete! You earned ${stars} star${stars > 1 ? "s" : ""} and reached ${mastery}% mastery.`);
-    }
-
-    function unlockNextTopic(){
-      const topics = curriculum[currentGrade];
-      const nextIndex = currentTopicIndex + 1;
-      if(nextIndex < topics.length){
-        studentState.unlocked[getTopicKey(currentGrade, nextIndex)] = true;
-      }
-    }
-
-    function resetLesson(){
-      resetLessonSession();
-      certificateCard.style.display = "none";
-      renderLesson();
-      updateStats();
-      playTone("reset");
-      showToast("Lesson reset.");
-    }
-
-    function resetLessonSession(resetIndex = true){
-      if(resetIndex) currentQuestionIndex = 0;
-      lessonCorrect = 0;
-      answered = false;
-      lessonSeconds = 0;
-      startLessonTimer();
-      updatePracticeMicroStats();
-    }
-
-    function updateStats(){
-      statStudent.textContent = studentState.name || "Guest";
-      statGrade.textContent = currentGrade.replace("Grade ","");
-      statXP.textContent = studentState.totalXP || 0;
-      statStars.textContent = studentState.totalStars || 0;
-    }
-
-    function updateDashboard(){
-      dashCompleted.textContent = getCompletedCount();
-      dashUnlocked.textContent = getUnlockedCount(currentGrade);
-      dashAccuracy.textContent = getAccuracy() + "%";
-      dashLastLesson.textContent = studentState.lastLesson || "—";
-      dashGoal.textContent = studentState.goal || "—";
-    }
-
-    function updateCoachMessage(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const mastery = getTopicMastery(currentGrade, currentTopicIndex);
-      let message = "";
-
-      if(!studentState.name){
-        message = "Welcome! Start by saving a student name so progress can be tracked on this device.";
-      }else if(mastery >= 90){
-        message = `Excellent work, ${studentState.name}. You already have strong mastery in ${topic.title}. You can review it or move to the next unlocked lesson.`;
-      }else if(mastery >= 60){
-        message = `Good progress, ${studentState.name}. Keep practicing ${topic.title} to improve fluency and accuracy.`;
-      }else{
-        message = `Today’s focus is ${topic.title}. Read the explanation carefully, use the hint when needed, and aim for stronger mastery.`;
-      }
-
-      coachMessage.innerHTML = `<strong class="lesson-box-title">Professor Pi Coach Message</strong>${escapeHTML(message)}`;
-    }
-
-    function updateQuickSummary(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const mastery = getTopicMastery(currentGrade, currentTopicIndex);
-      const favorite = studentState.favorites[getTopicKey(currentGrade, currentTopicIndex)] ? "Yes" : "No";
-
-      quickSummary.innerHTML = `
-        <strong>Continue Learning:</strong><br>
-        Topic: <strong>${escapeHTML(topic.title)}</strong><br>
-        Difficulty: <strong>${escapeHTML(topic.difficulty)}</strong><br>
-        Time estimate: <strong>${escapeHTML(topic.timeEstimate)}</strong><br>
-        Current mastery: <strong>${mastery}%</strong><br>
-        Favorite: <strong>${favorite}</strong>
-      `;
-    }
-
-    function updateBadges(){
-      const completed = getCompletedCount();
-      const accuracy = getAccuracy();
-      const stars = studentState.totalStars || 0;
-      const opened = studentState.totalLessonsOpened || 0;
-      const xp = studentState.totalXP || 0;
-
-      const badgeStarter = document.getElementById("badgeStarter");
-      const badgeExplorer = document.getElementById("badgeExplorer");
-      const badgeAccuracy = document.getElementById("badgeAccuracy");
-      const badgeChampion = document.getElementById("badgeChampion");
-
-      badgeStarter.classList.toggle("locked", completed < 1);
-      badgeExplorer.classList.toggle("locked", opened < 3);
-      badgeAccuracy.classList.toggle("locked", !(accuracy >= 80 && (studentState.totalAnswered || 0) >= 8));
-      badgeChampion.classList.toggle("locked", !(stars >= 8 || xp >= 150));
-    }
-
-    function updateSpotlight(){
-      spotlightStreak.textContent = studentState.streak || 0;
-      spotlightSession.textContent = Math.floor((Date.now() - sessionStartedAt) / 60000) + "m";
-      spotlightMastery.textContent = getAverageMastery() + "%";
-      spotlightBadges.textContent = getBadgeCount();
-    }
-
-    function updatePracticeMicroStats(){
-      const topic = curriculum[currentGrade][currentTopicIndex];
-      const totalQuestions = topic.questions.length;
-      const starsPreview = totalQuestions ? (lessonCorrect / totalQuestions) : 0;
-      let previewStars = 0;
-      if(starsPreview >= 0.9) previewStars = 3;
-      else if(starsPreview >= 0.7) previewStars = 2;
-      else if(lessonCorrect > 0) previewStars = 1;
-
-      practiceStars.textContent = `Lesson Stars: ${previewStars}`;
-      practiceCorrect.textContent = `Correct: ${lessonCorrect}`;
-      practiceTimer.textContent = `Time: ${lessonSeconds}s`;
-    }
-
-    function getAverageMastery(){
-      const values = Object.values(studentState.mastery || {});
-      if(!values.length) return 0;
-      return Math.round(values.reduce((a,b) => a+b, 0) / values.length);
-    }
-
-    function renderStarString(count){
-      return "★".repeat(count) + "☆".repeat(3 - count);
-    }
-
-    function incrementLessonOpenCount(){
-      studentState.totalLessonsOpened = (studentState.totalLessonsOpened || 0) + 1;
-      saveProgress();
-      updateBadges();
-      updateSpotlight();
-    }
-
-    function goPrevTopic(){
-      for(let i = currentTopicIndex - 1; i >= 0; i--){
-        if(isTopicUnlocked(currentGrade, i)){
-          currentTopicIndex = i;
-          resetLessonSession();
-          certificateCard.style.display = "none";
-          renderMap();
-          renderTopics();
-          renderLesson();
-          updateStats();
-          updateCoachMessage();
-          updateQuickSummary();
-          return;
-        }
-      }
-      playTone("locked");
-    }
-
-    function goNextTopic(){
-      const topics = curriculum[currentGrade];
-      for(let i = currentTopicIndex + 1; i < topics.length; i++){
-        if(isTopicUnlocked(currentGrade, i)){
-          currentTopicIndex = i;
-          resetLessonSession();
-          certificateCard.style.display = "none";
-          renderMap();
-          renderTopics();
-          renderLesson();
-          updateStats();
-          updateCoachMessage();
-          updateQuickSummary();
-          return;
-        }
-      }
-      playTone("locked");
-      showToast("No further unlocked lesson yet.");
-    }
-
-    function toggleFavoriteCurrentTopic(){
-      const key = getTopicKey(currentGrade, currentTopicIndex);
-      studentState.favorites[key] = !studentState.favorites[key];
-      saveProgress();
-      renderTopics();
-      updateBookmarkButton();
-      updateQuickSummary();
-      showToast(studentState.favorites[key] ? "Topic added to favorites." : "Topic removed from favorites.");
-      playTone("hint");
-    }
-
-    function updateBookmarkButton(){
-      const key = getTopicKey(currentGrade, currentTopicIndex);
-      const favorite = !!studentState.favorites[key];
-      bookmarkBtn.textContent = favorite ? "★ Saved Topic" : "☆ Save Topic";
-      favoriteTopicBtn.textContent = favorite ? "★ Favorited" : "★ Favorite Topic";
-    }
-
-    function printCertificate(){
-      if(certificateCard.style.display === "none" || certificateCard.style.display === ""){
-        alert("Please finish the lesson first to unlock the certificate.");
+  function goNextTopic(){
+    const topics = curriculum[currentGrade];
+    for(let i = currentTopicIndex + 1; i < topics.length; i++){
+      if(isTopicUnlocked(currentGrade, i)){
+        currentTopicIndex = i;
+        resetLessonSession();
+        certificateCard.style.display = "none";
+        renderMap();
+        renderTopics();
+        renderLesson();
+        updateStats();
+        updateCoachMessage();
+        updateQuickSummary();
         return;
       }
-      window.print();
     }
+    playTone("locked");
+    showToast("No further unlocked lesson yet.");
+  }
 
-    function scrollToTutorial(){
-      document.getElementById("tutorialSection").scrollIntoView({behavior:"smooth"});
+  function toggleFavoriteCurrentTopic(){
+    const key = getTopicKey(currentGrade, currentTopicIndex);
+    studentState.favorites[key] = !studentState.favorites[key];
+    saveProgress();
+    renderTopics();
+    updateBookmarkButton();
+    updateQuickSummary();
+    showToast(studentState.favorites[key] ? "Topic added to favorites." : "Topic removed from favorites.");
+    playTone("hint");
+  }
+
+  function updateBookmarkButton(){
+    const key = getTopicKey(currentGrade, currentTopicIndex);
+    const favorite = !!studentState.favorites[key];
+    bookmarkBtn.textContent = favorite ? "★ Saved Topic" : "☆ Save Topic";
+    favoriteTopicBtn.textContent = favorite ? "★ Favorited" : "★ Favorite Topic";
+  }
+
+  function printCertificate(){
+    if(certificateCard.style.display === "none" || certificateCard.style.display === ""){
+      alert("Please finish the lesson first to unlock the certificate.");
+      return;
     }
+    window.print();
+  }
 
-    function scrollToLogin(){
-      document.getElementById("loginSection").scrollIntoView({behavior:"smooth"});
+  function scrollToTutorial(){
+    document.getElementById("tutorialSection").scrollIntoView({behavior:"smooth"});
+  }
+
+  function scrollToLogin(){
+    document.getElementById("loginSection").scrollIntoView({behavior:"smooth"});
+  }
+
+  function jumpToMap(){
+    document.getElementById("mapSection").scrollIntoView({behavior:"smooth"});
+  }
+
+  function focusCurrentTopic(){
+    document.getElementById("tutorialSection").scrollIntoView({behavior:"smooth"});
+  }
+
+  function toggleSound(){
+    soundOn = !soundOn;
+    soundToggleBtn.textContent = soundOn ? "🔊 Sound On" : "🔇 Sound Off";
+    showToast(soundOn ? "Sound enabled." : "Sound disabled.");
+  }
+
+  function startLessonTimer(){
+    if(lessonTimer) clearInterval(lessonTimer);
+    lessonTimer = setInterval(() => {
+      lessonSeconds++;
+      updatePracticeMicroStats();
+      updateSpotlight();
+    }, 1000);
+  }
+
+  function playTone(type){
+    if(!soundOn) return;
+
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if(!AudioContextClass) return;
+
+    const ctx = new AudioContextClass();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    const tones = {
+      success:[660,0.12],
+      wrong:[220,0.18],
+      hint:[520,0.08],
+      finish:[880,0.22],
+      locked:[180,0.15],
+      reset:[300,0.08]
+    };
+
+    const [freq, dur] = tones[type] || [440,0.1];
+    osc.type = "sine";
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
+    osc.start();
+    osc.stop(ctx.currentTime + dur + 0.02);
+    osc.onended = () => ctx.close();
+  }
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  function launchConfetti(){
+    confettiWrap.innerHTML = "";
+    const colors = ["#0f6fff","#ffbf3f","#7f5cff","#21b66f","#ff7cb4"];
+    for(let i = 0; i < 32; i++){
+      const piece = document.createElement("div");
+      piece.className = "confetti";
+      piece.style.left = Math.random() * 100 + "vw";
+      piece.style.top = (-10 - Math.random() * 20) + "px";
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDuration = (2.4 + Math.random() * 1.9) + "s";
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      confettiWrap.appendChild(piece);
     }
+    setTimeout(() => confettiWrap.innerHTML = "", 4200);
+  }
 
-    function jumpToMap(){
-      document.getElementById("mapSection").scrollIntoView({behavior:"smooth"});
-    }
+  function escapeHTML(str){
+    return String(str)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#39;");
+  }
 
-    function focusCurrentTopic(){
-      document.getElementById("tutorialSection").scrollIntoView({behavior:"smooth"});
-    }
+  window.showHint = showHint;
+  window.nextQuestion = nextQuestion;
+  window.finishLesson = finishLesson;
+  window.resetLesson = resetLesson;
+  window.printCertificate = printCertificate;
+  window.scrollToTutorial = scrollToTutorial;
+  window.scrollToLogin = scrollToLogin;
+  window.jumpToMap = jumpToMap;
+  window.focusCurrentTopic = focusCurrentTopic;
 
-    function toggleSound(){
-      soundOn = !soundOn;
-      soundToggleBtn.textContent = soundOn ? "🔊 Sound On" : "🔇 Sound Off";
-      showToast(soundOn ? "Sound enabled." : "Sound disabled.");
-    }
-
-    function startLessonTimer(){
-      if(lessonTimer) clearInterval(lessonTimer);
-      lessonTimer = setInterval(() => {
-        lessonSeconds++;
-        updatePracticeMicroStats();
-        updateSpotlight();
-      }, 1000);
-    }
-
-    function playTone(type){
-      if(!soundOn) return;
-
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if(!AudioContextClass) return;
-
-      const ctx = new AudioContextClass();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      const tones = {
-        success:[660,0.12],
-        wrong:[220,0.18],
-        hint:[520,0.08],
-        finish:[880,0.22],
-        locked:[180,0.15],
-        reset:[300,0.08]
-      };
-
-      const [freq, dur] = tones[type] || [440,0.1];
-      osc.type = "sine";
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
-      osc.start();
-      osc.stop(ctx.currentTime + dur + 0.02);
-      osc.onended = () => ctx.close();
-    }
-
-    function showToast(message){
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(showToast._timer);
-      showToast._timer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2600);
-    }
-
-    function launchConfetti(){
-      confettiWrap.innerHTML = "";
-      const colors = ["#0f6fff","#ffbf3f","#7f5cff","#21b66f","#ff7cb4"];
-      for(let i = 0; i < 32; i++){
-        const piece = document.createElement("div");
-        piece.className = "confetti";
-        piece.style.left = Math.random() * 100 + "vw";
-        piece.style.top = (-10 - Math.random() * 20) + "px";
-        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDuration = (2.4 + Math.random() * 1.9) + "s";
-        piece.style.transform = `rotate(${Math.random()*360}deg)`;
-        confettiWrap.appendChild(piece);
-      }
-      setTimeout(() => confettiWrap.innerHTML = "", 4200);
-    }
-
-    function escapeHTML(str){
-      return String(str)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#39;");
-    }
-
-    window.showHint = showHint;
-    window.nextQuestion = nextQuestion;
-    window.finishLesson = finishLesson;
-    window.resetLesson = resetLesson;
-    window.printCertificate = printCertificate;
-    window.scrollToTutorial = scrollToTutorial;
-    window.scrollToLogin = scrollToLogin;
-    window.jumpToMap = jumpToMap;
-    window.focusCurrentTopic = focusCurrentTopic;
-
-    init();
-  </script>
+  init();
+</script>
 </body>
 </html>
