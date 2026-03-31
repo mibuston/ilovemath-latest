@@ -836,950 +836,2153 @@
     </div>
   </div>
 
-  <script>
-    const gradeLabels = {
-      k2: "Kinder–Grade 2",
-      g35: "Grades 3–5",
-      g68: "Grades 6–8",
-      g912: "Grades 9–12"
-    };
+ <script>
+  const gradeLabels = {
+    k: "Kindergarten",
+    g1: "Grade 1",
+    g2: "Grade 2",
+    g3: "Grade 3",
+    g4: "Grade 4",
+    g5: "Grade 5",
+    g6: "Grade 6"
+  };
 
-    const difficultyConfig = {
-      easy:   { time: 40, points: 10, label: "Easy" },
-      medium: { time: 30, points: 15, label: "Medium" },
-      hard:   { time: 20, points: 20, label: "Hard" }
-    };
+  const difficultyConfig = {
+    easy:   { time: 45, points: 10, label: "Easy" },
+    medium: { time: 35, points: 15, label: "Medium" },
+    hard:   { time: 25, points: 20, label: "Hard" }
+  };
 
-    const puzzleBank = {
-      k2: {
-        easy: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Count by 2.",
-            visual: { kind: "pattern", values: [2,4,6,"?"] },
-            options: ["7","8","10","12"],
-            answer: "8",
-            explanation: "The pattern goes up by 2 each time: 2, 4, 6, 8."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "5 + ? = 9",
-            subtext: "Find the missing number.",
-            visual: { kind: "pattern", values: ["5","+","?","=","9"] },
-            options: ["2","3","4","5"],
-            answer: "4",
-            explanation: "5 + 4 = 9."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which number is the biggest?",
-            subtext: "Choose the greatest number.",
-            visual: { kind: "logic", items: ["3", "8", "5"] },
-            options: ["3","8","5","2"],
-            answer: "8",
-            explanation: "8 is greater than 3, 5, and 2."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Count in order.",
-            visual: { kind: "grid", values: [1,2,3,4,"?",6,7,8,9] },
-            options: ["4","5","6","7"],
-            answer: "5",
-            explanation: "The numbers are in order from 1 to 9, so the missing number is 5."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 3 + 2 = 5",
-            subtext: "Pick the correct answer.",
-            visual: { kind: "logic", items: ["3 + 2 = 5"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "3 + 2 really does equal 5."
-          }
-        ],
-        medium: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Count by 5.",
-            visual: { kind: "pattern", values: [5,10,15,"?"] },
-            options: ["18","20","25","30"],
-            answer: "20",
-            explanation: "The pattern adds 5 each time."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "? + 7 = 12",
-            subtext: "Find the missing addend.",
-            visual: { kind: "pattern", values: ["?","+","7","=","12"] },
-            options: ["3","4","5","6"],
-            answer: "5",
-            explanation: "5 + 7 = 12."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which number is even?",
-            subtext: "Choose the number divisible by 2.",
-            visual: { kind: "logic", items: ["3", "7", "8", "9"] },
-            options: ["3","7","8","9"],
-            answer: "8",
-            explanation: "8 is even because it can be split into 2 equal groups."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Numbers increase by 1.",
-            visual: { kind: "grid", values: [10,11,12,13,14,15,16,"?",18] },
-            options: ["15","16","17","19"],
-            answer: "17",
-            explanation: "The missing number between 16 and 18 is 17."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 9 - 4 = 6",
-            subtext: "Check the subtraction.",
-            visual: { kind: "logic", items: ["9 - 4 = 6"] },
-            options: ["True","False"],
-            answer: "False",
-            explanation: "9 - 4 = 5, not 6."
-          }
-        ],
-        hard: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Add 3 each time.",
-            visual: { kind: "pattern", values: [4,7,10,"?"] },
-            options: ["11","12","13","14"],
-            answer: "13",
-            explanation: "4, 7, 10, 13 increases by 3 each step."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "2 + ? + 3 = 10",
-            subtext: "Find the missing number.",
-            visual: { kind: "pattern", values: ["2","+","?","+","3","=","10"] },
-            options: ["4","5","6","7"],
-            answer: "5",
-            explanation: "2 + 5 + 3 = 10."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which number does not belong?",
-            subtext: "Three numbers are even.",
-            visual: { kind: "logic", items: ["2", "4", "6", "7"] },
-            options: ["2","4","6","7"],
-            answer: "7",
-            explanation: "7 is odd while the others are even."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Count by 2.",
-            visual: { kind: "grid", values: [2,4,6,8,10,12,14,"?",18] },
-            options: ["15","16","17","20"],
-            answer: "16",
-            explanation: "The pattern is counting by 2."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 4 + 4 + 4 = 11",
-            subtext: "Add carefully.",
-            visual: { kind: "logic", items: ["4 + 4 + 4 = 11"] },
-            options: ["True","False"],
-            answer: "False",
-            explanation: "4 + 4 + 4 = 12."
-          }
-        ]
-      },
+  const topicConfig = {
+    k: [
+      { id:"counting-1", name:"Counting to 20", kind:"counting_to_20" },
+      { id:"before-after", name:"Before and After", kind:"before_after" },
+      { id:"patterns", name:"Simple Patterns", kind:"simple_patterns" },
+      { id:"compare", name:"Compare Numbers", kind:"compare_numbers" },
+      { id:"shapes", name:"Shape Logic", kind:"shape_logic" },
+      { id:"more-less", name:"More or Less", kind:"more_less" },
+      { id:"simple-add", name:"Simple Addition", kind:"simple_add" },
+      { id:"simple-sub", name:"Simple Subtraction", kind:"simple_sub" },
+      { id:"sorting", name:"Sorting Numbers", kind:"sorting_numbers" },
+      { id:"ten-frame", name:"Make 10", kind:"make_ten" }
+    ],
+    g1: [
+      { id:"add-20", name:"Addition Within 20", kind:"add_within_20" },
+      { id:"sub-20", name:"Subtraction Within 20", kind:"sub_within_20" },
+      { id:"number-bonds", name:"Number Bonds", kind:"number_bonds" },
+      { id:"place-value", name:"Place Value", kind:"place_value_tens_ones" },
+      { id:"compare", name:"Comparing Numbers", kind:"compare_numbers_99" },
+      { id:"time", name:"Time to the Hour", kind:"time_hour" },
+      { id:"shapes", name:"2D Shapes", kind:"shapes_2d" },
+      { id:"measure", name:"Length Logic", kind:"length_compare" },
+      { id:"word", name:"Word Puzzles", kind:"word_add_sub_1" },
+      { id:"missing", name:"Missing Numbers", kind:"missing_number_line_1" }
+    ],
+    g2: [
+      { id:"add-regroup", name:"Addition Regrouping", kind:"add_regroup_2d" },
+      { id:"sub-regroup", name:"Subtraction Regrouping", kind:"sub_regroup_2d" },
+      { id:"skip", name:"Skip Counting", kind:"skip_counting" },
+      { id:"money", name:"Money Puzzles", kind:"money_values" },
+      { id:"measure", name:"Measurement", kind:"measurement_compare" },
+      { id:"place", name:"Place Value to 1000", kind:"place_value_1000" },
+      { id:"time", name:"Time and Minutes", kind:"time_minutes" },
+      { id:"fractions", name:"Fraction Basics", kind:"fraction_basics" },
+      { id:"shapes", name:"Geometry Logic", kind:"geometry_logic_2" },
+      { id:"word", name:"Word Puzzles", kind:"word_add_sub_2" }
+    ],
+    g3: [
+      { id:"mult", name:"Multiplication Facts", kind:"multiplication_facts" },
+      { id:"div", name:"Division Facts", kind:"division_facts" },
+      { id:"fractions", name:"Fractions", kind:"fraction_compare_basic" },
+      { id:"area", name:"Area", kind:"area_rectangles" },
+      { id:"perimeter", name:"Perimeter", kind:"perimeter_rectangles" },
+      { id:"time", name:"Elapsed Time", kind:"elapsed_time_basic" },
+      { id:"place", name:"Place Value", kind:"place_value_10000" },
+      { id:"geometry", name:"Angles and Shapes", kind:"angles_shapes_3" },
+      { id:"logic", name:"Logic Grids", kind:"logic_grid_sequence" },
+      { id:"word", name:"Word Problems", kind:"word_mult_div_3" }
+    ],
+    g4: [
+      { id:"multi", name:"Multi-Digit Multiplication", kind:"multi_digit_mult" },
+      { id:"division", name:"Long Division Logic", kind:"division_whole_number" },
+      { id:"eq-frac", name:"Equivalent Fractions", kind:"equivalent_fractions" },
+      { id:"cmp-frac", name:"Comparing Fractions", kind:"compare_fractions" },
+      { id:"decimals", name:"Decimal Puzzles", kind:"decimal_compare_add" },
+      { id:"factors", name:"Factors and Multiples", kind:"factors_multiples" },
+      { id:"angles", name:"Angle Types", kind:"angle_types" },
+      { id:"area-perim", name:"Area and Perimeter", kind:"area_perimeter_mix" },
+      { id:"place", name:"Place Value", kind:"place_value_large" },
+      { id:"word", name:"Word Problems", kind:"word_grade4" }
+    ],
+    g5: [
+      { id:"frac-op", name:"Fraction Operations", kind:"fraction_add_sub_like" },
+      { id:"decimals", name:"Decimals", kind:"decimal_ops" },
+      { id:"volume", name:"Volume", kind:"volume_prisms" },
+      { id:"order", name:"Order of Operations", kind:"order_of_operations" },
+      { id:"percent", name:"Percents", kind:"percent_of_number" },
+      { id:"coord", name:"Coordinate Plane", kind:"coordinate_plane_basic" },
+      { id:"geometry", name:"Geometry", kind:"geometry_grade5" },
+      { id:"measure", name:"Conversions", kind:"measurement_conversion" },
+      { id:"area", name:"Area and Perimeter", kind:"area_perimeter_grade5" },
+      { id:"word", name:"Word Problems", kind:"word_grade5" }
+    ],
+    g6: [
+      { id:"ratios", name:"Ratios", kind:"ratios_basic" },
+      { id:"percents", name:"Percents", kind:"percent_grade6" },
+      { id:"integers", name:"Integers", kind:"integers_add_compare" },
+      { id:"expressions", name:"Expressions", kind:"expressions_eval" },
+      { id:"equations", name:"Equations", kind:"equations_one_step" },
+      { id:"geometry", name:"Geometry", kind:"geometry_grade6" },
+      { id:"area", name:"Triangles and Parallelograms", kind:"area_tri_para" },
+      { id:"stats", name:"Statistics", kind:"mean_median_mode" },
+      { id:"coord", name:"Coordinate Plane", kind:"coordinate_plane_grade6" },
+      { id:"word", name:"Word Problems", kind:"word_grade6" }
+    ]
+  };
 
-      g35: {
-        easy: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Multiply by 2.",
-            visual: { kind: "pattern", values: [3,6,12,"?"] },
-            options: ["18","20","24","30"],
-            answer: "24",
-            explanation: "Each term doubles: 3, 6, 12, 24."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "7 × ? = 21",
-            subtext: "Find the missing factor.",
-            visual: { kind: "pattern", values: ["7","×","?","=","21"] },
-            options: ["2","3","4","5"],
-            answer: "3",
-            explanation: "7 × 3 = 21."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which is a multiple of 4?",
-            subtext: "Pick the best answer.",
-            visual: { kind: "logic", items: ["10", "12", "14", "18"] },
-            options: ["10","12","14","18"],
-            answer: "12",
-            explanation: "12 is divisible by 4."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Rows increase by 1.",
-            visual: { kind: "grid", values: [21,22,23,24,"?",26,27,28,29] },
-            options: ["23","24","25","26"],
-            answer: "25",
-            explanation: "The missing number is 25."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 6 × 4 = 24",
-            subtext: "Check the multiplication.",
-            visual: { kind: "logic", items: ["6 × 4 = 24"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "6 times 4 equals 24."
-          }
-        ],
-        medium: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Add 6 each time.",
-            visual: { kind: "pattern", values: [6,12,18,"?"] },
-            options: ["20","22","24","26"],
-            answer: "24",
-            explanation: "The pattern increases by 6."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "36 ÷ ? = 6",
-            subtext: "Find the missing divisor.",
-            visual: { kind: "pattern", values: ["36","÷","?","=","6"] },
-            options: ["4","5","6","7"],
-            answer: "6",
-            explanation: "36 ÷ 6 = 6."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which fraction is equal to one-half?",
-            subtext: "Look for an equivalent fraction.",
-            visual: { kind: "logic", items: ["1/2", "2/4", "3/6"] },
-            options: ["1/3","2/4","3/5","4/5"],
-            answer: "2/4",
-            explanation: "2/4 is equivalent to 1/2."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "The pattern counts by 3.",
-            visual: { kind: "grid", values: [3,6,9,12,"?",18,21,24,27] },
-            options: ["13","14","15","16"],
-            answer: "15",
-            explanation: "The sequence counts by 3."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 45 ÷ 5 = 8",
-            subtext: "Divide carefully.",
-            visual: { kind: "logic", items: ["45 ÷ 5 = 8"] },
-            options: ["True","False"],
-            answer: "False",
-            explanation: "45 ÷ 5 = 9."
-          }
-        ],
-        hard: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Alternate +2, +4.",
-            visual: { kind: "pattern", values: [2,4,8,10,14,"?"] },
-            options: ["16","18","20","22"],
-            answer: "16",
-            explanation: "The pattern is +2, +4, +2, +4, +2."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "( ? + 5 ) × 2 = 18",
-            subtext: "Solve in the correct order.",
-            visual: { kind: "pattern", values: ["(","?","+","5",")","×","2","=","18"] },
-            options: ["2","3","4","5"],
-            answer: "4",
-            explanation: "4 + 5 = 9, then 9 × 2 = 18."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which number is prime?",
-            subtext: "Choose the number with only 2 factors.",
-            visual: { kind: "logic", items: ["9", "15", "17", "21"] },
-            options: ["9","15","17","21"],
-            answer: "17",
-            explanation: "17 is prime."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "The middle row continues the pattern.",
-            visual: { kind: "grid", values: [8,16,24,32,"?",48,56,64,72] },
-            options: ["36","40","44","52"],
-            answer: "40",
-            explanation: "The pattern increases by 8."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 3/4 is greater than 2/3",
-            subtext: "Compare the fractions.",
-            visual: { kind: "logic", items: ["3/4 ? 2/3"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "3/4 = 0.75 and 2/3 ≈ 0.67."
-          }
-        ]
-      },
+  const PUZZLE_BEST_KEY = "ilovemath_puzzle_best_score_v3";
+  const PUZZLE_PROGRESS_KEY = "ilovemath_puzzle_topic_progress_v3";
 
-      g68: {
-        easy: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Square numbers.",
-            visual: { kind: "pattern", values: [1,4,9,16,"?"] },
-            options: ["20","24","25","36"],
-            answer: "25",
-            explanation: "These are perfect squares: 1², 2², 3², 4², 5²."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "3x = 21. What is x?",
-            subtext: "Solve for the variable.",
-            visual: { kind: "pattern", values: ["3x","=","21"] },
-            options: ["5","6","7","8"],
-            answer: "7",
-            explanation: "Divide both sides by 3."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which value is an integer?",
-            subtext: "Choose the whole-number answer.",
-            visual: { kind: "logic", items: ["1/2", "-3", "2.7", "π"] },
-            options: ["1/2","-3","2.7","π"],
-            answer: "-3",
-            explanation: "Integers include negative whole numbers like -3."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Look at multiples of 5.",
-            visual: { kind: "grid", values: [5,10,15,20,"?",30,35,40,45] },
-            options: ["22","24","25","28"],
-            answer: "25",
-            explanation: "The sequence counts by 5."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: -4 is greater than -6",
-            subtext: "Compare negative numbers carefully.",
-            visual: { kind: "logic", items: ["-4 > -6"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "-4 is to the right of -6 on the number line."
-          }
-        ],
-        medium: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Multiply by 3, then subtract 1.",
-            visual: { kind: "pattern", values: [2,5,14,41,"?"] },
-            options: ["80","101","122","124"],
-            answer: "122",
-            explanation: "2×3-1=5, 5×3-1=14, 14×3-1=41, 41×3-1=122."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "2x + 5 = 19. What is x?",
-            subtext: "Use inverse operations.",
-            visual: { kind: "pattern", values: ["2x","+","5","=","19"] },
-            options: ["5","6","7","8"],
-            answer: "7",
-            explanation: "Subtract 5 to get 14, then divide by 2."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which expression is equal to 3² + 4²?",
-            subtext: "Evaluate before choosing.",
-            visual: { kind: "logic", items: ["3² + 4²"] },
-            options: ["7","12","25","49"],
-            answer: "25",
-            explanation: "3² = 9 and 4² = 16, so the sum is 25."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "The pattern grows by 7.",
-            visual: { kind: "grid", values: [7,14,21,28,"?",42,49,56,63] },
-            options: ["32","35","36","37"],
-            answer: "35",
-            explanation: "The sequence counts by 7."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: 0.75 = 3/4",
-            subtext: "Compare decimal and fraction forms.",
-            visual: { kind: "logic", items: ["0.75 = 3/4"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "0.75 is equal to 3/4."
-          }
-        ],
-        hard: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Look at the differences.",
-            visual: { kind: "pattern", values: [3,6,12,24,48,"?"] },
-            options: ["72","84","96","99"],
-            answer: "96",
-            explanation: "Each term doubles."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "5(x - 2) = 35. What is x?",
-            subtext: "Solve step by step.",
-            visual: { kind: "pattern", values: ["5(x - 2)","=","35"] },
-            options: ["7","8","9","10"],
-            answer: "9",
-            explanation: "Divide by 5 first: x - 2 = 7, so x = 9."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which value is irrational?",
-            subtext: "Pick the non-terminating, non-repeating value.",
-            visual: { kind: "logic", items: ["0.5", "√2", "3/7", "-4"] },
-            options: ["0.5","√2","3/7","-4"],
-            answer: "√2",
-            explanation: "√2 is irrational."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "The sequence increases by 9.",
-            visual: { kind: "grid", values: [9,18,27,36,"?",54,63,72,81] },
-            options: ["42","45","46","48"],
-            answer: "45",
-            explanation: "The numbers go up by 9."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: The sum of interior angles of a triangle is 180°",
-            subtext: "Use geometry knowledge.",
-            visual: { kind: "logic", items: ["Triangle angle sum = 180°"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "All triangles have interior angles that add to 180°."
-          }
-        ]
-      },
+  const gradeSelect = document.getElementById("gradeSelect");
+  const difficultySelect = document.getElementById("difficultySelect");
+  const questionCountSelect = document.getElementById("questionCountSelect");
 
-      g912: {
-        easy: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Arithmetic sequence with common difference 4.",
-            visual: { kind: "pattern", values: [10,14,18,22,"?"] },
-            options: ["24","25","26","28"],
-            answer: "26",
-            explanation: "Add 4 each time."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "x/4 = 6. What is x?",
-            subtext: "Undo the division.",
-            visual: { kind: "pattern", values: ["x","÷","4","=","6"] },
-            options: ["18","20","22","24"],
-            answer: "24",
-            explanation: "Multiply both sides by 4."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which value is a solution to x² = 49?",
-            subtext: "Choose one valid answer.",
-            visual: { kind: "logic", items: ["x² = 49"] },
-            options: ["5","6","7","8"],
-            answer: "7",
-            explanation: "7² = 49. Note that -7 also works, but it is not listed."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "The sequence increases by 11.",
-            visual: { kind: "grid", values: [11,22,33,44,"?",66,77,88,99] },
-            options: ["52","54","55","57"],
-            answer: "55",
-            explanation: "The missing value is 55."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: The slope of a horizontal line is 0",
-            subtext: "Recall slope rules.",
-            visual: { kind: "logic", items: ["Horizontal line slope = 0"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "Horizontal lines have slope 0."
-          }
-        ],
-        medium: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Geometric sequence with ratio 3.",
-            visual: { kind: "pattern", values: [2,6,18,54,"?"] },
-            options: ["108","132","162","216"],
-            answer: "162",
-            explanation: "Multiply by 3 each time."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "2x - 7 = 15. What is x?",
-            subtext: "Solve for x.",
-            visual: { kind: "pattern", values: ["2x","-","7","=","15"] },
-            options: ["9","10","11","12"],
-            answer: "11",
-            explanation: "Add 7 to get 22, then divide by 2."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which point lies on y = 2x + 1?",
-            subtext: "Substitute x-values mentally.",
-            visual: { kind: "logic", items: ["(1,3)", "(2,6)", "(3,5)", "(4,10)"] },
-            options: ["(1,3)","(2,6)","(3,5)","(4,10)"],
-            answer: "(1,3)",
-            explanation: "If x = 1, then y = 2(1)+1 = 3."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Quadratic pattern.",
-            visual: { kind: "grid", values: [1,4,9,16,"?",36,49,64,81] },
-            options: ["20","24","25","27"],
-            answer: "25",
-            explanation: "These are perfect squares."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: sin²θ + cos²θ = 1",
-            subtext: "Use a trig identity.",
-            visual: { kind: "logic", items: ["sin²θ + cos²θ = 1"] },
-            options: ["True","False"],
-            answer: "True",
-            explanation: "This is a fundamental trigonometric identity."
-          }
-        ],
-        hard: [
-          {
-            type: "Number Pattern",
-            prompt: "What comes next?",
-            subtext: "Look at powers of 2.",
-            visual: { kind: "pattern", values: [2,4,8,16,32,"?"] },
-            options: ["48","56","64","72"],
-            answer: "64",
-            explanation: "Each term doubles."
-          },
-          {
-            type: "Equation Puzzle",
-            prompt: "If 3x + 2 = 20, what is x?",
-            subtext: "Use inverse operations.",
-            visual: { kind: "pattern", values: ["3x","+","2","=","20"] },
-            options: ["5","6","7","8"],
-            answer: "6",
-            explanation: "Subtract 2 to get 18, then divide by 3."
-          },
-          {
-            type: "Logic Puzzle",
-            prompt: "Which is the solution set of x² = 16?",
-            subtext: "Think of both positive and negative roots.",
-            visual: { kind: "logic", items: ["x² = 16"] },
-            options: ["{4}","{-4}","{-4, 4}","{0, 4}"],
-            answer: "{-4, 4}",
-            explanation: "Both 4 and -4 square to 16."
-          },
-          {
-            type: "Missing Grid",
-            prompt: "Fill the missing number.",
-            subtext: "Arithmetic sequence with common difference 12.",
-            visual: { kind: "grid", values: [12,24,36,48,"?",72,84,96,108] },
-            options: ["58","60","62","64"],
-            answer: "60",
-            explanation: "The sequence increases by 12."
-          },
-          {
-            type: "True or False",
-            prompt: "True or False: A function can have two different y-values for one x-value",
-            subtext: "Recall the definition of a function.",
-            visual: { kind: "logic", items: ["One x maps to two y-values"] },
-            options: ["True","False"],
-            answer: "False",
-            explanation: "A function assigns exactly one output to each input."
-          }
-        ]
+  const scoreValue = document.getElementById("scoreValue");
+  const timerValue = document.getElementById("timerValue");
+  const streakValue = document.getElementById("streakValue");
+  const bestValue = document.getElementById("bestValue");
+  const starDisplay = document.getElementById("starDisplay");
+
+  const gradeBadge = document.getElementById("gradeBadge");
+  const difficultyBadge = document.getElementById("difficultyBadge");
+  const progressBadge = document.getElementById("progressBadge");
+  const statusBadge = document.getElementById("statusBadge");
+  const progressFill = document.getElementById("progressFill");
+  const gameContent = document.getElementById("gameContent");
+
+  const startBtn = document.getElementById("startBtn");
+  const welcomeStartBtn = document.getElementById("welcomeStartBtn");
+  const startHeroBtn = document.getElementById("startHeroBtn");
+  const howToBtn = document.getElementById("howToBtn");
+
+  gradeSelect.innerHTML = `
+    <option value="k">Kindergarten</option>
+    <option value="g1">Grade 1</option>
+    <option value="g2">Grade 2</option>
+    <option value="g3">Grade 3</option>
+    <option value="g4">Grade 4</option>
+    <option value="g5">Grade 5</option>
+    <option value="g6">Grade 6</option>
+  `;
+
+  questionCountSelect.innerHTML = `
+    <option value="5">5 Puzzles</option>
+    <option value="8">8 Puzzles</option>
+    <option value="10" selected>10 Puzzles</option>
+  `;
+
+  let progressData = loadProgressData();
+  let selectedTopicId = getFirstUnlockedTopicId(gradeSelect.value);
+  let sessionPuzzles = [];
+  let currentIndex = 0;
+  let score = 0;
+  let streak = 0;
+  let answered = false;
+  let timer = null;
+  let timeLeft = difficultyConfig.medium.time;
+  let gameStarted = false;
+
+  function escapeHtml(text){
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function randomInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function pick(arr){
+    return arr[randomInt(0, arr.length - 1)];
+  }
+
+  function shuffleArray(arr){
+    const copy = [...arr];
+    for(let i = copy.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function loadProgressData(){
+    try{
+      const raw = localStorage.getItem(PUZZLE_PROGRESS_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch{
+      return {};
+    }
+  }
+
+  function saveProgressData(){
+    localStorage.setItem(PUZZLE_PROGRESS_KEY, JSON.stringify(progressData));
+  }
+
+  function getTopicKey(grade, topicId){
+    return `${grade}__${topicId}`;
+  }
+
+  function getTopicProgress(grade, topicId){
+    const key = getTopicKey(grade, topicId);
+    if(!progressData[key]){
+      progressData[key] = {
+        stars: 0,
+        unlocked: false,
+        bestPercent: 0,
+        bestScore: 0,
+        played: 0
+      };
+    }
+    return progressData[key];
+  }
+
+  function ensureGradeUnlocks(grade){
+    const topics = topicConfig[grade] || [];
+    topics.forEach((topic, idx) => {
+      const prog = getTopicProgress(grade, topic.id);
+      if(idx === 0) prog.unlocked = true;
+    });
+
+    for(let i = 0; i < topics.length - 1; i++){
+      const current = getTopicProgress(grade, topics[i].id);
+      const next = getTopicProgress(grade, topics[i+1].id);
+      if(current.stars >= 1){
+        next.unlocked = true;
       }
-    };
+    }
+    saveProgressData();
+  }
 
-    const gradeSelect = document.getElementById("gradeSelect");
-    const difficultySelect = document.getElementById("difficultySelect");
-    const questionCountSelect = document.getElementById("questionCountSelect");
+  function getFirstUnlockedTopicId(grade){
+    ensureGradeUnlocks(grade);
+    const topics = topicConfig[grade];
+    const found = topics.find(topic => getTopicProgress(grade, topic.id).unlocked);
+    return found ? found.id : topics[0].id;
+  }
 
-    const scoreValue = document.getElementById("scoreValue");
-    const timerValue = document.getElementById("timerValue");
-    const streakValue = document.getElementById("streakValue");
-    const bestValue = document.getElementById("bestValue");
-    const starDisplay = document.getElementById("starDisplay");
+  function getCurrentTopicObject(){
+    const topics = topicConfig[gradeSelect.value] || [];
+    return topics.find(t => t.id === selectedTopicId) || topics[0];
+  }
 
-    const gradeBadge = document.getElementById("gradeBadge");
-    const difficultyBadge = document.getElementById("difficultyBadge");
-    const progressBadge = document.getElementById("progressBadge");
-    const statusBadge = document.getElementById("statusBadge");
-    const progressFill = document.getElementById("progressFill");
-    const gameContent = document.getElementById("gameContent");
+  function getBestScore(){
+    return Number(localStorage.getItem(PUZZLE_BEST_KEY) || 0);
+  }
 
-    const startBtn = document.getElementById("startBtn");
-    const welcomeStartBtn = document.getElementById("welcomeStartBtn");
-    const startHeroBtn = document.getElementById("startHeroBtn");
-    const howToBtn = document.getElementById("howToBtn");
+  function setBestScore(value){
+    localStorage.setItem(PUZZLE_BEST_KEY, String(value));
+  }
 
-    let sessionPuzzles = [];
-    let currentIndex = 0;
-    let score = 0;
-    let streak = 0;
-    let answered = false;
-    let timer = null;
-    let timeLeft = 30;
-    let gameStarted = false;
+  function getStarsDisplay(currentScore, total){
+    if(total === 0) return "☆☆☆";
+    const ratio = currentScore / (total * difficultyConfig[difficultySelect.value].points);
+    if(ratio >= 0.9) return "★★★";
+    if(ratio >= 0.7) return "★★☆";
+    if(ratio >= 0.4) return "★☆☆";
+    return "☆☆☆";
+  }
 
-    const bestScoreKey = "ilovemath_puzzle_best_score";
+  function getRoundStars(currentScore, total){
+    if(total === 0) return 0;
+    const ratio = currentScore / (total * difficultyConfig[difficultySelect.value].points);
+    if(ratio >= 0.9) return 3;
+    if(ratio >= 0.7) return 2;
+    if(ratio >= 0.4) return 1;
+    return 0;
+  }
 
-    function getBestScore(){
-      return Number(localStorage.getItem(bestScoreKey) || 0);
+  function updateStats(){
+    scoreValue.textContent = score;
+    timerValue.textContent = timeLeft;
+    streakValue.textContent = streak;
+    bestValue.textContent = getBestScore();
+    starDisplay.textContent = getStarsDisplay(score, sessionPuzzles.length || Number(questionCountSelect.value));
+  }
+
+  function updateProgress(){
+    const total = sessionPuzzles.length || 0;
+    const shownIndex = total ? Math.min(currentIndex + 1, total) : 0;
+    progressBadge.textContent = total ? `Puzzle ${shownIndex} / ${total}` : "Puzzle 0 / 0";
+    const percent = total ? (currentIndex / total) * 100 : 0;
+    progressFill.style.width = percent + "%";
+  }
+
+  function renderVisual(visual){
+    if(!visual) return "";
+
+    if(visual.kind === "pattern"){
+      return `
+        <div class="visual-box">
+          <div class="pattern-row">
+            ${visual.values.map(v => `<div class="pattern-pill">${v}</div>`).join("")}
+          </div>
+        </div>
+      `;
     }
 
-    function setBestScore(value){
-      localStorage.setItem(bestScoreKey, String(value));
+    if(visual.kind === "grid"){
+      return `
+        <div class="visual-box">
+          <div class="grid-visual">
+            ${visual.values.map(v => `<div class="grid-cell">${v}</div>`).join("")}
+          </div>
+        </div>
+      `;
     }
 
-    function updateStats(){
-      scoreValue.textContent = score;
-      timerValue.textContent = timeLeft;
-      streakValue.textContent = streak;
-      bestValue.textContent = getBestScore();
-      starDisplay.textContent = getStars(score, sessionPuzzles.length || Number(questionCountSelect.value));
+    if(visual.kind === "logic"){
+      return `
+        <div class="visual-box">
+          <div class="logic-box">
+            ${visual.items.map(item => `<div class="logic-item">${item}</div>`).join("")}
+          </div>
+        </div>
+      `;
     }
 
-    function getStars(currentScore, total){
-      if(total === 0) return "☆☆☆";
-      const ratio = currentScore / (total * difficultyConfig[difficultySelect.value].points);
-      if(ratio >= 0.9) return "★★★";
-      if(ratio >= 0.6) return "★★☆";
-      if(ratio >= 0.3) return "★☆☆";
-      return "☆☆☆";
-    }
+    return "";
+  }
 
-    function shuffleArray(arr){
-      const copy = [...arr];
-      for(let i = copy.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
+  function getTopicSelectorHtml(){
+    const grade = gradeSelect.value;
+    ensureGradeUnlocks(grade);
+    const topics = topicConfig[grade];
+
+    return `
+      <div class="control-group">
+        <label for="topicSelectInline">Puzzle Topic</label>
+        <select id="topicSelectInline">
+          ${topics.map(topic => {
+            const prog = getTopicProgress(grade, topic.id);
+            const label = `${topic.name} ${prog.unlocked ? `(${["☆☆☆","★☆☆","★★☆","★★★"][prog.stars]})` : "(Locked)"}`;
+            return `<option value="${escapeHtml(topic.id)}" ${topic.id === selectedTopicId ? "selected" : ""} ${prog.unlocked ? "" : "disabled"}>${escapeHtml(label)}</option>`;
+          }).join("")}
+        </select>
+      </div>
+    `;
+  }
+
+  function attachTopicInlineEvent(){
+    const topicSelectInline = document.getElementById("topicSelectInline");
+    if(topicSelectInline){
+      topicSelectInline.addEventListener("change", (e) => {
+        selectedTopicId = e.target.value;
+        syncBadges();
+        statusBadge.textContent = `${getCurrentTopicObject().name} selected`;
+      });
+    }
+  }
+
+  function getTopicGridHtml(){
+    const grade = gradeSelect.value;
+    ensureGradeUnlocks(grade);
+    const topics = topicConfig[grade];
+
+    return `
+      <div class="visual-box">
+        <div class="logic-box" style="max-width:100%;">
+          ${topics.map((topic, idx) => {
+            const prog = getTopicProgress(grade, topic.id);
+            const locked = !prog.unlocked;
+            const stars = ["☆☆☆","★☆☆","★★☆","★★★"][prog.stars];
+            return `
+              <button
+                class="logic-item topic-card-btn"
+                data-topic="${escapeHtml(topic.id)}"
+                ${locked ? "disabled" : ""}
+                style="
+                  cursor:${locked ? "not-allowed" : "pointer"};
+                  opacity:${locked ? ".55" : "1"};
+                  text-align:left;
+                  background:${topic.id === selectedTopicId ? "#eef7ff" : "#fff"};
+                  border:${topic.id === selectedTopicId ? "2px solid #8fc4ff" : "1px solid #dbeaff"};
+                "
+              >
+                <strong>${idx + 1}. ${escapeHtml(topic.name)}</strong><br>
+                <span style="font-size:13px;color:#3d5873;">
+                  ${locked ? "Locked — earn at least 1 star on previous topic" : `Unlocked • Stars: ${stars} • Best: ${prog.bestPercent}%`}
+                </span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function attachTopicCardEvents(){
+    document.querySelectorAll(".topic-card-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        selectedTopicId = btn.dataset.topic;
+        syncBadges();
+        showHowTo();
+      });
+    });
+  }
+
+  function makePuzzle(type, prompt, subtext, visual, options, answer, explanation){
+    return { type, prompt, subtext, visual, options, answer, explanation };
+  }
+
+  function makeUniqueChoices(answer, extras = []){
+    const set = new Set([String(answer), ...extras.map(String)]);
+    while(set.size < 4){
+      const n = Number(answer);
+      if(!Number.isNaN(n)){
+        set.add(String(n + randomInt(-5, 5)));
+      }else{
+        set.add(String(answer) + pick([" A"," B"," C"]));
       }
-      return copy;
     }
+    return shuffleArray([...set]).slice(0, 4);
+  }
 
-    function buildSession(){
-      const grade = gradeSelect.value;
-      const difficulty = difficultySelect.value;
-      const count = Number(questionCountSelect.value);
+  function buildTopicPuzzles(grade, topicId){
+    const topic = (topicConfig[grade] || []).find(t => t.id === topicId);
+    if(!topic) return [];
 
-      const source = puzzleBank[grade][difficulty];
-      const expanded = [];
+    const puzzles = [];
+    const kind = topic.kind;
 
-      while(expanded.length < count){
-        expanded.push(...shuffleArray(source));
+    for(let i = 1; i <= 20; i++){
+      let puzzle = null;
+
+      switch(kind){
+        case "counting_to_20": {
+          const n = i;
+          puzzle = makePuzzle(
+            "Counting Puzzle",
+            `What number comes after ${n}?`,
+            "Count forward by 1.",
+            { kind:"pattern", values:[n, "?"] },
+            makeUniqueChoices(n + 1, [n, n + 2, n + 3]),
+            String(n + 1),
+            `${n} plus 1 is ${n + 1}.`
+          );
+          break;
+        }
+
+        case "before_after": {
+          const n = i + 2;
+          const askAfter = i % 2 === 0;
+          const ans = askAfter ? n + 1 : n - 1;
+          puzzle = makePuzzle(
+            "Number Puzzle",
+            `What number comes ${askAfter ? "after" : "before"} ${n}?`,
+            "Think one step on the number line.",
+            { kind:"pattern", values:[askAfter ? n : "?", askAfter ? "?" : n] },
+            makeUniqueChoices(ans, [ans + 1, ans - 1, ans + 2]),
+            String(ans),
+            askAfter ? `The number after ${n} is ${ans}.` : `The number before ${n} is ${ans}.`
+          );
+          break;
+        }
+
+        case "simple_patterns": {
+          const start = randomInt(1, 5) + i;
+          const step = pick([1,2,5]);
+          const ans = start + step * 3;
+          puzzle = makePuzzle(
+            "Pattern Puzzle",
+            "What comes next?",
+            `The pattern grows by ${step}.`,
+            { kind:"pattern", values:[start, start+step, start+step*2, "?"] },
+            makeUniqueChoices(ans, [ans+step, ans-step, ans+2]),
+            String(ans),
+            `Add ${step} each time. The next number is ${ans}.`
+          );
+          break;
+        }
+
+        case "compare_numbers": {
+          const a = randomInt(1, 20 + i);
+          const b = randomInt(1, 20 + i);
+          const ans = Math.max(a, b);
+          puzzle = makePuzzle(
+            "Compare Puzzle",
+            "Which number is bigger?",
+            "Choose the greatest number.",
+            { kind:"logic", items:[String(a), String(b)] },
+            shuffleArray([String(a), String(b), String(ans+1), String(Math.max(0, ans-1))]).slice(0,4),
+            String(ans),
+            `${ans} is the bigger number.`
+          );
+          break;
+        }
+
+        case "shape_logic": {
+          const shapes = [
+            ["Triangle", "3"],
+            ["Square", "4"],
+            ["Rectangle", "4"],
+            ["Pentagon", "5"]
+          ];
+          const [name, ans] = shapes[(i-1) % shapes.length];
+          puzzle = makePuzzle(
+            "Shape Puzzle",
+            `How many sides does a ${name.toLowerCase()} have?`,
+            "Think about the shape.",
+            { kind:"logic", items:[name] },
+            ["3","4","5","6"],
+            ans,
+            `A ${name.toLowerCase()} has ${ans} sides.`
+          );
+          break;
+        }
+
+        case "more_less": {
+          const n = randomInt(2, 20);
+          const delta = pick([1,2]);
+          const askMore = i % 2 === 0;
+          const ans = askMore ? n + delta : n - delta;
+          puzzle = makePuzzle(
+            "More or Less Puzzle",
+            `What is ${delta} ${askMore ? "more" : "less"} than ${n}?`,
+            "Add for more, subtract for less.",
+            { kind:"pattern", values:[n, askMore ? `+${delta}` : `-${delta}`, "?"] },
+            makeUniqueChoices(ans, [ans+1, ans-1, ans+2]),
+            String(ans),
+            `${delta} ${askMore ? "more" : "less"} than ${n} is ${ans}.`
+          );
+          break;
+        }
+
+        case "simple_add": {
+          const a = randomInt(1, 10);
+          const b = randomInt(1, 10);
+          const ans = a + b;
+          puzzle = makePuzzle(
+            "Addition Puzzle",
+            `${a} + ${b} = ?`,
+            "Add the numbers.",
+            { kind:"pattern", values:[a, "+", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+1, ans-1, ans+2]),
+            String(ans),
+            `${a} + ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "simple_sub": {
+          let a = randomInt(5, 15);
+          let b = randomInt(1, a);
+          const ans = a - b;
+          puzzle = makePuzzle(
+            "Subtraction Puzzle",
+            `${a} - ${b} = ?`,
+            "Take away carefully.",
+            { kind:"pattern", values:[a, "-", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+1, Math.max(0, ans-1), ans+2]),
+            String(ans),
+            `${a} - ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "sorting_numbers": {
+          const nums = shuffleArray([randomInt(1,20), randomInt(1,20), randomInt(1,20)]);
+          const ans = [...nums].sort((a,b) => a-b).join(", ");
+          puzzle = makePuzzle(
+            "Sorting Puzzle",
+            `Put these in order from smallest to biggest: ${nums.join(", ")}`,
+            "Order the numbers carefully.",
+            { kind:"logic", items:nums.map(String) },
+            [
+              ans,
+              [...nums].sort((a,b)=>b-a).join(", "),
+              `${Math.min(...nums)}, ${Math.max(...nums)}, ${nums[1]}`,
+              nums.join(", ")
+            ],
+            ans,
+            `From smallest to biggest, the numbers are ${ans}.`
+          );
+          break;
+        }
+
+        case "make_ten": {
+          const filled = randomInt(1, 9);
+          const ans = 10 - filled;
+          puzzle = makePuzzle(
+            "Make 10 Puzzle",
+            `How many more are needed to make 10 if you already have ${filled}?`,
+            "Think of number bonds to 10.",
+            { kind:"pattern", values:[filled, "+", "?", "=", "10"] },
+            makeUniqueChoices(ans, [ans+1, ans-1, filled]),
+            String(ans),
+            `${filled} + ${ans} = 10.`
+          );
+          break;
+        }
+
+        case "add_within_20": {
+          const a = randomInt(1, 20);
+          const b = randomInt(1, 20);
+          const ans = a + b;
+          puzzle = makePuzzle(
+            "Addition Puzzle",
+            `${a} + ${b} = ?`,
+            "Add the numbers.",
+            { kind:"pattern", values:[a, "+", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+1, ans-1, ans+2]),
+            String(ans),
+            `${a} + ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "sub_within_20": {
+          let a = randomInt(5, 20);
+          let b = randomInt(1, a);
+          const ans = a - b;
+          puzzle = makePuzzle(
+            "Subtraction Puzzle",
+            `${a} - ${b} = ?`,
+            "Subtract carefully.",
+            { kind:"pattern", values:[a, "-", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+1, ans-1, ans+2]),
+            String(ans),
+            `${a} - ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "number_bonds": {
+          const total = randomInt(6, 20);
+          const part = randomInt(1, total - 1);
+          const ans = total - part;
+          puzzle = makePuzzle(
+            "Number Bond Puzzle",
+            `${part} + ? = ${total}`,
+            "Find the missing part.",
+            { kind:"pattern", values:[part, "+", "?", "=", total] },
+            makeUniqueChoices(ans, [ans+1, ans-1, total]),
+            String(ans),
+            `${total} - ${part} = ${ans}, so the missing number is ${ans}.`
+          );
+          break;
+        }
+
+        case "place_value_tens_ones": {
+          const tens = randomInt(1, 9);
+          const ones = randomInt(0, 9);
+          const n = tens * 10 + ones;
+          puzzle = makePuzzle(
+            "Place Value Puzzle",
+            `How many tens are in ${n}?`,
+            "Look at the tens digit.",
+            { kind:"logic", items:[String(n)] },
+            makeUniqueChoices(tens, [ones, tens+1, 0]),
+            String(tens),
+            `${n} has ${tens} tens and ${ones} ones.`
+          );
+          break;
+        }
+
+        case "compare_numbers_99": {
+          const a = randomInt(1, 99);
+          const b = randomInt(1, 99);
+          const ans = a > b ? ">" : a < b ? "<" : "=";
+          puzzle = makePuzzle(
+            "Compare Puzzle",
+            `${a} __ ${b}`,
+            "Choose the correct symbol.",
+            { kind:"logic", items:[`${a} ? ${b}`] },
+            [">","<","=","+"],
+            ans,
+            `${a} ${ans} ${b}.`
+          );
+          break;
+        }
+
+        case "time_hour": {
+          const hour = randomInt(1, 12);
+          const ans = hour === 12 ? 1 : hour + 1;
+          puzzle = makePuzzle(
+            "Time Puzzle",
+            `What hour comes after ${hour} o'clock?`,
+            "Move forward by 1 hour.",
+            { kind:"logic", items:[`${hour}:00`, "1 hour later"] },
+            makeUniqueChoices(ans, [hour, ans+1, hour-1]),
+            String(ans),
+            `One hour after ${hour} o'clock is ${ans} o'clock.`
+          );
+          break;
+        }
+
+        case "shapes_2d": {
+          const shapes = [
+            ["triangle", "3"],
+            ["square", "4"],
+            ["rectangle", "4"],
+            ["circle", "0"]
+          ];
+          const [name, ans] = shapes[(i-1)%shapes.length];
+          puzzle = makePuzzle(
+            "Shape Puzzle",
+            `How many sides does a ${name} have?`,
+            "Think about the shape name.",
+            { kind:"logic", items:[name] },
+            ["0","3","4","5"],
+            ans,
+            `${name} has ${ans} sides${name === "circle" ? " because it has no straight sides" : ""}.`
+          );
+          break;
+        }
+
+        case "length_compare": {
+          const a = randomInt(2, 20);
+          const b = randomInt(2, 20);
+          const ans = Math.max(a, b);
+          puzzle = makePuzzle(
+            "Length Puzzle",
+            `Which is longer: ${a} cm or ${b} cm?`,
+            "Choose the longer length.",
+            { kind:"logic", items:[`${a} cm`, `${b} cm`] },
+            [String(a), String(b), String(a+b), String(Math.abs(a-b) || 1)],
+            String(ans),
+            `${ans} cm is longer.`
+          );
+          break;
+        }
+
+        case "word_add_sub_1": {
+          const a = randomInt(2, 12);
+          const b = randomInt(2, 12);
+          const ans = i % 2 === 0 ? a + b : Math.max(a,b) - Math.min(a,b);
+          if(i % 2 === 0){
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `Professor Pi has ${a} apples and gets ${b} more. How many apples now?`,
+              "Think addition.",
+              { kind:"logic", items:[`${a} apples`, `+ ${b} apples`] },
+              makeUniqueChoices(ans, [ans+1, ans-1, a]),
+              String(ans),
+              `${a} + ${b} = ${ans}.`
+            );
+          }else{
+            const big = Math.max(a,b), small = Math.min(a,b);
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `Professor Pi had ${big} pencils and gave away ${small}. How many are left?`,
+              "Think subtraction.",
+              { kind:"logic", items:[`${big} pencils`, `- ${small} pencils`] },
+              makeUniqueChoices(ans, [ans+1, ans-1, big]),
+              String(ans),
+              `${big} - ${small} = ${ans}.`
+            );
+          }
+          break;
+        }
+
+        case "missing_number_line_1": {
+          const start = randomInt(1, 15);
+          const ans = start + 2;
+          puzzle = makePuzzle(
+            "Missing Number Puzzle",
+            "Fill in the missing number.",
+            "The numbers go in order.",
+            { kind:"grid", values:[start, start+1, "?", start+3, start+4, start+5, start+6, start+7, start+8] },
+            makeUniqueChoices(ans, [ans+1, ans-1, start]),
+            String(ans),
+            `The numbers increase by 1, so the missing number is ${ans}.`
+          );
+          break;
+        }
+
+        case "add_regroup_2d": {
+          const a = randomInt(15, 79);
+          const b = randomInt(15, 79);
+          const ans = a + b;
+          puzzle = makePuzzle(
+            "Addition Puzzle",
+            `${a} + ${b} = ?`,
+            "Add and regroup if needed.",
+            { kind:"pattern", values:[a, "+", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+10, ans-10, ans+1]),
+            String(ans),
+            `${a} + ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "sub_regroup_2d": {
+          let a = randomInt(40, 99);
+          let b = randomInt(12, 59);
+          if(b > a) [a,b] = [b,a];
+          const ans = a - b;
+          puzzle = makePuzzle(
+            "Subtraction Puzzle",
+            `${a} - ${b} = ?`,
+            "Subtract and regroup if needed.",
+            { kind:"pattern", values:[a, "-", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+10, ans-1, ans+1]),
+            String(ans),
+            `${a} - ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "skip_counting": {
+          const step = pick([2,5,10]);
+          const start = step * randomInt(1, 5);
+          const ans = start + step * 3;
+          puzzle = makePuzzle(
+            "Pattern Puzzle",
+            "What comes next?",
+            `Skip count by ${step}.`,
+            { kind:"pattern", values:[start, start+step, start+step*2, "?"] },
+            makeUniqueChoices(ans, [ans+step, ans-step, ans+2]),
+            String(ans),
+            `The pattern counts by ${step}, so the next number is ${ans}.`
+          );
+          break;
+        }
+
+        case "money_values": {
+          const optionsSet = [
+            ["1 dime", "10¢"],
+            ["1 nickel", "5¢"],
+            ["1 quarter", "25¢"],
+            ["2 dimes", "20¢"],
+            ["3 nickels", "15¢"]
+          ];
+          const [name, ans] = optionsSet[(i-1)%optionsSet.length];
+          puzzle = makePuzzle(
+            "Money Puzzle",
+            `How much is ${name}?`,
+            "Choose the correct value.",
+            { kind:"logic", items:[name] },
+            ["5¢","10¢","15¢","20¢","25¢"].slice(0,4),
+            ans,
+            `${name} is worth ${ans}.`
+          );
+          break;
+        }
+
+        case "measurement_compare": {
+          const a = randomInt(5, 50);
+          const b = randomInt(5, 50);
+          const ans = Math.max(a, b);
+          puzzle = makePuzzle(
+            "Measurement Puzzle",
+            `Which is longer: ${a} cm or ${b} cm?`,
+            "Compare the lengths.",
+            { kind:"logic", items:[`${a} cm`, `${b} cm`] },
+            [String(a), String(b), String(a+b), String(Math.abs(a-b) || 1)],
+            String(ans),
+            `${ans} cm is longer.`
+          );
+          break;
+        }
+
+        case "place_value_1000": {
+          const n = randomInt(100, 999);
+          const digits = String(n).split("");
+          const ask = pick([
+            { label:"hundreds", answer:digits[0] },
+            { label:"tens", answer:digits[1] },
+            { label:"ones", answer:digits[2] }
+          ]);
+          puzzle = makePuzzle(
+            "Place Value Puzzle",
+            `What digit is in the ${ask.label} place in ${n}?`,
+            "Read the place value carefully.",
+            { kind:"logic", items:[String(n)] },
+            shuffleArray([...new Set([digits[0], digits[1], digits[2], String(randomInt(0,9))])]).slice(0,4),
+            String(ask.answer),
+            `In ${n}, the digit in the ${ask.label} place is ${ask.answer}.`
+          );
+          break;
+        }
+
+        case "time_minutes": {
+          const minute = pick([0, 15, 30, 45]);
+          const hour = randomInt(1, 12);
+          const next = minute === 45 ? "quarter to next hour" : minute === 30 ? "half past" : minute === 15 ? "quarter past" : "o'clock";
+          const ans = minute === 45 ? `${hour === 12 ? 1 : hour + 1}` : `${hour}`;
+          puzzle = makePuzzle(
+            "Time Puzzle",
+            `At ${hour}:${String(minute).padStart(2,"0")}, what hour are we in?`,
+            "Look at the hour part of the time.",
+            { kind:"logic", items:[`${hour}:${String(minute).padStart(2,"0")}`, next] },
+            makeUniqueChoices(ans, [Number(ans)+1, Number(ans)-1, hour]),
+            String(ans),
+            `The hour shown is ${hour}.`
+          );
+          break;
+        }
+
+        case "fraction_basics": {
+          const den = randomInt(2, 8);
+          const num = randomInt(1, den - 1);
+          const ans = `${num}/${den}`;
+          puzzle = makePuzzle(
+            "Fraction Puzzle",
+            "What fraction is shown?",
+            "Count the selected parts out of the total parts.",
+            { kind:"pattern", values:[`${num}`, "out of", `${den}`] },
+            shuffleArray([ans, `${num+1}/${den}`, `${num}/${den+1}`, `1/${den}`]),
+            ans,
+            `${num} out of ${den} is written as ${ans}.`
+          );
+          break;
+        }
+
+        case "geometry_logic_2": {
+          const shapes = [
+            ["triangle", "3"],
+            ["square", "4"],
+            ["pentagon", "5"],
+            ["hexagon", "6"]
+          ];
+          const [shape, ans] = shapes[(i-1)%shapes.length];
+          puzzle = makePuzzle(
+            "Geometry Puzzle",
+            `How many sides does a ${shape} have?`,
+            "Use what you know about shapes.",
+            { kind:"logic", items:[shape] },
+            ["3","4","5","6"],
+            ans,
+            `A ${shape} has ${ans} sides.`
+          );
+          break;
+        }
+
+        case "word_add_sub_2": {
+          const a = randomInt(20, 60);
+          const b = randomInt(5, 20);
+          const add = i % 2 === 0;
+          const ans = add ? a + b : a - b;
+          puzzle = makePuzzle(
+            "Word Puzzle",
+            add
+              ? `A shelf has ${a} books. ${b} more books are added. How many books are there now?`
+              : `A class has ${a} crayons. ${b} crayons are used. How many are left?`,
+            add ? "Use addition." : "Use subtraction.",
+            { kind:"logic", items:[String(a), add ? `+ ${b}` : `- ${b}`] },
+            makeUniqueChoices(ans, [ans+1, ans-1, a]),
+            String(ans),
+            add ? `${a} + ${b} = ${ans}.` : `${a} - ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "multiplication_facts": {
+          const a = randomInt(2, 12);
+          const b = randomInt(2, 12);
+          const ans = a * b;
+          puzzle = makePuzzle(
+            "Multiplication Puzzle",
+            `${a} × ${b} = ?`,
+            "Use multiplication facts.",
+            { kind:"pattern", values:[a, "×", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+2, ans-2, ans+5]),
+            String(ans),
+            `${a} × ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "division_facts": {
+          const b = randomInt(2, 12);
+          const ans = randomInt(2, 12);
+          const a = b * ans;
+          puzzle = makePuzzle(
+            "Division Puzzle",
+            `${a} ÷ ${b} = ?`,
+            "Use multiplication to help.",
+            { kind:"pattern", values:[a, "÷", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+1, ans-1, ans+2]),
+            String(ans),
+            `${a} ÷ ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "fraction_compare_basic": {
+          const den = randomInt(4, 10);
+          let a = randomInt(1, den-1);
+          let b = randomInt(1, den-1);
+          while(a === b) b = randomInt(1, den-1);
+          const ans = a > b ? `${a}/${den}` : `${b}/${den}`;
+          puzzle = makePuzzle(
+            "Fraction Puzzle",
+            `Which fraction is larger: ${a}/${den} or ${b}/${den}?`,
+            "Compare numerators because denominators are the same.",
+            { kind:"logic", items:[`${a}/${den}`, `${b}/${den}`] },
+            [ `${a}/${den}`, `${b}/${den}`, `1/${den}`, `${den-1}/${den}` ],
+            ans,
+            `With the same denominator, the fraction with the larger numerator is larger. So the answer is ${ans}.`
+          );
+          break;
+        }
+
+        case "area_rectangles": {
+          const l = randomInt(2, 12);
+          const w = randomInt(2, 12);
+          const ans = l * w;
+          puzzle = makePuzzle(
+            "Area Puzzle",
+            `Area of a rectangle with length ${l} and width ${w}?`,
+            "Use area = length × width.",
+            { kind:"logic", items:[`Length = ${l}`, `Width = ${w}`] },
+            makeUniqueChoices(ans, [l+w, 2*(l+w), ans+2]),
+            String(ans),
+            `Area = ${l} × ${w} = ${ans}.`
+          );
+          break;
+        }
+
+        case "perimeter_rectangles": {
+          const l = randomInt(2, 12);
+          const w = randomInt(2, 12);
+          const ans = 2 * (l + w);
+          puzzle = makePuzzle(
+            "Perimeter Puzzle",
+            `Perimeter of a rectangle with sides ${l} and ${w}?`,
+            "Add all sides.",
+            { kind:"logic", items:[`${l}`, `${w}`, `${l}`, `${w}`] },
+            makeUniqueChoices(ans, [l*w, l+w, ans+4]),
+            String(ans),
+            `Perimeter = ${l} + ${w} + ${l} + ${w} = ${ans}.`
+          );
+          break;
+        }
+
+        case "elapsed_time_basic": {
+          const hour = randomInt(1, 10);
+          const add = pick([1,2,3,4]);
+          const ans = ((hour - 1 + add) % 12) + 1;
+          puzzle = makePuzzle(
+            "Time Puzzle",
+            `It is ${hour} o'clock now. What time will it be in ${add} hours?`,
+            "Add the hours.",
+            { kind:"logic", items:[`${hour}:00`, `+ ${add} hours`] },
+            makeUniqueChoices(ans, [ans+1 > 12 ? 1 : ans+1, ans-1 || 12, hour]),
+            String(ans),
+            `${add} hours after ${hour} o'clock is ${ans} o'clock.`
+          );
+          break;
+        }
+
+        case "place_value_10000": {
+          const n = randomInt(1000, 9999);
+          const digits = String(n).split("");
+          const asks = [
+            { label:"thousands", answer:digits[0] },
+            { label:"hundreds", answer:digits[1] },
+            { label:"tens", answer:digits[2] },
+            { label:"ones", answer:digits[3] }
+          ];
+          const ask = asks[(i-1)%asks.length];
+          puzzle = makePuzzle(
+            "Place Value Puzzle",
+            `What digit is in the ${ask.label} place in ${n}?`,
+            "Read the number carefully.",
+            { kind:"logic", items:[String(n)] },
+            shuffleArray([...new Set([...digits, String(randomInt(0,9))])]).slice(0,4),
+            String(ask.answer),
+            `In ${n}, the ${ask.label} digit is ${ask.answer}.`
+          );
+          break;
+        }
+
+        case "angles_shapes_3": {
+          const bank = [
+            ["acute angle", "less than 90°"],
+            ["right angle", "90°"],
+            ["obtuse angle", "more than 90°"]
+          ];
+          const [name, ans] = bank[(i-1)%bank.length];
+          puzzle = makePuzzle(
+            "Angle Puzzle",
+            `Which one is a ${name}?`,
+            "Choose the correct angle description.",
+            { kind:"logic", items:[name] },
+            ["less than 90°", "90°", "more than 90°", "360°"],
+            ans,
+            `A ${name} matches ${ans}.`
+          );
+          break;
+        }
+
+        case "logic_grid_sequence": {
+          const start = randomInt(2, 8);
+          const step = randomInt(2, 9);
+          const values = [start, start+step, start+step*2, start+step*3, "?", start+step*5, start+step*6, start+step*7, start+step*8];
+          const ans = start + step * 4;
+          puzzle = makePuzzle(
+            "Logic Grid Puzzle",
+            "Fill the missing number.",
+            `The pattern grows by ${step}.`,
+            { kind:"grid", values },
+            makeUniqueChoices(ans, [ans+step, ans-step, ans+1]),
+            String(ans),
+            `The sequence increases by ${step}, so the missing number is ${ans}.`
+          );
+          break;
+        }
+
+        case "word_mult_div_3": {
+          if(i % 2 === 0){
+            const groups = randomInt(2, 8);
+            const each = randomInt(2, 9);
+            const ans = groups * each;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `There are ${groups} bags with ${each} marbles in each bag. How many marbles altogether?`,
+              "Use multiplication.",
+              { kind:"logic", items:[`${groups} groups`, `${each} each`] },
+              makeUniqueChoices(ans, [ans+groups, ans-each, ans+1]),
+              String(ans),
+              `${groups} × ${each} = ${ans}.`
+            );
+          }else{
+            const each = randomInt(2, 9);
+            const groups = randomInt(2, 8);
+            const total = each * groups;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `${total} cookies are shared equally among ${groups} children. How many cookies does each child get?`,
+              "Use division.",
+              { kind:"logic", items:[`${total} total`, `${groups} children`] },
+              makeUniqueChoices(each, [each+1, each-1, groups]),
+              String(each),
+              `${total} ÷ ${groups} = ${each}.`
+            );
+          }
+          break;
+        }
+
+        case "multi_digit_mult": {
+          const a = randomInt(12, 89);
+          const b = randomInt(2, 9);
+          const ans = a * b;
+          puzzle = makePuzzle(
+            "Multiplication Puzzle",
+            `${a} × ${b} = ?`,
+            "Multiply carefully.",
+            { kind:"pattern", values:[a, "×", b, "=","?"] },
+            makeUniqueChoices(ans, [ans+10, ans-10, ans+1]),
+            String(ans),
+            `${a} × ${b} = ${ans}.`
+          );
+          break;
+        }
+
+        case "division_whole_number": {
+          const divisor = randomInt(2, 9);
+          const quotient = randomInt(10, 30);
+          const dividend = divisor * quotient;
+          puzzle = makePuzzle(
+            "Division Puzzle",
+            `${dividend} ÷ ${divisor} = ?`,
+            "Use multiplication to check.",
+            { kind:"pattern", values:[dividend, "÷", divisor, "=","?"] },
+            makeUniqueChoices(quotient, [quotient+1, quotient-1, divisor]),
+            String(quotient),
+            `${dividend} ÷ ${divisor} = ${quotient}.`
+          );
+          break;
+        }
+
+        case "equivalent_fractions": {
+          const num = randomInt(1, 6);
+          const den = randomInt(num+1, 8);
+          const factor = pick([2,3,4]);
+          const ans = `${num*factor}/${den*factor}`;
+          puzzle = makePuzzle(
+            "Fraction Puzzle",
+            `Which fraction is equivalent to ${num}/${den}?`,
+            "Multiply numerator and denominator by the same number.",
+            { kind:"logic", items:[`${num}/${den}`] },
+            shuffleArray([ans, `${num+1}/${den*factor}`, `${num*factor}/${den*factor+1}`, `${num}/${den+1}`]),
+            ans,
+            `${num}/${den} × ${factor}/${factor} = ${ans}.`
+          );
+          break;
+        }
+
+        case "compare_fractions": {
+          const den = randomInt(5, 12);
+          let a = randomInt(1, den-1);
+          let b = randomInt(1, den-1);
+          while(a === b) b = randomInt(1, den-1);
+          const ans = a > b ? `${a}/${den}` : `${b}/${den}`;
+          puzzle = makePuzzle(
+            "Fraction Puzzle",
+            `Which is larger: ${a}/${den} or ${b}/${den}?`,
+            "Same denominator means compare numerators.",
+            { kind:"logic", items:[`${a}/${den}`, `${b}/${den}`] },
+            [ `${a}/${den}`, `${b}/${den}`, `1/${den}`, `${den-1}/${den}` ],
+            ans,
+            `Because the denominators are the same, compare numerators. The larger fraction is ${ans}.`
+          );
+          break;
+        }
+
+        case "decimal_compare_add": {
+          if(i % 2 === 0){
+            const a = (randomInt(1, 30) / 10).toFixed(1);
+            const b = (randomInt(1, 30) / 10).toFixed(1);
+            const ans = (parseFloat(a) + parseFloat(b)).toFixed(1);
+            puzzle = makePuzzle(
+              "Decimal Puzzle",
+              `${a} + ${b} = ?`,
+              "Line up the decimal points.",
+              { kind:"pattern", values:[a, "+", b, "=","?"] },
+              makeUniqueChoices(ans, [(parseFloat(ans)+0.1).toFixed(1), (parseFloat(ans)-0.1).toFixed(1), (parseFloat(ans)+1).toFixed(1)]),
+              ans,
+              `${a} + ${b} = ${ans}.`
+            );
+          }else{
+            const a = (randomInt(1, 50) / 10).toFixed(1);
+            const b = (randomInt(1, 50) / 10).toFixed(1);
+            const ans = parseFloat(a) > parseFloat(b) ? a : b;
+            puzzle = makePuzzle(
+              "Decimal Puzzle",
+              `Which decimal is larger: ${a} or ${b}?`,
+              "Compare the tenths first.",
+              { kind:"logic", items:[a, b] },
+              [a, b, (Math.max(parseFloat(a), parseFloat(b))+0.1).toFixed(1), (Math.min(parseFloat(a), parseFloat(b))-0.1).toFixed(1)],
+              ans,
+              `${ans} is the larger decimal.`
+            );
+          }
+          break;
+        }
+
+        case "factors_multiples": {
+          if(i % 2 === 0){
+            const n = randomInt(12, 50);
+            const factor = pick([2,3,4,5,6]);
+            const ans = n % factor === 0 ? "True" : "False";
+            puzzle = makePuzzle(
+              "Factor Puzzle",
+              `True or False: ${factor} is a factor of ${n}`,
+              "A factor divides a number evenly.",
+              { kind:"logic", items:[`${n} ÷ ${factor}`] },
+              ["True","False"],
+              ans,
+              ans === "True"
+                ? `${n} is divisible by ${factor}, so ${factor} is a factor.`
+                : `${n} is not divisible by ${factor}, so ${factor} is not a factor.`
+            );
+          }else{
+            const base = randomInt(2, 9);
+            const mult = randomInt(2, 9);
+            const ans = base * mult;
+            puzzle = makePuzzle(
+              "Multiple Puzzle",
+              `Which of these is a multiple of ${base}?`,
+              "Choose the value in the ${base} times table.",
+              { kind:"logic", items:[`${base} × ?`] },
+              shuffleArray([String(ans), String(ans+1), String(ans+2), String(ans-1)]),
+              String(ans),
+              `${ans} is a multiple of ${base}.`
+            );
+          }
+          break;
+        }
+
+        case "angle_types": {
+          const items = [
+            ["Acute", "less than 90°"],
+            ["Right", "exactly 90°"],
+            ["Obtuse", "greater than 90° but less than 180°"]
+          ];
+          const [name, ans] = items[(i-1)%items.length];
+          puzzle = makePuzzle(
+            "Angle Puzzle",
+            `Which description matches a ${name.toLowerCase()} angle?`,
+            "Match the angle name to its meaning.",
+            { kind:"logic", items:[`${name} angle`] },
+            ["less than 90°", "exactly 90°", "greater than 90° but less than 180°", "360°"],
+            ans,
+            `A ${name.toLowerCase()} angle is ${ans}.`
+          );
+          break;
+        }
+
+        case "area_perimeter_mix": {
+          if(i % 2 === 0){
+            const l = randomInt(3, 12);
+            const w = randomInt(3, 12);
+            const ans = l * w;
+            puzzle = makePuzzle(
+              "Area Puzzle",
+              `Area of a rectangle with length ${l} and width ${w}?`,
+              "Use area = length × width.",
+              { kind:"logic", items:[`Length ${l}`, `Width ${w}`] },
+              makeUniqueChoices(ans, [2*(l+w), l+w, ans+2]),
+              String(ans),
+              `Area = ${l} × ${w} = ${ans}.`
+            );
+          }else{
+            const l = randomInt(3, 12);
+            const w = randomInt(3, 12);
+            const ans = 2*(l+w);
+            puzzle = makePuzzle(
+              "Perimeter Puzzle",
+              `Perimeter of a rectangle with sides ${l} and ${w}?`,
+              "Add all 4 sides.",
+              { kind:"logic", items:[`${l}`, `${w}`, `${l}`, `${w}`] },
+              makeUniqueChoices(ans, [l*w, l+w, ans+4]),
+              String(ans),
+              `Perimeter = ${l} + ${w} + ${l} + ${w} = ${ans}.`
+            );
+          }
+          break;
+        }
+
+        case "place_value_large": {
+          const n = randomInt(10000, 99999);
+          const digits = String(n).split("");
+          const places = [
+            {label:"ten-thousands", answer:digits[0]},
+            {label:"thousands", answer:digits[1]},
+            {label:"hundreds", answer:digits[2]},
+            {label:"tens", answer:digits[3]},
+            {label:"ones", answer:digits[4]}
+          ];
+          const ask = places[(i-1)%places.length];
+          puzzle = makePuzzle(
+            "Place Value Puzzle",
+            `What digit is in the ${ask.label} place in ${n}?`,
+            "Read from left to right.",
+            { kind:"logic", items:[String(n)] },
+            shuffleArray([...new Set([...digits, String(randomInt(0,9))])]).slice(0,4),
+            String(ask.answer),
+            `In ${n}, the ${ask.label} digit is ${ask.answer}.`
+          );
+          break;
+        }
+
+        case "word_grade4": {
+          if(i % 2 === 0){
+            const boxes = randomInt(3, 8);
+            const each = randomInt(12, 25);
+            const ans = boxes * each;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `There are ${boxes} boxes with ${each} pencils in each box. How many pencils are there altogether?`,
+              "Use multiplication.",
+              { kind:"logic", items:[`${boxes} boxes`, `${each} in each`] },
+              makeUniqueChoices(ans, [ans+boxes, ans-each, ans+1]),
+              String(ans),
+              `${boxes} × ${each} = ${ans}.`
+            );
+          }else{
+            const perPack = randomInt(4, 9);
+            const packs = randomInt(4, 9);
+            const total = perPack * packs;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `${total} candies are shared equally into ${packs} bags. How many candies go in each bag?`,
+              "Use division.",
+              { kind:"logic", items:[`${total} total`, `${packs} bags`] },
+              makeUniqueChoices(perPack, [perPack+1, perPack-1, packs]),
+              String(perPack),
+              `${total} ÷ ${packs} = ${perPack}.`
+            );
+          }
+          break;
+        }
+
+        case "fraction_add_sub_like": {
+          const den = randomInt(4, 12);
+          if(i % 2 === 0){
+            const a = randomInt(1, den-2);
+            const b = randomInt(1, den-a);
+            const ans = `${a+b}/${den}`;
+            puzzle = makePuzzle(
+              "Fraction Puzzle",
+              `${a}/${den} + ${b}/${den} = ?`,
+              "Add numerators because the denominators match.",
+              { kind:"pattern", values:[`${a}/${den}`, "+", `${b}/${den}`, "=","?"] },
+              shuffleArray([ans, `${a+b+1}/${den}`, `${a+b}/${den+1}`, `${a+b-1}/${den}`]),
+              ans,
+              `${a}/${den} + ${b}/${den} = ${a+b}/${den}.`
+            );
+          }else{
+            let a = randomInt(2, den-1);
+            let b = randomInt(1, a-1);
+            const ans = `${a-b}/${den}`;
+            puzzle = makePuzzle(
+              "Fraction Puzzle",
+              `${a}/${den} - ${b}/${den} = ?`,
+              "Subtract numerators because the denominators match.",
+              { kind:"pattern", values:[`${a}/${den}`, "-", `${b}/${den}`, "=","?"] },
+              shuffleArray([ans, `${a-b+1}/${den}`, `${a-b}/${den+1}`, `${a-b-1}/${den}`]),
+              ans,
+              `${a}/${den} - ${b}/${den} = ${a-b}/${den}.`
+            );
+          }
+          break;
+        }
+
+        case "decimal_ops": {
+          const a = (randomInt(5, 60) / 10).toFixed(1);
+          const b = (randomInt(1, 40) / 10).toFixed(1);
+          if(i % 2 === 0){
+            const ans = (parseFloat(a) + parseFloat(b)).toFixed(1);
+            puzzle = makePuzzle(
+              "Decimal Puzzle",
+              `${a} + ${b} = ?`,
+              "Line up decimal points.",
+              { kind:"pattern", values:[a, "+", b, "=","?"] },
+              makeUniqueChoices(ans, [(parseFloat(ans)+0.1).toFixed(1), (parseFloat(ans)-0.1).toFixed(1), (parseFloat(ans)+1).toFixed(1)]),
+              ans,
+              `${a} + ${b} = ${ans}.`
+            );
+          }else{
+            const max = Math.max(parseFloat(a), parseFloat(b)).toFixed(1);
+            const min = Math.min(parseFloat(a), parseFloat(b)).toFixed(1);
+            const ans = (parseFloat(max) - parseFloat(min)).toFixed(1);
+            puzzle = makePuzzle(
+              "Decimal Puzzle",
+              `${max} - ${min} = ?`,
+              "Subtract carefully.",
+              { kind:"pattern", values:[max, "-", min, "=","?"] },
+              makeUniqueChoices(ans, [(parseFloat(ans)+0.1).toFixed(1), (parseFloat(ans)-0.1).toFixed(1), (parseFloat(ans)+1).toFixed(1)]),
+              ans,
+              `${max} - ${min} = ${ans}.`
+            );
+          }
+          break;
+        }
+
+        case "volume_prisms": {
+          const l = randomInt(2, 8);
+          const w = randomInt(2, 8);
+          const h = randomInt(2, 8);
+          const ans = l * w * h;
+          puzzle = makePuzzle(
+            "Volume Puzzle",
+            `Find the volume: ${l} × ${w} × ${h}`,
+            "Volume = length × width × height.",
+            { kind:"logic", items:[`l=${l}`, `w=${w}`, `h=${h}`] },
+            makeUniqueChoices(ans, [l*w, l+w+h, ans+6]),
+            String(ans),
+            `Volume = ${l} × ${w} × ${h} = ${ans}.`
+          );
+          break;
+        }
+
+        case "order_of_operations": {
+          const a = randomInt(1,9);
+          const b = randomInt(1,9);
+          const c = randomInt(1,9);
+          const ans = a + b * c;
+          puzzle = makePuzzle(
+            "Operations Puzzle",
+            `${a} + ${b} × ${c} = ?`,
+            "Multiply before adding.",
+            { kind:"pattern", values:[a, "+", `${b}×${c}`] },
+            makeUniqueChoices(ans, [(a+b)*c, a*b+c, ans+2]),
+            String(ans),
+            `Do multiplication first: ${b} × ${c} = ${b*c}, then add ${a} to get ${ans}.`
+          );
+          break;
+        }
+
+        case "percent_of_number": {
+          const base = pick([20,40,50,100,200]);
+          const pct = pick([10,20,25,50]);
+          const ans = (pct / 100) * base;
+          puzzle = makePuzzle(
+            "Percent Puzzle",
+            `${pct}% of ${base} = ?`,
+            "Convert percent to a fraction or decimal.",
+            { kind:"logic", items:[`${pct}%`, `of ${base}`] },
+            makeUniqueChoices(ans, [ans+5, ans-5, base]),
+            String(ans),
+            `${pct}% of ${base} = ${ans}.`
+          );
+          break;
+        }
+
+        case "coordinate_plane_basic": {
+          const x = randomInt(0, 5);
+          const y = randomInt(0, 5);
+          puzzle = makePuzzle(
+            "Coordinate Puzzle",
+            `In the ordered pair (${x}, ${y}), what is the y-coordinate?`,
+            "Remember: (x, y).",
+            { kind:"logic", items:[`(${x}, ${y})`] },
+            makeUniqueChoices(y, [x, x+y, Math.abs(x-y)]),
+            String(y),
+            `In (${x}, ${y}), the second number is the y-coordinate, so the answer is ${y}.`
+          );
+          break;
+        }
+
+        case "geometry_grade5": {
+          const bank = [
+            ["triangle", "3 sides"],
+            ["quadrilateral", "4 sides"],
+            ["pentagon", "5 sides"],
+            ["hexagon", "6 sides"]
+          ];
+          const [shape, ans] = bank[(i-1)%bank.length];
+          puzzle = makePuzzle(
+            "Geometry Puzzle",
+            `Which description matches a ${shape}?`,
+            "Use your shape knowledge.",
+            { kind:"logic", items:[shape] },
+            ["3 sides", "4 sides", "5 sides", "6 sides"],
+            ans,
+            `A ${shape} has ${ans}.`
+          );
+          break;
+        }
+
+        case "measurement_conversion": {
+          if(i % 2 === 0){
+            const m = randomInt(2, 9);
+            const ans = m * 100;
+            puzzle = makePuzzle(
+              "Conversion Puzzle",
+              `${m} meters = ? centimeters`,
+              "1 meter = 100 centimeters.",
+              { kind:"logic", items:[`${m} m`, "100 cm each"] },
+              makeUniqueChoices(ans, [m*10, m*1000, ans+10]),
+              String(ans),
+              `${m} × 100 = ${ans} centimeters.`
+            );
+          }else{
+            const kg = randomInt(2, 9);
+            const ans = kg * 1000;
+            puzzle = makePuzzle(
+              "Conversion Puzzle",
+              `${kg} kilograms = ? grams`,
+              "1 kilogram = 1000 grams.",
+              { kind:"logic", items:[`${kg} kg`, "1000 g each"] },
+              makeUniqueChoices(ans, [kg*100, kg*10, ans+100]),
+              String(ans),
+              `${kg} × 1000 = ${ans} grams.`
+            );
+          }
+          break;
+        }
+
+        case "area_perimeter_grade5": {
+          const l = randomInt(4, 15);
+          const w = randomInt(3, 12);
+          const askArea = i % 2 === 0;
+          const ans = askArea ? l*w : 2*(l+w);
+          puzzle = makePuzzle(
+            askArea ? "Area Puzzle" : "Perimeter Puzzle",
+            askArea
+              ? `Area of a rectangle with length ${l} and width ${w}?`
+              : `Perimeter of a rectangle with length ${l} and width ${w}?`,
+            askArea ? "Use area = length × width." : "Add all sides.",
+            { kind:"logic", items:[`Length=${l}`, `Width=${w}`] },
+            makeUniqueChoices(ans, [l+w, l*w, ans+4]),
+            String(ans),
+            askArea ? `Area = ${l} × ${w} = ${ans}.` : `Perimeter = 2 × (${l} + ${w}) = ${ans}.`
+          );
+          break;
+        }
+
+        case "word_grade5": {
+          if(i % 2 === 0){
+            const boxes = randomInt(3, 8);
+            const each = randomInt(6, 15);
+            const ans = boxes * each;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `There are ${boxes} crates with ${each} oranges in each crate. How many oranges are there altogether?`,
+              "Use multiplication.",
+              { kind:"logic", items:[`${boxes} groups`, `${each} in each`] },
+              makeUniqueChoices(ans, [ans+boxes, ans-each, ans+1]),
+              String(ans),
+              `${boxes} × ${each} = ${ans}.`
+            );
+          }else{
+            const total = pick([40,60,80,100,120]);
+            const pct = pick([10,20,25,50]);
+            const ans = (pct/100)*total;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `${pct}% of the ${total} students joined the club. How many students joined?`,
+              "Find the percent of the whole number.",
+              { kind:"logic", items:[`${pct}%`, `of ${total}`] },
+              makeUniqueChoices(ans, [ans+5, ans-5, total]),
+              String(ans),
+              `${pct}% of ${total} = ${ans}.`
+            );
+          }
+          break;
+        }
+
+        case "ratios_basic": {
+          const a = randomInt(2, 12);
+          const b = randomInt(2, 12);
+          puzzle = makePuzzle(
+            "Ratio Puzzle",
+            `In the ratio ${a}:${b}, what is the first term?`,
+            "Read the ratio in order.",
+            { kind:"logic", items:[`${a}:${b}`] },
+            makeUniqueChoices(a, [b, a+b, Math.abs(a-b)]),
+            String(a),
+            `In ${a}:${b}, the first term is ${a}.`
+          );
+          break;
+        }
+
+        case "percent_grade6": {
+          const base = pick([50,80,100,120,200]);
+          const pct = pick([5,10,20,25,30,50]);
+          const ans = (pct/100)*base;
+          puzzle = makePuzzle(
+            "Percent Puzzle",
+            `${pct}% of ${base} = ?`,
+            "Multiply the whole number by the percent in decimal form.",
+            { kind:"logic", items:[`${pct}%`, `of ${base}`] },
+            makeUniqueChoices(ans, [ans+5, ans-5, base]),
+            String(ans),
+            `${pct}% of ${base} = ${ans}.`
+          );
+          break;
+        }
+
+        case "integers_add_compare": {
+          if(i % 2 === 0){
+            const a = randomInt(-15, 15);
+            const b = randomInt(-15, 15);
+            const ans = a + b;
+            puzzle = makePuzzle(
+              "Integer Puzzle",
+              `${a} + ${b} = ?`,
+              "Watch the signs carefully.",
+              { kind:"pattern", values:[a, "+", b, "=","?"] },
+              makeUniqueChoices(ans, [ans+1, ans-1, -ans]),
+              String(ans),
+              `${a} + ${b} = ${ans}.`
+            );
+          }else{
+            const a = randomInt(-15, 15);
+            const b = randomInt(-15, 15);
+            const ans = a > b ? ">" : a < b ? "<" : "=";
+            puzzle = makePuzzle(
+              "Integer Puzzle",
+              `${a} __ ${b}`,
+              "Compare the integers on the number line.",
+              { kind:"logic", items:[`${a} ? ${b}`] },
+              [">","<","=","+"],
+              ans,
+              `${a} ${ans} ${b}.`
+            );
+          }
+          break;
+        }
+
+        case "expressions_eval": {
+          const x = randomInt(1, 10);
+          const ans = 2*x + 3;
+          puzzle = makePuzzle(
+            "Expression Puzzle",
+            `If x = ${x}, what is 2x + 3?`,
+            "Substitute the value of x.",
+            { kind:"logic", items:[`x = ${x}`, `2x + 3`] },
+            makeUniqueChoices(ans, [ans+1, ans-1, x+3]),
+            String(ans),
+            `2(${x}) + 3 = ${ans}.`
+          );
+          break;
+        }
+
+        case "equations_one_step": {
+          const x = randomInt(1, 12);
+          const b = randomInt(1, 10);
+          const c = x + b;
+          puzzle = makePuzzle(
+            "Equation Puzzle",
+            `Solve: x + ${b} = ${c}`,
+            "Use inverse operations.",
+            { kind:"pattern", values:["x", "+", b, "=", c] },
+            makeUniqueChoices(x, [x+1, x-1, c]),
+            String(x),
+            `Subtract ${b} from both sides. x = ${c-b}.`
+          );
+          break;
+        }
+
+        case "geometry_grade6": {
+          const bank = [
+            ["triangle", "180°"],
+            ["quadrilateral", "360°"],
+            ["pentagon", "540°"]
+          ];
+          const [shape, ans] = bank[(i-1)%bank.length];
+          puzzle = makePuzzle(
+            "Geometry Puzzle",
+            `What is the sum of the interior angles of a ${shape}?`,
+            "Use geometry facts.",
+            { kind:"logic", items:[shape] },
+            ["180°","360°","540°","720°"],
+            ans,
+            `A ${shape} has interior angles that add up to ${ans}.`
+          );
+          break;
+        }
+
+        case "area_tri_para": {
+          if(i % 2 === 0){
+            const b = randomInt(4, 14);
+            const h = randomInt(2, 10);
+            const ans = (b*h)/2;
+            puzzle = makePuzzle(
+              "Area Puzzle",
+              `Area of a triangle with base ${b} and height ${h}?`,
+              "Use 1/2 × base × height.",
+              { kind:"logic", items:[`base=${b}`, `height=${h}`] },
+              makeUniqueChoices(ans, [b*h, ans+2, ans-2]),
+              String(ans),
+              `Area = 1/2 × ${b} × ${h} = ${ans}.`
+            );
+          }else{
+            const b = randomInt(4, 14);
+            const h = randomInt(2, 10);
+            const ans = b*h;
+            puzzle = makePuzzle(
+              "Area Puzzle",
+              `Area of a parallelogram with base ${b} and height ${h}?`,
+              "Use base × height.",
+              { kind:"logic", items:[`base=${b}`, `height=${h}`] },
+              makeUniqueChoices(ans, [ans/2, ans+2, ans-2]),
+              String(ans),
+              `Area = ${b} × ${h} = ${ans}.`
+            );
+          }
+          break;
+        }
+
+        case "mean_median_mode": {
+          const nums = shuffleArray([randomInt(2,10), randomInt(2,10), randomInt(2,10), randomInt(2,10), randomInt(2,10)]);
+          if(i % 3 === 1){
+            const ans = (nums.reduce((a,b)=>a+b,0) / nums.length).toFixed(1);
+            puzzle = makePuzzle(
+              "Statistics Puzzle",
+              `Find the mean of: ${nums.join(", ")}`,
+              "Add all values and divide by 5.",
+              { kind:"logic", items:nums.map(String) },
+              [ans, (Number(ans)+1).toFixed(1), (Number(ans)-1).toFixed(1), String(nums[0])],
+              ans,
+              `The mean is ${ans}.`
+            );
+          }else if(i % 3 === 2){
+            const sorted = [...nums].sort((a,b)=>a-b);
+            const ans = String(sorted[2]);
+            puzzle = makePuzzle(
+              "Statistics Puzzle",
+              `Find the median of: ${nums.join(", ")}`,
+              "Order the numbers first.",
+              { kind:"logic", items:nums.map(String) },
+              makeUniqueChoices(ans, [sorted[1], sorted[3], sorted[0]]),
+              ans,
+              `The middle value after sorting is ${ans}, so the median is ${ans}.`
+            );
+          }else{
+            const base = randomInt(2, 8);
+            const arr = [base, base, randomInt(9,12), randomInt(13,16), randomInt(17,20)];
+            const ans = String(base);
+            puzzle = makePuzzle(
+              "Statistics Puzzle",
+              `Find the mode of: ${arr.join(", ")}`,
+              "The mode is the value that appears most often.",
+              { kind:"logic", items:arr.map(String) },
+              makeUniqueChoices(ans, [arr[2], arr[3], arr[4]]),
+              ans,
+              `${ans} appears most often, so it is the mode.`
+            );
+          }
+          break;
+        }
+
+        case "coordinate_plane_grade6": {
+          const x = randomInt(-5, 5);
+          const y = randomInt(-5, 5);
+          if(i % 2 === 0){
+            puzzle = makePuzzle(
+              "Coordinate Puzzle",
+              `In the point (${x}, ${y}), what is the x-coordinate?`,
+              "Remember: (x, y).",
+              { kind:"logic", items:[`(${x}, ${y})`] },
+              makeUniqueChoices(x, [y, x+y, Math.abs(x-y)]),
+              String(x),
+              `The first number in (${x}, ${y}) is the x-coordinate, so the answer is ${x}.`
+            );
+          }else{
+            puzzle = makePuzzle(
+              "Coordinate Puzzle",
+              `In the point (${x}, ${y}), what is the y-coordinate?`,
+              "Remember: (x, y).",
+              { kind:"logic", items:[`(${x}, ${y})`] },
+              makeUniqueChoices(y, [x, x+y, Math.abs(x-y)]),
+              String(y),
+              `The second number in (${x}, ${y}) is the y-coordinate, so the answer is ${y}.`
+            );
+          }
+          break;
+        }
+
+        case "word_grade6": {
+          if(i % 2 === 0){
+            const total = pick([40, 50, 80, 100, 120]);
+            const pct = pick([10,20,25,50]);
+            const ans = (pct/100)*total;
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `${pct}% of ${total} students joined the math club. How many students joined?`,
+              "Find the percent of the total.",
+              { kind:"logic", items:[`${pct}%`, `of ${total}`] },
+              makeUniqueChoices(ans, [ans+5, ans-5, total]),
+              String(ans),
+              `${pct}% of ${total} = ${ans}.`
+            );
+          }else{
+            const red = randomInt(2, 8);
+            const blue = randomInt(2, 8);
+            puzzle = makePuzzle(
+              "Word Puzzle",
+              `A bag has ${red} red marbles and ${blue} blue marbles. What is the ratio of red to blue?`,
+              "Write the first amount to the second amount.",
+              { kind:"logic", items:[`${red} red`, `${blue} blue`] },
+              shuffleArray([`${red}:${blue}`, `${blue}:${red}`, `${red+blue}:${blue}`, `${red}:${red+blue}`]),
+              `${red}:${blue}`,
+              `The ratio of red to blue is ${red}:${blue}.`
+            );
+          }
+          break;
+        }
       }
 
-      sessionPuzzles = shuffleArray(expanded).slice(0, count);
-      currentIndex = 0;
-      score = 0;
-      streak = 0;
-      answered = false;
-      gameStarted = true;
+      if(puzzle) puzzles.push(puzzle);
+    }
 
-      gradeBadge.textContent = gradeLabels[grade];
-      difficultyBadge.textContent = difficultyConfig[difficulty].label;
-      statusBadge.textContent = "Game in progress";
-      updateProgress();
+    return puzzles;
+  }
+
+  function buildSession(){
+    const grade = gradeSelect.value;
+    ensureGradeUnlocks(grade);
+
+    const currentProgress = getTopicProgress(grade, selectedTopicId);
+    if(!currentProgress.unlocked){
+      statusBadge.textContent = "Topic locked";
+      showHowTo();
+      return;
+    }
+
+    const difficulty = difficultySelect.value;
+    const count = Number(questionCountSelect.value);
+
+    const pool = buildTopicPuzzles(grade, selectedTopicId);
+    const expanded = [];
+    while(expanded.length < count){
+      expanded.push(...shuffleArray(pool));
+    }
+
+    sessionPuzzles = shuffleArray(expanded).slice(0, count);
+    currentIndex = 0;
+    score = 0;
+    streak = 0;
+    answered = false;
+    gameStarted = true;
+
+    syncBadges();
+    difficultyBadge.textContent = difficultyConfig[difficulty].label;
+    statusBadge.textContent = "Game in progress";
+    updateProgress();
+    startTimer();
+    renderQuestion();
+    updateStats();
+  }
+
+  function startTimer(){
+    clearInterval(timer);
+    timeLeft = difficultyConfig[difficultySelect.value].time;
+    updateStats();
+
+    timer = setInterval(() => {
+      timeLeft--;
+      updateStats();
+
+      if(timeLeft <= 0){
+        clearInterval(timer);
+        if(!answered){
+          handleAnswer(null, true);
+        }
+      }
+    }, 1000);
+  }
+
+  function renderQuestion(){
+    if(currentIndex >= sessionPuzzles.length){
+      showResults();
+      return;
+    }
+
+    const puzzle = sessionPuzzles[currentIndex];
+    answered = false;
+    updateProgress();
+
+    gameContent.innerHTML = `
+      <div class="question-card">
+        <div class="question-type">${puzzle.type.toUpperCase()}</div>
+        ${getTopicSelectorHtml()}
+        <div class="question-text">${puzzle.prompt}</div>
+        <div class="question-subtext">${puzzle.subtext}</div>
+        ${renderVisual(puzzle.visual)}
+
+        <div class="options">
+          ${puzzle.options.map(option => `
+            <button class="option-btn" data-option="${escapeHtml(option)}">${option}</button>
+          `).join("")}
+        </div>
+
+        <div class="feedback" id="feedbackBox"></div>
+
+        <div class="bottom-actions">
+          <button class="btn btn-secondary" id="skipBtn">Skip Puzzle</button>
+          <button class="btn btn-primary" id="nextBtn" style="display:none;">Next Puzzle</button>
+        </div>
+      </div>
+    `;
+
+    attachTopicInlineEvent();
+
+    document.querySelectorAll(".option-btn").forEach(btn => {
+      btn.addEventListener("click", () => handleAnswer(btn.dataset.option, false));
+    });
+
+    document.getElementById("skipBtn").addEventListener("click", () => {
+      if(!answered) handleAnswer(null, false, true);
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      currentIndex++;
       startTimer();
       renderQuestion();
-      updateStats();
+    });
+  }
+
+  function handleAnswer(selected, timedOut = false, skipped = false){
+    if(answered) return;
+    answered = true;
+    clearInterval(timer);
+
+    const puzzle = sessionPuzzles[currentIndex];
+    const feedbackBox = document.getElementById("feedbackBox");
+    const nextBtn = document.getElementById("nextBtn");
+    const allButtons = document.querySelectorAll(".option-btn");
+
+    allButtons.forEach(btn => {
+      btn.disabled = true;
+      if(btn.dataset.option === puzzle.answer){
+        btn.classList.add("correct");
+      }
+      if(selected && btn.dataset.option === selected && selected !== puzzle.answer){
+        btn.classList.add("wrong");
+      }
+    });
+
+    let message = "";
+    let feedbackClass = "wrong";
+
+    if(timedOut){
+      streak = 0;
+      message = `⏰ Time's up. The correct answer is <strong>${puzzle.answer}</strong>. ${puzzle.explanation}`;
+      statusBadge.textContent = "Time ran out";
+    } else if(skipped){
+      streak = 0;
+      message = `⏭ You skipped this puzzle. The correct answer is <strong>${puzzle.answer}</strong>. ${puzzle.explanation}`;
+      statusBadge.textContent = "Puzzle skipped";
+    } else if(selected === puzzle.answer){
+      const gained = difficultyConfig[difficultySelect.value].points;
+      score += gained;
+      streak++;
+      feedbackClass = "correct";
+      message = `✅ Correct! You earned <strong>${gained}</strong> points. ${puzzle.explanation}`;
+      statusBadge.textContent = "Correct answer";
+    } else {
+      streak = 0;
+      message = `❌ Not quite. The correct answer is <strong>${puzzle.answer}</strong>. ${puzzle.explanation}`;
+      statusBadge.textContent = "Wrong answer";
     }
 
-    function updateProgress(){
-      const total = sessionPuzzles.length || 0;
-      const shownIndex = Math.min(currentIndex + 1, total);
-      progressBadge.textContent = total ? `Puzzle ${shownIndex} / ${total}` : "Puzzle 0 / 0";
-      const percent = total ? (currentIndex / total) * 100 : 0;
-      progressFill.style.width = percent + "%";
+    if(score > getBestScore()){
+      setBestScore(score);
     }
 
-    function startTimer(){
-      clearInterval(timer);
+    feedbackBox.className = `feedback show ${feedbackClass}`;
+    feedbackBox.innerHTML = message;
+    nextBtn.style.display = "inline-block";
+    updateStats();
+  }
+
+  function completeTopicAndUnlockNext(){
+    const grade = gradeSelect.value;
+    const topicObj = getCurrentTopicObject();
+    const progress = getTopicProgress(grade, topicObj.id);
+    const maxScore = sessionPuzzles.length * difficultyConfig[difficultySelect.value].points;
+    const percent = maxScore ? Math.round((score / maxScore) * 100) : 0;
+    const stars = getRoundStars(score, sessionPuzzles.length);
+
+    progress.played += 1;
+    progress.bestPercent = Math.max(progress.bestPercent, percent);
+    progress.bestScore = Math.max(progress.bestScore, score);
+    progress.stars = Math.max(progress.stars, stars);
+
+    const topics = topicConfig[grade];
+    const idx = topics.findIndex(t => t.id === topicObj.id);
+    if(progress.stars >= 1 && idx < topics.length - 1){
+      getTopicProgress(grade, topics[idx + 1].id).unlocked = true;
+    }
+
+    saveProgressData();
+    ensureGradeUnlocks(grade);
+  }
+
+  function showResults(){
+    clearInterval(timer);
+    progressFill.style.width = "100%";
+    statusBadge.textContent = "Game complete";
+
+    completeTopicAndUnlockNext();
+
+    const grade = gradeSelect.value;
+    const topicObj = getCurrentTopicObject();
+    const topicProgress = getTopicProgress(grade, topicObj.id);
+    const maxScore = sessionPuzzles.length * difficultyConfig[difficultySelect.value].points;
+    const stars = getStarsDisplay(score, sessionPuzzles.length);
+    let reward = "Great effort!";
+    if(stars === "★★★") reward = "Puzzle Master";
+    else if(stars === "★★☆") reward = "Sharp Thinker";
+    else if(stars === "★☆☆") reward = "Good Start";
+
+    gameContent.innerHTML = `
+      <div class="result-screen">
+        <h2>🎉 Puzzle Challenge Complete</h2>
+        <p>You finished the premium puzzle round on <strong>I Love Math</strong> with Professor Pi.</p>
+        <div class="big-score">${score} / ${maxScore}</div>
+        <div class="stars" style="font-size:34px; margin:8px 0 2px;">${stars}</div>
+        <div class="reward-badge">${reward}</div>
+        <p>
+          Topic completed: <strong>${escapeHtml(topicObj.name)}</strong><br>
+          Best topic stars: <strong>${["☆☆☆","★☆☆","★★☆","★★★"][topicProgress.stars]}</strong><br>
+          Best topic accuracy: <strong>${topicProgress.bestPercent}%</strong>
+        </p>
+        <div style="margin-top:18px;">
+          <strong>Topic Unlock Progress</strong>
+          ${getTopicGridHtml()}
+        </div>
+        <div class="bottom-actions" style="justify-content:center;">
+          <button class="btn btn-primary" id="playAgainBtn">Play Again</button>
+          <button class="btn btn-secondary" id="chooseTopicBtn">Choose Topic</button>
+        </div>
+      </div>
+    `;
+
+    attachTopicCardEvents();
+
+    document.getElementById("playAgainBtn").addEventListener("click", buildSession);
+    document.getElementById("chooseTopicBtn").addEventListener("click", showHowTo);
+    updateStats();
+  }
+
+  function showHowTo(){
+    gameContent.innerHTML = `
+      <div class="question-card">
+        <div class="question-type">HOW TO PLAY</div>
+        ${getTopicSelectorHtml()}
+        <div class="question-text">Solve puzzles before the timer ends.</div>
+        <div class="question-subtext">
+          Choose a K–6 grade level, pick one of 10 topics for that grade, select a difficulty, and start the game.
+          Each topic has 20 unique puzzles in the script. Topics unlock one by one as you earn stars.
+        </div>
+        <div class="visual-box">
+          <div class="logic-box">
+            <div class="logic-item">1. Pick your K–6 grade level</div>
+            <div class="logic-item">2. Choose an unlocked topic</div>
+            <div class="logic-item">3. Solve 5, 8, or 10 puzzles per round</div>
+            <div class="logic-item">4. Earn 1–3 stars for the topic</div>
+            <div class="logic-item">5. Unlock the next topic</div>
+          </div>
+        </div>
+
+        <div style="margin:16px 0 10px;">
+          <strong>Topic Progress</strong>
+        </div>
+        ${getTopicGridHtml()}
+
+        <div class="bottom-actions">
+          <button class="btn btn-primary" id="howToStartBtn">Start Game</button>
+        </div>
+      </div>
+    `;
+
+    attachTopicInlineEvent();
+    attachTopicCardEvents();
+    document.getElementById("howToStartBtn").addEventListener("click", buildSession);
+    statusBadge.textContent = "Viewing instructions";
+  }
+
+  function syncBadges(){
+    const topicObj = getCurrentTopicObject();
+    gradeBadge.textContent = `${gradeLabels[gradeSelect.value]} • ${topicObj.name}`;
+    difficultyBadge.textContent = difficultyConfig[difficultySelect.value].label;
+  }
+
+  startBtn.addEventListener("click", buildSession);
+  startHeroBtn.addEventListener("click", buildSession);
+  howToBtn.addEventListener("click", showHowTo);
+
+  if(welcomeStartBtn){
+    welcomeStartBtn.addEventListener("click", buildSession);
+  }
+
+  gradeSelect.addEventListener("change", () => {
+    ensureGradeUnlocks(gradeSelect.value);
+    selectedTopicId = getFirstUnlockedTopicId(gradeSelect.value);
+    syncBadges();
+    if(!gameStarted){
+      showHowTo();
+    }
+  });
+
+  difficultySelect.addEventListener("change", () => {
+    difficultyBadge.textContent = difficultyConfig[difficultySelect.value].label;
+    if(!gameStarted){
       timeLeft = difficultyConfig[difficultySelect.value].time;
       updateStats();
-
-      timer = setInterval(() => {
-        timeLeft--;
-        updateStats();
-
-        if(timeLeft <= 0){
-          clearInterval(timer);
-          if(!answered){
-            handleAnswer(null, true);
-          }
-        }
-      }, 1000);
     }
+  });
 
-    function renderVisual(visual){
-      if(!visual) return "";
-
-      if(visual.kind === "pattern"){
-        return `
-          <div class="visual-box">
-            <div class="pattern-row">
-              ${visual.values.map(v => `<div class="pattern-pill">${v}</div>`).join("")}
-            </div>
-          </div>
-        `;
-      }
-
-      if(visual.kind === "grid"){
-        return `
-          <div class="visual-box">
-            <div class="grid-visual">
-              ${visual.values.map(v => `<div class="grid-cell">${v}</div>`).join("")}
-            </div>
-          </div>
-        `;
-      }
-
-      if(visual.kind === "logic"){
-        return `
-          <div class="visual-box">
-            <div class="logic-box">
-              ${visual.items.map(item => `<div class="logic-item">${item}</div>`).join("")}
-            </div>
-          </div>
-        `;
-      }
-
-      return "";
-    }
-
-    function renderQuestion(){
-      if(currentIndex >= sessionPuzzles.length){
-        showResults();
-        return;
-      }
-
-      const puzzle = sessionPuzzles[currentIndex];
-      answered = false;
-      updateProgress();
-
-      gameContent.innerHTML = `
-        <div class="question-card">
-          <div class="question-type">${puzzle.type.toUpperCase()}</div>
-          <div class="question-text">${puzzle.prompt}</div>
-          <div class="question-subtext">${puzzle.subtext}</div>
-          ${renderVisual(puzzle.visual)}
-
-          <div class="options">
-            ${puzzle.options.map(option => `
-              <button class="option-btn" data-option="${escapeHtml(option)}">${option}</button>
-            `).join("")}
-          </div>
-
-          <div class="feedback" id="feedbackBox"></div>
-
-          <div class="bottom-actions">
-            <button class="btn btn-secondary" id="skipBtn">Skip Puzzle</button>
-            <button class="btn btn-primary" id="nextBtn" style="display:none;">Next Puzzle</button>
-          </div>
-        </div>
-      `;
-
-      document.querySelectorAll(".option-btn").forEach(btn => {
-        btn.addEventListener("click", () => handleAnswer(btn.dataset.option, false));
-      });
-
-      document.getElementById("skipBtn").addEventListener("click", () => {
-        if(!answered) handleAnswer(null, false, true);
-      });
-
-      document.getElementById("nextBtn").addEventListener("click", () => {
-        currentIndex++;
-        startTimer();
-        renderQuestion();
-      });
-    }
-
-    function handleAnswer(selected, timedOut = false, skipped = false){
-      if(answered) return;
-      answered = true;
-      clearInterval(timer);
-
-      const puzzle = sessionPuzzles[currentIndex];
-      const feedbackBox = document.getElementById("feedbackBox");
-      const nextBtn = document.getElementById("nextBtn");
-      const allButtons = document.querySelectorAll(".option-btn");
-
-      allButtons.forEach(btn => {
-        btn.disabled = true;
-        if(btn.dataset.option === puzzle.answer){
-          btn.classList.add("correct");
-        }
-        if(selected && btn.dataset.option === selected && selected !== puzzle.answer){
-          btn.classList.add("wrong");
-        }
-      });
-
-      let message = "";
-      let feedbackClass = "wrong";
-
-      if(timedOut){
-        streak = 0;
-        message = `⏰ Time's up. The correct answer is <strong>${puzzle.answer}</strong>. ${puzzle.explanation}`;
-        statusBadge.textContent = "Time ran out";
-      } else if(skipped){
-        streak = 0;
-        message = `⏭ You skipped this puzzle. The correct answer is <strong>${puzzle.answer}</strong>. ${puzzle.explanation}`;
-        statusBadge.textContent = "Puzzle skipped";
-      } else if(selected === puzzle.answer){
-        const gained = difficultyConfig[difficultySelect.value].points;
-        score += gained;
-        streak++;
-        feedbackClass = "correct";
-        message = `✅ Correct! You earned <strong>${gained}</strong> points. ${puzzle.explanation}`;
-        statusBadge.textContent = "Correct answer";
-      } else {
-        streak = 0;
-        message = `❌ Not quite. The correct answer is <strong>${puzzle.answer}</strong>. ${puzzle.explanation}`;
-        statusBadge.textContent = "Wrong answer";
-      }
-
-      if(score > getBestScore()){
-        setBestScore(score);
-      }
-
-      feedbackBox.className = `feedback show ${feedbackClass}`;
-      feedbackBox.innerHTML = message;
-      nextBtn.style.display = "inline-block";
-      updateStats();
-    }
-
-    function showResults(){
-      clearInterval(timer);
-      progressFill.style.width = "100%";
-      statusBadge.textContent = "Game complete";
-
-      const maxScore = sessionPuzzles.length * difficultyConfig[difficultySelect.value].points;
-      const stars = getStars(score, sessionPuzzles.length);
-      let reward = "Great effort!";
-      if(stars === "★★★") reward = "Puzzle Master";
-      else if(stars === "★★☆") reward = "Sharp Thinker";
-      else if(stars === "★☆☆") reward = "Good Start";
-
-      gameContent.innerHTML = `
-        <div class="result-screen">
-          <h2>🎉 Puzzle Challenge Complete</h2>
-          <p>You finished the premium puzzle round on <strong>I Love Math</strong> with Professor Pi.</p>
-          <div class="big-score">${score} / ${maxScore}</div>
-          <div class="stars" style="font-size:34px; margin:8px 0 2px;">${stars}</div>
-          <div class="reward-badge">${reward}</div>
-          <p>
-            Keep playing to improve your speed, build your streak, and earn a better score.
-            Your best score is saved on this device.
-          </p>
-          <div class="bottom-actions" style="justify-content:center;">
-            <button class="btn btn-primary" id="playAgainBtn">Play Again</button>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("playAgainBtn").addEventListener("click", buildSession);
-      updateStats();
-    }
-
-    function escapeHtml(text){
-      return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function showHowTo(){
-      gameContent.innerHTML = `
-        <div class="question-card">
-          <div class="question-type">HOW TO PLAY</div>
-          <div class="question-text">Solve puzzles before the timer ends.</div>
-          <div class="question-subtext">
-            Choose a grade level, set a difficulty, and start the game. Each correct answer gives points.
-            Harder levels give more points but less time. Build streaks and try to earn three stars.
-          </div>
-          <div class="visual-box">
-            <div class="logic-box">
-              <div class="logic-item">1. Pick your grade level</div>
-              <div class="logic-item">2. Choose easy, medium, or hard</div>
-              <div class="logic-item">3. Answer before the timer reaches zero</div>
-              <div class="logic-item">4. Earn stars based on score</div>
-            </div>
-          </div>
-          <div class="bottom-actions">
-            <button class="btn btn-primary" id="howToStartBtn">Start Game</button>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("howToStartBtn").addEventListener("click", buildSession);
-      statusBadge.textContent = "Viewing instructions";
-    }
-
-    startBtn.addEventListener("click", buildSession);
-    startHeroBtn.addEventListener("click", buildSession);
-    howToBtn.addEventListener("click", showHowTo);
-
-    if(welcomeStartBtn){
-      welcomeStartBtn.addEventListener("click", buildSession);
-    }
-
-    gradeSelect.addEventListener("change", () => {
-      gradeBadge.textContent = gradeLabels[gradeSelect.value];
-    });
-
-    difficultySelect.addEventListener("change", () => {
-      difficultyBadge.textContent = difficultyConfig[difficultySelect.value].label;
-      if(!gameStarted){
-        timeLeft = difficultyConfig[difficultySelect.value].time;
-        updateStats();
-      }
-    });
-
-    bestValue.textContent = getBestScore();
-    timeLeft = difficultyConfig[difficultySelect.value].time;
-    gradeBadge.textContent = gradeLabels[gradeSelect.value];
-    difficultyBadge.textContent = difficultyConfig[difficultySelect.value].label;
-    updateStats();
-  </script>
+  bestValue.textContent = getBestScore();
+  timeLeft = difficultyConfig[difficultySelect.value].time;
+  ensureGradeUnlocks(gradeSelect.value);
+  if(!(topicConfig[gradeSelect.value] || []).some(t => t.id === selectedTopicId && getTopicProgress(gradeSelect.value, t.id).unlocked)){
+    selectedTopicId = getFirstUnlockedTopicId(gradeSelect.value);
+  }
+  syncBadges();
+  updateStats();
+  showHowTo();
+</script>
 </body>
 </html>
